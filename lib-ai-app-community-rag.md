@@ -751,7 +751,26 @@ modified: 2024-09-08T20:08:16.088Z
 
 - ## 
 
-- ## 
+- ## [大模型RAG实战，从被骂不靠谱到成为部门MVP，这是我的踩坑全记录 - 张不惑 - 博客园 _202602](https://www.cnblogs.com/bu-huo/p/19601644)
+- 把这套系统从被骂下线到成为部门标配，前后折腾了将近一个月。趟过的坑挺多，但收获也很大。
+- 几点核心总结：
+1. RAG不是万能的，选好适用场景
+RAG适合有明确知识库、答案可追溯的场景。如果你的需求是让大模型发挥创造力（比如写文案、做创意），那RAG反而是个约束。
+
+2. 切分和检索是根基
+大家往往把注意力放在大模型本身，觉得用更强的模型就能解决问题。但实际上，如果前面的切分和检索做得不好，再强的模型也是巧妇难为无米之炊。
+
+3. Prompt工程真的是门手艺
+同样的检索结果，不同的Prompt可能带来天壤之别的回答效果。这个没什么捷径，就是多试、多看、多迭代。
+
+4. 上线只是开始
+真正的挑战在上线之后。用户的各种奇葩输入、文档的持续更新、性能的优化、效果的监控……每一项都是持续的工作。
+
+- 最后，附上这套系统目前的一些核心指标：
+  - 日均查询量：200+次
+  - 平均响应时间：2.3秒（开启流式后首字符延迟约0.8秒）
+  - 用户满意度（通过回答后的点赞/点踩收集）：约72%
+  - 无法回答的比例：约22%（这部分会定期分析，推动补充文档）
 
 - ## [How do you update a RAG vector store in production? (Best practices?) : r/Rag](https://www.reddit.com/r/Rag/comments/1rj1bkg/how_do_you_update_a_rag_vector_store_in/)
 - the biggest thing that tripped us up was treating the vector store like a static artifact instead of a living system. once you shift to that mindset, the update strategy becomes clearer.
@@ -932,7 +951,36 @@ modified: 2024-09-08T20:08:16.088Z
 
 - ## 
 
-- ## 
+- ## 💡 [Built an MCP server that gives AI agents a full codebase map instead of reading files one at a time : r/mcp _202603](https://www.reddit.com/r/mcp/comments/1rjdoag/built_an_mcp_server_that_gives_ai_agents_a_full/)
+  - Kept running into the same problem - Claude Code and Cursor would read files one at a time, burn through tokens, and still create functions that already existed somewhere else in the repo. got tired of it so I built Pharaoh
+  - It parses your whole repo into a `Neo4j` knowledge graph and exposes it as 16 MCP tools. Instead of your agent reading 40K tokens of files hoping it sees enough, it gets the full architecture in about 2K tokens. blast radius before refactoring, function search before writing new code, dead code detection, dependency tracing, etc
+
+- Strange, my LLM just uses grep to solve this issue.
+  - grep finds text. Pharaoh knows architecture. Big difference
+  - The other thing is token efficiency. grep dumps raw file content into context. Pharaoh gives the LLM a 2K token architectural summary instead of burning 40K tokens reading files one at a time. Better decisions because it actually understands how things connect before writing anything
+
+- How does it compare to anthropic's LSP plugins?
+  - LSP answers "what is this thing?" - Pharaoh answers "what breaks if I touch this?"
+  - Cross-repo analysis - LSP is scoped to one project
+  - Pre-flight architectural reasoning - blast radius, reachability, dead code are graph queries, not LSP capabilities
+  - Token efficiency at scale - 30-repo monorepos don't fit in LSP context
+  - Agent workflow orchestration - the MCP Prompts / playbooks layer has no LSP equivalent
+
+- How is it better than built in lsp plugins?
+  - LSP gives you single-hop stuff - go-to-definition, find-references. Super useful. 
+  - Pharaoh gives you multi-hop traversal across your whole codebase
+
+- remember that the entire MCP gets loaded into context and with 13 tools, that sounds like a big file, which defeats the purpose.
+
+- How is this better than Serena semantic search
+  - Different approach. Serena does semantic search - "find me code that's similar to X." 
+  - Pharaoh builds a knowledge graph of your entire codebase in Neo4j. Every function, every call chain, every dependency, every module boundary - mapped as actual graph relationships
+  - Practical difference: semantic search is good for discovery. Pharaoh is good for understanding - what happens if I change this? what depends on what? does this function already exist? The graph means no hallucination risk. It's structural facts, not similarity scores
+  - They honestly pair well together. But if your main problem is AI agents recreating code that already exists or making blind refactors, the graph solves that more directly
+
+- Good start! I'm working on something similar except it also focuses on reducing input token use by 70%+. https://github.com/GlitterKill/sdl-mcp
+  - SDL-MCP (Symbol Delta Ledger MCP Server) is a cards-first context system for coding agents.
+  - Instead of opening large files first, SDL-MCP indexes repositories into symbol cards and graph edges so agents can: Search and retrieve small, structured context first
 
 - ## [Enable LSP in Claude Code: code navigation goes from 30-60s to 50ms with exact results : r/ClaudeCode _202602](https://www.reddit.com/r/ClaudeCode/comments/1rh5pcm/enable_lsp_in_claude_code_code_navigation_goes/)
   - If you've noticed Claude Code taking 30-60 seconds to find a function, or returning the wrong file because it matched a comment instead of the actual definition, it's because it uses text-based grep by default. 

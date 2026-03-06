@@ -129,7 +129,10 @@ modified: 2026-02-20T17:36:40.796Z
 
 - ## 
 
-- ## 
+- ## [[分享] GoRabbit：本地优先的 AI Agent 桌面平台（开发内测中） ](https://linux.do/t/topic/1684941)
+  - 主要目标是： 让 AI 不只是聊天，而是能像一个「可编程助手」那样，真正替你干活。
+  - 一句话概括： 桌面端 + 多模型 + 工具调用 + Agent + 记忆系统 + 自我学习规划决策，完全本地可控。
+  - 基础功能已经可用：多模型、多 Agent、工具系统、记忆系统、权限控制等
 
 - ## 🤔 [Is the Codex app basically just a CLI wrapper? : r/codex _202603](https://www.reddit.com/r/codex/comments/1rgxpbm/is_the_codex_app_basically_just_a_cli_wrapper/)
   - Trying to understand how the Codex app is structured here. Is it essentially a wrapper around the CLI, or does it have its own separate update cycle and capabilities?
@@ -214,6 +217,14 @@ modified: 2026-02-20T17:36:40.796Z
 
 - ## 
 
+- ## 🎞️ [有哪些知名的AI套壳项目值得推荐 ](https://linux.do/t/topic/1689853)
+  - 想做一个类似 pollo .ai 的项目，提供一些视频模板，传自己的角色或者场景，生成宣传视频，有没有合适的开源项目做二次开发呀？
+
+- 站内有两个开源的短剧/视频生成平台，可以参考下
+  - [免费开源！已经盈利的AI影视/短剧agent制作系统 waoowaoo  ](https://linux.do/t/topic/1670000)
+  - [ai火宝开源 ](https://linux.do/t/topic/1521682)
+  - 另外还有些 Skills，可以通过关键词短剧进一步了解
+
 - ## [一个在浏览网页时扫描内容是否由AI生成的油猴脚本 ](https://linux.do/t/topic/1641840)
   - https://textoracle.h-e.top/
   - 爬了一些不大的数据集，训练了一个可以判别是 AI 还是人类的模型
@@ -232,6 +243,62 @@ modified: 2026-02-20T17:36:40.796Z
 - ## 
 
 - ## 
+
+- ## 
+
+- ## [为什么您根本不需要OpenClaw ](https://linux.do/t/topic/1696116)
+  - 2026年3月3日，OpenClaw 成为 GitHub Star 星标数量历史第一，超越了 React 和 Linux。
+  - 闲鱼上 199、499 甚至上万的安装费——对，仅仅是安装 OpenClaw，有的销量甚至已经破了 1000 …
+  - 但是我想说，我们不需要 OpenClaw，也没有必要装 OpenClaw。现在不需要装，以后也不需要装。
+  - OpenClaw 带来的所谓颠覆内容和创新，甚至不如 Manus
+  - 当时的大部分人，包括我，一致认为 Manus 只是一个套壳软件，不会掀起什么太大的波澜…
+  - 我不需要在自己的电脑上安装任何运行环境，只需把任何文件、想法或定时任务扔给它，就像扔给下属或助手一样。我可以扔给它一段视频，让它使用剪辑软件帮我剪辑掉头尾；帮我把一张壁纸转为 HEIC 格式；帮我修改 PPT；真正从零开始编写一个项目，并在虚拟环境中完全自测、打包，直到运行结果通过，而这所做的一切都是端到端的，我无需对这个工具本身进行任何调试，也无需参与到中间的过程中，我只需要输入信息和看到结果。
+  - 这是一个成熟稳定的工具的最大魅力所在。
+  - 总而言之，所有的工作、想法和文件都可以扔到对话框中，通过稳定地对话输出一个稳定的结果。
+  - 目前在所有讨论openclaw的文章和对话里，我还没看到一个真有价值的使用案例，全是些自动汇总信息和发帖的不痛不痒的工作，一方面是受制于接口权限，其实做不了很多事，一方面是沉迷用社交对话框操控生产的人可能也没太多想象力，单纯只是对“自动”这个词上头而已。
+  - 为什么我认为 OpenClaw 是一个玩具，而不是工具？ 因为在现代社会中，没有任何一项工具是需要亲自去购买原材料、组装、测试并运行的，而且最蠢的是，在您进行这一大堆耗费精力的过程中，您甚至不知道自己组装这一把工具要干什么。
+  - 总有一群人，他们不喜欢技术，只喜欢折腾的感觉。在 AI 之前，他们折腾 Obsidian、Notion、飞书、语雀、Flomo 等笔记软件；而在 AI 时代，他们乐此不疲地探索、追捧、神话各种概念和工具，然后留下一地鸡毛。
+  - 很多双向链接、知识库等花里胡哨的功能，大多数人学了之后根本用不上，甚至为了这些功能所付出的情绪价值和精力，都要比功能本身带来的生产力要强）
+  - 第一性原理，按照我的理解，就应该和工具一样，指您在干一件事情的时候，您的目的和结果都是端到端的，期间的所有工具都是您为了实现这个结果的手段。
+
+- 佬大部分的观点表示赞同，但是有一小部分不赞同。比如说对于折腾的看法和对玩具的看法不甚赞同。这个世界的创新是需要这些折腾的人的，很多时候最初的工具诞生和技术的发展，并不具有太多的实际意义，靠的就是这些爱折腾人的兴趣和莫名其妙的执着。一个工具的诞生，最初往往就是玩具。不管是当初的汽车、当初的个人电脑，还是几年前的AI，刚刚诞生的时候，都被人嗤之以鼻，认为也就算个玩具而已。
+
+- 不不不，这个角度太老登了，我虽然40+了，我的小龙虾也找不到什么活儿干，或者说干不好，还费token，但是我不会认为这个东西是纯粹的折腾，只是产品形态不太成熟，也是正常的，也有用的好，用的出价值的人，我不是这个人，但是我不会轻易去否定，一种自以为是。小龙虾是有跨时代意义的，我说的不是moltbook这种鬼故事，而是真的数字助理走进生活的开端，虽然也带来了一些隐私，安全问题，但是真的有需求。
+
+- manus和openclaw是解决同一个问题的两种解法，前者是公司做给你用的，也是大部分公司走的方向，安全合规也有点用；openclaw是野生的，野蛮生长的，完全以有用为导向的。
+
+- 感觉现在批openclaw和当初批manus的是同一批人
+
+- 从实用主义上来说，佬友文章我是赞成的从个人爱好角度来说，不认可这种观点。折腾是很多时候驱使人去寻求新鲜事物和学习新东西的动力。换个角度来说如果不是折腾或者爱找方法，我也不会来到l站了。换个角度折腾ai工作流是不是一种折腾呢，折腾更便宜的渠道是不是一种折腾呢我觉得有一个观点说的很好，很多时候这种东西就是一个人的天赋，他会在这个角度为之努力乐此不疲，而在有一天收获意想不到的宝藏当然因为焦虑而去装一个龙虾当然是大可不必的行为
+
+- ## [大家除了编程一般都拿AI干啥 _202603](https://linux.do/t/topic/1679742)
+- 分析在线新闻，建立对于某个事件的路径图，分析舆论啥的
+
+- NSFW，我做了一个女友的赛博分身NSFW版，配上生图skill，不要太哈皮。
+  - NSFW 这不是生产力的来源吗
+
+- 阅读 给他提要求 推荐一系列的书籍 读不懂的时候问它 和自己熟悉的知识建立联系
+
+- 思维练习: 多角度分析
+
+- 学习！很多不懂的东西让他解释都非常好，还可以让他规划学习路线。生活中看到一些现象非常好奇是怎么回事我也会问一下ai。我现在其实百分之七八十都是不是让他编程，都是在满足好奇心
+
+- openclaw
+每天早上发一份天气预报，一份新闻，一份github热点报告。
+定时提醒，不过这个有点不稳定，不太重要的定时可以用，否则还是手机自带的语音助手更安心。
+待办列表，用一个skill将待办存进数据库里，用来平替gmail的tasks, 体验一般，看个人习惯了。
+帮我读容器日志，更新下容器什么的。
+
+- ## [Reddit上关于Qwen人事变动的讨论 ](https://linux.do/t/topic/1690679)
+- 有一定的道理，qwen拿着最多的钱和资源到现在却没有什么标杆模型，现在这qwen3.5也只能勉强算一个吧。
+  - 别的模型一眼就能看出哪些是主线大模型哪些是小模型而且也只专心维护升级那几个模型，成本自然低，而qwen混乱的产品线不去研究根本不知道他到底哪些模型是干什么的，整这么多模型成本炸裂不说大部分都没人在乎
+  - 我觉得以后qwen可能是整一个顶级闭源大模型赚钱，一个中等开源模型以及小模型抢开源市场
+
+- 一堆模型我觉得不影响什么, 问题是 Qwen Max 为啥那么平庸
+
+- 看起来情况比想像的糟糕? 别的团队花同样的资金可以搞出 200B, 300B 甚至 700B 的 SOTA LLM, Qwen 却只能死守 SLM, 然后还有内部斗争
+
+- [千问离职瓜继续爆料 ](https://linux.do/t/topic/1690763)
 
 - ## 🤔 [NotebookLM lowkey gave me superpowers and i’m not even joking : r/notebooklm _202602](https://www.reddit.com/r/notebooklm/comments/1rfhswr/notebooklm_lowkey_gave_me_superpowers_and_im_not/)
   - threw in sources for programming, marketing, copywriting, literally everything i was studying. and dude. i was understanding stuff in like 20 minutes that would take me an entire afternoon watching youtube videos. this is not an exaggeration. i bought a marketing course that cost me good money and i ended up literally taking the course content, feeding it as a source into NotebookLM and learned BETTER than going through the actual course. the course became study material for the AI. i’m still processing this honestly.
