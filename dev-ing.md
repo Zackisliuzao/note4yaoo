@@ -308,6 +308,35 @@ cd ~/Documents/opt/compiled/zimage && ./ZImageCLI -m mzbac/Z-Image-Turbo-8bit -o
 - dev-log
   - ?
 
+## 0310
+
+- 🤔 from both clashx pro network monitor and NetSpeedMonitor.app, it shows download speed is 6.1~6.9 MB/s, it keeps showing for hours. please find which apps are downloading and eating my network. from both clashx pro network monitor and NetSpeedMonitor.app, now it still shows download speed is 6.1~6.9 MB/s.
+  - 这个问题非常奇怪, 在从22:00到凌晨03:05， 突然就没有异常流量了, 一切恢复正常了
+  - 试了codex/iflow，都没有正确分析出问题
+- the heavy downloader is Microsoft Edge Helper, not Chrome.  Evidence from live Clash connection deltas (8-second window):
+- Microsoft Edge Helper -> stun.chat.bilibili.com (UDP 3478): 54, 670, 336 bytes / 8s
+  - That is about 6.52 MB/s, matching your observed 6.1–6.9 MB/s.
+- Next highest traffic in same window was tiny (node -> api.telegram.org: 6, 309 bytes).
+- So the app eating traffic is:
+- Microsoft Edge (background helper process)
+- Host pattern: stun.chat.bilibili.com (likely Edge tab/background RTC stream)
+
+## 0309
+
+- [How long does It typically take for an extension to get reviewed? : r/chrome_extensions _202411](https://www.reddit.com/r/chrome_extensions/comments/1h099ur/how_long_does_it_typically_take_for_an_extension/)
+  - My extensions were initially approved in 4 and 7 days. It depends on permissions you request, overall quality: content, features, etc.
+  - It varies; may take up to 10 days also. It mainly depends upon how many "permissions" your chrome extension requires.
+
+- [企微官方机器人接入 openclaw ](https://linux.do/t/topic/1711457)
+
+- i get it working in chrome. in chrome://extensions/shortcuts , i set a hot key for `current tab with date: [title _date](url)`.  when i pressed the hotkey, i want to replace some text in title to make the title clean. please make a plan to add a `copy-format.json` as configuration file, so that i can configure some rules to replace oldText with newText . the oldText and newText should support simple regular expression. for example, the old copied content is `[QMD: Local hybrid search engine  by 95% +. | by DevSphere | Coding Nexus | Feb, 2026 | Medium _202603](https://medium.com/coding-nexus/qmd- local-hybrid-search-engine-for-markdown-that-cuts-token-usage-by-95-e0f9d21f89af)`, after your implementation, the new content should be `[QMD: Local hybrid search engine  by 95%+. | Medium _202603](https://medium.com/coding-nexus/qmd-local-hybrid-search-engine-for-markdown-that-cuts- token-usage-by-95-e0f9d21f89af)`. please a make a plan to design a extensible implementation to make the example text replacement use case above work.
+
+- in current git uncommited files and codebase , i can set a hot key for `current tab with date: [title _date](url)`.  when i pressed the hotkey, i want to replace some text in title to make the title clean. the text replacement rules should be configurable by `src/static/copy-format.json`, so that it is extensible. 
+  - the goal is to review the uncommited code, recheck logic, code reuse, extensible, maintainable.
+  - analyze the architecture and core data flow, make sure the implementation is correct and clear.
+
+- improve your implementation by your code review results, fixing medium to severe bugs is enough, no unnecessary work
+
 ## 0307
 
 - 有没有什么在线大模型或本地大模型，说话或聊天的风格偏向于不正经的聊天，偏向于抬杠或毒舌，有没有一些热门的抬杠或毒舌模型？ 如果有，可以列出 huggingface url并给出简介
