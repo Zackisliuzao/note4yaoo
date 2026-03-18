@@ -1419,6 +1419,23 @@ vllm serve RUC-DataLab/DeepAnalyze-8B --max-num-batched-tokens 40000 --max-model
 
 - ## 
 
+- ## 
+
+- ## 
+
+- ## 🤔 [Has increasing the number of experts used in MoE models ever meaningfully helped? : r/LocalLLaMA _202603](https://www.reddit.com/r/LocalLLaMA/comments/1runn9v/has_increasing_the_number_of_experts_used_in_moe/)
+- Tried bumping Qwen3-30B-A3B to A6B a few months back. The first commenter is right that without retraining, you're activating experts that were trained to be dormant for that input - basically adding noise.
+  - Where it gets interesting is the router itself. The router weights were learned assuming 3 active experts. When you force 6, the top-3 experts still do most of the work and the extra 3 contribute near-zero weight after softmax. You end up paying double the compute for maybe 2-5% of the actual compute being useful.
+  - The one scenario where more active experts might help is if the routing is poorly calibrated - like when you're running a quantized version where the router logits got slightly distorted by quantization. In that case forcing more experts can sometimes compensate for routing errors. But it's hard to tell if the improvement is real or just you cherry-picking outputs.
+  - If you want more capable MoE, the actual path is fine-tuning with more active experts from the start, not patching it at inference time.
+
+- Short answer: No. (unless you re-train it)
+  - by increasing the amount of active parameters/experts of an usual MoE model like qwen3 30ba3b, you are basically increasing the chances of a "bad" / "wrong" token to be chosen, due to how most MoE architectures are.
+
+- funny how the whole field is actually moving in the opposite direction. deepseek v3 uses 8 out of 256 experts and the trend keeps going toward more total experts with fewer active per token, not the other way around. finer grained routing just works better than brute forcing more experts on each pass. also from a practical standpoint you already loaded all those weights into VRAM so activating more doesnt save you anything, youre just burning extra compute for outputs that are probably worse lol
+
+- On original mixtral it lowered perplexity for me when using a couple of merges. In clowncar MoE it also helped. Since then, not really. Labs have gotten better at making MoE.
+
 - ## 🧩 [Repetition penalties are terribly implemented - A short explanation and solution : r/LocalLLaMA _202410](https://www.reddit.com/r/LocalLLaMA/comments/1g383mq/repetition_penalties_are_terribly_implemented_a/)
   - For reasons of various hypotheses, LLMs have a tendency to repeat themselves and get stuck in loops during multi-turn conversations (for single-turn Q&A/completion, repetition penalty usually isn't necessary). Therefore, reducing the probabilities of existing words will minimise repetitiveness.
   - Frequency and presence penalties are subtractive(减少的，减去的；应减的). Frequency penalty reduces word weights per existing word instance, whereas presence penalty reduces based on boolean word existence. Note that these penalties are applied to the logits (unnormalised weight predictions) of each token, not the final probability.
@@ -1545,7 +1562,19 @@ vllm serve RUC-DataLab/DeepAnalyze-8B --max-num-batched-tokens 40000 --max-model
 
 - ## 
 
-- ## 
+- ## [Krasis LLM Runtime: 8.9x prefill / 4.7x decode vs llama.cpp — Qwen3.5-122B on a single 5090, minimal RAM : r/LocalLLaMA _202603](https://www.reddit.com/r/LocalLLaMA/comments/1rwal26/krasis_llm_runtime_89x_prefill_47x_decode_vs/)
+  - Since Krasis' initial release I've been working on optimising decode speeds.
+  - This has led to dropping the dual-format system and moving to run both prefill and decode entirely on GPU with very different optimisation strategies.
+  - This means less requirement on the CPU and system RAM memory speed and much less system RAM usage overall (Krasis now needs enough just for the quantised model plus some overhead vs the prior 2.5x model)
+  - The results are that Krasis can now run Qwen3-Coder-Next on a single 16GB 5080 (1801 tok/sec prefill, 26.8 tok/sec decode) faster than Llama.cpp on a 32GB 5090 (layer offloading to GPU).
+  - On equal footing with a single 5090 (in both cases limited by PCIE 4.0) Krasis is multiples faster on both prefill and decode (purple bar vs grey bar).
+  - The server is currently OpenAI compatible and I also plan to expand on support for IDEs and tooling like Opencode and Aider.
+
+- NVidia-only at this point, hopefully support of AMD+Intel comes soon.
+  - This won't benefit Strix Halo at all. This benefits eGPU + CPU setups. 
+  - Strix Halo uses unified memory and the entire model will run on the GPU. There is no need to move data from RAM to VRAM.
+
+
 
 - ## [Qwen 3.5 small just dropped : r/LocalLLaMA _202603](https://www.reddit.com/r/LocalLLaMA/comments/1rirjg1/qwen_35_small_just_dropped/)
 - What’s the difference between base and no base?

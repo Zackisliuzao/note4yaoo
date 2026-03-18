@@ -138,6 +138,12 @@ modified: 2025-02-21T17:17:42.225Z
   - Code Generation
     - React + Tailwind CSS
     - HTML + CSS
+  - [【开源自荐】OpenPencil：首个开源AI原生矢量设计工具，支持Agent Team，可导入Figma，一键导出React/Vue代码 - LINUX DO _202603](https://linux.do/t/topic/1773258)
+    - 自然语言生成设计稿，支持 Claude Code/Codex/OpenCode 等主流CLI
+    - 支持 MCP 实时操作画布，可局部修改元素
+    - 支持 Agent Team，多Agent并发完成设计
+    - 兼容 .pen，支持 .fig 导入，还原度相当高
+    - 一键导出React/Vue等8种原生代码，还原度接近100%
 
 - https://github.com/TesslateAI/Studio /apache2/202510/python/ts
   - Open Source Locally Hosted Lovable with Full Stack Support
@@ -643,6 +649,13 @@ modified: 2025-02-21T17:17:42.225Z
   - https://docs.openclaw.ai/start/getting-started
   - OpenClaw is a personal AI assistant you run on your own devices. It answers you on the channels you already use (WhatsApp, Telegram, Slack, Discord, Google Chat, Signal, iMessage...)
   - It can speak and listen on macOS/iOS/Android, and can render a live Canvas you control. The Gateway is just the control plane — the product is the assistant.
+- https://github.com/Neirth/OpenLobster /GPL/202603/go/ts
+  - [OpenLobster – for those frustrated with OpenClaw's architecture : r/openclaw _202603](https://www.reddit.com/r/openclaw/comments/1rum56j/openlobster_for_those_frustrated_with_openclaws/)
+  - Neo4j graph database (proper memory system, not .md files)
+  - Real multi-user support (RBAC per user per channel)
+  - Encrypted secrets backend
+  - Task scheduler with cron + ISO 8601
+  - [Migrating from OpenClaw to OpenLobster _202603](https://github.com/Neirth/OpenLobster/discussions/44)
 
 - https://github.com/remorses/kimaki /577Star/MIT/202603/ts
   - https://kimaki.xyz/

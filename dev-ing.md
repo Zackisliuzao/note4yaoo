@@ -310,6 +310,61 @@ cd ~/Documents/opt/compiled/zimage && ./ZImageCLI -m mzbac/Z-Image-Turbo-8bit -o
 - dev-log
   - ?
 
+## 0317
+
+- i want to run unsloth-studio locally on my macbook without docker.
+- i followed the readme.md 
+```
+git clone https://github.com/unslothai/unsloth.git
+cd unsloth
+uv tool install -e .
+unsloth studio setup
+unsloth studio -H 0.0.0.0 -p 8888
+```
+- but i am using uv instead of pip. after `uv tool install -e .` , `unsloth studio setup` failed with error:
+```
+[02:26:38] ➜  unsloth git:(main) unsloth studio setup
+╔══════════════════════════════════════╗
+║     Unsloth Studio Setup Script      ║
+╚══════════════════════════════════════╝
+✅ Node v24.14.0 and npm 11.11.1 already meet requirements. Skipping nvm install.
+✅ Node v24.14.0 | npm 11.11.1
+✅ Frontend built to frontend/dist
+finished finding best python
+✅ Using python3 (3.13.5) — compatible (3.11.x – 3.13.x)
+Error: Command '['/Users/yaoo/.unsloth/studio/.venv/bin/python3', '-m', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.
+```
+- read related code and docs, tell me how to run unsloth-studio locally step by step
+
+
+
+
+- NVFP4 并非简单的 4-bit 浮点格式，它利用了 Blackwell 架构中第五代 Tensor Core（张量核心）的硬件加速能力，并配合先进的双级缩放（dual-level scaling）技术，在保持模型精度的同时，大幅减少显存占用并提升推理速度
+- NVFP4 requires Blackwell architecture (GeForce RTX 50-series / Blackwell Pro / select workstation cards). Don’t expect NVFP4 on older 40/30-series.
+  - frameworks like TensorRT-LLM, vLLM, and recent toolchains already add NVFP4 support — but some kernels or specific MoE/FlashInfer kernels may require particular versions or builds (you may need an updated wheel/Docker image or to build from source).
+- Older, much cheaper GPUs can run 4-bit models using INT4 formats (like AWQ, GPTQ, EXL2, or GGUF).
+
+## 0316
+
+- [How can I use the NVIDIA API key? - Friends of the Crustacean _202603](https://www.answeroverflow.com/m/1476727729423388683)
+
+- [Adding NVIDIA NIM provider to OpenClaw 2026.3.8 — Kimi K2.5 via NIM API - Friends of the Crustacean _202603](https://www.answeroverflow.com/m/1481858215279984650)
+  - Known NIM-ish gotchas
+  - Token limits: NVIDIA’s built-in defaults can be conservative; defining the model with contextWindow / maxTokens (like above) avoids surprise truncation.
+  - Role compatibility: for non-OpenAI hosts, OpenClaw forces developer role off for openai-completions to avoid 400s on providers that don’t support it (good for many OpenAI-compatible endpoints).
+  - 403s: usually an NVIDIA key permission issue (needs the “Public API Endpoints” access on the NVIDIA side).
+
+- [Mistral 422 (no body) : r/openclaw _202603](https://www.reddit.com/r/openclaw/comments/1rp32af/mistral_422_no_body/)
+  - I updated to 2026.3.8 today. Every Agent no replies "422 status code (no body)".
+- same 422 code, downgraded then fixed.
+
+- [Fix for 400/422 Errors with OpenWebUI + Mistral API : r/MistralAI _202507](https://www.reddit.com/r/MistralAI/comments/1ltchsi/fix_for_400422_errors_with_openwebui_mistral_api/)
+  - If you're using OpenWebUI with Mistral AI models and hitting errors like:
+  - 422: OpenWebUI: Server Connection Error when loading a model
+  - 400: Server Connection Error when clicking "Continue Response"
+  - it’s because OpenWebUI expects OpenAI-compatible behavior, but Mistral’s API doesn’t fully match (e.g., unsupported fields like logit_bias, or assistant-ending messages that Mistral can’t continue from).
+  - I ran into this too and put together a quick Python proxy that fixes it
+
 ## 0315
 
 - ndjson vs jsonl format
