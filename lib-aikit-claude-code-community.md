@@ -34,7 +34,22 @@ modified: 2025-12-18T12:26:08.445Z
 # discuss-stars
 - ## 
 
-- ## 
+- ## [Terminal vs. Desktop App: What’s The Difference? : r/ClaudeCode _202603](https://www.reddit.com/r/ClaudeCode/comments/1ryq4t7/terminal_vs_desktop_app_whats_the_difference/)
+- Claude Code was a terminal app before it was a desktop app. A lot of people started using it that way, grew accustomed to it, and built a ton of systems around terminal-based interfaces. So... partly it's cultural.
+  - But there are important functional reasons to run Claude Code in terminal mode. 
+  - First, Claude Code terminal sessions are persistent and can talk to each other, which opens up a huge architectural advantage in multi-agent system. 
+  - And second, you can run tmux or other software packages to view all kinds of agents at once. Claude for Mac doesn't support either of those - zero agent-to-agent communication, and you only get to view one session at a time.
+  - Finally... Claude for Mac, at least, is an underdeveloped piece of software with a lot of bugs. Some are purely aesthetic but a fair number are functional and even crippling. It's my sense that Claude Code terminal mode simply doesn't have those problems.
+
+- Terminal is infinitely better at least on Mac. The app is so laggy and takes forever to start up if you have a lot of mcp servers, even on a 2025 M2 Pro.
+
+- It's purely a preference thing, the desktop app just wraps the cli so it's basically the cli in an interface
+
+- terminal vs desktop is mostly culture/habit but there is one real difference: terminal integrates with your existing shell setup. if you already live in tmux or iterm triggers, the terminal feels natural. if you just want to code and not think about your tooling, desktop app is fine. the performance difference is negligible for most tasks. the desktop app does have some quality of life things the terminal doesnt (easier file browsing, native notifications) but honestly once you get comfortable in terminal you wont go back. as a hobbyist just use whatever lets you ship faster, the desktop app is perfectly capable
+
+- New to it myself but the one thing I like most about running the terminal is that when you do so in an ide like cursor or vs you can actually see what it’s doing, as opposed to just watching the claude window and waiting. And obviously you can do things in the terminal that you can’t in the Claude app, like check your usage limits with a command or see the context window.
+
+- It's usually easier to manipulate the CLI via scripting. Automations are crucial for many users, and if you're not comfortable with that, ask LLMs for help and be specific.
 
 - ## 🧩 [CC环境变量 搞点简单记录 _202601](https://linux.do/t/topic/1513988)
 - CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC
@@ -377,6 +392,32 @@ export ANTHROPIC_SMALL_FAST_MODEL="claude-sonnet-4-5-20250929"
   - For complex multi-stage tasks (the ones that actually deliver value) it is almost impossible. 
   - On top of that you frequently want to fork or split conversation into separate threads copy paste text here and there. TUIs are bottle neck for those cases. Frequently it is about efficiency (what was such a big selling point of editors like vim) - i don't want to type a command if i can click a button or use hotkey (don't even start about hotkeys on TUIs). 
   - Agent orchestrators are in its infancy and will evolve as coding-as-job becomes higher level abstraction than writing actual code.
+
+# discuss-cc-sandbox
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+# discuss-cc-web
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 在 Claude Code Web的虚拟机里，我们发现了什么
+- https://x.com/AprilNEA/status/2034216942924624054
+  - Claude Code Web 跑在 Firecracker MicroVM 里——这是 AWS 开源的轻量虚拟机，Lambda 和 Fargate 底层用的就是它。证据是 ACPI 表里写死的 OEM ID FIRECK `。整个虚拟机极其精简：4核 CPU、16GB 内存、252GB 磁盘，没有 systemd，没有 sshd，没有 cron，PID 1 是一个自研的 ` /process_api ` 二进制，同时充当 init 进程和 WebSocket API 网关。
+  - 虚拟机里有一个 27MB 的 Go 二进制 `/usr/local/bin/environment-runner` ，没有做 strip，保留了完整的调试信息和符号表。源码路径指向 github[.]com/anthropics/anthropic/api-go/environment-manager/——这是 Anthropic 内部的私有仓库。
+  - 通过 go tool objdump `、` strings `、` objdump `等工具，我们从中提取出了完整的包结构、所有函数签名、嵌入资源和关键字符串。
+  - 1. Antspace —— Anthropic 自建的 PaaS 平台
+  - 2. Baku —— Claude 网页版应用构建器的内部代号
+  - 3. BYOC —— 自带容器的企业部署模式
+  - 这不只是一个 AI 编程助手，而是一个 AI 原生的 PaaS 平台的雏形。它的竞争对手不仅是 Cursor 和 GitHub Copilot，更是 Vercel、Netlify、Replit、Lovable 和 Bolt。而 Anthropic 的独特优势在于：他们拥有从大模型到运行时到部署平台的完整垂直整合，这是目前任何竞品都不具备的。
+  - 方法论：全部发现来自对一个未 strip 的 Go 二进制的静态分析和运行时追踪。没有任何网络攻击、权限提升或越权操作——这个二进制就在虚拟机里，带着完整的符号表，等着被读取。
 
 # discuss
 - ## 

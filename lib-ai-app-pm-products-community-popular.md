@@ -14,9 +14,47 @@ modified: 2026-02-20T17:36:40.796Z
 
 - ## 
 
-- ## 
+- ## 🤔 [What actually convinces you to reach for OpenClaw instead of Claude Code? : r/openclaw _202603](https://www.reddit.com/r/openclaw/comments/1rxx2q9/what_actually_convinces_you_to_reach_for_openclaw/)
+  - OpenClaw's multi-agent setup, the cron jobs, the channel integrations — all that stuff seems cool in theory. But none of it has made me think "oh damn, I NEED to use this for coding tasks."
+  - openclaw借助llm解决了传统自动化/工作流的if条件模糊/复杂难处理的问题
 
-- ## 
+- I use both. Claude Code for programming, Openclaw for monitoring my life and nudging my behavior.
+  - The difference isn't the model, it's that OpenClaw runs 24/7 and has memory across sessions. Claude Code is a tool I open when I need it. OpenClaw is always there, connected to my calendar, fitness watch, tasks. Runs cron jobs while I sleep, remembers what happened last week, connects data from sources that don't know about each other. You could build all of that in Claude Code too but then you've spent weeks building infrastructure instead of using it.
+  - You could build all of that in Claude Code too but then you've spent weeks building infrastructure instead of using it.
+  - Best win was when it caught a pattern in my behavior that I hadn't noticed myself. You don't get that from a coding tool no matter how smart the model is. That's not intelligence, that's persistence plus context. So the automation/integration side matters a lot for me.
+
+- Claude Code is incredible but it's fundamentally a synchronous tool. You sit there with it. OpenClaw is the thing you set up, walk away from, and come back to find your inbox processed, a draft report written, and three calendar invites sent.
+- For pure coding in the terminal? Claude Code wins, no contest. But the moment your task involves:
+  - Multiple steps across different apps (email + calendar + web search + a spreadsheet)
+  - Something that needs to happen on a schedule without you babysitting it
+  - Coordinating between multiple specialized agents
+- ...that's where OpenClaw stops feeling like "Claude Code but worse" and starts feeling like an entirely different category of tool.
+- The model intelligence question is real though. If you're using Claude through both, the model ceiling is the same — OpenClaw's value is in the orchestration layer, not the underlying intelligence.
+
+- The "aha" moment for me was when I wanted something to run while I was NOT at my computer.
+  - OpenClaw is an agent. It has a heartbeat. It can run crons at 2am. It can notice that you got an email from a specific person and do something about it before you wake up. It can monitor a thing and alert you when a condition is met. That's a fundamentally different use case.
+- if you want:
+  - Daily briefings when you wake up
+  - Auto-draft email replies for review
+  - Scheduled reminders and check-ins
+  - Cross-platform automation (calendar + email + Slack + WhatsApp)
+  - An agent that runs even when you're traveling without a laptop
+- ...then OpenClaw fills a gap Claude Code structurally cannot fill.
+
+- 
+
+- ## 凡是吹 CLI 和 TUI 伟大复兴的人，都是没有脑子。历史已经一次次证明了图形化是必然的。教育市场，反过来只会被市场教育。
+- https://x.com/techeconomyana/status/2033852684286234666
+  - Codex在CLI命令行界面的时候，只有60万用户。推出了Codex APP之后激增到200万。
+  - Claude Code推出都这么久了，为什么是Cowork出圈？
+
+- 降低使用门槛是必然的，普通用户和类似程序员的专业用户，体量不同而已
+
+- ## 有没有一种可能，以后软件/服务商只提供 API 和 CLI， 由社区来 Vibe 和 打包 各种发行版本的 GUI
+- https://x.com/cellinlab/status/2034108711229395304
+  - ffmpeg 其实就已经是这样了， 提供最全参数和 API 的 CLI， 然后社区去做了不同的 发行版本
+- 为什么产品制作方不同时直接制作面向最终用户带 GUI 的版本呢
+  - 可以，但是 他不能做太多个版本，就行 Office 很多功能一般都不用
 
 - ## LLM被过度神化，根本原因是大多数人不了解其背后的数学原理。它的实际价值在于效率提升——大约30%，且集中在编程这类输出容易自动化生成、结果容易形式化验证的领域。
 - https://x.com/edward40e/status/2032899339090276545
@@ -535,7 +573,7 @@ modified: 2026-02-20T17:36:40.796Z
   - It is stupid slow on all models.
   - At the end of the day, what ever you are doing on claude that isn't code, there is very little reason to pay to get cowork. It's not going to do anything it advertised if you aren't coding standalone agents.
   - Over all, it has potential, but in its current form, its too slow, too naggy, too annoying, too useless.
-  - Being advertised as an actual "co-worker" you can hand off a bunch of work to and f*** off and come back and its mostly done, is so far from reality its not even funny.
+  - Being advertised as an actual "co-worker" you can hand off a bunch of work to and f *** off and come back and its mostly done, is so far from reality its not even funny.
 
 - Co-work is great, to be honest. If they cancel that, I’ll drop my Claude subscription. I use it to write confluence docs, edit pdfs, word docs, create contracts, amend them, do P&l stuff, powerpoint presentation, even google slides via chrome mcp. You’re using it wrong OP.
 
@@ -608,8 +646,6 @@ modified: 2026-02-20T17:36:40.796Z
 
 - You are better off having a normal NAS and an inferencing machine that pulls from it. That way, you aren't maxxing out your GPU when you're just pulling an image or two.
 # discuss-ai-pm
-- ## 
-
 - ## 
 
 - ## 

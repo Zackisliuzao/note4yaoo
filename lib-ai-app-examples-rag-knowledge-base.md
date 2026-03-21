@@ -44,6 +44,17 @@ modified: 2025-11-30T17:27:16.720Z
   - ollama-embeddings
   - 中文优化
   - structured extraction
+
+- context/memory layering
+  - user/system prompt
+  - chat hisotry
+  - local sources
+    - codebase
+    - files: pdf/docs
+  - external sources
+    - integartions: slack, google-docs
+    - search
+    - crawling
 # citation/backlinks
 - 权威数据源
   - arxiv
@@ -95,7 +106,7 @@ modified: 2025-11-30T17:27:16.720Z
     - LlamaIndex API key (enhanced parsing, supports 50+ formats)
   - 👷 xp
     - 跨workspace不能共享source-document
-    - 聊天时~~只能选择全部文档或不选文档，不~~可以只选择部分文档
+    - 聊天时 ~~只能选择全部文档或不选文档，不~~ 可以只选择部分文档
     - 支持根据场景配置不同llm: fast, long, reasoning
     - 🐛 聊天中的内容支持点击跳转到文档的chunk位置，而不是源文件，且中文文档的chunk经常是乱码
   - [【Feature Request】 Streaming Response for Research Agent _202505](https://github.com/MODSetter/SurfSense/issues/86)
@@ -1046,6 +1057,18 @@ modified: 2025-11-30T17:27:16.720Z
   - A RAG-based web search and deep research model context protocol (MCP) server that runs entirely locall
   - Features multi-engine research across 9+ search backends with semantic similarity ranking, and requires no API keys.
   - 9+ Search Backends: DuckDuckGo, Google, Bing, Brave, Wikipedia, Yahoo, Yandex, Mojeek, Grokipedia
+
+- https://github.com/bobmatnyc/mcp-skillset /MIT/202603/python
+  - mcp-skillset is a standalone Python application that provides intelligent, context-aware skills to code assistants through hybrid RAG (vector + knowledge graph). 
+  - Unlike static skills that load at startup, mcp-skillset enables runtime skill discovery, automatic recommendations based on your project's toolchain
+  - Dynamic Discovery: Vector similarity + knowledge graph for better skill finding
+  - On-Demand Loading: Skills loaded when needed, not all at startup
+  - MCP Native: First-class Model Context Protocol integration
+  - agentskills.io Compatible: Supports both native and agentskills.io specification formats
+  - On first run, mcp-skillset will automatically download a ~90MB `sentence-transformer` model (all-MiniLM-L6-v2) for semantic search. 
+    - Models are cached in `~/.cache/huggingface/` for future use
+  - mcp-skillset uses a hybrid RAG approach combining: Vector Store (ChromaDB) and Knowledge Graph (NetworkX)
+    - The hybrid search system combines vector similarity (semantic search) with knowledge graph relationships (dependency traversal) to find relevant skills. 
 # graph-knowledge
 - https://github.com/paukkroa/SemaTree /202603/python
   - a framework for managing and querying semantically structured graph-like knowledge bases
@@ -1898,6 +1921,13 @@ modified: 2025-11-30T17:27:16.720Z
     - Isolated installation (Ollama) – Operate fully on-premises with containers. All neural networks (LLM, reranker, embedding) run on your cloud or PC 
     - Custom LLM (OpenAI-compatible API) – Use your own deployed LLM with OpenAI-compatible API (vLLM, Ollama server, TGI, etc.). The indexer runs locally while the LLM can be on your server, cloud, or local machine.
     - Custom GPT – Query your local documents using ChatGPT app or web with custom GPTs. The indexer runs on your cloud or local PC, while the primary LLM remains ChatGPT.
+
+- https://github.com/NitroRCr/nyaai /apache2/202603/ts/vue
+  - https://nyaai.cc/
+  - [[开源] Nya AI: 在一个地方进行 AI 对话 / 网络搜索 / 笔记 / 协作 / 频道 / 网盘  - LINUX DO _202603](https://linux.do/t/topic/1787694)
+    - Nya AI 结合了 AI 对话客户端和协作平台，让你能够在一个平台进行 AI 对话、网络搜索、记笔记、编写文档、与团队沟通/协作、管理文件等操作。
+    - Nya AI 是可协作的平台，因此所有内容都储存在云端，你可以随时通过任意设备访问所有内容。得益于同步引擎 Zero
+    - 类似于传统搜索引擎和 AI 搜索的结合，左侧是搜索结果，右侧会生成 AI 总结回答，也可进行后续对话。
 
 - https://github.com/HKUDS/DeepTutor /9.3kStar/AGPL/202601/python/ts
   - https://hkuds.github.io/DeepTutor
