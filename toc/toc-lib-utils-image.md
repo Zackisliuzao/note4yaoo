@@ -28,6 +28,23 @@ modified: 2023-04-04T22:39:45.442Z
   - https://vectorizer.ai/
     - 利用人工智能将 JPG、PNG 等位图转成矢量 SVG 格式。先用 MidJourney 生成插图，再用这个工具转成矢量略加修改，岂不美哉。
 
+- https://github.com/stirling-image/stirling-image /MIT > AGPL/202604/ts
+  - https://stirling-image.github.io/stirling-image/
+  - Stirling-PDF but for images. 30+ tools and local AI in a single Docker container - resize, compress, remove backgrounds, upscale, OCR, and more. 
+  - Local AI - Remove backgrounds, upscale images, erase objects, blur faces, extract text (OCR). All running on your hardware with pre-downloaded models, no internet required
+  - Pipelines - Chain tools into reusable workflows. Batch process up to 200 images at once
+  - REST API - Every tool available via API 
+  - Single container - One docker run, no Redis, no Postgres, no external services
+  - 📡
+    - 可开发cli
+  - [chore: switch to AGPLv3 dual-license _20260403](https://github.com/stirling-image/stirling-image/commit/51a4f2d2bf80d3bb5e680e77dc3c0c8c26fb2cd4)
+  - [I built Stirling-PDF but for images : r/selfhosted _202604](https://www.reddit.com/r/selfhosted/comments/1sbgjxk/i_built_stirlingpdf_but_for_images/)
+    - it is heavily AI-coded, but if i need to quickly edit some things i think this could be actually useful. If it get's the job done i'm happy. A 9GB+ Docker image is really big atm.
+    - 9GB is a fair gripe though. That's mostly the Python ML models (background removal, up-scaling, OCR etc). I want to get some feedback first on which tools people actually use the most, then package those together for the lite image.
+  - 🐛 Almost 11 GB image?
+    - Yeah, most of that is the AI/ML stuff. Background removal, upscaling, OCR, face detection, object eraser they all pull in Python ML libraries and I pre-download the model weights so there's no surprise multi-GB fetch the first time you use a feature
+    - A lite image without the ML tools is on my to-do list. Would bring it way down for people who just need the core image ops.
+
 - tui.image-editor /5.9kStar/MIT/202210/js/fabricjs/简单编辑图片
   - https://github.com/nhn/tui.image-editor
   - http://ui.toast.com/tui-image-editor
@@ -453,6 +470,13 @@ modified: 2023-04-04T22:39:45.442Z
 
 - https://github.com/iyadahmed/AwesomeImageEditor3 /python
   - open-source, user friendly and high-performance image editor made from scratch with Python and Qt
+
+## ps-utils
+
+- https://github.com/pangxiaobin/apple-matting /GPL/202604/ts/rust/tauri
+  - https://matting.lingxiangtools.top/
+  - A local macOS desktop matting tool built with Tauri, Vue, and Rust.
+  - [不到8兆的mac抠图软件，整理了下开源了 - LINUX DO _202604](https://linux.do/t/topic/1880344)
 # image-tiles/lod
 - https://github.com/EddieMachete/em-ui-quadrant
   - Quadrant is a tile based, JavaScript web component which allows viewing an image in different levels of detail while optimizing the download process. 

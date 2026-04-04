@@ -97,7 +97,8 @@ serve -p 9000 --cors
 HOST=0.0.0.0 PORT=8080 react-scripts start
 next dev -H 0.0.0.0 -p 3000
 
-npm i -g npm yarn pnpm corepack serve @dotenvx/dotenvx opencode-ai @openai/codex @iflow-ai/iflow-cli @kilocode/cli @kimuson/claude-code-viewer 
+npm i -g npm yarn pnpm corepack serve @dotenvx/dotenvx opencode-ai @openai/codex @kilocode/cli @kimuson/claude-code-viewer 
+npm up -g opencode-ai @openai/codex @kilocode/cli 
 ```
 
 - dev-goals 不能在产品中检验的技术不玩，注意产品化
@@ -320,6 +321,28 @@ cd ~/Documents/opt/compiled/zimage && ./ZImageCLI -m mzbac/Z-Image-Turbo-8bit -o
   - ?
 - dev-log
   - ?
+
+## 0403
+
+- 🤔 i am using my m4 macbook now. From both clashx pro network monitor and NetSpeedMonitor.app, it shows download speed is 2.9~10.1 MB/s, it keeps showing this network speed for hours. please find which processes/apps are downloading and eating my network. the reason may not be chrome browser, because when i close chrome, it still showed the download speed. from both clashx pro network monitor and NetSpeedMonitor.app, now it is showing download speed is 2.9~10.1 MB/s. please analyze the root cause and tell me how to fix it step by step.
+  - ❓ 手动强制退出 ClashX Pro 再打开， 网络自动恢复正常， 所以可能是这个闭源代理软件自身的问题
+  - This is a known issue with proxy clients - they can get stuck in connection loops, especially with unreliable proxy servers 
+
+## 0402
+
+- [google/gemma-4-E4B-it · Hugging Face _202604](https://huggingface.co/google/gemma-4-E4B-it)
+  - The "E" in E2B and E4B stands for "effective" parameters. The smaller models incorporate Per-Layer Embeddings (PLE) to maximize parameter efficiency in on-device deployments. Rather than adding more layers or parameters to the model, PLE gives each decoder layer its own small embedding for every token. These embedding tables are large but are only used for quick lookups, which is why the effective parameter count is much smaller than the total.
+
+```sh
+brew install llama.cpp --HEAD
+
+llama-server -hf ggml-org/gemma-4-26B-A4B-it-GGUF:Q4_K_M
+```
+
+- what's the differences between https://huggingface.co/google/gemma-3-27b-it and https://huggingface.co/google/gemma-3-27b-pt ?
+  - gemma-3-27b-it (Instruction Tuned)
+  - gemma-3-27b-pt (Pre-Trained / Base Model)
+  - -it is tuned from -pt
 
 ## 0401
 

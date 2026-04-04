@@ -784,6 +784,14 @@ modified: 2025-12-19T12:43:21.150Z
   - 基于mineru网页端，抓包分析后将核心的上传及转换功能集成为api，供其他服务调用
   - [[开源]两个比较有意义的docker项目吧，一个是mineru-api，另一个是微信和T的音频转换api ](https://linux.do/t/topic/975584)
 
+- https://github.com/yuzi-ska/OCR-Finder /MIT/202604/python
+  - 本地离线 OCR 图片搜索工具，递归扫描文件夹，查找包含目标文本的图片。
+  - 本地离线运行 - 使用 RapidOCR ONNX Runtime，无需联网
+  - 环境要求 Python 3.10+ Windows
+  - [【开源自荐】OCR Finder 递归扫描本地离线的 OCR 图片搜索工具 - LINUX DO _202604](https://linux.do/t/topic/1884459)
+    - 和OCR原作用一样，提取图片中的文字信息，关键词是想要在图片中找到的字
+    - 使用的本地模型是PaddleOCR的v4版本，结合性能需求等综合下来的识别率算挺高的了，PP模型对手写体也有做优化，我测试下来基本只要不是非常奇怪的手写体大多都能识别
+
 ## utils-ocr
 
 - https://github.com/yigitkonur/llm-based-ocr /AGPL/202511/python
@@ -876,6 +884,17 @@ modified: 2025-12-19T12:43:21.150Z
 - https://github.com/microsoft/OmniParser /CCBy4/202502/python
   - A simple screen parsing tool towards pure vision based GUI agent
   - 用于把屏幕截图转化成LLM可处理的结构化格式，再结合屏幕操作工具即可让LLM操作屏幕
+
+- https://github.com/RRRRUDDDD/LLM_OCR /MIT/202604/js
+  - https://ocr.yoshinagakoi.eu.org/
+  - 基于多模态大语言模型的智能文字识别工具。通过 Vision API 从图片中提取文字，支持流式输出、LaTeX 公式渲染、PDF 处理、多格式导出。
+  - 纯浏览器端运行，无需后端服务。
+  - PDF 支持 — 上传 PDF 文件后自动逐页提取，每页独立处理
+  - LLM 驱动识别 — 使用多模态大模型进行文字识别，非传统 OCR 引擎
+  - 流式实时输出 — 通过 SSE 流式返回识别A结果，逐字显示
+  - 多图批量处理 — 支持同时上传多张图片，基于 p-queue 任务队列自动管理并发
+  - 智能重试
+  - [[开源] 做了一个用LLM来OCR的工具，欢迎各位佬友使用！ - LINUX DO _202604](https://linux.do/t/topic/1888946)
 
 - https://github.com/eloops/hocr2pdf /MIT/202509/js/inactive
   - take scanned image, and hocr output from tesseract, create PDF. Thats it.
@@ -1072,6 +1091,13 @@ modified: 2025-12-19T12:43:21.150Z
   - Features dynamic parallel processing with up to 256 workers for high-performance translation.
   - Smart Allocation: Up to 16 pages/slides concurrently, 64 workers per page
   - Supports multiple file formats including PDF, Word, PowerPoint, Excel, and more.
+
+- https://github.com/wxyhgk/retain-pdf /202603
+  - [RetainPDF：PDF 保留排版翻译工具 - LINUX DO _202604](https://linux.do/t/topic/1891990)
+  - RetainPDF 做的事: 上传 PDF，一键拿到保留原始排版的中文译文。
+  - 首次运行需要填写两个 API Key：MinerU（用于 PDF 解析，每天 2000 页免费）和 DeepSeek（用于翻译，需要自己充值 API ）。
+  - 不建议一次丢几百页的 PDF 进去。翻译是按页调 API 的，万一中间断了，前面已经翻完的那些页的费用就回不来了。 建议拆成几十页一批，翻完一批再翻下一批，稳一点。
+  - 社区内有类似的项目： PDF2zh ，是否参考过呢。功能几乎一样的
 
 - https://github.com/aikilan/Babel-Markdown /MIT/202511/ts
   - provides real-time translation previews for VS Code, synchronizing the original Markdown and AI-translated content in a single view to help you efficiently proofread multilingual documents.

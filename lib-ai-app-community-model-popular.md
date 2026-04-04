@@ -667,7 +667,73 @@ https://github.com/ml-explore/mlx-lm/blob/main/mlx_lm/LEARNED_QUANTS.md
 
 - ## 
 
-- ## 
+- ## 💡🧩 Information All You Need for Gemma 4
+- https://x.com/holo_b/status/2039815942658523392?s=20
+- it's multimodal  meaning it can process not just text, but also images, video, and audio. 
+  - However, it's important to note: it's not an all-to-all model. It can take in different modalities, but it only responds in generated text.
+- "Effective" means how many parameters actually fire during inference. 
+- Architecture-wise, Gemma 4 pulls together the best components from its predecessor Gemma 3, while dropping complex and inconclusive features like AltUp. 
+  - What's AltUp? It stands for "Alternating Updates" a technique that  widens the token's internal representation by splitting it into blocks, processing only one block per layer, and using a lightweight predictor  to guess the rest. Clever idea, but in practice the gains were  inconclusive at these scales, so Gemma 4 skipped it in favor of simpler, proven tricks.
+- Gemma 4 alternates between two types of attention layers: local sliding-window layers and global full-context layers.
+  - What's a sliding window? Imagine you're reading a  book. Instead of remembering every single word from the beginning, you only focus on the last ~512 words around where you currently are. That's  a sliding window. It's cheap and fast because each token only looks at  its nearby neighbors  not the entire document.
+  - What's global full-context attention? This is the  classic "look at everything" approach. Every token can attend to every other token in the entire sequence. Expensive, but it's how the model  connects ideas from the beginning to the end of a long document.
+  - By alternating these two (local, global, local, global…), Gemma 4 gets the best of both worlds: cheap local processing  for most layers, with periodic "zoom out" layers that see the whole  picture.
+- RoPE (Rotary Position Embeddings) is how the model knows where each token is in the sequence.
+  - Gemma 4 uses two different RoPE settings:
+  - Standard RoPE for the sliding-window (local)  layers these only need to encode positions within a short window, so the standard rotation frequency works fine.
+  - Proportional RoPE for the global layers  this  stretches the frequencies proportionally so that position signals remain  distinguishable even at very long context (up to 256K tokens!).
+- Per-Layer Embeddings (PLE)
+  - The problem: In a standard transformer, each  token gets converted into a single embedding vector right at the input. That same vector is what every layer builds on. 
+  - The PLE solution: PLE adds a parallel, smaller side channel that delivers a fresh, dedicated vector to each layer individually.  
+- The vision encoder in Gemma 4 takes in images and converts them into tokens that the text decoder can understand. It uses learned 2D positional embeddings and multidimensional RoPE to understand spatial relationships in images.
+
+- [[D] Memory demand of per-layer-embeddings/how would one train a model with it? : r/MachineLearning _202506](https://www.reddit.com/r/MachineLearning/comments/1ldkj1a/d_memory_demand_of_perlayerembeddingshow_would/)
+  - During inference, you can stream embeddings from ram (or nvme) to vram. 
+  - If you don't have enough vram anyways, it should be faster than MoE because with MoE, you have to synchronize with gpu at each expert router. 
+  - But with Gemma 3n approach, you only have to synchronize at the start of new token. 
+  - I'm not sure about training, but I suspect the same can be done while training, too.
+
+- [Gemma 3n Preview : r/LocalLLaMA _202505](https://www.reddit.com/r/LocalLLaMA/comments/1kr8s40/gemma_3n_preview/)
+  - It seems to be better than an MoE because it doesn't have to keep all parameters in ram.
+- Tl; dr: the architecture is identical to normal transformer but during training they randomly sample differently sized contiguous subsets of the feed forward part. Kind of like dropout but instead of randomly selecting a different combination every time at a fixed rate you always sample the same contiguous block at a given, randomly sampled rates. They also say that you can mix and match, for example take only 20% of neurons for the first transformer block and increase it slowly until the last. This way you can have exactly the best model for your compute resources
+  - that architecture intuitively makes much more sense than MoE. The ability to scale resource requirements dynamically is a killer feature. 
+
+- [Gemma3n:2B and Gemma3n:4B models are ~40% slower than equivalent models in size running on Llama.cpp : r/LocalLLaMA _202506](https://www.reddit.com/r/LocalLLaMA/comments/1lmranc/gemma3n2b_and_gemma3n4b_models_are_40_slower_than/)
+  - All parameters in an MoE are typically loaded in vram BC you can’t predetermine what experts to activate.
+- It is also hard to define the model as actually 5b (or 8b in case of E4B) in density because the PLE layers are closer to a kind of lookup table to guide the model layers towards better answers basically context-specific "adjustments"
+  - Instead of performing a complex matrix multiplication on a continuous input vector like with other layers, when utilising PLE layers it takes a specific token ID and layer ID, and "looks up" a corresponding embedding vector from this large lookup table and adjust its values.
+  - As a result those PLE layers can be stored on slower memory and loaded dynamically saving on the needed memory footprint.
+  - You can see it in GPQA Diamond (Scientific Reasoning) benchmarks or humanities last exam where it performs no different from the gemma 3 4b model or even slightly worse because it likely does not have "adjustments" saved for those situations but instead for more common use cases.
+
+- ## [Gemma 4 and Qwen3.5 on shared benchmarks : r/LocalLLaMA _202604](https://www.reddit.com/r/LocalLLaMA/comments/1saoyj7/gemma_4_and_qwen35_on_shared_benchmarks/)
+- To be fair, Qwen releases a model every two weeks or so, no chance for Gemma to catch up in benchmarks, but it doesn't have to. Real world use cases are much more important and we know where Gemma will take the clear lead - multilingual and writing capabilities.
+  - Tool usage is becoming increasingly more useful (especially for enriching writing with sources using RAG, and having the agent be able to query different parts of the query automatically), so seeing the tool usage be so poor for the Gemma models is a bit disappointing. More testing will be required ofc.
+- These benches does not matter. Gemmas language skills are unbeatable. Qwen sucks with different languages.
+
+- Gemma 4 is a reasoning model. Don't expect the quick answers you were used to in Gemma 3.
+
+- ## google gemma 4 architecture is very interesting and every model has some subtle differences, here is a recap:
+- https://x.com/eliebakouch/status/2039751171556954531
+  - per layer embedding only on the small variant 
+  - no attention scale (usually you divide qk^T by sqrt(d), they don't) 
+  - they do QK norm + V norm as well 
+  - they share K and V for the large variant 
+  - they do quite aggressive KV cache sharing on the small variant 
+  - sliding window (512 and 1024) is bigger than gpt-oss 128 and they don't use sinks! 
+  - softcapping 
+  - rope only on part of the dimensions + different rope theta for the local/global layer
+
+- Looks like no one uses sinks now, it’s too cumbersome and the benefit is small
+  - I think it’s pretty popular if you look at the last release with swa or some variant solving the same problem like gating attention
+
+- for the attention scale it’s defo merged into the qk norm weights. I’ve always liked this idea
+
+- Pure transformer ? I thought we have already shown that hybrid is the way to go 
+
+- ## [In anticipation of Gemma 4's release, how was your experience with previous gemma models (at their times) : r/LocalLLaMA _202604](https://www.reddit.com/r/LocalLLaMA/comments/1sagulj/in_anticipation_of_gemma_4s_release_how_was_your/)
+- I use Qwen27b 4bit and Gemma27b 4bit for classifying German (political) texts and the F1 Score (measure of precision) is ALWAYS lower with Gemma. Can really not recommend Gemma anymore.
+
+- Gemma3 is still the best we've found to serve EU clients for simple tasks (like shop assistant, faqs, etc). It's "smart enough", understands and can reply in most languages, and is "safe" enough that it doesn't start spewing hate randomly. It's a perfect fit. Oh, and the clients love it because it doesn't randomly output chinese characters (it's insane how many clients have literally asked about that)
 
 - ## [只能说Qwen3.5 35b太强大了，未经审查版-更炸裂！！！ - LINUX DO _202603](https://linux.do/t/topic/1773045)
   - {% set enable_thinking = false %}
