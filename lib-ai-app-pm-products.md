@@ -30,6 +30,11 @@ modified: 2025-03-22T16:10:24.856Z
   - agent框架的tool-use实现对最新llm的支持，llm-provider的部署 都会影响llm的效果
   - ai适合快速生成草稿文本或原型, 但修改难
 
+- app vs browser
+  - 不是每个用户都能免费使用word的审阅模式, 自定义webapp/app提供了可选方式
+  - 自定义webapp/app能提供独特的体验, 如artifacts/diff/image/code-running/table/ocr
+  - agent擅长浏览器操作, agent能读取其他文件或程序
+
 - ai-ux/visiual
   - 在浏览器cdp成熟后, 通过cdp直接打开浏览器操作web ui似乎比electron app更强大
   - 输入或输出包含visual内容的产品需要human-in-the-loop, 如ocr/image
@@ -304,6 +309,7 @@ modified: 2025-03-22T16:10:24.856Z
   - 🔗 citations for search: 外部数据源如字典mdx/书籍epub/wikipedia公开db/统计年鉴, 产品价值参考context7
     - 目前cli的搜索体验太差, 可针对 context/search-engine 结合 coding-agent 开发类似notebooklm的搜索体验
     - 查看原文pdf-parts时支持仅查看前后几页, 保护原文内容
+    - optimized for long docs/books
     - 类似词典库/kiwix的预置模块, 可下载、可分享, 不必每次都全量索引
     - wikipedia zim 自动翻译为中文
     - web-search
@@ -659,13 +665,6 @@ modified: 2025-03-22T16:10:24.856Z
   - https://github.com/cheahjs/free-llm-api-resources
 
 - news
-  - [OAI-FREE](https://newapi.zhx47.xyz/pricing)
-    - [LinuxDo 社区福利活动](https://campaign.zhx47.xyz/)
-    - [OAI-FREE 签到发送订阅 ](https://linux.do/t/topic/1632349)
-    - 都是临时渠道，不开签到了，直接每天送 100 刀余额 
-  - [GOOOD！！！ _202603](https://goood.my/pricing), 无签到
-    - [自建公益站随便蹬！注册即送1000额度 - LINUX DO _202603](https://linux.do/t/topic/1779827)
-    - 个人自建的站，随意蹬，如果用完了，到时候会补的
   - [Atomgit GLM5 无限 Token? ](https://linux.do/t/topic/1696331)
   - [华为云 CodeArts 试用期间开放GLM4.7与DeepSeek V3.2模型无限畅用，大善人还是小白鼠？ _202601](https://linux.do/t/topic/1536794/5)
   - [寻找L站开源作者，UUcode送商业级API额度—— 优质开源项目扶持计划 1228](https://linux.do/t/topic/1370667)
@@ -703,6 +702,7 @@ modified: 2025-03-22T16:10:24.856Z
   - [Compute Token](https://computetoken.ai/console/personal)
     - [【正式上线】Compute Token —— 是大家推着我们走到这里 _202603](https://linux.do/t/topic/1772654)
     - 正式上线付费版，但公益的精神不丢。每天签到送额度
+  - [xem API](https://ai.xem8k5.top/console/personal)
   - [君の的公益](https://muyuan.do/console/personal), 签到额度少
     - [『高级推广』『君の公益』Claude渠道恢复  ](https://linux.do/t/topic/1853293)
     - 仅支持Claude Code
@@ -806,13 +806,14 @@ modified: 2025-03-22T16:10:24.856Z
     - 很多openrouter渠道的模型
     - cc不支持tool, **cc渠道经常上架下架** 
     - [黑与白chatAPI福利站](https://cdk.hybgzs.com/)
-  - 📌 [OAI-FREE](https://newapi.zhx47.xyz/console/personal), 每天100, 需手动
+  - 🗑️ [OAI-FREE](https://newapi.zhx47.xyz/console/personal), 每天100, 需手动
     - [LinuxDo 社区福利活动](https://campaign.zhx47.xyz/)
     - [OAI-FREE 签到发送订阅 ](https://linux.do/t/topic/1632349)
     - 都是临时渠道，不开签到了，直接每天送 100 刀余额
   - 📌 [Enjoy _202604](https://free.glen.cc.cd/dashboard), 无签到, 每天限额1000刀
     - [enjoycodex公益站1000个账号邀请码 ](https://linux.do/t/topic/1944332)
-  - [ruilab _202604](http://sub2api.ruilab.top/dashboard)
+  - [ruilab ](https://newapi.ruilab.top/console/personal)
+    - [ruilab _202604](http://sub2api.ruilab.top/dashboard)
     - [公益站更换域名 ](https://linux.do/t/topic/1947960)
   - [FreeAI _202604](https://free.closeai.hk/home), 无需签到, 
     - $5/d, $35/w, 非L站, 可付费
@@ -1730,6 +1731,10 @@ modified: 2025-03-22T16:10:24.856Z
   - L站用户注册就送小小股东, $5/mon
     - right code 也是站内的一家主要做codex的中转站
   - o2a基本没有缓存?
+
+- [帕帝AI](https://padi-shop.closeai.hk/)
+  - [FreeAI - AI API Gateway](https://free.closeai.hk/)
+  - [Home - 帕帝AI _202604](https://padi.closeai.hk/home)
 
 - [IKunCode](https://api.ikuncode.cc/pricing)
   - [LinuxDo商家评价平台](https://rate.linux.do/merchant/15)
