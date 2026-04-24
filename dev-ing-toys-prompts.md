@@ -81,8 +81,6 @@ please analyze git commits and code if you need, then explain to me what major f
 - feature-by-feature file map may have licensing risk. you can do it, but please use similar file/folder names instead of the same file/folder names as the original. you can also use similar implementation logic for features, but MUST not use the same function/variable names as the original. please make sure your feature implementation work, but without licensing issues.
 - in your implementation, you can also improve the code logic for features and make your implementation clean and extensible. tests are not necessary for your implementation, but you can write some important tests if you want. do not write too many tests, if logic is simple/clear, skipping tests is ok. 
 
-- you have migrated some features from ilove-bentopdf to ilove-pdf. 
-
 - please recheck the migrations and improve implementation for the the following features:
 1. dynamic WASM loading
 2. PDF layers, overlay/underlay
@@ -129,7 +127,6 @@ what should be done to macth the upstream? explain to me. if it it complicated, 
 - you may implement code architecture and structure similar to superdoc, but rewrite from scractch to avoid licensing issue. `EditorAdapter` is a good design, you should implement similar architecture. OOXML → ProseMirror handlers is powerful, you should implement your converter and handler by refrencing superdoc, but remember to avoid licensing issues. collaboration with yjs should be implemented. encryption/signing can be skipped now. you can reference as many superdoc code as possible, but remember to rewrite it to avoid license issue.
 - please analyze related code and architecture, make a plan and implement your ailovedoc project.
 
-- you have migrated some features from superdoc to ailovedoc.
 - please analyze git repo and code when you need, then explain to me what major features are in superdoc but missing in ailovedoc.
 
 - the most important feature is a powerful, robust, extensible, headless ai ooxml editing engine . 
@@ -155,6 +152,10 @@ you have worked on this problem several times but features are still lacking. Th
 
 - to achieve full feature parity with superdoc, help me choose the best option for long-term.
 
+- you have migrated some features from superdoc to ailovedoc.
+
+- you should recheck logic parity detail by detail for every  major feature, the goal is to achieve full feature parity(ux can differ).
+
 - these are the most important features now, the goal is to achieve full feature pairity or even better.
 - make a plan, then migrate and improve full feature pairity, without licensing issues
 
@@ -166,6 +167,8 @@ you have worked on this problem several times but features are still lacking. Th
 - please deep research superdoc code, then can you design a similar solution in ailovedoc to improve it? is superdoc's solution good enough? if yes, solve it in a similar way for ailovedoc.
 
 - you have worked on this several times but features are still lacking. They are the most important features at this moment. DO NOT stop untill you achieve full feature parity. 
+
+- you may do a big code refactor to match full feature of superdoc in a similar architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - research and make a full plan, then implement ailovedoc to match full features of superdoc, or even better than superdoc, without licensing issues.
 
@@ -200,8 +203,6 @@ please analyze onlyoffice architecture, and give tips to my question before iple
 
 - the core pdf editor should be modular and extensible. 
 
-- you have migrated some features from onlyoffice pdf editor to hardoc.
-
 one goal is to support to view both text pdf and scanned image pdf, text pdf should support in-place text editing like onlyoffice/adobe-acrobat. both text and image pdf should support annotations with simple shapes and text.
 
 one goal is to enhance hardoc pdf editor with more important features:
@@ -232,6 +233,10 @@ project onlyoffice and project at `~/Documents/repos/office/all-pdf/open-pdf-stu
 
 recheck and migrate full features of True PDF text editing engine with annotation support. 
 
+- you have migrated some features from onlyoffice pdf editor to hardoc.
+
+- you should recheck logic parity detail by detail for every  major feature, the goal is to achieve full feature parity(ux can differ).
+
 - you can deep research, and reference good deisgn from onlyoffice pdf editor.
 - you may reference the upstream code, use similar dependencies, and implement similar logic, but you should rewrite it without licensing issue.  
 - you have worked on this several times but features are still lacking. They are the most important features at this moment, please migrate and improve it. 
@@ -251,9 +256,9 @@ please make a plan, then improve the core in-place text editing engine to make i
 
 - please deep research the onlyoffice pdf editor, then can you design a similar solution to solve it? is onlyoffice's solution good enough? if yes, solve it in a similar way for hardoc.
 
-- DO NOT stop untill you achieve full feature parity. 
-- you have worked on this several times but still not solve it. this is the most important features at this moment. 
-- make a full plan to solve it completely, DO NOT stop if you improves just a little, only stop when you have solved it .
+- you have worked on this several times but still not solve it. 
+
+- you may do a big code refactor to match full feature of onlyoffice-pdf-editor in a similar architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - research and make a full plan, then implement hardoc to match full features of onlyoffice-pdf-editor, or even better than onlyoffice-pdf-editor, without licensing issues.
 
@@ -288,6 +293,8 @@ please make a plan, then improve the core in-place text editing engine to make i
 - the most important feature in react webapp is a modular, extensible, headless spreadsheet view/editing engine with undo/redo history support like backbonejs webapp. you should implement it in a way to make it easy to merge code changes from `main` branch to `feat/office-react` branch in the future, so keep as many code unchanged as possible.
 
 - you have migrated some features from backbonejs webapp to react webapp.
+
+- you should recheck logic parity detail by detail for every  major feature, the goal is to achieve full feature parity(ux can differ).
 
 - you have worked on this several times but features are still lacking.
 
@@ -345,6 +352,8 @@ you may use similar file/folder names instead of the same file/folder names as t
 
 - you have migrated some features from PPTist to slaides.
 
+- you should recheck logic parity detail by detail for every  major feature, the goal is to achieve full feature parity(ux can differ).
+
 - you have worked on this several times but features are still lacking.
 
 - please deep research the PPTist, then can you design a similar solution in slaides to achieve full feature parity?
@@ -379,10 +388,40 @@ finally make sure all tests run and pass locally with npm. you can update/fix te
 # rafactor
 
 ```prompt
-for project ailovedoc, please refactor code structure if you need, to make sure all source code and tests files should have less than **800** lines of code(other code-unrelated or unimportant files are not required). because if too many code exists in a single file, it will be hard to maintain. small files and modular architecture are always preferred.
+The goal is to refactor existing code to be more clear, extensible, functional-programming style, while improving logic correctness at the same time.
+The first important task is to remove `class extends` inheritance and js prototype. es6 class may be used, but `class extends` inheritance and prototype MUST be avoided by refactoring and rewriting.
+
+Keep the existing code/architecture working. Do not rewrite the whole codebase at once. you may refactor and improve code progressively.
+
+Prefer composition over Inheritance: Replace class hierarchies with small, composable functions.
+Prefer pure functions, immutable data, explicit inputs/outputs, and small composable functions.
+Extract repeated logic into small, composable, named functions. The core logic becomes a pure function that can be unit tested.
+Use function composition instead of nested calls.
+If a function is too large, decompose it into smaller pure functions composed together.
+
+Pure FP applications push side effects to the "edges" of the program (the main function, controllers, UI handlers). The core remains pure.
+Prefer to extract all side effects (logging, API calls, DOM updates) to the function's edges.
+
+Prefer to reduce hidden state, side effects, mutation, and tightly coupled modules.
+Prefer to avoid mutating inputs. prefer immutable-style functions: `(state, action) => newState`.
+Prefer to replace mutation with immutable transformations.
+Prefer to replace nested imperative logic with composition, mapping, filtering, or small helpers.
+Prefer `map/filter` if it is better than LOOP. `reduce` should be avoid, you may use LOOP to replace `reduce`.
+
+make a plan, refactor and improve the codebase progressively.
+
+yes, continue to refactor and improve towards more functional-programming style
+```
+
+
+
+```prompt
+for project ailovedoc, please refactor code structure if you need, to make sure all source code and tests files should have less than **700** lines of code(other code-unrelated or unimportant files are not required). because if too many code exists in a single file, it will be hard to maintain. small files and modular architecture are always preferred.
 
 please refactor code to migrate from pnpm to npm.
 please keep as many code as possible unchanged, so most bun scripts and code should be kept for backward compatibility, but bun wont be used any more. bun code should not be removed. you should create new script for nodejs or add new entrypoint for nodejs. now update your plan.
+
+Make minimal, mechanical changes first, then deeper improvements only when safe.
 
 you may reference the upstream code, use similar dependencies, and implement similar logic, but you should rewrite it without licensing issue. 
 ```

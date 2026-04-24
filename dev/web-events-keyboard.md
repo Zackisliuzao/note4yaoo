@@ -23,6 +23,9 @@ modified: 2023-03-19T20:03:32.594Z
   - However, it would be a little too much to create a variable for each key. 
   - For that reason, an object is created with a property for each key code that you want to track down. A key code is usually the ASCII code.
 # utils
+- https://github.com/TanStack/hotkeys /MIT/202604/ts
+  - Type-Safe keyboard shortcuts library with awesome devtools
+
 - https://github.com/jamiebuilds/tinykeys /3.8kStar/MIT/202408/ts/体积小
   - https://jamiebuilds.github.io/tinykeys/
   - A tiny (~650 B) & modern library for keybindings
@@ -41,6 +44,12 @@ modified: 2023-03-19T20:03:32.594Z
   - https://jaywcjlove.github.io/hotkeys-js
   - A robust Javascript library for capturing keyboard input. 
   - react-hotkeys is the React component that listen to keydown and keyup keyboard events, defining and dispatching keyboard shortcuts. 
+
+- https://github.com/keybindyjs/core /MIT/202507/ts/NoDeps/inactive
+  - Lightweight and framework-agnostic keybinding library for JavaScript and TypeScript with zero dependencies.
+  - Global and Scoped Shortcuts – Define app-wide or context-specific keys
+  - Multi-Key Combos – Full support for combinations like Ctrl+Shift+K
+  - Framework Agnostic – Works with any frontend stack
 
 - https://github.com/ssleptsov/ninja-keys /MIT/202207/ts/inactive
   - Keyboard shortcut interface for your website that works with Vanilla JS, Vue, and React.
