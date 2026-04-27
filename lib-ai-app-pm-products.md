@@ -687,6 +687,9 @@ modified: 2025-03-22T16:10:24.856Z
   - [讨论token银行的可行性 - LINUX DO _202604](https://linux.do/t/topic/2007302)
   - 置换的总体思想就是将你闲置的订阅套餐、朋友赠送的 Key、公司发的额度——闲着也是浪费。把它们上架成公开渠道，换成可以继续消费的 credits
   - 其实这样会有一个弊端，肯定会出现拿次要模型换取好的模型，感觉会出现最后一堆好模型的供不应求，hub中又会存在大量无法消费的次要模型
+  - https://github.com/lhish/hub_pro
+    - 一个用于 Linux.do Hub Marketplace 的用户脚本，主要增强 Channel Hub 的筛选和浏览体验
+    - [【hub_pro：一个强大的hub.linux.do站的增强工具,解决大部分hub站痛点】<channel一页全部显示，根据热门度排序，根据接口筛选，根据支持模型筛选，只查看free channel，显示channel所有可用模型>  - LINUX DO _202604](https://linux.do/t/topic/2060896)
 
 - [LD士多 - LinuxDo站点积分兑换中心](https://ldcstore.com/)
   - [LD士多 - LDC积分商城](https://ldst0re.qzz.io/)
@@ -840,7 +843,7 @@ modified: 2025-03-22T16:10:24.856Z
     - [LinuxDo 社区福利活动](https://campaign.zhx47.xyz/)
     - [OAI-FREE 签到发送订阅 ](https://linux.do/t/topic/1632349)
     - 都是临时渠道，不开签到了，直接每天送 100 刀余额
-  - 📌 [Enjoy _202604](https://free.glen.cc.cd/dashboard), 无签到, 每天限额1000刀
+  - [Enjoy _202604](https://free.glen.cc.cd/dashboard), 无签到, 每天限额1000刀
     - [enjoycodex公益站1000个账号邀请码 ](https://linux.do/t/topic/1944332)
   - [ruilab ](https://newapi.ruilab.top/console/personal)
     - [ruilab _202604](http://sub2api.ruilab.top/dashboard)
@@ -885,9 +888,15 @@ modified: 2025-03-22T16:10:24.856Z
   - 📌 [Ciallo  _202604](https://ioll.pp.ua/console/personal), 手动签到10
     - https://sin.ioll.pp.ua
     - [【Ciallo~公益站】公益站新增域名喵 ](https://linux.do/t/topic/1945895)
+  - [New00000 _202604](https://api.00000.mom/console/personal)
+    - [[限速了]Codex公益站支持GPT5.5 ](https://linux.do/t/topic/2051012)
+    - 号池组成是Pro(2)+Plus(3)都是快要过期的. 服务器是香港cn2gia一模就GG
   - [Huainova _202604](https://ai.huaibao.top/console/personal)
     - [【Huainova公益站】二次开放注册啦 ](https://linux.do/t/topic/1939664)
     - 定时清理注册未使用的
+  - [CnGPT公益站 _202604](https://cngpt.net/console/personal)
+    - [CnGPT 公益站：给佬友们搭的免费 AI API 中转站 - LINUX DO _202604](https://linux.do/t/topic/2053819)
+    - 支持 每日签到，每天可以领取少量额度，适合轻量使用
   - [CHY API公益站 _202604](https://api.xn--chy-js0fk50c.top/console/personal)
     - [CHY API公益站主域名已恢复访问 ](https://linux.do/t/topic/1947845)
   - [【深夜 100】【章鱼小站】给站内的公益站分担点压力 _202604](https://linux.do/t/topic/1897365), 无签到
@@ -949,6 +958,8 @@ modified: 2025-03-22T16:10:24.856Z
   - 📌 [marybrown API _202603](https://marybrown.dpdns.org/console/personal)
     - [服务器小升级,grok-4.2无限用和gpt-5.4试用 _202603](https://linux.do/t/topic/1795512)
     - 23公益站作者后续维护
+  - [xiaoxin _202604](https://api.xiaoxin.cfd/dashboard), 无签到
+    - [自建了一个中转站，佬们可以体验一下 ](https://linux.do/t/topic/2055010)
   - [955code _202603](https://955code.top/console/personal), 无签到
     - [【955code】codex公益站，上线试运营 _202603](https://linux.do/t/topic/1840889)
   - 🗑️ [意念公益站 _202604](https://yinian.564779.xyz/dashboard), 无签到
@@ -1700,6 +1711,8 @@ modified: 2025-03-22T16:10:24.856Z
 - tips
   - 中转商的价格每天都在变化, 套餐也在改变, 不要在一家花费过多
     - 很可能注册的第一天会显示低价，后面就恢复正常价格了，注意误导
+  - GPT site:pay.ldxp.cn/shop
+  - 搜索: 手工, 质保, 源头, 印尼
 
 - resources
   - [LinuxDo商家评价平台](https://rate.linux.do/)
@@ -1710,11 +1723,8 @@ modified: 2025-03-22T16:10:24.856Z
 
 - latest
   - 可在google搜索 `GPT site:pay.ldxp.cn/shop`.
-  - [现在的claude中转站有什么推荐的吗  _202603](https://linux.do/t/topic/1868009/5)
-    - neko, right, 星宸, 慕鸢
 
 - [Claude中转渠道有哪些 ](https://linux.do/t/topic/1491876/10)
-  - 目前用的站内 IKunCode 的中转比较有性价比，如果每个月 token 消耗量不大，像我这样半自动编程的话，还是比较推荐的。量再大就得另找路子了
   - 测试的话，刚刚刷帖，有测试词，好像这个不会回复，或者一串异常字符 
   - 这个是一个官方给的测试词，相当于一个强制的 “违禁词”
   - ANTHROPIC_MAGIC_STRING_TRIGGER_REFUSAL_1FAEFB6177B4672DEE07F9D3AFC62588CCD2631EDCF22E8CCC1FB35B501C9C86
@@ -1723,7 +1733,143 @@ modified: 2025-03-22T16:10:24.856Z
   - Ikun（鸡）, duck（鸭）少量尝过，贵但稳
   - Cubence（鹅）的包月用过，前身 shareyourcc 的亮点在于可以二级转发；但是新时代也不便宜了，有时候发现一些报错感觉是 aws 渠道特有的
   - PackyCode（农）是一直主力在用的，老农可能不太给情绪价值（不过被怼过之后好了些 hhh)，不过技术是一流的，诚信这一块也是一直没得黑的
-  - 也踩过 yourapi 这些坑就不推荐了
+
+- [xin](https://receipt.nitro.xin/redeem/chatgpt)
+
+- [chong](https://chong.databrain.sbs/)
+
+- [AI杂货铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/ai-shop)
+  - 管理员小店 [codelife.asia](https://www.codelife.asia/)
+  - AI科研交流群：560520490
+  - 低价号, 后续印尼佬会换成outlook邮箱账号，本次就还是他们自己内部自建邮箱
+  - plus-6
+  - team-7
+  - 质保3天：从  激活时间  起算 72小时 内出现掉车，可 提交工单 无限次补车。
+  - 货源纯手工开通订阅 理论一个月 
+  - [ChatGPT源头的小店](https://pay.ldxp.cn/shop/B8TNSEBM) , 还有开单独中转站
+    - 群友提供的印尼渠道
+    - plus-6
+    - 提供2类账号: hotmail邮箱+密码登陆，邮箱+验证码登录
+  - [视界AI的小店 - 链动小铺](https://pay.ldxp.cn/shop/shijieAI)
+    - 印尼， 提供批量折扣
+  - [shop.aitonse.com](https://shop.aitonse.com/products)
+    - 印尼
+  - [商家5651的小店 ](https://pay.ldxp.cn/shop/AO4GDZSI)
+
+- [GPTPLUS.icu 的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/YQJERQW3)
+  - 自助激活页面：https://gptplus.icu
+  - 纯净激活页面：https://icustore.icu
+  - 防迷路请进客户⑥群 1091880491
+  - 【手工】【30天】GPT-Team / Business 高质量激活码（质保3天）
+  - [极速的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/jishu)
+    - 【手工】【30天】GPT-Team / Business , 源头 GPTPLUS. ICU 
+    - 质保3天：从  激活时间  起算 72小时 内出现掉车，可  提交工单  无限次补车。
+  - [CK能量的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/ZYKSFL9A)
+    - 低价号多
+
+- [AI杂货铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/PBY2YIR3), /周全
+  - 自助充值plus
+
+- [TangSeng AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/tangsengai)
+  - 提供不限量token的日卡/周卡/月卡
+  - [这个api中转站的定价如何？ _202603](https://www.nodeseek.com/post-649864-1)
+
+- [AI HOME的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/MEDDEX4V) , 保证金1000元
+  - 群：https://t.me/aihome123
+  - 无低价号
+  - plus-32
+  - pro5x-140
+  - pro10x-210
+
+- [松松的小店，招代理的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/gpt_songsong)
+  - 交流群: https://t.me/+5UfugtLTLq40ZGQ0
+  - 无低价号
+  - plus-35
+  - pro5x-160, 质保400
+  - pro10x-250, 质保650
+
+- [YCYAPI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/3RXKX01X), 已被封禁
+  - YCY供应商订阅: https://t.me/+n5uswJrZIAg2NTk1
+  - plus成品号-10, 质保3天, 反代质保首登---不是日抛
+  - plus-30
+  - pro5x-175
+  - pro10x-270
+
+- [LToken的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/12P8XO9Z)
+  - 公益Plus/Team机器人
+  - 品类非常多
+  - 低价号很多， 很多10个起购
+  - plus-8
+  - team-3
+  - pro5x-175
+  - [咕咕嘎嘎 GPT Plus的小店 - 链动小铺](https://pay.ldxp.cn/shop/E7AEE7TS)
+    - 和上面的plus很像
+
+- [GPT PRO的小店 - 链动小铺](https://pay.ldxp.cn/shop/progpt)
+  - pro5x-236, 质保1月
+
+- [懒虫AI](https://buy.aieasy.plus/)
+  - [懒虫AI充值的小店  ](https://pay.ldxp.cn/shop/LanChongAI)
+  - TG客服: https://t.me/LanChongAI
+  - pro5x-140
+  - pro10x-250
+
+- [见AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/JIANAI)
+  - TG频道：https://t.me/JIANAI996
+  - 兑换网址：aichong.plus
+
+- [52AI店铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/52ai)
+  - 品类非常多
+  - TG客服：https://t.me/x87110  , 仅通知，无聊天
+
+- [AI源头小陈的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/AItools)
+  - 客服微信BIGLanjiao00
+  - 品类多
+  - pro5x-350
+
+- [ai源头的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/dagou.vip)
+  - plus成品账号-15，特价商品极不稳定，随时会封，3件起购
+  - pro5x-214
+  - pro10x-310
+
+- [九渊Ai源头的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/jiuyuan)
+  - 售后TG：https://t.me/jiuyuanai
+  - plus-150
+
+- [codex-for.me ](https://codex-for.me/)
+  - [vibe coding 专营的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/GUBERQA2)
+  - 日卡-5
+  - 月卡-59
+
+- [逍遥AI批发小铺的小店 ](https://pay.ldxp.cn/shop/1490777)
+  - plus-质保15
+  -  https://ai.dcfkj.com/xin/chatgpt 
+  - [出GPT Plus直充卡密8元 _202604](https://www.nodeseek.com/post-687488-1)
+
+- [AI 源头旗舰店的小店 - 链动小铺](https://pay.ldxp.cn/shop/CodexBro)
+  - 低价号多，但及其不稳定
+
+- [AI源头的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/shiwanfute)
+  - TG：https://t.me/mikaksa2
+  - 仅gemini
+
+- [玩偶小铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/WOXP888)
+  - https://t.me/WOXP66
+  - 无pro
+
+- [5jupe1的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/5jupe1_5)
+  - 可以加QQ：3673905468或添加公众号：5jupe1, 或者电报客服机器人：https://t.me/jupe1_5_bot
+
+- [逸轩ai店铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/xuanplus/)
+  - team-5
+
+- [沐风的小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/mfshop)
+  - pro5x-185, chong
+
+- [炒鸡变黑的AI店的小店 ](https://pay.ldxp.cn/shop/chaoji)
+  - plus-无质保6
+
+- [KiroSwitch官方直营店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/Z3VSKEGC)
 
 - [PackyAPI](https://www.packyapi.com/pricing)
   - [Packy - 模型健康面板](https://check.linux.do/group/Packy)
@@ -1766,7 +1912,7 @@ modified: 2025-03-22T16:10:24.856Z
     - right code 也是站内的一家主要做codex的中转站
   - o2a基本没有缓存?
 
-- [帕帝AI](https://padi-shop.closeai.hk/)
+- 🗑️ [帕帝AI](https://padi-shop.closeai.hk/), 已倒闭
   - [FreeAI - AI API Gateway](https://free.closeai.hk/)
   - [Home - 帕帝AI _202604](https://padi.closeai.hk/home)
 
@@ -1797,32 +1943,6 @@ modified: 2025-03-22T16:10:24.856Z
   - [【富可敌国】InstCopilot API 更名 DuckCoding ](https://linux.do/t/topic/937521)
   - [话题 - 活动 - WCyrus - LINUX DO](https://linux.do/u/wcyrus/activity/topics)
   - cc官方 1.5x , 提供opus, in-¥5-15/M, out-¥25-75
-
-- [TangSeng AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/tangsengai)
-  - 提供不限量token的日卡/周卡/月卡
-
-- [熊猫Ai](https://cwppt.cn/)
-  - 自助充值plus
-  - https://pay.ldxp.cn/shop/PBY2YIR3  /周全
-
-- [codex-for.me ](https://codex-for.me/)
-  - [vibe coding 专营的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/GUBERQA2)
-  - 日卡-5
-  - 月卡-59
-
-- [逍遥AI批发小铺的小店 ](https://pay.ldxp.cn/shop/1490777)
-  - plus-质保15
-  -  https://ai.dcfkj.com/xin/chatgpt 
-  - [出GPT Plus直充卡密8元 _202604](https://www.nodeseek.com/post-687488-1)
-
-- [炒鸡变黑的AI店的小店 ](https://pay.ldxp.cn/shop/chaoji)
-  - plus-无质保6
-
-- [AI源头小陈的小店 - 链动小铺 _202604](https://pay.ldxp.cn/shop/AItools)
-  - 品类多
-
-- [52AI店铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/52ai)
-  - 品类非常多
 
 - [米醋API](https://www.openclaudecode.cn/)
   - 提供opus, in-￥1.00/M, out-￥5.00/M
@@ -1894,6 +2014,7 @@ modified: 2025-03-22T16:10:24.856Z
 
 - [兔小店](https://store.tu-zi.com/)
   - 特别贵, 199+
+  - 充值基本是官方价格
 
 - [UUcode - API 中转管理平台](https://www.uucode.org/)
   - [【致敬开源】与其打硬广，不如给佬友们的代码“供电”，寻找L站开源作者，UUcode送商业级API额度 ](https://linux.do/t/topic/1370667)
