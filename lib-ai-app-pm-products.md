@@ -31,6 +31,15 @@ modified: 2025-03-22T16:10:24.856Z
   - agent框架的tool-use实现对最新llm的支持，llm-provider的部署 都会影响llm的效果
   - ai适合快速生成草稿文本或原型, 但修改难
 
+- ai-harness
+  - claude-code
+  - codex-cli
+  - gemini-cli/qwen-code
+  - opencode
+  - mistral-vibe
+  - cursor-cli/sdk
+  - vscode copilot-cli/sdk
+
 - app vs browser
   - 不是每个用户都能免费使用word的审阅模式, 自定义webapp/app提供了可选方式
   - 自定义webapp/app能提供独特的体验, 如artifacts/diff/image/code-running/table/ocr
@@ -483,6 +492,8 @@ modified: 2025-03-22T16:10:24.856Z
   - 企业版
 # 💎 ai-pdf/docs
 - revision history for pdf
+
+- spinedigest: 一次处理完，所有中间结果（Chunk、图谱、Snake、总结）全部打包进一个 .sdpub 文件。以后想重新导出成 Markdown、EPUB、纯文本……完全不需要再跑 LLM，秒级完成。
 # pm-mcp
 - writing
 
@@ -1750,18 +1761,44 @@ modified: 2025-03-22T16:10:24.856Z
     - 群友提供的印尼渠道, 都是微软邮箱, 印尼的临时不要
     - plus-6
     - 提供2类账号: hotmail邮箱+密码登陆，邮箱+验证码登录
+  - [畅用plus的小店 - 链动小铺](https://pay.ldxp.cn/shop/ooopp)
+    - plus账号, 质保三天 
   - [视界AI的小店 - 链动小铺](https://pay.ldxp.cn/shop/shijieAI)
     - 印尼， 提供批量折扣
   - [shop.aitonse.com](https://shop.aitonse.com/products)
     - 印尼
+
+- [codex.kedaya.xyz](https://codex.kedaya.xyz/)
+  - [KEDAYA的小店 - 链动小铺](https://pay.ldxp.cn/shop/3S5GUAQ4)
+    - https://shop.kedaya.xyz/
+    - https://t.me/kedaya_888
+    - 中转站: https://api.kedaya.xyz/
   - [商家5651的小店 ](https://pay.ldxp.cn/shop/AO4GDZSI)
-    - 自助售后
+    - 自助售后, 质保三天 
   - [山姆奥特曼商店的小店 - 链动小铺](https://pay.ldxp.cn/shop/1E5DST9P)
     - plus账号-6, 质保三天 
+  - [商家9052的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/LOA3IZW5)
+    - plus账号, 质保三天 
+  - [王二的小铺的小店 ](https://pay.ldxp.cn/shop/2JSR3DGY)
+    - plus账号, 质保三天 
+  - [哈哈的ai杂货铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/22DHYNNV)
+    - plus账号, 质保三天 
+  - [夏麦小铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/GSVP35W6)
+    - plus账号, 质保三天 
   - [超低价GPT会员的小店 - 链动小铺](https://pay.ldxp.cn/shop/dijiagpt)
     - 【手工】【30天】GPT-Team / Business 高质量激活码（质保3天）
+  - [普露米AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/plumire)
+    - 低价号多
+  - [叮当猫稳定AI渠道的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/dingdangmao)
+    - 品类特别多
+    - 只做群里面的三级代理
 
-- [GPTPLUS.icu 的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/YQJERQW3)
+- [麦当当plus的小店 - 链动小铺](https://pay.ldxp.cn/shop/EOTZ17J2)
+  - 交流: https://t.me/maidangdangplus
+  - 兑换及售后：https://plus.geekzone.cloud
+  - 在兑换后48小时内账号有问题，可以到网站提供兑换码或者邮箱兑换新的
+
+- [GPTPLUS.icu team 的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/YQJERQW3)
   - 自助激活页面：https://gptplus.icu
   - 纯净激活页面：https://icustore.icu
   - 防迷路请进客户⑥群 1091880491
@@ -1771,6 +1808,9 @@ modified: 2025-03-22T16:10:24.856Z
     - 质保3天：从  激活时间  起算 72小时 内出现掉车，可  提交工单  无限次补车。
   - [CK能量的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/ZYKSFL9A)
     - 低价号多
+
+- [咕咕Ai源头号商（招代理）的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/gugu)
+  - 价格较贵, 只做批发
 
 - [AI杂货铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/PBY2YIR3), /周全
   - 自助充值plus

@@ -664,6 +664,11 @@ modified: 2025-02-21T17:17:42.225Z
   - CLI is the recommended and most stable entry point.
   - Web Workspace is under active development — the frontend UX and flows are not finalized; expect rough edges.
 
+- https://github.com/yeap531/word-format-skill /apache2/202604/python
+  - skill：把一份参考 Word (.docx) 的排版样式（字体 / 字号 / 缩进 / 行距 / 对齐 / 页面设置 / 样式表 / 主题 / 页眉页脚）视觉一致地复刻到新内容上。
+  - 仅在 macOS 工作（依赖 Microsoft Word + 浏览器 + System Events 的 UI 自动化）。
+  - [100%复刻word模版的skill - LINUX DO _202604](https://linux.do/t/topic/2068329)
+
 ## reader
 
 - https://github.com/codedogQBY/ReadAny /GPL/2026t03/ts
@@ -859,6 +864,18 @@ modified: 2025-02-21T17:17:42.225Z
   - 从剧本到分镜，从角色到成片，Actionow 把"开拍 · 此刻"变成创意团队。
   - 触手可及的工程化工作台——智能体驱动，开箱即接最新模型，可代码级控制、可私有化部署
   - [【开源·Actionow】【演示站上线】包含Agent辅助·团队协作·多租户·积分系统的 AI 影视创作SaaS平台 - LINUX DO _202604](https://linux.do/t/topic/2034482)
+
+- https://github.com/hjxwz123/flowmusegallery
+  - [[开源]FlowMuse 本地的AI 图片与视频创作工作台 - LINUX DO _202604](https://linux.do/t/topic/2083254)
+  - 使用codex+Gemini vibe coding了一个本地的ai创作平台，接入API（官方或者公益）即可使用，支持Gemini，GPT生图格式以及seedance2.0、最新的HappyHorse 1.0视频模型，接入火山/阿里百炼的key即可使用。
+  - 本地的 AI 图片与视频创作工作台，适合把日常的提示词、生成任务、项目素材、对话式创作流程和桌面应用集中管理起来。它支持浏览器服务模式，也支持 Electron 桌面端打包，数据默认使用 SQLite 保存，生成结果和上传资源默认落在本地，比较适合个人创作者、独立开发者或需要沉淀项目素材的人使用。
+  - 目前内置了 NanoBanana、Midjourney、GPT Image、火山豆包、通义千问、通义万相等媒体渠道配置入口
+  - 另外对于视频生成方面，由于我不是专业的工作者，只是按照我的理解+ai的理解进行编写的，所以对于视频生来说可能略微不足，还请各位佬提提意见。
+
+## vid2txt
+
+- https://github.com/maskgo68/YPBrief
+  - [【开源】YPBrief，自托管 YouTube 播客与长视频简报工具，支持docker、GitHub Action部署 - LINUX DO _202604](https://linux.do/t/topic/2086869)
 
 ## subtitle
 

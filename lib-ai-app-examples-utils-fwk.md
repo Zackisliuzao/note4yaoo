@@ -591,6 +591,15 @@ modified: 2025-02-21T18:20:42.624Z
     - 反向提示词 — 上传图片，提取生成提示词
     - 灵感广场 — 社区作品展示、点赞、Remix、审核机制
 
+- https://github.com/CookSleep/gpt_image_playground /MIT/202604/ts
+  - https://gpt-image-playground.cooksleep.dev/
+  - 基于 OpenAI gpt-image-2 接口的图片生成与编辑工具
+  - [纯前端的 GPT-Image-2 API 调用 WebUI，参数齐全，功能完备 _202604](https://linux.do/t/topic/2048984)
+  - https://github.com/insistanan/GPT_Image_Playground
+    - 一站式解决 GPT-Image-2 的 Image API / Response API 参数可视化调整、API 调用、输入与输出存储、输出复用等需求，支持多请求同时进行
+    - [【开源】生图自由，二开GPT_Image_Playground，支持图生图 ](https://linux.do/t/topic/2072798)
+      - 本地部署使用过程中通过response api出现了很多问题，怎么都无法图编辑，于是做了一番改造，目前已经实现流式调用避免cf的120s超时问题，并且支持图生图功能，添加了回收站和分类功能，添加了多供应商功能。测试any大善人和几个中转站都能够流畅使用。
+
 ## model-router
 
 - https://github.com/ulab-uiuc/LLMRouter /400Star/MIT/202512/python
@@ -746,6 +755,13 @@ modified: 2025-02-21T18:20:42.624Z
   - a high-level NLP toolkit built on top of LLMs.
   - utilities for translation, question detection, categorization, NER extraction, and more
 # eval/prompt
+- https://github.com/MigoXLab/LMeterX /apache2/202604/python/ts
+  - 一站式通用 API 压测平台，支持大模型推理与业务 HTTP 接口，一键完成性能测试、结果对比与 AI 智能分析总结
+  - Full Modality & Scenarios: Supports GPT, Claude, Llama to document parsing models like MinerU and dots.ocr, covering text, multimodal, and streaming.
+  - Hybrid Protocol Testing: Supports standard Chat APIs and business HTTP interface
+  - Built-in Dual-Mode Datasets: Pre-configured with high-quality self-built datasets and ShareGPT standard sets, supporting one-click invocation to lower data preparation barriers.
+  - Web Console: Manage task scheduling, monitoring, and real-time logs through an intuitive interface, reducing operational complexity.
+
 - https://github.com/openai/evals /17.7kStar/MIT/202511/python
   - Evals provide a framework for evaluating large language models (LLMs) or systems built using LLMs.
   - We offer an existing registry of evals to test different dimensions of OpenAI models and the ability to write your own custom evals for use cases you care about.

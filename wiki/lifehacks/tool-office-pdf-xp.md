@@ -33,6 +33,15 @@ modified: 2020-12-29T17:52:48.584Z
 # draft
 - 基于 AI 的pdf review/suggestions
 
+- 将富文本化的内容embed到扫描版pdf，这样传统pdf软件能预览，而定制pdf软件能文本化编辑
+
+- spinedigest: 一次处理完，所有中间结果（Chunk、图谱、Snake、总结）全部打包进一个 .sdpub 文件。以后想重新导出成 Markdown、EPUB、纯文本……完全不需要再跑 LLM，秒级完成。
+
+- 
+- 
+- 
+- 
+
 - ⚖️ 支持中国知网的 caj 格式
 
 - 
