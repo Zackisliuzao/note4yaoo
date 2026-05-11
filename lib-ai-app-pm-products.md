@@ -832,6 +832,8 @@ modified: 2025-03-22T16:10:24.856Z
   - [SunRouter _202605](https://sun.meowai.net/console/personal)
     - [SunRouter 公益站，来源bai号池，无限 gemini ](https://linux.do/t/topic/2114421)ƒ
     - 限制每用户rpm为30，enjoy
+  - [GPT Pool _202605](https://gpt-pool.com/)
+    - [[GPT Pool]临时开放 LinuxDO Connect 注册 _202605](https://linux.do/t/topic/2150883)
   - 🗑️ [NihaoAPI _202603](https://nih.cc/console/personal)
     - cc
   - 🗑️ [Pond Hub 反重力号池 _202603](https://code.claudex.us.ci/panel/profile), 签到
@@ -1804,8 +1806,6 @@ modified: 2025-03-22T16:10:24.856Z
     - plus账号极低价格， 10个-35
   - [xileyyds的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/KK5XQNYK)
     - 低价代理商
-  - [夏麦小铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/GSVP35W6)
-    - plus账号-9.5, 质保三天 
   - [商家5651的小店 ](https://pay.ldxp.cn/shop/AO4GDZSI)
     - 自助售后, 质保三天 
   - [山姆奥特曼商店的小店 - 链动小铺](https://pay.ldxp.cn/shop/1E5DST9P)
@@ -1814,6 +1814,8 @@ modified: 2025-03-22T16:10:24.856Z
     - 【手工】【30天】GPT-Team / Business 高质量激活码（质保3天）
   - [普露米AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/plumire)
     - 低价号多
+
+- [邮件与账号工具台](https://mails.aidark.icu/)
 
 - [麦当当plus的小店 - 链动小铺](https://pay.ldxp.cn/shop/EOTZ17J2)
   - 交流: https://t.me/maidangdangplus
@@ -1834,7 +1836,7 @@ modified: 2025-03-22T16:10:24.856Z
   - [哈哈的ai杂货铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/22DHYNNV)
     - plus账号, 质保
 - [叮当猫稳定AI渠道的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/dingdangmao)
-  - 品类特别多
+  - 品类特别多， 里面可以找到质保2天的
   - 只做群里面的三级代理
 
 - [小猫GPT源头的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/1D0LD6BR)
@@ -1874,6 +1876,9 @@ modified: 2025-03-22T16:10:24.856Z
   - gpt plus月订阅CPA json(质保3天)
   - 无密码，无codex登录。质保3天，出现401封禁可换1次账号。
   - 购买后获得兑换卡密，卡密到 https://chat.duou.ai/download/ 网站兑换gpt plus cpa json
+
+- [花无缺的小店 - 9. PLUS ](https://9.plus/shop/bingbong)
+  - https://t.me/bingbongAI
 
 - [AI HOME的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/MEDDEX4V) , 保证金1000元
   - 群：https://t.me/aihome123
