@@ -600,7 +600,10 @@ modified: 2025-02-03T10:17:42.052Z
 
 - ## 
 
-- ## 
+- ## 🌰🤔 做 Midscene.js 这两年，我们做了一个迟来但关键的判断：UI 自动化迟早要从「理解 DOM」切到「看屏幕」，所以去年 12 月 1.0 版本我们直接砍掉了 DOM 兼容路径。
+- https://x.com/quanruzhuoxiu/status/2054924854588264559
+  - 早期我们和大家一样，走的是 DOM + 视觉混合方案——能拿 DOM 的地方就拿，省 Token、定位稳。但跑得越深越发现：同一个产品现在要同时跑在 Web、iOS、Android、HarmonyOS、Mac、Windows、Linux 桌面端，再加上 Canvas、Electron、Qt 这些根本没有 DOM 的渲染层。如果元素定位还要为每个平台维护一套 DOM 适配，事情永远收敛不了。
+  - 所以 1.0 我们把 UI 操作彻底切到纯视觉：只看截图，不读 DOM。意外收获是，UI 操作不带 DOM 进 prompt，Token 消耗反而比之前的混合方案更低。
 
 - ## A Production Architecture for the Browser Use Open-Source Library
 - https://x.com/larsencc/status/2053862900289470765
@@ -1351,6 +1354,21 @@ Don’t want/can’t have external dependencies?
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## [【开源】佬是怎样把skill转为web saas 对外访问服务的 - 我做了4个技术方案开源 - LINUX DO _202605](https://linux.do/t/topic/2196004)
+- 把skill转为web saas 对外访问服务， 而不是自己本地运行的工具，把claude code / codex 等的能力对外提供服务，变成web应用，变成api，变成saas, 这样才有更大的价值。
+
+我研究了4个方案，分别应对不同复杂程度的skill:
+1, 把skill转为tools: 很多简单的skill就是非常简单的转换，就可以变成web应用。
+2，把skill转为MCP
+3, 把skill转为 langchain deepagents skill: 为什么需要 DeepAgents 这一套？单一提示词撑不住复杂任务真实业务往往是：多步推理、多工具组合、长会话、还要记用户偏好和历史决策。把一切都塞进一个 Chat 里，容易出现指令被淹没、行为漂移、失败不可定位。这就是为什么像Claude Code、Deep Research、Manus这样的应用能够脱颖而出——它们不是简单的工具调用器，而是具备深度思考能力 的智能体。
+4 使用 claude-agent-sdk 直接使用skill
+
+- 把已经跑通的 Agent skills 用 Web 技术包装起来，让任何人打开浏览器就能用，而且支持多人同时在线。 这样就能把它变成一个对外的 SaaS 服务。把整个saas和用户体验都补充进去了，我觉得让skill变成saas服务，这是很大的商业价值。反正我以后全部项目都这样搞成saas给佬试用哈。项目我已经完成了，但是暂时不开源。
 
 - ## [Skill 开发踩坑：相对路径解析问题 - LINUX DO _202604](https://linux.do/t/topic/1894042)
   - Claude Code 和 Qoder Cli 中，Skill 无法感知自身目录，导致 Skill 脚本的第一次调用都会出错，然后才会搜索正确目录，影响 scripts/ 和 reference/ 的使用。

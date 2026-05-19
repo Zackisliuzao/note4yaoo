@@ -463,6 +463,24 @@ codex --yolo resume --last
 
 - ## 
 
+- ## 
+
+- ## [codex-tui.log · Issue · openai/codex _202603](https://github.com/openai/codex/issues/13463)
+- It's not typical for it to be that large, but there are situations where it can after significant usage. You can manually delete it if you'd like.
+
+- [Codex Desktop App Becomes Unusable Due to `codex-tui.log` Being Used as State / Index · Issue · openai/codex _202602](https://github.com/openai/codex/issues/11136)
+  - I've also reviewed the CLI (rust) code base, and I've confirmed that the codex-tui.log file is opened in "append only" mode, so its full contents are not read.
+
+- [Codex tui logs keeps growing and not getting rotated · Issue #16886 · openai/codex _202604](https://github.com/openai/codex/issues/16886)
+
+- ## [奇怪，为什么OpenAI 能直接看到我的真实ip了 - LINUX DO _202605](https://linux.do/t/topic/2179728)
+- 换成全局代理后重新登录，试试有没有提示了，如果没有提示了，说明你的规则里有openai的域名遗漏了。
+  - 没有提示了，但是在连接里没有看到疑似openai的连接，所以想问问各位佬最近有没有什么新的openai域名啥的，因为昨天都是正常的
+
+- 感觉是规则问题，昨天我也遇到问题，只好全局
+
+- 这种就把IP段放到规则里，不过这个是UDP，按照规则应该是走IP的
+
 - ## [codex /goal 滥用思路 - LINUX DO _202605](https://linux.do/t/topic/2177132)
   - 最近看到好几个贴提到/goal在额度跑完之后还在继续，那鉴于agent的特性，状态会不会是由客户端这一侧控制的呢？
   - 可以说按照这些证据，只要不调用update_goal它是真的会一直跑的，那理论上只要找到给它补充新任务的切入点，它就可以一直工作下去，/goal edit这种在goal执行期间更新任务需求的口子也就为把它滥用成通用型API提供了可能性。

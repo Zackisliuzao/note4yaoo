@@ -11,6 +11,7 @@ modified: 2022-11-07T10:25:12.034Z
 
 - username
   - uptonking/yorke/yaork
+    - surname: king
   - [names.org - The Meaning Of Names](https://www.names.org/)
   - address
     - West Hollywood Park: 647 N San Vicente Blvd, West Hollywood, CA 90069
@@ -399,6 +400,10 @@ mineru paddleocr site:github.com -inurl:"github.com/opendatalab/" -inurl:"github
 - https://github.com/cinit/TMoe /GPL/202602/java/kotlin
   - 一个兼容若干第三方开源 Telegram 客户端的开源 Xposed 模块
   - 激活本模块后，在 Telegram 客户端的设置中点击 "TMoe 设置" 即可开关对应功能。
+
+- [离大谱，装telegram居然必须安装gnome桌面 - LINUX DO _202605](https://linux.do/t/topic/2196366)
+  - 可在kde下使用，但无法在kde下移除gnome
+  - telegram开发用了gnome来做ui吧, 也算正常, 毕竟linux的ui生态很难评
 # discord
 - [Use SOCKS5 proxy with Discord on Linux](https://gist.github.com/mzpqnxow/ca4b4ae0accf2d3b275537332ccbe86e)
 
@@ -428,6 +433,11 @@ flatpak run com.discordapp.Discord --proxy-server="socks5://127.0.0.1:1080"
   - mail.protonmail.com
   - ref
     - [请问现在有什么不用手机号可以注册的邮箱](https://v2ex.com/t/683308)
+
+- outlook
+  - 用wifi很难注册成功，用手机流量有时也会失败，但过一会儿也许就成功了
+  - [How can i find my recovery email - Microsoft Q&A _202208](https://learn.microsoft.com/en-us/answers/questions/4592959/how-can-i-find-my-recovery-email)
+    - If the account has not been accessed in the last 2 years, it would be automatically deleted due to inactivity as per the Microsoft Account Activity policy (subject to the exceptions noted). Once an account has been deleted (for any reason), it can never be recovered for any reason by anyone. There are no exceptions to that policy. Microsoft does not recycle email addresses.
 
 - [Pamir University](https://mail.ryanvan.com/inbox)
   - linux.do
@@ -896,8 +906,23 @@ export https_proxy=http://127.0.0.1:7890;export http_proxy=http://127.0.0.1:7890
 - [中国执行信息公开网](http://zxgk.court.gov.cn/index.jsp)
 
 - [中国裁判文书网](https://wenshu.court.gov.cn/website/wenshu/181029CR4M5A62CH/index.html)
-# artman
-- https://www.boyfriendtv.com/
-  - 光头大叔
-- https://www.gv2.mom/
-  - 便利受
+# accounts
+- ## [购买Google 一年账号使用问题求助 - LINUX DO _202605](https://linux.do/t/topic/2108663/6)
+  - 本人购买了一个一年的谷歌账号, 刚购买的账号让养号两天然后更改密码与常用设备, 本人养号4天更改了常用密码与设备, 然后被封号了. 
+  - 通过申述账号恢复了. 然后更改了 2Fa 使用CPA登录, 现在出现了无法验证是否为本人, 要等7天.
+
+- 谷歌的风控说实话是真没啥规则可循。
+  - 就算你是老号，异地登录一样会被侦测异常。
+  - 新号更没啥可说的，各种风控套餐随机触发。
+
+- 谷歌号刚买至少等7天再碰安全设置每个验证方式自添加后都要至少7天才能变为受信验证方式，期间碰多了被风控就废了，封禁会卡没验证方式死循环解不了
+
+- 刷youtube，用邮箱，用gemini之类的，就是正常使用就行，账号密码别急着改，没有一个具体的时间节点（比如2天4天），等到用熟了后面你想起来再改就改吧，谷歌又不怕被盗号，买的号密码就晚点改呗。
+
+- 应该这么说吧，我自己买的成号，或我自己提供账号给人升级，无一逃过封控，他们的自动化开通程序里太过于人机了。所以被封控的话，就只能老实接码申诉，这个码最好是你能够自己长期持有的号码，因为谷歌后续可能会二验三验都是发验证码到这个号码。一般申诉完就没啥事了。不要有异地登录的操作问题都不大
+
+- 谷歌风控如果不是因为反代那种违规行为，一般就是安全性原因，这种只是防盗号而已。刚买的号最好还是不要立马关两步验证器，不过也没必要留多久。在有两步验证器的情况下，改密码什么的都需要验证，虽然麻烦点但是不容易风控
+
+- 新号不要碰Gemini那些薅羊毛的。日常使用干净的IP操练。稳定之后再放开了造。
+
+- Cpa登录用几下必封，谷歌做的风控感觉太好了，就是没调用几次就封禁

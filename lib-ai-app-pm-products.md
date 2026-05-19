@@ -70,6 +70,7 @@ modified: 2025-03-22T16:10:24.856Z
   - cost: unlimited tokens, local models支持超大context, 利用本地模型ocr/文生图
     - 文本模型有很多api提供商可选择，ocr模型的api可选择的不多，定制模型只能本地运行
     - 简单的 tool call 使用本地模型更高效, 可考虑将tool call小模型内置在软件中
+    - 将本地token与移动/联通/电信的套餐做对比
   - openclaw比manus更火的原因，是支持在本地自动化执行任务，而不是云端
   - 多模态的场景，本地可以对图片预处理，如压缩、裁剪、base64编码
   - 🤔 能充分利用本地文件系统和命令行的资源，进行数据分析/文件修改/...
@@ -263,7 +264,7 @@ modified: 2025-03-22T16:10:24.856Z
 - 
 
 # draft
-- 2b-ai
+- toB-ai
   - 企业需要支持快速集成现有系统、权限、日志审计
 
 - editor-heavy
@@ -271,13 +272,22 @@ modified: 2025-03-22T16:10:24.856Z
   - ooxml editing
   - agentfs
 
-- rewrite open-canvas with langgraph
+- translation
+  - 基于ai的翻译对比阅读
+  - 对比阅读pdf的 原文 和 译文
+
+- rewrite 
+  - ✨ replace vscode with codemirror, compatible with obsidian
+  - open-canvas with langgraph
 
 - token-router/gateway
   - 分享本地的GPU、token，类似的项目有分享画图gpu，但如何分享token还未流行
 
 - local-reimpl
-  - 比如支持minimax语言的api、mineru-ocrapi，直接本地可用
+  - 比如支持minimax语言的api、mineru-ocr api，直接本地可用
+
+- cleaner
+  - 清理codex-cli/cc的对话历史，展示date/size/suggestion-to-clean
 # 💎🚀 aichorage - local llm with joy, 提供模型API、rag可靠性、pdf文本操作
 - selling-points
   - non-goals: local image gen
@@ -1762,7 +1772,9 @@ modified: 2025-03-22T16:10:24.856Z
 - tips
   - 中转商的价格每天都在变化, 套餐也在改变, 不要在一家花费过多
     - 很可能注册的第一天会显示低价，后面就恢复正常价格了，注意误导
+  - [货源广场 - 链动小铺](https://pay.ldxp.cn/merchant/my_parent/source_square)
   - GPT site:pay.ldxp.cn/shop
+    - 小铺还有很多其他产品: kiro, windsurf, 接码, 虚拟卡, 手机号, visa
   - ~~搜索: 手工, 质保, 源头, 印尼~~ 
     - 在5月13号，几乎所有成品号渠道都失效了，所有店铺(无论贵的还是便宜的)的源头渠道几乎相同，，，以后买便宜的就行了
   - 月初是openai集中清理风险型用户和欺诈性用户的敏感时间, 很多便宜的渠道会挂掉
@@ -1884,6 +1896,9 @@ modified: 2025-03-22T16:10:24.856Z
     - 【手工】【30天】GPT-Team / Business , 源头 GPTPLUS. ICU 
     - 质保3天：从  激活时间  起算 72小时 内出现掉车，可  提交工单  无限次补车。
 
+- [Chat-gpt（源头）的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/OGBZJ5SY)
+  - team
+
 - http://155.229.50.232/email-assistant 
   - [plus源头的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/IY16OXB7)
     - GPT-PLUS-JSON 中转站版
@@ -1906,6 +1921,10 @@ modified: 2025-03-22T16:10:24.856Z
   -  https://otp.the22222.org/
   -  https://t.me/GPTattackz
 
+- [Lyla-精灵小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lyla)
+  - kiro周卡-18
+  - cursot周卡-19
+
 - [Tora-雪诺AI源头分销小铺的小店 - 链动小铺](https://pay.ldxp.cn/shop/Tora)
   - 通知 https://t.me/Tora_AiShop
   - 提供正规充值 gpt/claude 的方式
@@ -1919,15 +1938,46 @@ modified: 2025-03-22T16:10:24.856Z
   - 通知频道：https://t.me/hdunzx
   - 质保两天
     - 一天就上几个，引流的
+- [源头GPT的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/1DM0L7CR)
+  - 100个 free账号 Token（实时验活）CPA + sub2api格式
 - [sekirocloud的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/L9P7JDGN)
   - sub2api josn格式
   - [天选AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/txai)
     - https://plus.oai.do/ 
   - [随欲小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/MO2JGWG9)
     - free-0.45
+  - [AI小铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/echo_dream)
+    - https://gpt.aveve.xyz/ 
+    - 手机接码推荐：https://hero-sms.com/cn  找安哥拉+244地区，接码成功率高！
+  - [🍑桃俊泽的AI小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/DJOBBG3H)
+    - GPT plus日抛成品号x1
+    - 不包codex接码
+  - [yimoAi-US的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/CQRJKJ0N)
+    - 频道：https://t.me/songbai0420
   - [小NO plus的小店 - 链动小铺](https://pay.ldxp.cn/shop/BWGFCYG1)
   - [秋刀鱼精品小铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/qiudaoyu777)
+    - 购买后需要手动联系来索取json
   - [faka.jnmtk PLUS 账号 ](http://faka.jnmtk.com/)
+  - [一只狗子的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/2IG615LQ)
+  - [Xun AI - 海外效率工具订阅的小店 - 链动小铺 5](https://pay.ldxp.cn/shop/XunAI)
+- [卓建AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/THJ70HZO)
+  - sub2格式json不带账密质保首登
+  - 格式转换网站 https://lywqfvjb.feiyus.com
+
+- [AI小铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/XWTVY86A)
+  - kiro
+- [AI服务站的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/ikun666)
+  - 发货账号为谷歌邮箱: 账号----密码----辅助邮箱----2fa密钥
+  - kiro官网选择谷歌邮箱登录，输入账号密码登录，选择身份验证器验证，去2fa.fun网站输入2fa密钥获取6位数验证码
+- [蒲美丽のAI副食店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/YXCTJAH4)
+  - 只发凭证，不发账号，自行导入使用，质保首登
+  - 反代可用 claude opus
+  - 低价kiro
+
+- [Windsurf专卖4988的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/3FR7Y3PY)
+  - 谷歌母号, 不质保，只保拍下立马登录满配额。有效期10天左右。
+- [AI账号百货通的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/windsurf-test)
+  - Windsurf 全新 纯谷歌邮箱账号 （wf 账号、密码发货）无质保（下单请思考）
 
 - [度偶Ai专卖店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/G3EUVLR7)
   - gpt plus月订阅CPA json(质保3天)
@@ -2063,6 +2113,16 @@ modified: 2025-03-22T16:10:24.856Z
   - plus-无质保6
 
 - [KiroSwitch官方直营店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/Z3VSKEGC)
+
+- [黑鹅小铺的小店 - 云猫寄售 ](https://www.ooeao.com/shop/ithte)
+  - plus-¥2
+  - 不包codex接码， 实测需要绑定手机号
+  - https://plus3.yhmoai.online/?key=
+
+- [鹰鹰发卡](https://fk.apiway.cc/)
+  - 下单前请检测自己的号有没有试用资格，如果拿没有试用资格的普号导致无法升级
+
+### 中转站
 
 - [PackyAPI](https://www.packyapi.com/pricing)
   - [Packy - 模型健康面板](https://check.linux.do/group/Packy)
@@ -2214,7 +2274,7 @@ modified: 2025-03-22T16:10:24.856Z
 
 - [AI Ping](https://aiping.cn/modelList)
 
-### 中转站
+- [New API  /newapi](https://cc-api.chat/pricing)
 
 - [Duo API - /newapi](https://api.duou.ai/)
 
