@@ -195,12 +195,23 @@ modified: 2025-12-11T18:10:23.710Z
   - https://gitlawb.com/node/repos/z6MkqDnb/openclaude
     - https://x.com/gitlawb/status/2039063488468000835
     - We forked the leaked Claude Code source and made it work with ANY LLM: GPT, DeepSeek, Gemini, Llama, MiniMax. Open source.
-- https://github.com/instructkr/claw-code /202603/python>rust
+
+- https://github.com/ultraworkers/claw-code /193kStar/MIT/202605/python/rust
   - https://github.com/instructkr/claude-code
   - Better Harness Tools, not merely storing the archive of leaked Claude Code but also make shit things done.
   - Rust port is now in progress on the dev/rust branch
+    - rust/ — canonical Rust workspace and the claw CLI binary
+    - high-performance Rust rewrite of the Claw Code CLI agent harness. Built for speed, safety, and native tool execution.
+    - src/ + tests/ — companion Python/reference workspace and audit helpers; not the primary runtime surface
   - https://x.com/realsigridjin/status/2038993516848873718
     - we decided not to store the archive of claude code to avoid potential trouble, so renamed to clawd-code
+
+- https://github.com/e10nMa2k/cc-mini /202605/python
+  - Ultra-light Harness scaffolding for AI agents, a mini version of claude code
+  - The entire core is ~1000 lines of Python
+  - Agentic tool loop — Claude calls tools autonomously until the task is complete
+  - 9 built-in tools: Read, Edit, Write, Glob, Grep, Bash, AskUser, EnterPlanMode, ExitPlanMode
+  - Permission system — mode-aware (default/plan), reads auto-approved, writes/bash ask for confirmation
 
 - https://github.com/codeany-ai/open-agent-sdk-typescript /MIT/202603/ts
   - https://github.com/shipany-ai/open-agent-sdk /renamed
@@ -282,6 +293,9 @@ modified: 2025-12-11T18:10:23.710Z
 - https://github.com/aaaAlexanderaaa/cchistory /MIT/202603/ts
   - The all in one platform that you can quick view and search your turns in coding agent history.
   - [[开源分享] 7天, 8亿token, 更好地分析 coding agent会话记录  _202603](https://linux.do/t/topic/1770925)
+- https://github.com/jerrywu001/cc-sessions-viewer /202605/rust/ts/vue
+  - support cc/codex/gemini sessions viewer, token usage statistics, global search, resume, and export to html
+  - [基于Claudecode / Codex / Gemini-cli 的会话桌面端管理器 - LINUX DO _202605](https://linux.do/t/topic/2259217)
 
 - https://github.com/RubyRose2001/claudeInsight /202603/ts/vue
   - Claude AI 对话历史管理和分析工具，帮助开发者管理和回顾与 Claude 的对话历史
@@ -1086,6 +1100,13 @@ modified: 2025-12-11T18:10:23.710Z
     - @earendil-works/pi-coding-agent	Interactive coding agent CLI
     - @earendil-works/pi-tui	Terminal UI library with differential rendering
   - 核心开发仅2人
+  - https://github.com/earendil-works/pi-chat
+    - A pi extension that bridges Discord and Telegram channels to a sandboxed pi session. Each connected channel gets its own Gondolin micro-VM with persistent workspace, shared storage, memory, and skills.
+    - Requirements
+    - QEMU installed (brew install qemu on macOS)
+    - Gondolin guest image (downloaded automatically on first connect)
+  - https://github.com/can1357/oh-my-pi /MIT
+    - AI Coding agent for the terminal — hash-anchored edits, optimized tool harness, LSP, Python, browser, subagents, and more
 
 - https://github.com/1rgs/nanocode /1.7kStar/MIT/202601/python/单文件
   - Minimal Claude Code alternative. Single Python file, zero dependencies, ~250 lines.

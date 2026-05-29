@@ -520,6 +520,9 @@ modified: 2025-03-22T16:10:24.856Z
 - llm-playground - 使用公益api的效率工具+api统计分析
   - 公益版
   - 企业版
+
+- news-feed/crawler
+  - reddit/hacker-news上的热门讨论
 # 💎 ai-pdf/docs
 - revision history for pdf
 
@@ -759,6 +762,9 @@ modified: 2025-03-22T16:10:24.856Z
 - 免费的共享ChatGPT账号
   - [RawChat公益站点 ](https://sharedchat.cc/)
   - [RawChat公益站点](https://sharedchat.fun/)
+  - https://new.sharedchat.cc
+    - [codex公益站已开 继续每人免费100刀   _202605](https://linux.do/t/topic/2260900)
+    - 关t子或者用非us节点访问，ccswtich的不要获取模型，手填模型可以直接用
 
 - 中转站
   - 不需要用自己的gpt/claude账号
@@ -1907,6 +1913,12 @@ modified: 2025-03-22T16:10:24.856Z
     - 质保、非质保 分开
   - [GPT成品plus的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/FEO0CLZ6)
   - [金幺の小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/911)
+  - [ParHom的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/parhom)
+    - Cursor Auto｜超账单｜库存号
+    - Cursor Pro Plan 20$官方套餐【已用完高级模型额度】
+    - 可Auto、Composer模型｜可对接Api
+  - [奥仔小铺的小店 - 链动小铺  ](https://pay.ldxp.cn/shop/aozai)
+    - windsurf低价
 - [AI源头-oak的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/oak)
   - tg频道：https://t.me/dabaizu 
   - 接码多, paypal
@@ -2050,8 +2062,10 @@ modified: 2025-03-22T16:10:24.856Z
   - https://team.longxiadev.store/
   - [Antipro 的小店 - 云猫寄售 ](https://catfk.com/shop/W5YJ6A0E)
   - [商家696的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/Kegan04)
+- [旋律plus的小店 - 造梦企发Pro，造梦寄售平台 ](https://fh10.zmfaka.cn/shop/XGLVB89E)
+  - 低价plus
 
-- [Gemini Pixel 设备认证 ](https://autopixel.qzz.io/wholesale)
+- [Gemini Pixel 设备认证 ](https://autopixel.qzz.io/blackcat)
   - 品类多
 - [Lyla-精灵小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lyla)
   - kiro周卡-18
@@ -2102,7 +2116,6 @@ modified: 2025-03-22T16:10:24.856Z
     - 高价plus
   - [一只狗子的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/2IG615LQ)
   - [Xun AI - 海外效率工具订阅的小店 - 链动小铺 5](https://pay.ldxp.cn/shop/XunAI)
-  - [壹码工坊的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/1aicode)
   - [AI小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/HGQW9XKA)
   - [AICA的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/aica)
 - [卓建AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/THJ70HZO)
@@ -2130,8 +2143,27 @@ modified: 2025-03-22T16:10:24.856Z
   - 谷歌母号, 不质保，只保拍下立马登录满配额。有效期10天左右。
 - [AI账号百货通的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/windsurf-test)
   - Windsurf 全新 纯谷歌邮箱账号 （wf 账号、密码发货）无质保（下单请思考）
+- [YOUC的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/INJXURRY)
+  - 临期windsurf很低价
+- [claude 供应商的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/73QTX1TH)
+  - 过期日期临期，剩余时间就3-7天随机
+- [AI账号百货通 962395845的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/windsurf-test)
+  - Windsurf 谷歌别名（子号） 自行研究 无质保
+- [A8 小店 购买账号 - 链动小铺 ](https://pay.ldxp.cn/shop/16888)
+  - 顶部售后群有切号软，可导入账号一键切号查看额度等 
+- [Windsurf专卖4988的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/3FR7Y3PY)
+  - 送免魔法登录插件
+
 - [极速的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/jishu)
   - Gmail母号 邮箱，正规账号，单账号独立注册。 可用opus4.6  4.7
+
+- [青蛙AI·低价源头的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/qingwaAA)
+  - plus成品team的，，只能反代codex。实测平均每个15刀
+  - [GanAI小铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/ganai)
+    - Team稳定版 7日卡
+    - 有效期至 05-28 + 7 版本，稳定版车位有效期过了后一般可以继续用再 7 天，但是如果用不到要自行承担风险。
+  - [壹码工坊的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/1aicode)
+  - [GPT TEAM 日抛号的小店 - QXVX Pay ](https://pay.qxvx.cn/shop/3V3CBG6P)
 
 - [度偶Ai专卖店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/G3EUVLR7)
   - gpt plus月订阅CPA json(质保3天)
@@ -2334,6 +2366,7 @@ modified: 2025-03-22T16:10:24.856Z
 - resources
   - [LinuxDo商家评价平台](https://rate.linux.do/)
   - [模型中转状态检测](https://check.linux.do/)
+  - [模型状态检测 御三家](https://jiankong.qianxing-ai.cc.cd/)
   - [AI中转站推荐 | Claude/Gemini/Codex中转站评测对比](https://www.helpaio.com/transit)
     - 评分结果与L站评分基本一致
     - 提供了很多折扣码

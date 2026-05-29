@@ -241,7 +241,12 @@ modified: 2026-01-21T04:22:29.956Z
 
 - ## 
 
-- ## 
+- ## [开源了一个OpenAI/Codex的邮箱重新登录工具 - LINUX DO _202605](https://linux.do/t/topic/2262563)
+  - https://github.com/haeyupi/relogin-mail-manager
+  - 最近gpt/codex登录及其不稳定，因此需要工具进行大规模批量重登，所以relogin mail manager这个工具就孕育而生了。
+  - 它从你的邮箱资料中导出Outlook/Hotmail邮箱、邮箱refresh token、OpenAI密码和手机号，然后在本项目内完成邮箱验证码读取、重新登录、token保存和可选的远端上传。
+  - 项目不依赖外部邮箱池服务。所有账号资料都保存在本地 SQLite 数据库中。
+  - 目前我关于cpa的已经试过，sub2api还没测试过
 
 - ## [【HelloKimi】免费无限的KimAPI+0成本+工具调用 - LINUX DO _202605](https://linux.do/t/topic/2244578)
   - 在之前，我们已经向DeepSeek，GLM清言，甚至Steam说出了"Hello"
@@ -321,8 +326,21 @@ modified: 2026-01-21T04:22:29.956Z
 - ## [反代用 CLIProxyAPI 还是 Sub2API ? - LINUX DO _202604](https://linux.do/t/topic/1972760)
 - 我记得 sub2api 有粘性会话，cliproxyapi 没有？
 
+- ## [API中转如何让模型联网？ - LINUX DO _202605](https://linux.do/t/topic/2251944)
+  - 就是自己在做一些小项目的时候，发现接入的API无法联网，无法搜索网页知识，不知道该如何解决，同样的配置放到codex里能够正常联网使用。不知道有没有佬知道该如何解决？
+
+- 你大概说的是某些模型原生没有 web_search 能力？比如 sub2api 是可以配置给他们增加 Tavily 或者 Brave 搜索来兜底。
+- 这个api搜索能力需要看官方支不支持tool调用，tool调用中有没有网络搜索
+
+- 如果模型支持websearch 可以用reponses 透传websearch，不能的话使用自部署的searchxng，或者是api，tavily，exa，grok，brave这些。送的额度也很难用完
+
+- 直接安装groksearch mcp就行，然后grok就使用grok2api自己组号池或者站内公益站
+
 - ## [toolcall-gateway ：让不支持function call的模型支持function call - LINUX DO _202604](https://linux.do/t/topic/1915096)
   - 分享一个从我的web2api项目抽离出来的python库(已发布pypi)：toolcall-gateway 作用：让不支持function call的模型支持function call
+
+- [一个普通的虚拟 tool calling - LINUX DO _202605](https://linux.do/t/topic/2256408)
+  - 前几天做了一个qwen2api 的tool bridge(也叫tool bridge), 效果很不理想, 几轮对话, 就卡的没边了, 遂放弃了，今天借鉴一下佬友看看
 
 - [「开源自荐」[AnyToolCall] 去tmd原生工具调用 | 基于提示词注入的工具调用中间件  - LINUX DO _202601](https://linux.do/t/topic/1400154)
 
