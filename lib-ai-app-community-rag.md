@@ -743,7 +743,22 @@ modified: 2024-09-08T20:08:16.088Z
 
 - ## 
 
-- ## 
+- ## [How are you evaluating RAG quality beyond RAGAS in production? (Especially for hallucinated answers that sound grounded) : r/Rag _202606](https://www.reddit.com/r/Rag/comments/1u0ynxn/how_are_you_evaluating_rag_quality_beyond_ragas/?sort=top)
+- Stack we landed on:
+
+RAGAS for the baseline scoring (faithfulness, answer relevance, context precision/recall)
+
+TestMu's Agent to Agent for adversarial hallucination testing (evaluator agents probe with intentionally misleading questions, edge cases, ambiguous queries)
+
+TruLens for the production observability side
+
+Custom factuality checks against our knowledge base for high-stakes response
+
+Probably overbuilt for basic RAG, but we're in a regulated industry so the cost is justified.
+
+- Honestly the "sounds right, isn't right" failure mode is what pushed us to layered eval. RAGAS is layer 1 (faithfulness scoring), then we added an LLM-as-judge for semantic correctness, then we added TestMu's Agent to Agent Testing Cloud for adversarial probing.
+
+- What helped us more than any tool: better source citation in the UI itself. We started showing the exact chunk that informed each part of the response. Users started catching hallucinations themselves because they could see when the source didn't actually support the claim. Reduced our reliance on automated hallucination detection. Same conceptual approach works for internal QA review.
 
 - ## [What metrics do you use to evaluate production RAG systems? : r/Rag _202603](https://www.reddit.com/r/Rag/comments/1rspagy/what_metrics_do_you_use_to_evaluate_production/)
 - The most bottom-line metrics to me are: total latency, factual accuracy and cost per query. 
@@ -1503,6 +1518,22 @@ RAG适合有明确知识库、答案可追溯的场景。如果你的需求是�
 - I really don't recommend node when working with pdf, they are slow even when the framework claim they access/use native c++(pain to install in certain server). We end up using c# with itextsharp, so the api just send rmq that consumed by that service.
 
 - I have spawned a worker thread to call Apache Tika
+# discuss-rag-image 🖼️
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [How we index images for RAG : r/Rag _202606](https://www.reddit.com/r/Rag/comments/1u057js/how_we_index_images_for_rag/?sort=top)
+  - The short version: we don't send images to the model at query time. We describe each image once, at indexing time, with a cheap vision model, store the descriptions as text, and retrieve them alongside ordinary text chunks. Indexing is a one-time cost; after that, per-query overhead is 1% to 6% over text-only, and answers are measurably, statistically significantly better. This post explains how we got there.
+  - For context: Kapa builds AI assistants that answer questions from technical documentation. The knowledge bases we process hold millions of images: screenshots, architecture diagrams, circuit schematics, annotated UI walkthroughs. We spent several months working out how to make them useful in our RAG pipeline.
+  - [How we index images for RAG | Hacker News _202606](https://news.ycombinator.com/item?id=48372239)
+
+- We did something similar for RAG, chatbot and agents to view images
+  - [Make Embedded Images Instantly Searchable | SearchBlox | Unified RAG and Hybrid Search Platform _202606](https://www.searchblox.com/make-embedded-images-within-documents-instantly-searchable)
 # discuss-rag-elements
 - ## 
 

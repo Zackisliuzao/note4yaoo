@@ -312,6 +312,12 @@ modified: 2025-03-22T16:10:24.856Z
 - local-reimpl
   - 比如支持minimax语言的api、mineru-ocr api，直接本地可用
 
+- models
+  - reproducible ai/rag/ocr
+    - 不同版本的向量模型生成的数据空间维度大小是不一致的会导致后续查询数据处理啥的有问题
+    - 另一种思路是通过类似jupyter的重代码工具去实现
+    - 可以兼容comfyui的导出json，直接在aichorage打开
+
 - chat-ai
   - 主流ai的web-chat结果能快速对比
 
@@ -332,6 +338,7 @@ modified: 2025-03-22T16:10:24.856Z
   - 用类似 claude-design 的思路来实现 ui/编辑器 类型的产品
   - too many options: 
     - models/quants, cloud api, 处理速度不同
+    - parallel requests for local models/ocr
     - text/image pdf ocr, 源文件处理方式不同
     - vlm, pipeline, 识别方法不同
     - versions/comparison
@@ -477,6 +484,11 @@ modified: 2025-03-22T16:10:24.856Z
 # 💎 modelpedia - 模型参数对比, 历史评测结果, 能免费对比最新参数及上一个版本
 - pm-eval/bench
   - 模型文档及参数都是on-paper, 可直接运行的测试集加上量化版本更适合实际效果, 是否存在产品空间
+
+- free-models
+  - nvidia, openrouter
+  - modelscope
+  - xunfei
 
 - 基本参数(card)
   - 模型列表
@@ -2465,14 +2477,19 @@ modified: 2025-03-22T16:10:24.856Z
   - codex分组--0.03
   - 不可用
 
-- [青熵 ](https://api.qs89hub.com/keys)
+- [松松 AI ](https://ai.songsongcard.shop/keys), 已充值
+  - [松松 AI ](https://songsongcard.shop/)
+  - plus--0.02
+
+- [青熵 ](https://api.qs89hub.com/keys), 中转已关
   - [青熵的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/P9HPIPWA)
   - 渠道多
   - plus--0.02
 
-- [松松 AI ](https://ai.songsongcard.shop/keys)
-  - [松松 AI ](https://songsongcard.shop/)
-  - plus--0.02
+- [ApexCode API ](https://codeapx.com/models/pricing)
+  - 注意套餐价格变化, 还提供了包月 ¥188--$55/day
+  - 特价分组gpt--0.03
+  - 常规分组gpt--0.18
 
 - [Qmy2AI /sub2api](https://sub2api.qmytai.com/dashboard)
   - 个人0.04x，中转站0.03x
@@ -2545,9 +2562,6 @@ modified: 2025-03-22T16:10:24.856Z
   - L站用户注册就送小小股东, $5/mon
     - right code 也是站内的一家主要做codex的中转站
   - o2a基本没有缓存?
-
-- [ApexCode API ](https://codeapx.com/console)
-  - 注意套餐价格变化
 
 - 🗑️ [帕帝AI](https://padi-shop.closeai.hk/), 已倒闭
   - [FreeAI - AI API Gateway](https://free.closeai.hk/)

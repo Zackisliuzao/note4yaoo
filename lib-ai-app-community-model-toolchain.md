@@ -628,6 +628,22 @@ iPhone 17 Pro GPU: 25 TPS
 - apex is apllicable also for qwen3.5 27b, ? or only for moe arch?
   -APEX it's targeting MoEs architectures specifically, but we have in our roadmap to explore applications to Dense models as well!
 
+- ## [Was BitNet a dead end? What happened to ternary LLMs? : r/LocalLLaMA _202606](https://www.reddit.com/r/LocalLLaMA/comments/1u0hy5p/was_bitnet_a_dead_end_what_happened_to_ternary/?sort=top)
+- The reason there are no bigger:
+  - training is just as expensive as other models, you mostly get the speed up at inference from this type of model
+  - unproven as of yet, so a gamble to put a lot of training resources into
+  - no hardware acceleration for ternary matmul specifically, everything still runs fp16 as far as I'm aware, so it's just not that worth it yet.
+- checkout https://baudlabs.ai they are building an ASIC for ternary training and inference
+
+- It seems like FP4 gives you most of the ternary benefits, with less of the downsides.
+
+- Bitnet comes with it's own challenges that need to be addressed. Challenges include how to Backroll trough a network only using 0 - 1 instead of a gradient.
+
+- Not dead, Microsoft just shipped BitNet b1.58 2B4T plus bitnet.cpp. It's stuck small because you have to train ternary from scratch and current GPUs don't give the speedup without custom kernels, so no frontier lab wants to bet a whole pretraining run on it when 4 bit post training quant already works fine.
+  - Fella, it really was last year.  Besides bonsai family (which made binary first, most people tried), We have some other releases like BitCPM-CANN, and this translation model, https://huggingface.co/tencent/Hy-MT2-1.8B-1.25Bit-GGUF which is sparse ternary and has potential for conventional hardware alignment. 
+
+- As long as GPUs and/or NPUs don't have native support for those data types it's just interesting research and nothing to use for production.
+
 - ## [The Bonsai 1-bit models are very good : r/LocalLLaMA _202604](https://www.reddit.com/r/LocalLLaMA/comments/1s9zumi/the_bonsai_1bit_models_are_very_good/)
 - bonsai vs qwen3.5 based on my benchmark: https://github.com/ArmanJR/PrismML-Bonsai-vs-Qwen3.5-Benchmark
   - Bonsai-8B trades accuracy for speed — 1-bit quantization delivers 46.5 tok/s but costs 17 points of accuracy vs. the 27B. Still outperforms the dense Qwen3.5-2B despite radical compression.
@@ -1510,7 +1526,18 @@ iPhone 17 Pro GPU: 25 TPS
 
 - ## 
 
-- ## 
+- ## [any prompt processing tweaks? : r/StrixHalo _202606](https://www.reddit.com/r/StrixHalo/comments/1tzxoik/any_prompt_processing_tweaks/?sort=top)
+  - Token generation is good enough for me but the PP degrades so much when context length grows. Is there anything I can do to optimize PP? Anything on the roadmap for ROCM?
+
+- just use the Vulkan/RADV build. On gfx1151 it's been the better prefill path in my testing, and it sidesteps the ROCm memory-cap and version-regression headaches. If you're on AMDVLK, switch to RADV
+
+- you can get an eGPU and direct the PP to that device and then TG on strix.
+
+- Newer models have linear attention varieties that scale with context length much more effectively. Qwen3.6 has 3 layers of GatedDeltaNet attention (a linear variety) and 1 layer of standard MH attention (flash attention), but that last standard attention scales poorly. You have to research which types of attention a model has now a days for this kind of thing.
+
+- From testing on my setup vulkan is faster at refill and pp both, all the way up to an ~80% loaded 256k ctx
+
+- I really wish someone would just publish the optimal llamacpp command for all models with our hardware. We all have the same thing so we should all benefit from the same best command per model
 
 - ## [(Llama.cpp) In case people are struggling with prompt processing on larger models like Qwen 27B, here's what helped me out : r/LocalLLaMA _202603](https://www.reddit.com/r/LocalLLaMA/comments/1rnrxsv/llamacpp_in_case_people_are_struggling_with/)
   - ~~TLDR: I put the --ubatch-size to my GPU's L3 cache is (in MB).~~ 
