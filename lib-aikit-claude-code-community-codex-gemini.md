@@ -177,6 +177,19 @@ codex --yolo resume --last
 - 因为围绕tmux来构建人机交互根本不需要构建，tmux直接硬控。我就是tmux硬控，让pane A的agent直接run tmux send-keys和tmux capture-pane来给另一个pane的agent发消息，或者看对方在干嘛。而且这么用一阵子，直接让它写个tmux skill就行了
 
 - tmux在解决一个问题的同时又带来很多新问题，例如和macOS touchID & clickable link的兼容性 
+# discuss-alternatives-local/lite
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [I want OpenCode, but with Pi's stripped down system prompts. : r/LocalLLM _202606](https://www.reddit.com/r/LocalLLM/comments/1u3mfy4/i_want_opencode_but_with_pis_stripped_down_system/?sort=top)
+- Look at little-coder and oh-my-pi. Both use pi under the hood, but are a little closer to OpenCode
+
+- Stripping those guardrails is a massive risk. The model becomes faster, sure, but it's far more likely to charge ahead and break things without that workflow encoding. I'd rather wait for the tokens than deal with the fallout.
 # discuss-alternatives
 - ## 
 
@@ -186,7 +199,15 @@ codex --yolo resume --last
 
 - ## 
 
-- ## 
+- ## [不懂就问，有人测了GLM 5.2 在Claude 里更强还是在 Codex里更强 - LINUX DO _202606](https://linux.do/t/topic/2395716/11)
+- GLM 的coding plan 不支持在codex里面使用，之前我和我同事都被封禁警告了（没封调用，只是套餐上显示封禁中的提示）。 别碰官方不支持的工具，不然会变得不幸
+- glm官方工具接入说明里都没有codex, 而claude code是排在第一个
+
+- 官方的都接入不进去codex，怎么比，目前codex就是gpt模型独享的。别家模型都不支持OpenAI Response 格式
+
+- 虽然CLI应用开源, 但是模型层面不开源, 导致API的很多特性第三方都没有对应的实现, 比如 GPT5系列的 Context-Free Grammar (CFG) 是 codex 使用的比较多的一个能力, 而第三方没有.
+
+- 用习惯了codex的 /goal ，prompt tab队列，并且感觉codex的自发搜索代码能力比claude要强，不知道是不是system prompt里面有指引，感觉更省token和更精准
 
 - ## [佬们聊一聊openclaw, 爱马仕, codex, claude 几个agent - LINUX DO _202606](https://linux.do/t/topic/2300016)
 - 我现在用爱马仕，codex和cc只是用cli接api写代码用，爱马仕接入新闻、推特等做消息关注
