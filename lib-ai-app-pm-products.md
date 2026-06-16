@@ -283,7 +283,7 @@ modified: 2025-03-22T16:10:24.856Z
     - 缺点: 体积大，vector/dimension缺乏标准
 
 - pdf
-  - gitbook-like viewer, mdBook
+  - gitbook-like viewer, mdBook, sharing without editing
   - LiteParse Grid Projection Algorithm
 
 - image
@@ -589,7 +589,7 @@ modified: 2025-03-22T16:10:24.856Z
   - reddit/hacker-news上的热门讨论
 # 💎 ai-pdf/docs
 - pdf
-  - gitbook-like viewer, mdBook
+  - gitbook-like viewer, mdBook, sharing without editing
   - LiteParse Grid Projection Algorithm
 
 - translation
@@ -2760,6 +2760,21 @@ modified: 2025-03-22T16:10:24.856Z
 - [T佬的gmail批发渠道 ](https://ai666.dnxb.cc/)
   - 全tg最便宜gmail邮箱批发
   - Gemini专区：美区/随机2022--2024谷歌邮箱/指定地区gmail邮箱
+
+### accounts
+
+- [海外社媒批发的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/GVF3KJWI)
+  - fb
+  - ins
+
+- [豀南小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/N33RKBWR)
+  - tg
+  - appleid
+  - twitter/x
+
+- [阿北AI会员的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/abei)
+  - ai
+  - twitter
 
 ### ip
 
