@@ -639,7 +639,96 @@ modified: 2024-01-23T02:52:23.932Z
 
 - Can the Base file also query text inside the note itself? like collecting open checkboxes under a specific header of a note?
   - Currently no.
+# discuss-feat-backlinks
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [Automatic Backlinks : r/ObsidianMD _202409](https://www.reddit.com/r/ObsidianMD/comments/1fg0ycy/automatic_backlinks/)
+  - Is there a way for Obsidian to automatically backlink to a file when I type it out? For instance, I have a folder called "Definitions" where I store all the definitions of words. So when I create a new file outside that folder, and write down a word, Obsidian can detect that the word is in the "Definitions" folder and automatically backlink to it.
+- Virtual Linker / Glossary Plugin is close to automatic but it's not consistent for some reason.
+  - Various Complements is another option as well. I like this one because it shows you what to link to which I really like when I'm typing away on my phone I don't have to think about what I need to link.
+
+- ## [Does anybody use Obsidian URL with []() instead of Backlinks with [[]]? : r/ObsidianMD _202407](https://www.reddit.com/r/ObsidianMD/comments/1dwodo1/does_anybody_use_obsidian_url_with_instead_of/)
+- I don't recommend using Obsidian's note url. If you rename the file, the link breaks. Use something like Advanced URI. It has an option to use UUIDs instead, which doesn't break after the file being renamed.
+
+- Wikilinks seem to be gradually replacing internal URLs as the defacto standard even in simple markdown editors like iA Writer. It will be interesting to see whether that trend continues.
+
+- Wikilinks are great. They don't show the full path, so they appear better on linked mentions.
+
+- I use tags for stuff I don't want linked in graph view. 
+
+- ## [I built a tool that automatically adds semantic backlinks to your vault — fully local, no cloud, no API key : r/ObsidianMD _202603](https://www.reddit.com/r/ObsidianMD/comments/1s46wxu/i_built_a_tool_that_automatically_adds_semantic/)
+- I checked it out, and I think it is not possible to run this on a single file, which i would like that to test it out. I do not want every note in my entire vault to have wikilinks to its related notes.
+- This may pair well with Wikilink Types. Rhizome finds that notes are related; Wikilink Types lets you specify how they are related (supersedes, contradicts, supports, etc.) via typed @ syntax, synced to YAML frontmatter.
+
+- Great idea why not a plugin in obsidian?
+  - the main challenge is the technical environment. Obsidian’s JavaScript context isn’t built to handle the heavy lifting of downloading a ~250 MB ONNX model and running dense vector searches—that would likely hog memory and freeze the UI. Python is simply better suited for that kind of workload, which is why keeping it as an external CLI keeps Obsidian itself fast and lightweight.
+  - That said, a companion plugin is possible in theory: a lightweight plugin could act as a UI wrapper, spawning the Python CLI in the background. The tricky part is distribution—users would still need to install Python, run pip install rhizome, and configure the plugin with the executable’s path, which goes against the usual one‑click install expectation. But for power users, it’s a brilliant workaround, and I might explore building it as an optional plugin down the road.
+
+- 
+- 
+- 
+
+- ## [How many of you have never used or needeed the backlinking feature at all? : r/ObsidianMD _202508](https://www.reddit.com/r/ObsidianMD/comments/1mo7ohj/how_many_of_you_have_never_used_or_needeed_the/)
+- I have a handful of empty notes that are only there for backlinking. If I'm taking notes somewhere else and I start thinking "Hey, this would be a good blog post, " I can add a link to my blog post ideas note. When I go to that ideas note, I see all the backlinks with a bit of surrounding context. For me, it feels a little bit like tags, but the context is a sentence rather than a whole note.
+
+- I use it for citations, reference, related or direct mentions. I also use paragraph embeds a lot. I have empty notes that basically functions as a connection node.
+  - Even the H1 (title) is in double brackets to reference itself. So when I change the file name, the H1 also automatically changes.
+
+- I even barely use the forward links. I rely on a folder system for structure between my notes.
+# discuss-feat-sync
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [佬们都用什么方案同步 Obsidian？求推荐 - LINUX DO _202606](https://linux.do/t/topic/2441916)
+- 之前试过 Github，坚果云，因为是苹果全家桶，现在用的苹果 ICloud，实测秒同步很方便。
+
+- 之前用 Remotely Save + Cloudflare R2，现在用 Git 了，自动生成提交并推送
+
+- tailscale + syncthing, 日常使用够用，直接把这两个弄成windows服务在后台了
+
+- 我使用的是onedrive，5GB足够我用了，平时同步也没啥问题，
+
+- Windows、iPad、安卓手机混合用户，用的坚果云同步，但是插件同步有时候会出问题
+
+- 如果自己有NAS或者VPS的话，推荐fast-note-sync-service
+- 有条件服务器或者自建的话，fast note sync真的是降维打击
+
+- 我认为最合适的方式就是将 obsidian 的数据文件夹变成 git 仓库，使用GitHub Desktop 来手动同步，不限容量，又做了历史版本管理，真的是非常的香，我现在就是这么用的
+
+- 我obsidian vault 在 7G 左右，你看你的 vault 多大，正常如果你 icloud 没有其他照片什么的，买个 6 块一个月 50G 够用了，甚至内容少也可以先用免费 5G 试试。win上我记得微软商店里有 icloud 的软件，不过我没试过。总之苹果全家桶是很顺畅的，你电脑手机登同个 ID，把 vault 放在 icloud 里，记得打开保留下载就行了。
+
+- 用的阿里的s3存储服务，一年也就几块钱，很稳定省心
+
+- git: 能够网页预览，版本管理, 能忽略文件夹。支持Linux、mac、win
+坚果云：能够网页预览，无版本管理，不能忽略文件夹。支持Linux、mac、win
+iCloud：无法网页预览，能同步到Iphone, 无版本管理，不能忽略文件夹。支持mac、win
+
+坚果云和iCloud不能忽略文件夹，就会把一些配置文件夹或者不想同步的内容也同步。
+跨平台时快捷键或者啥的冲突，就会在配置文件夹生成很多冲突文件。
+
+最推荐的还是git, git+双链，git提供了纵向的以时间顺序的迭代记录，双链提供了当前时间点横向的各个文档的关联。
+
+我目前是git手动提交+icloud。obsidian的git插件如果你不用其他同步手段可以使用防止忘记提交。
+
+- onedrive→webdave云盘→自建webdav→飞牛同步，现在感觉飞牛同步用的很舒服。
 # discuss
+- ## 
+
+- ## 
+
+- ## 
+
 - ## 
 
 - ## 
