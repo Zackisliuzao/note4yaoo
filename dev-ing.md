@@ -338,6 +338,10 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0622
+
+- [macOS 27 beta：以下为Apple Intelligence 已出现，但 Siri 仍是旧版的补充修复步骤 · Issue · SkyBlue997/enableMacosAI _202606](https://github.com/SkyBlue997/enableMacosAI/issues/20)
+
 ## 0618
 
 - So after typing /word1 and pressing Enter, use n / N to move through all matches quickly.
