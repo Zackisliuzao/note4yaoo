@@ -47,6 +47,38 @@ modified: 2026-05-28T20:48:22.013Z
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+# discuss-local-config/bundle
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## shower thought: AI inference engines like vLLM/SGLang might be the hardest “server”-shaped OSS to configure, ever made.
+- https://x.com/ekzhang1/status/2070626846517993666
+  - Like it’s probably harder to configure them optimally than even Postgres, Nginx, Kubernetes, maybe even Kafka/Zookeeper … just in terms of all the issues, bugs, crashes, scheduler dynamics, kernels etc and it changes every month
+- yes, but I was also surprised how well abstracted they are. many 4-5x speedups (non trivial) are just arg changes
+  - Agent loops to change vLLM configs and benchmark, let it run for a bit and you’re golden
+
+- Not to mention the loading time with optimisations on every try!
+
+- even making version compatible for PyTorch and CUDA with each other, forces 80% of the people to quit
+
+- It's because vLLM is basically a real-time scheduler pretending to be an API. One wrong tweak to `gpu_memory_utilization` and you either OOM at 3am or waste half your throughput.
+
+- They constantly evolve, so they break. The systems you mentioned in comparison were redesigned many times to make them simpler and easier to use.
+
+- laughs in Kubernates
+- vLLM/slang config is a whole new level of 'database admin'  way more variables than rows and columns
+
+- Maybe because Postgres had time to develop and learn from previous database? I feel those inference engine add new model, paper and tricks every week with amazing speed but maybe less stabilisation?
+- postgres exposes stable workload knobs. these expose the kernel and scheduler directly because that's where the perf is... is that why the config never sits still?
 # discuss-browser-ai
 - ## 
 
@@ -798,7 +830,21 @@ console.log(reply);
 
 - ## 
 
-- ## 
+- ## [吐槽贴：现在B站数码up怎么都在搞本地AI，这东西完全没法用啊 - LINUX DO _202606](https://linux.do/t/topic/2490891)
+  - 尤其是NAS区，全都在那里发395的广，说什么用本地模型跑Hermes，绝口不提Prefill速度。
+  - 之前信了他们的鬼话买了台395，首token等到地老天荒，超时了都跑不出来，幸好能7天无理由
+
+- 本地ai除了做做向量化和翻译, 用amd那cpu可怜的ai能力跑模型来做养虾的纯瞎吹
+
+- 我之前也以为本地 mac 部署 ai 有搞头，干了个 mbp 回来，发现等 input 处理要 100 多 s，压根不可用。于是放弃。
+
+- 现在如果自部署还是得买老黄的，V100 32G现在也就3000，部署个27B比395+快多了
+  - MOE好像现在100B左右也没有特别强的
+
+- 有买硬件的钱，不如直接买token，省心而且好用
+
+- 核显本地AI的玩法就是moe靠参数量保证智力，配有限上下文（就算模型支持1M也限制到256K甚至128K）。
+  - 框架会做前缀缓存的（虽然像llama.cpp最近有bug），首次慢不意味着次次都这么慢。（当然每次工具调用来个10K的场景也不适合，不难想象128K的API在这里也会频繁compact）
 
 - ## [What is stopping enterprises from just using their own self hosted AI? : r/SelfHostedAI _202606](https://www.reddit.com/r/SelfHostedAI/comments/1u9dku9/what_is_stopping_enterprises_from_just_using/)
 - If you haven't spent 12 months explaining tons of details and filling out endless documents to satisfy IT and security teams to deploy anything internally, then you haven't worked in corporate.  

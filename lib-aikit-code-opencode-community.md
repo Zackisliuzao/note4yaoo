@@ -60,7 +60,13 @@ modified: 2026-01-17T22:41:25.867Z
 
 - ## 
 
-- ## 
+- ## in OpenCode v2 all instances of the tui and desktop and web share the same backend
+- https://x.com/thdxr/status/2071007637487894883
+  - so everything is synced by default and resource usaged is minimized no matter how many windows you have open
+
+- I thought you guys started with the client/server model from the start, what took so long to get this right?
+  - we could have done this a while ago but i wanted to wait until we were happy with our api + the way we modeled everything.
+  - always on agent means a lot more gets built on it and has to be able to hot reload everything
 
 - ## in the next version of @opencode , file search is powered by fff
 - https://x.com/nexxeln/status/2064039757668303036
@@ -344,7 +350,18 @@ modified: 2026-01-17T22:41:25.867Z
 
 - ## 
 
-- ## 
+- ## 👀 [CPA接opencode没缓存 - LINUX DO _202606](https://linux.do/t/topic/2482731)
+  - CPA接了opencode go的glm，然后cc里用，在CPA Manager Plus面板上看到的缓存输入一直是0
+
+- opencode默认不开启缓存，如果需要缓存，需要修改json “options”: { “setCacheKey”: true } 。 这个配置是使用opencode- *cli时才生效* 
+  - 不是那个意思，opencode go订阅接到CPA然后转给claude code用
+
+- glm模型是这样的，他的缓存命中率不高，必须特调才行
+  - 我的意思是这个模型搭建到GPU平台之前得调试好才行，直接用glm开源版本搞的，缓存命中都不搞。看opencode后续怎么优化了
+
+- 没吧， 我从来没设置过这个， 我看到都是有缓存的
+
+- 我昨天也遇到这个问题，更新cpa版本，调成填充优先之后缓存命中恢复正常。我用zcode可以达到97%。
 
 - ## [I have 2, 004 AI skills installed. Here's how I reduced my startup context from ~80K tokens to ~255 tokens (99.7% reduction) : r/opencodeCLI _202602](https://www.reddit.com/r/opencodeCLI/comments/1rfwlzk/i_have_2004_ai_skills_installed_heres_how_i/)
   - The problem: AI agents use a 3-level progressive disclosure system to load skills. Level 1 loads the name + description of every skill into the system prompt at startup. With 2, 004 skills, that's ~80, 000 tokens consumed before I even type a prompt - roughly 40% of a 200K context window.
