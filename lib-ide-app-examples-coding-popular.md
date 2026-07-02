@@ -199,6 +199,10 @@ modified: 2025-12-11T18:10:23.710Z
     - https://x.com/gitlawb/status/2039063488468000835
     - We forked the leaked Claude Code source and made it work with ANY LLM: GPT, DeepSeek, Gemini, Llama, MiniMax. Open source.
 
+- https://github.com/Windy3f3f3f3f/claude-code-from-scratch /ebook
+  - https://windy3f3f3f3f.github.io/claude-code-from-scratch
+  - Claude Code 开源了 50 万行代码，读不动？用 ~4000 行 TypeScript / Python 从零复现核心架构，11 章分步教程带你理解 coding agent 精髓
+
 - https://github.com/ultraworkers/claw-code /193kStar/MIT/202605/python/rust
   - https://github.com/instructkr/claude-code
   - Better Harness Tools, not merely storing the archive of leaked Claude Code but also make shit things done.
@@ -859,6 +863,9 @@ modified: 2025-12-11T18:10:23.710Z
 
 ## pi
 
+- resources
+  - [[pi] 对Pi Code Agent生态的整理 - LINUX DO _202607](https://linux.do/t/topic/2504439)
+
 - https://github.com/earendil-works/pi /55.5kStar/MIT/202605/ts
   - https://pi.dev/
   - https://pi.dev/docs/latest
@@ -1116,6 +1123,18 @@ modified: 2025-12-11T18:10:23.710Z
   - https://x.com/jiayuan_jy/status/2012040329407713404
     - 分享我们最近实现的一个开源版本 Claude Cowork
     - 目标是成为 coding agent 和终端用户的中间层，有点类似 Obsidian 的模式，每个人都可以根据自己的工作流使用插件的方式来定制化。
+
+- https://github.com/stablyai/orca /MIT/202604/ts
+  - https://onorca.dev/
+  - Orca is the next-gen IDE for building with coding agents
+  - Available for macOS, Windows, and Linux.
+  - Whether it's Claude Code, Codex, or OpenCode, Orca makes coordinating multiple features across multiple repos effortless.
+  - Worktree Management: Spin up, manage, and switch between multiple Git worktrees instantly. 
+  - Agent-Ready Terminals: Robust support for multiple terminals, tabs, and panes. Run Claude Code, Codex, OpenCode, or your own agents side-by-side.
+  - Smart Notifications & Status Tracking: See exactly which worktrees have active agents. 
+  - Deep GitHub Integration
+  - https://x.com/orca_build/status/2040147412002697617
+    - Orca now has Notion-style markdown editing.
 
 - https://github.com/siteboon/claudecodeui /8.2kStar/GPL/202603/ts
   - https://cloudcli.ai/
