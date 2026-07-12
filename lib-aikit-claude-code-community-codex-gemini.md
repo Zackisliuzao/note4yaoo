@@ -458,6 +458,16 @@ codex --yolo resume --last
 
 - ## 
 
+- ## 
+
+- ## People of Pi: the next release will incorporate dynamic tool loading without cache wiping on supported models and providers. 
+- https://x.com/mitsuhiko/status/2075703856726499364
+  - We did some investigations and found a way to get somewhat consistent API behavior between OpenAI and Anthropic.
+  - The neat thing is that existing API behavior if used correctly, will just do the right thing when possible. If you turn cache miss warnings on, you can detect good and bad behavior. Adding tools works, removing will wipe caches.
+  - This is allowing you to write you own search tool that executes on the client. You can utilize the inputs in whatever form you like.
+- Can this happen also mid-session? Why does removal of tools brake cache? Any particular use cases in mind?
+  - Yes. This works mid session. As to why removing tools breaks the cache: just fundamental limitations. Use cases are primarily progressive disclosure of tools but it can also be handy for clear state transitions. Plan -> Implement etc.
+
 - ## 🆚 [Pi vs Opencode : r/PiCodingAgent _202606](https://www.reddit.com/r/PiCodingAgent/comments/1uf6uqb/pi_vs_opencode/)
   - I like Pi for its light weight and endless expandability options. I like Opencode for providing most of what I need out of the box, but not a big fan of huge system prompts.
 - You can dramatically reduce OpenCodes system prompts by just overwriting the default build and plan agents with your own agents
@@ -624,6 +634,15 @@ codex --yolo resume --last
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## [How do I use /plan and /goal together? : r/codex _202606](https://www.reddit.com/r/codex/comments/1u004l1/how_do_i_use_plan_and_goal_together/)
+- You can just ask it to set the goal in the plan. Then it really depends on the context, sometimes the goal is set before the plan is finished, or sometimes it sets the goal after you clicked implement plan.
+
+- Did you try /goal implement the plan
 
 - ## [破甲项目升级了：Codex-X 可视化桌面版发布 - LINUX DO _202607](https://linux.do/t/topic/2523644)
   - https://github.com/yynxxxxx/Codex-X

@@ -338,6 +338,59 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0711
+
+- 🤔 cms is not required.  i want some open source examples that shows how to sync between db and files, so that when user edits a file, the db updates, when the db updates, the file also updates.  deep research related solutions/ideas, if you found any open source solutions or inspiration projects, provide overview/github-repo/website for each.
+- Joplin's File System sync target is the cleanest real match. 
+  - Joplin (note-taking app) stores all notes, notebooks, and metadata in an internal SQLite database. 
+  - But it ships a built-in sync target called File System, which is genuinely bidirectional: point Joplin at a folder, and it continuously mirrors every note to a .md file in that folder — external edits to those files are detected and re-imported into the SQLite database on the next sync pass.
+  - all three of its apps — desktop, mobile, and CLI — share this same sync engine
+- Beets — music library manager (SQLite ↔ audio file tags)
+  - ID3/Vorbis/APE tags live in the files, fields live in the database, and a user might edit either side independently (retagging in iTunes vs. editing in beets).
+  - beets is explicit that it does not do automatic bidirectional sync. 
+  - What it does contribute is a clean staleness-detection primitive: beets tries to maintain the invariant that if the on-disk metadata differs from the DB metadata, then the on-disk mtime must be greater than the DB mtime, letting it skip re-reading files that haven't changed. That mtime-comparison trick is worth stealing even if you build true bidirectional sync yourself.
+- sqlite-sync is the closest to genuine automatic bidirectional sync as a reusable library rather than a full app. Its Block-Level LWW mode was specifically designed to keep markdown files in sync — splitting text into lines so that two concurrent editors of the same document both keep their edits after merge, rather than one clobbering the other.
+- MarkdownDB's --watch flag is a small, readable example of just the file→DB half — it continuously watches for any modifications in the specified folder and automatically rebuilds the database whenever a change is detected, using chokidar under the hood.
+
+- The building blocks 
+- File-side change detection: chokidar, Watchman
+- SQLite has no built-in change notification, but two practical patterns work:
+  - Polling with updated_at
+  - sqlite3_update_hook
+- PostgreSQL has a much richer option: LISTEN/NOTIFY combined with a trigger.
+  - CREATE TRIGGER note_change_trigger
+- Debezium — for heavier production use, reads the Postgres WAL / MySQL binlog directly and emits every change as a Kafka event. Overkill for a single-machine file-sync daemon, but the standard choice if the database is remote / multi-writer.
+
+- ### 🏘️ Architectural Blueprint: How to build your own
+
+If you are building your own CMS or tool, you shouldn't rely on raw FUSE. The industry-standard way to achieve Bidirectional MD ↔ DB Sync requires three components:
+
+- **The Schema Mapping:** 
+  - **Database Columns:** id, title, slug, metadata (JSONB), content (TEXT), updated_at.
+  - **Markdown Mapping:** The metadata JSON object is serialized to YAML frontmatter at the top of the .md file. The content text is dropped below the frontmatter as the body.
+- **The Sync Registry (State File):** 
+  - You cannot rely solely on file modified timestamps (mtime), as Git checkouts or OS actions can change them. You must maintain a hidden local cache (e.g., a .sync-state.json) that stores the **SHA-256 hash** of the file at the last sync.
+  - Logic: If DB row updated_at > last sync AND local file hash == old hash, pull DB to File. If local file hash != old hash, push File to DB.
+  - The Circuit Breaker (Loop Prevention): Your sync script must keep a lightweight in-memory cache or a hidden .sync-state SQLite file containing the SHA-256 hash of the file/row at the last sync. Before updating the DB from a file event, check: Does the file hash equal the last known hash? If yes, ignore it. Do the same when the DB tries to update the file.
+- **Event Watchers:** 
+  - Use a file-watcher (like chokidar in Node.js) on your Markdown folder.
+  - Use Database Triggers (or PostgreSQL logical replication/Listen-Notify) to watch for database row changes.
+
+## 0709
+
+- project `modelbase-power`(in current folder) aims to support to create/update Obsidian Flavored Markdown files in folder `../modelbase` by scripts in `./modelbase`. 
+- the current goal is to write configurable/extensible workflow scripts in typescript to automate this process: first read data from sources like `~/Documents/repos/ai-ml-llm/all-router-token/modelpedia/packages/data`, then parse the data, then write the transformed markdown to target folder like `../modelbase/providers/vendors`. For example, source data like `~/Documents/repos/ai-ml-llm/all-router-token/modelpedia/packages/data/providers/deepseek/_provider.json` ended up to be create/update a file `~/Documents/repos/yaoo/modelbase/providers/vendors/DeepSeek.md`. you might read and understands the example source/target data format first, then write ts scripts like ``./modelbase/model-providers-port.ts` to automate this process. the default automation should work only for `_providers.json` files that contains popular models like `Claude/OpenAI/Gemini/Mistral/DeepSeek/GLM/zai/moonshoot/minimax/qwen/kimi` , make these configs all configurable in `./.env` file with sensible defaults for use out of the box. fields from `_providers.json` files that can be ignored when porting : sdk, free_tier. merge values of discord_url/support_url to `Community URL` field. Try to perfer using YAML list for property values in Obsidian Flavored Markdown files. Field Names should try to use the names like in example file `~/Documents/repos/yaoo/modelbase/providers/vendors/DeepSeek.md`, missing values just leave empty.
+- you should make the task running scripts extensible to make it easy to add more automation scripts later.
+
+- business code in current folder might be ignored, but you might reuse the dependencies and npm toolchain.
+
+- the target provider file name may just use the name field  in _provider.json. when i run the scripts multiple times, The script should only update the values from source data fields to target markdown yaml fields that value has changed. If the field values are unchanged, the update can be skipped.
+- you should parse source .json objects and targe .md yaml properties, only update the fields that value has changed when running the scripts multiple times. if value is not changed, skip the update.
+
+- i tried the automation scripts several times. some improvements need to implement. 
+  - for the fields/properties/values that exist both in source .json files and target  .md yaml, when you parse and compare what have changed, please relax the equals condition, ignore changes of properties order and values order. if i change the properties order or values order in targe .md files, as long as the value content is equal, the update should be skipped.  when values do change, only update the changed properties/values in place, do not do full overwrite. 
+  - for the properties that values is empty in source .json files but target .md files have values,  or the properties is non-existent in source .json files but target .md have new properties, running the port scripts should not remove the new values, update should be skipped.
+
 ## 0704
 
 - 🤔 running `git status` in this folder hangs, there seems to be some issue with this git repo.

@@ -133,11 +133,13 @@ modified: 2026-06-20T15:49:57.019Z
   - https://models.dev/
   - open-source database of AI model specifications, pricing, and capabilities
   - We also use it internally in opencode.
+  - 数据使用 .toml 格式
 
 - https://github.com/assistant-ui/modelpedia /MIT/202606/ts
   - https://modelpedia.dev/
   - Open catalog of AI models across providers
   - Models, Providers, Compare, Analytics, API
+  - 数据使用 .json 格式
 
 - https://github.com/janhq/model-catalog /202607/python
   - A curated catalog of Large Language Models (LLMs) sourced from the Hugging Face Hub, specifically designed for integration with the Jan application's model hub. 
@@ -445,6 +447,8 @@ modified: 2026-06-20T15:49:57.019Z
     - 不限量套餐: 限时、限并发
   - [123nhh API ](https://api.123nhh.com/profile), 只能签到得额度
     - [[nhh站]随时跑路和关闭注册 _202606](https://linux.do/t/topic/2468396)
+  - [KayanoLoveChenChen](https://chenchen.openachieve.asia)
+    - [晨晨公益站来了哩 Grok4.5 - LINUX DO _202607](https://linux.do/t/topic/2565874)
   - [Dk _202606](https://apideepseek.com/console/personal)
     - [DeepSeek公益站！支持缓存，完整原生支持 - LINUX DO _202606](https://linux.do/t/topic/2302675)
     - 10 LDC : 1 元用量 【DeepSeek 0.5倍率】（相当于 5 LDC = 1 元用量）
@@ -1407,7 +1411,7 @@ modified: 2026-06-20T15:49:57.019Z
   - 刚刚发现暂时只可用oai协议
   - 可用模型：minimax-2.5（其他模型陆续上线）
 # paid-api 💰
-- ai-plan2606
+- ai-coding-plan2606
   - codex - gateway -- ¥50
   - claude - opencode + antigravity  -- ¥40
   - cursor - composer/auto  -- ¥30
@@ -1429,12 +1433,12 @@ modified: 2026-06-20T15:49:57.019Z
     - 0.01的倍率差距不重要, 缓存命中率在93%以上时, 费用更低
   - 轮询的渠道不要太多，感觉会降低缓存命中率? 或者是new-api的缓存命中比sub2api默认就低? (实测sub2api高达94%)
     - 无人值守时才多号轮询, 人工干预时不需要多号
+  - 小众模型的中转站也可以考虑，比如grok/cursor-composer模型， 可在tg直接搜索
   - 廉价的套餐如lite-plan也可能慢/卡/不可用, 抢不到不必执着
     - 优先买容易退款的
   - 比较 主流coding-plan 和 中转/非正规套餐如cursor/devin 的价格/token额度, 灵活选择，没必要执着
     - 1亿token大概花费多少, 算起来比较通用
   - 利用bug的包月套餐不要买, 突然修复后可能直接高倍率刷光余额
-  - 小众模型的中转站也可以考虑，比如grok
   - 中转商的价格每天都在变化, 套餐也在改变, 不要在一家花费过多
     - 很可能注册的第一天会显示低价，后面就恢复正常价格了，注意误导
     - 在5月13号，几乎所有成品号渠道都失效了，所有店铺(无论贵的还是便宜的)的源头渠道几乎相同，，，以后买便宜的就行了
@@ -2049,7 +2053,7 @@ modified: 2026-06-20T15:49:57.019Z
 - [鹰鹰发卡](https://fk.apiway.cc/)
   - 下单前请检测自己的号有没有试用资格，如果拿没有试用资格的普号导致无法升级
 
-## 中转站
+## 中转站/router
 
 - tips
   - 很多中转站带有峰值倍率和闲时倍率, 夜间多用闲时倍率, 白天可用半公益站
@@ -2109,14 +2113,18 @@ modified: 2026-06-20T15:49:57.019Z
   - 充值地址 https://nikoapi.xyz/shop
   - 加群可领取1刀体验
 
-- [莫比乌斯 2Chat /Sub2API](https://2chat.cc/keys)
-  - 低倍率渠道， 夜晚可用性低
+- [莫比乌斯 2Chat /Sub2API](https://2chat.cc/keys), 已充值
+  - 低倍率渠道
+
+- 咩咩的中转 [MAX API ](https://maxapi.hanyue.xyz/pricing), 未开放注册
+  - [ₒ⦁⩊⦁ₒ - 千寻寄售服务平台 ](https://www.qianxun1688.com/details/D5A18D58)
 
 - [Code-Plan  /NewAPI](https://code-plan.site/pricing), 已充值
   - [GPT-源头供货-招代理的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/IY16OXB7)
   - AMD 顶级服务器 + 10Gbps 带宽
 
 - [DataCodex ](https://api.datacodex.net/keys), 已充值
+  - 中等价格
 
 - [数智AI ](https://api.xpluse.plus/pricing)
 - [AI来了 ](https://api.ailaile.site/)

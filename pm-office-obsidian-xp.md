@@ -11,28 +11,31 @@ modified: 2026-06-30T17:32:43.131Z
 # guide
 - pros
   - rich editor
-  - backlinks: 双链基于[[]]语法, 同名文件的写法是相对路径
-  - bases: 基于文件的多维表格
+  - 🔗 backlinks: 双链基于[[]]语法, 同名文件的写法是相对路径
+  - 📈 bases: 基于文件的多维表格
     - bases 基于文件的设计 方便扩展每行的属性
     - 支持直接编辑单元格
     - Convert CSV records to individual Markdown files and Bases.
     - 支持 导入/导出 csv/excel, 提供独立的webapp
+  - graph-view
+  - 🔌 plugins
   - publish
   - canvas
-  - graph-view
   - slides
   - templates
   - sync
 
 - cons
   - 不支持类似notion的 block-style dragging
+  - publish/webapp 视图层不开源
   - bases 基于文件的设计 难以获取页面内的内容
-    - 给block添加properties/元数据
+    - 给block添加properties/元数据, 变通方式是embed file
     - 页面内引用
   - bases
     - 文件架构限制，导致难以实现交换行列， 而benchmark场景有此需求
     - 不支持拖拽排序, 不能在指定位置插入行/列
     - 不支持拖拽导致不支持kanban
+  - css-snippets的样式设置是 per-page 的, 同一页面内的元素/bases难以实现不同样式
   - settings-sync 
   - 未提供统一的多语言切换方案
 
@@ -44,14 +47,20 @@ modified: 2026-06-30T17:32:43.131Z
   - command-palette
   - publish
   - sync
-# redmansion
+# dreamansion
+- features
+  - ob editor
+  - pdf editing
+  - pdf backlink/citation/preview
+
 - goals
   - publish/site: github for obsidian bases
   - editing: web, app, obfm editor
-  - api: md, bases
+  - api + cli + sdk: md, bases
   - compatible with obsidian: obfm, bases, plugins, config(attachment, .trash)
     - 兼容和扩展plugins在bases方面的能力
   - 不要过于依赖ob的runtime, 充分利用文件系统的优势
+  - 类似cloudflare-drop的快速分享
 
 - cms-platform
   - github for obsidian bases
@@ -59,6 +68,16 @@ modified: 2026-06-30T17:32:43.131Z
 - 
 - 
 - 
+- 
+
+- 
+- 
+- 
+- 
+
+- maybe
+  - 实现类似git commit history 的历史记录ux
+
 - 
 - 
 - 
@@ -106,12 +125,40 @@ modified: 2026-06-30T17:32:43.131Z
 - css-snippets
   - 调整bases左对齐是全局调整, 修改样式粒度太广, 如何部分左对齐、部分居中
 
+## openbases spec
+
+- mdbase
+
 ## bases
+
+> a base file is a live query language for the stateful(persisted) markdown files.
+
+- 实现方式3种
+  - ❌1 在ssg阶段提前持久化base的结果，在前端仅展示静态数据
+    - 维护成本低， 但体验差， 不支持修改, 
+    - 不支持大量数据, 对图片支持不好
+  - 📌2 server通过解析文件动态计算, 由server来计算， 甚至可支持修改数据/文件
+    - 完整的server能力，功能强， 但运营成本高，
+    - 支持大量数据，对本地图片支持友好
+    - 本地运行时需要设备提供计算能力， 计算大量数据的逻辑不适合放在本地，要考虑低性能移动端
+    - 方便基于本地server实现sync/edit
+    - free user 支持查看但不可编辑的成本不高， 这样避免方案3为了实现查看引入复杂的数据转换/缓存方案
+  - ❌ 3 将数据轻量获取到本地后，存入memorydb/jsondb, 直接在浏览器内存或indexdb计算， 不依赖server(所以 ~~不能~~ 难以修改数据)
+    - 🐛 实现复杂度太高, 但能支持动态filter， 低性能移动端的计算能力差
+    - 可在浏览器持久化变更数据，然后再手动/自动同步， 此方案可与方案2结合，支持切换数据源/server-url
+    - 此方案可结合多MPA多文件webapp拆分数据、懒加载来实现
+    - 甚至可引入高级数据操作方案， 如 sqlite-wasm/apache-arrow/duckdb
+    - 🛢️ 类似jsonnl的db也方便使用cdn静态化低成本提供
+    - 支持大量数据需要优化很多细节
+    - 对图片的支持需要单独的方案， 只做缓存的场景可以直接用base64
+    - 但本方案适合低成本托管db
+    - 本地client的实现没必要搞这么复杂，因为本地client/server逻辑更简单清晰
 
 - later
   - migrate popular notion-database to ob-bases
-  - export bundle: 将.base文件和相关文件一起导出
   - 有时会显示过期数据
+- export bundle: 将.base文件和相关文件一起导出
+- export view result: 可参考dataview的serializer
 
 - group
   - 另一种显示方式是组名不显示在分组上方，而是作为合并单元格显示在左边，这样内容区就显示为连续的表格了
@@ -146,10 +193,15 @@ modified: 2026-06-30T17:32:43.131Z
 ### map-view
 
 # pm
-- 支持公开子目录作为site
+- 🤔 产品形态是 markdown sdk？
+  - 付费点: bases reading, cloud rag for big pdf
 
 - 部分内容需要加密的场景，如何解决
   - 需要在cli侧解决
+
+- wikilinks扩展: pdf-bbox, 支持preview, 甚至可以显示为截图内容
+  - 引用pdf内容的场景都可以使用类似wikilinks的设计 + preview
+  - 还可以优化图片pdf的搜索体验
 
 - documentation-ideas
   - docusaurus
@@ -169,6 +221,9 @@ modified: 2026-06-30T17:32:43.131Z
   - 直接使用基于git的同步
 
 - multi-user/workspace的设计
+
+- 支持公开子目录作为site
+  - obsidian vault支持任意文件夹， 注意 此目标需要配置link使用 相对路径 来减少坏链
 
 ## ob-bases
 
@@ -191,8 +246,17 @@ modified: 2026-06-30T17:32:43.131Z
 - 
 
 - database的技术方案可参考agentfs+just-bash, 以数据库作为数据源，导出文件如markdown方便ai理解
+# publish-quartz
+- pros
+  - 支持 wikilinks/backlinks
+  - 支持 Bases
+  - 支持 graph view
+  - 支持 mermaid
 
-## publish-quartz
+- cons
+  - 偏重静态展示，bases动态操作数据的功能太弱
+  - 虽然自身ui支持i18n, 但似乎不支持多语言版本的文档
+  - 需要用户symlink/copy内容， 改变用户的习惯， 设计成用户无感更好
 
 - features
   - bases formula计算的列能正常渲染
@@ -203,6 +267,9 @@ modified: 2026-06-30T17:32:43.131Z
   - inline bases交互差
   - embed .base 文件有时未渲染， 因为相对路径解析失败了
   - bases的空内容渲染为 - , 很多cell的内容丢失了
+  - table的group ux很糟糕
+  - 会丢失sort排序， 但少数排序也可以正确展示
+  - image(property) 不能正确显示图片
 
 - links
   - 部分 wikilink 404， 因为相对路径解析失败了， 似乎只能解析同级文件夹下的
