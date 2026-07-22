@@ -88,9 +88,11 @@ https://meeting.tencent.com/p/9606972663
 
 ```shell
 # delete all node_modules folders recursively
-find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'dist' -type d -prune -exec rm -rf '{}' + && find . -name '.next' -type d -prune -exec rm -rf '{}' +
+find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'dist' -type d -prune -exec rm -rf '{}' + && find . -name '.vite' -type d -prune -exec rm -rf '{}' + && find . -name '.next' -type d -prune -exec rm -rf '{}' +
 # maybe prefix sudo
 find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + 
+rm package-lock.json node_modules/.package-lock.json
+
 # 格式化当前包，注意在子文件夹执行命令也会从package.json目录开始格式化整个包
 prettier --write ' **/* .{js,jsx,ts,tsx,json}' --ignore-unknown
 eslint --ext .js,.ts,.tsx --quiet --fix . 
@@ -337,6 +339,108 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - ?
 - dev-log
   - ?
+
+## 0721
+
+- ERR_UNSAFE_PORT
+  - The webpage at http://127.0.0.1:5060/ might be temporarily down or it may have moved permanently to a new web address.
+- [Chromium restricted ports](https://chromium.googlesource.com/chromium/src/+/master/net/base/port_util.cc).
+    2049,   // nfs
+    3659,   // apple-sasl / PasswordServer
+    4045,   // lockd
+    5060,   // sip
+    5061,   // sips
+    6000,   // X11
+    6566,   // sane-port
+    6665,   // Alternate IRC [Apple addition]
+    6666,   // Alternate IRC [Apple addition]
+    6667,   // Standard IRC [Apple addition]
+    6668,   // Alternate IRC [Apple addition]
+    6669,   // Alternate IRC [Apple addition]
+    6697,   // IRC + TLS
+    10080,  // Amanda
+
+- 🤔 i updated better-sqlite3 to latest version at apps/desktop/package.json. i pinned better-sqlite3 to a old version at apps/desktop/package.json. in root ./package.json, when `postinstall` runs, which better-sqlite3 will be used? this project uses npm workspaces, analyze related docs/rules, then explain to me.
+  - npm installs one tree for the whole monorepo, then tries to hoist shared deps to the root node_modules when ranges allow a single version.
+- Can you force the opposite layout?
+  - Yes. The reliable npm-native way is to make 12.8.0 a direct dependency of the root package
+- 🤔 electron-rebuild executable itself is hoisted at root, its dependency walker includes that nested desktop copy as well as the root copy, so `electron-rebuild -f -w better-sqlite3` rebuilds both versions, not just the desktop version?
+  - -w / --which- module: Adds those names into the “must consider” set (prodDeps / extraModules). Does not mean “rebuild only these.”
+  - The -w better-sqlite3 flag adds it to extraModules/prodDeps, and the walker scans all node_modules from apps/desktop up to the monorepo root. 
+  - -o better-sqlite3	Name-only; both paths still match
+  - -m apps/desktop	Same as current buildPath; still walks up via projectRootPath = monorepo root
+  - The reliable solution with your installed @electron/rebuild@4.2.0 is to use its JavaScript API 
+
+- Error occurred in handler for 'init': Error: The module '~/Documents/repos/ai-ml-llm/all-docai/redmansion/node_modules/better-sqlite3/build/Release/better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 137. This version of Node.js requires
+NODE_MODULE_VERSION 143. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+    at process.func [as dlopen] (node:electron/js2c/node_init:2:2617)
+    at Module._extensions..node (node:internal/modules/cjs/loader:1980:18)
+    at Object.func [as .node] (node:electron/js2c/node_init:2:2617)
+    at Module.load (node:internal/modules/cjs/loader:1540:32)
+    at Module._load (node:internal/modules/cjs/loader:1342:12)
+    at c._load (node:electron/js2c/node_init:2:18047)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:262:19)
+    at Module.require (node:internal/modules/cjs/loader:1563:12)
+    at require (node:internal/modules/helpers:152:16)
+    at bindings (/Users/yaoo/Documents/repos/ai-ml-llm/all-docai/redmansion/node_modules/bindings/bindings.js:112:48) {
+  code: 'ERR_DLOPEN_FAILED'
+}
+Error: App is not initialized
+    at ~/Documents/repos/ai-ml-llm/all-docai/redmansion/apps/desktop/.vite/build/main.js:59261:15
+    at AsyncFunction.<anonymous> (node:electron/js2c/browser_init:2:59676)
+Error: App is not initialized
+    at ~/Documents/repos/ai-ml-llm/all-docai/redmansion/apps/desktop/.vite/build/main.js:59261:15
+    at AsyncFunction.<anonymous> (node:electron/js2c/browser_init:2:59676)
+
+- Native module ABI mismatch: better-sqlite3 was built for a different Node than Electron. 
+  - Your system Node (v24.16.0)	137
+  - Electron 40.8.5 (ships Node 24.14.0)	143
+  - After npm install, better-sqlite3 is built/downloaded for system Node (137). The desktop app runs inside Electron (143), so dlopen fails
+  - There's already a rebuild script for Electron. Checking forge config and ABI versions, then rebuilding better-sqlite3 for Electron.
+  - `electron-rebuild -f -w better-sqlite3`
+
+## 0720
+
+- 🤔 there are so many markdown parsers,  is there any open source solutions that implement streaming parsing for markdown so that it can support very large .md file?   supporting both full parsing and streaming parsing would be even better.   deep research related solutions/ideas, if you found any open source solutions or inspiration projects, provide overview/github-repo/website for each.
+- Markdown "streaming" actually covers two pretty different problems
+  - Input-streaming — the file itself is too big to slurp into memory as one string, so the parser needs to consume it in chunks (or emit output without building a full tree).
+  - Forward-only append streaming — this is the LLM-chat-UI problem: text arrives token by token and grows, syntax is often unterminated mid-stream, and you're re-rendering, not re-reading a file.
+
+- Incremental parsers (re-parse only what changed — great for big files under live editing)
+- https://github.com/lezer-parser/markdown
+  - when a document is edited, the parser can reuse parts of the previous parse tree unaffected by the change, significantly improving performance for large documents with small edits.
+- tree-sitter / tree-sitter-markdown
+  - the general-purpose incremental parsing framework used across editors
+  - Tree-sitter solves a different but related problem: "How do I parse very large documents and update them efficiently?"
+  - It provides: incremental parsing, partial tree updates, error recovery, syntax trees
+- https://github.com/chuanqisun/semidown
+  - A semi-incremental streaming parser designed for LLM output. It incrementally processes and renders new blocks 
+  - balance correctness and performance by incrementally parsing at the block level while re-rendering inline content.
+
+- https://github.com/commonmark/cmark /c
+  - the C reference implementation of CommonMark.
+  - it exposes both a one-shot cmark_parse_document() and a genuine streaming API
+- https://github.com/micromark/micromark /js/rust
+  - implemented as a state machine tokenizer that explicitly works on chunks.The parser takes chunks and turns them into events — the start or end of a token amongst other events It even ships a Node duplex stream.
+  - two interfaces: buffering and streaming. The first takes all input at once whereas the last uses a Node.js stream to take input separately. 
+- https://github.com/pulldown-cmark/pulldown-cmark /rust
+  - a pull parser for CommonMark
+  - events are produced lazily as you pull them rather than materializing a tree.
+- https://github.com/mity/md4c /c
+  - a SAX-style push parser
+
+- "Streaming markdown" for LLM output (append-only, unterminated syntax)
+  - Streamdown
+  - FluidMarkdown (Ant Group) — native Android/iOS/HarmonyOS streaming markdown engine for AI chat UIs
+  - Textual's approach (Will McGugan, terminal UI framework) isn't a standalone library but is a genuinely clever idea worth stealing: rather than reparsing the whole growing document on every token, track the line number where the last open block began and feed the parser only from there to the end — parse cost then stays sub-millisecond no matter how large the document gets. That's a general streaming-parser trick
+
+## 0719
+
+- LPT means Longest Processing Time first.
+  - It’s a scheduling heuristic: order jobs by estimated duration descending, then assign the next job to the least-loaded worker/bin. The idea is that long jobs start early so they don’t sit at the end and stretch the makespan.
 
 ## 0716
 
