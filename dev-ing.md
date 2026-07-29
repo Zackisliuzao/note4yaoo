@@ -295,6 +295,8 @@ use react to create a homepage shows a list of frontend frameworks like react/vu
 launchctl stop com.donehub && launchctl start com.donehub
 launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.donehub.plist
 
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.newapi.plist
+
 launchctl stop com.cpap && launchctl start com.cpap
 
 # DATA_DIR=~/sub2api-local-data ./sub2api -setup
@@ -342,6 +344,27 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0728
+
+- Your choices define a clean transition: new desktop cloud workspaces become user-selected local copies with explicit server/folder targets, while existing direct server workspaces stop syncing and remain readable until copied.
+- Existing direct server-backed desktop workspaces become read-only legacy snapshots. Users explicitly create target-based local copies from them; the snapshot remains untouched. SQLite remains authoritative, cloud reconciliation runs before folder reconciliation, and attachments remain lazy at natural workspace paths.
+
+- Atomic Folder Imports
+  - Split reconciliation into scan -> plan -> validate -> commit -> export.
+- Do not add .colanode/projection-commit.json or another durable export journal.
+
+- [GitHub+PicGo+JSDELIVER搭建自己的图床（亲测可用） - 知乎 _202402](https://zhuanlan.zhihu.com/p/681945624)
+  - 图片比较多或者准备多平台分发的时候，工作量成倍增加。提高效率的方式是插入在线图片。引用在线的图片，图片本身的插入相对于文件来说就是一串字符，多平台迁移的时候，直接粘贴过去就行了，无需考虑图片的路径问题。
+  - 几个问题：1. 上传到哪里？ 2. 如何上传？ 3. 如何生成链接？
+  - GitHub解决第一个问题
+  - PicGo解决后两个问题: 主要用于将本地图片上传至图床（图像托管服务），以获取可以在网页、博客等地方使用的图片链接。
+- [搭建 Github 免费图床 - 知乎 _202310](https://zhuanlan.zhihu.com/p/641821707)
+
+## 0727
+
+- I'm spotting a concrete performance issue: the code hashes every file on every export pass, and then hashes the destination again during the copy operation. Since the file path and destination are the same after adoption, this means we're doing redundant hash computations that could be eliminated.
+  - The fix is straightforward — the manifest already tracks mtime, size, ctime, and attachmentVersion, and there's already a matchesFingerprint utility that does exactly this comparison. I can short-circuit the hash computation by checking the fingerprint against the previous item, reusing the cached hash when nothing has changed. This matters because sync passes fire every 60 seconds plus on every content event with a 500ms debounce, so typing in a document would re-hash all attachments in the workspace unnecessarily. I need to verify these performance issues empirically rather than just by code inspection. Let me trace through getLocalFile and adoptFilePath to confirm the path repointing actually happens, and I should also flag that O(n²) string comparison in the exporter at line 242 — for a 10k-page workspace that's 100 million comparisons.
+
 ## 0724
 
 - redmansion
@@ -372,6 +395,31 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - The feed includes the changed payload, allowing the adapter to apply it directly.
   - Preferably, the mirror synchronizer records the server sequence when it applies each change. The adapter waits until the mirror’s applied sequence reaches the feed cursor, then reads the mirror as usual. 
   - The second option preserves the existing mirror architecture and keeps SQLite as the adapter’s content source.
+
+- Cloud, SQLite, and folder are three current states. A baseline is a remembered common ancestor from an earlier successful sync.
+- State Model
+  - C: current cloud value
+  - L: current SQLite value
+  - F: current folder value
+  - Bc: last value confirmed equal between cloud and SQLite
+  - Bf: last value confirmed equal between folder and SQLite
+   - Two baselines are necessary because folder synchronization must continue while cloud is offline. In that case Bf advances while Bc does not.
+- When SQLite is gone, the manifest needs one additional value per item, cloudAckHash/
+  - cloudAckHash: the folder-compatible hash of the last state confirmed present in cloud.
+    - The canonical SQLite representation that the cloud target most recently confirmed it accepted or already contained
+  - baseHash: The last canonical representation known to be equal in SQLite and this folder target.
+- Recovery then works as follows:
+  01. Keep the folder target disabled.
+  02. Pull current cloud data into a new SQLite database, producing L = C.
+  03. Use cloudAckHash as the recovery common ancestor R.
+  04. Compare restored cloud/SQLite L and current folder F against R.
+  - This distinction matters when the folder was updated while cloud was offline. The folder manifest’s normal baseHash may be newer than cloud, so treating current cloud as the baseline could overwrite newer folder work.
+- so you wanna store a cloudAckHash at .colanode/manifest.json for each file/folder?
+  - Yes, but per exported Colanode item, not per physical directory.
+  - A page Markdown file, attachment, database JSON, or folder-node JSON gets an entry. 
+  - Ordinary filesystem directories such as pages/ do not.
+
+- contentHash is only the last normalized content shared by SQLite and the folder. It is not a cloud hash.
 
 ## 0721
 
@@ -1200,19 +1248,19 @@ URL	: http://www.cip.cc/124.240.71.187
 
 For the parity refactor, which live edit authority should the plan assume for forms/annotations/reviews on recognized pages?
 
-1. Unify Page-Owned (Recommended)  Use one recognized-page scene/object authority for live editing, with forms/annotations/reviews projected to PDF/native structures only at import/save boundaries.
+01. Unify Page-Owned (Recommended)  Use one recognized-page scene/object authority for live editing, with forms/annotations/reviews projected to PDF/native structures only at import/save boundaries.
 
-2. Keep Sidecars                   Keep forms/annotations/reviews as separate live arrays beside the page scene, and only unify text/images/shapes under the page-owned runtime.
+02. Keep Sidecars                   Keep forms/annotations/reviews as separate live arrays beside the page scene, and only unify text/images/shapes under the page-owned runtime.
 
-3. Hybrid By Family                Unify annotations/reviews into the page scene now, but keep forms as a separate live model for longer.
+03. Hybrid By Family                Unify annotations/reviews into the page scene now, but keep forms as a separate live model for longer.
 
 ```
 
 - ONLYOFFICE is closer to Keep Sidecars, not Unify Page-Owned.
 - So the ONLYOFFICE-like choice for Hardoc is:
-  1. Keep recognized-page drawings/page objects as the authority for rich editable page content: text, images, shapes, groups, tables, charts.
-  2. Keep forms, annotations/redactions, and review threads as separate live families in the document model.
-  3. Unify them at the command/history/collaboration/selection layer, not by forcing them into one scene schema.
+  01. Keep recognized-page drawings/page objects as the authority for rich editable page content: text, images, shapes, groups, tables, charts.
+  02. Keep forms, annotations/redactions, and review threads as separate live families in the document model.
+  03. Unify them at the command/history/collaboration/selection layer, not by forcing them into one scene schema.
 
 ## 0414
 

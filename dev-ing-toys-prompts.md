@@ -63,7 +63,7 @@ modified: 2026-04-11T01:31:17.720Z
   - multi-column layout
   - hybrid table and doc
 
-project `superdoc` (at folder `../superdoc` ) implements renders, edits, and automates `.docx` files in the browser, headless on the server, and within AI agent workflows. but it is AGPL licensed.
+project `superdoc` (at folder `../superdoc` ) implements renders, edits, and automates `.docx` files in the browser, headless on the server, and within AI agent workflows. but it is AGPL licensed. 
 - the final goal is to implement a framework-agnostic, modular, extensible, headless ai docx editing solution named `begonia` similar to `superdoc` in current folder to avoid the licensing issues.
 - begonia should be implemented in a modular and extensible architecture for core features, with functional programming style.
 
@@ -166,6 +166,14 @@ you have worked on this problem several times but features are still lacking. Th
 - try to improve/refactor the full tests to make it faster so that full tests running within 1.5 minutes.
 - improve the slow/complicated/heavy parts of tests, 
 you might refactor/reorganize the tests architecture/logic to make it correct, fast, robust, maintainable in the long term.
+
+### superdoc v2
+
+- `./superdoc2` is a experimental toy that might be a reference for begonia in the future, just ignore all files at `./superdoc2` for now.
+
+- the latest minified code for superdoc v2 beta is superdoc@v2.3.0 and @superdoc/docx-engine@0.2.0 at `../ superdoc-v2-beta`, please analyze the minified code and related superdoc v1 code, then restore and improve superdoc v2 at `./superdoc2`.
+
+-  `../ superdoc-v2-beta`'s overall architecture is good enough to follow, just try to restore by the minified code.
 
 ### docx-editor
 
@@ -573,7 +581,6 @@ project `directus` (at folder `../directus` ) is a source-available licensed, po
 - project directus-rstore(at folder `../directus-rstore`, MIT license) implements a local-first data store for Vue and Nuxt applications. It makes it easy to build reactive Vue and Nuxt applications, and connect to your backend with hooks or plugins. A TASK is to build similar utils as sub packages in dreamansion to make it easy to build reactive applications for rstore, react and dreamansion. The core packages in directus-rstore like @rstore/core, @rstore/directus, @rstore/vite-directus ... are all framework agnostic. you might use similar architecture to build similar packages like @datalking/rstore-react, @datalking/rstore-dreamansion, @datalking/rstore-vite-dreamansion, playground-react-dreamansion .... you might reuse some code or just import the rstore related packages (from npm) for implementation in dreamansion since it is MIT license. you might use similar dependencies like the packages used in rstore and implement similar logic for dreamansion utils packages. @rstore/directus package is built with @directus/sdk, similarly, @datalking/rstore-dreamansion should be built with @datalking/dreamansion-sdk. for the example playground-react-dreamansion app, you might refer to the doc `../directus-rstore/docs/plugins/vite-directus.md`, then build similar app to showcase the integration of rstore, react and dreamansion, you might build examples to showcase how to use @datalking/rstore-vite-dreamansion to generate rstore collections and a dreamansion plugin in react app, how to use @datalking/rstore-react for a react app where you create the store yourself. for complicated state management in react examples, you might use zustand if necessary. you might add more examples to showcase the core features of rstore and dreamansion like Data Query/Mutation, Cache, Batching, reusable modules, Offline, Devtools.
 
 - features that may be planned but delayed(not in current goal): full parity of directus-style admin UI/UX, complicated multi-user/team/workspace/access-control, sso auth, workflow automations, extension marketplace, AI Assistant, MCP server, GraphQL API.
-- features that may be ignored in dreamansion: GraphQL API.
 
 - you have migrated/reimplemented some features from upstream directus to dreamansion.
 
@@ -758,6 +765,7 @@ This project `colanode` (also named redmansion) is a local-first Slack and Notio
   - when app.sqlite exits but workspace.sqlite is missing: if using colannode to open a folder does not contain .colanode/manifest.json, use the user info from app.sqlite, a workspace with the same name of the folder is created automatically, local folder as a sync target is auto set. if using colannode to open a folder contains .colanode/manifest.json, use the user info from app.sqlite, ask the user to sync or just use it locally.
   - generally, local sqlite is the source of truth, before updating local sqlite with reparsing local files, sync the cloud data to local sqlite first, then provide the user with conflicts list if any conflict exists.
 - colanode is designed to be offline first, user mostly manage files at local folder or cloud/self-hosted server, local sqlite should be invisible to user: in most cases, before updating local sqlite, fetch cloud content first, then update local sqlite by cloud changes(always succeed), then try to update local sqlite by changes from local files(if conflicts exist, provide list).
+- downloading files/attachments/binary to local folder sync target should be lazy and follow the file structure in the workspace, for example, a `pets/cat.png` should be only exported to local folder sync target at `pets/cat.png` when it is clicked/opened, to simplify the implementation, generally the attachment/file download result should be success or failure, all or nothing, no crash intermediate state, interrupted downloads or incompleted downloads like *.part should be auto deleted. no global cache or private .staging design for this feature.
 
 - for offline use of desktop app, logout does not remove data, logout just show the onboarding page with user avatar that enable login again quickly, if user clicks the avatar to login again, most data/ui before logout just restores. when logout, most data stays unchanged, but cloud-server/local-folder syncing stops if exists; when login again, most data/ui before logout shows again, cloud-server/local-folder syncing auto starts.
 
@@ -768,37 +776,11 @@ This project `colanode` (also named redmansion) is a local-first Slack and Notio
 
 - The current server target creates a dedicated remote workspace behind the scenes and mirrors the local workspace into it; it does not let the user choose an existing remote workspace. That avoids accidental merges but is a product choice, not an architectural necessity.
 - Colanode restores its working SQLite/Yjs workspace from canonical data under .colanode. The visible Markdown files are editable projections; they are not the only recovery source.
-- Colanode performs a three-way reconciliation using the baseline saved at the last successful syn
 
-- in joplin app, when sync target is set to a local folder, image are not exported as .jpg/.png but random name like `.resource/11ebaf4a20084f99879f4af3b763d363`, which is inconvenient. in colanode, please just export the image in a readable format like `attachments
+- in joplin app, when sync target is set to a local folder, image are not exported as .jpg/.png but random name like `.resource/11ebaf4a20084f99879f4af3b763d363`, which is inconvenient. in colanode, please just export the image in a readable format like `attachments`
 
-- Cloud, SQLite, and folder are three current states. A baseline is a remembered common ancestor from an earlier successful sync.
-- State Model
-  - C: current cloud value
-  - L: current SQLite value
-  - F: current folder value
-  - Bc: last value confirmed equal between cloud and SQLite
-  - Bf: last value confirmed equal between folder and SQLite
-   - Two baselines are necessary because folder synchronization must continue while cloud is offline. In that case Bf advances while Bc does not.
-- When SQLite is gone, the manifest needs one additional value per item, cloudAckHash/
-  - cloudAckHash: the folder-compatible hash of the last state confirmed present in cloud.
-    - The canonical SQLite representation that the cloud target most recently confirmed it accepted or already contained
-  - baseHash: The last canonical representation known to be equal in SQLite and this folder target.
-- Recovery then works as follows:
-  01.                       Keep the folder target disabled.
-  02.                       Pull current cloud data into a new SQLite database, producing L = C.
-  03.                       Use cloudAckHash as the recovery common ancestor R.
-  04.                       Compare restored cloud/SQLite L and current folder F against R.
-  - This distinction matters when the folder was updated while cloud was offline. The folder manifest’s normal baseHash may be newer than cloud, so treating current cloud as the baseline could overwrite newer folder work.
-- so you wanna store a cloudAckHash at .colanode/manifest.json for each file/folder?
-  - Yes, but per exported Colanode item, not per physical directory.
-  - A page Markdown file, attachment, database JSON, or folder-node JSON gets an entry. 
-  - Ordinary filesystem directories such as pages/ do not.
+- Colanode desktop remains single-instance; simultaneously sharing one folder target between independent Colanode processes is outside this phase.
 
-- contentHash is only the last normalized content shared by SQLite and the folder. It is not a cloud hash.
-
-- 
-- 
 - 
 - 
 - 
@@ -926,6 +908,8 @@ you might refactor/reorganize the tests architecture/logic to make it correct, f
 
 - you should rerun the full tests again after you finish your fix, repeat until full tests pass.
 
+- if my macos system is overloaded, you can run the tests at higher time budget. 
+
 - tests files in each package should existing as sibling folder of `src`. for example, all tests for `packages/core/src` should be put at ``packages/core/__tests__` , tests files like `parse.test.ts` should not be put inside `src` folder.
 
 - you have migrated/implemented major features in project react web, but when you migrated/implemented features, tests are not taken good care of. please fix and update existing tests. 
@@ -990,6 +974,7 @@ current code is under active development. please review and refactor code if you
 # play
 
 # llm-toolchain
+- DO NOT use parallel subagents, just explore code directly.
 
 ```prompt
 i start this llm api gateway by `dist/one-api --config config.yaml`. when i use codex-cli with it, codex always shows "exceeded retry limit, last status: 429 Too Many Requests". please analyze logs and related code , and explain to me which channels/providers is the cause of the rate limit ?
