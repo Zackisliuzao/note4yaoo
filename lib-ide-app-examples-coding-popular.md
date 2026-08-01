@@ -1016,6 +1016,16 @@ modified: 2025-12-11T18:10:23.710Z
 - https://github.com/rcarmo/piclaw /MIT/202607/ts
   - https://rcarmo.github.io/projects/piclaw/
   - PiClaw packages the Pi Coding Agent into a self-hosted workspace with a trilingual streaming web UI, persistent state, multi-provider LLM support, and a practical built-in toolset that includes many add-ons.
+
+- https://github.com/ThilinaTLM/nerve /apache2/202607/ts/svelte
+  - https://nerve.tlmtech.dev/
+  - A transparent, local-first desktop coding harness with the focus of a small agent and the workflow of a complete workbench.
+  - [Nerve — an open-source, local-first desktop coding harness inspired by the simplicity of Pi : r/PiCodingAgent _202607](https://www.reddit.com/r/PiCodingAgent/comments/1v976ro/nerve_an_opensource_localfirst_desktop_coding/)
+
+- https://github.com/daugasauron/piodide /MIT/202607/ts/c
+  - https://daugasauron.github.io/piodide/
+  - pi coding-agent terminal running entirely in the browser with Ghostty Web and Pyodide
+  - A coding agent, Python runtime, shell, editor, and local LLM host that run in one browser tab.
 # cli-aggregator/wrapper
 - https://github.com/jazzenchen/VibeAround /MIT/202606/rust/ts
   - https://vibearound.ai/

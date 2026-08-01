@@ -1927,12 +1927,20 @@ modified: 2026-06-20T15:49:57.019Z
   - 月末的优惠: kiro
 
 - cursor内置的都是非常高级的模型claude/haiku/gpt/gpt-mini/composer/gemini/grok/glm/kimi, 所以用auto模型完成普通开发也可考虑
+  - 在闲鱼搜cursor的转卖也许能碰上好东西
+  - pro的auto 和 无限free的auto 区别在于pro不需要经常换号， context更完整
   - 咸鱼上的cursor-pro废号可考虑，保证登录官网且是Pro号，可以自己修改账号密码，有效期15以上
     - 优先考虑账密登录， 不考虑 发货格式：SessionToken/AccessToken 
     - 👀 部分号来自速刷cursor pro, 刷完了再转卖
     - 速刷号速刷号！非月号非月号，在1天内使用完毕
     - 部分号是拼车收过来的号 不可能保证一定一个人用 部分账号两人共享使用。
   - 有商家聚合了cursor free或pro账号， 然后按天/周/月卖cursor用量，额度由商家定义
+  - 插件 cursorpool 的计费方式， auto和高级模型共享额度， 官方提供大概 100 + 40 刀的额度， 商家的额度是自定义的
+    - [cursor激活插件 | 文档中心 ](https://docs.cloudpp.win/docs/cursor-extention)
+    - 100额度大约5刀， 官方100刀售价70RMB大约对应2000额度
+    - 注意高级模型倍率很高， 其它模型：0.75倍, gpt-5.5：5倍, Sonnet: 7.5倍, Opus: 15倍
+    - 👀 claude模型需要去【配置自定义API】页面勾选 **kiro** , 消耗很高建议额度小于400的不要开
+    - 激活器不绑定设备，但只能单设备使用，不支持多设备同时使用。
   - 高级模型额度已用完，只剩Auto+Composer模型额度，大概在100刀额度。 
   - 可在账户余量界面看到剩余composer/auto的用量，来估算余量
   - ✨ 有商家甚至推出了自动换号的月卡， 价格合适也可考虑
@@ -1944,7 +1952,6 @@ modified: 2026-06-20T15:49:57.019Z
 
 ```
 你好, 我想买个划算的用完了高级模型的 cursor pro。
-1. 请问你这个是不是用漏洞的速刷号，据说速刷号掉号快, 发给我的是正常账密，还是token, 需要安装专门的插件吗？
 1. 请问你这个是不是用漏洞的速刷号，据说速刷号掉号快, 发给我的是正常账密，还是token, 需要安装专门的插件吗？
 2. 买好后是我一个人用吗，还是多人用, 我不想买共享的
 3. 下个月几号到期, auto模型用了多少了， 用的不多我能接受
@@ -1960,6 +1967,30 @@ modified: 2026-06-20T15:49:57.019Z
   - 只能使用auto模型，约200W+ token（$2额度）。有限的Tab 补全。
   - 所以100个free号大概能提供 2亿 token
 
+- [AI助手 — 无限 auto 额度 · 一键登录 Cursor ](https://vaultbyte.top/)
+  - [AI助手使用教程T1 ](https://www.kdocs.cn/l/crNHsGjTirob)
+  - [cursor（常见问题处理方法）T1 ](https://www.kdocs.cn/l/ccqUKlbIdxLV)
+  - [AI助手的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/aizs)
+  - 月卡--¥26.8
+  - 无限 auto 额度 · 一键登录 Cursor，无需自行注册 Cursor 账号
+  - 系统冷却倒计时： 获取太多了，触发系统冷却机制，12点重置，等不到私聊我发激活码
+  - 当当前账号额度用尽时，手动前往 AI助手 的 Cursor 页面点击「获取账号并登录」。系统会自动完成重置机器标识、写入新凭证等整套逻辑，整个过程只需 5~10 秒。
+  - Windows 用户和 macOS Intel 芯片用户完美支持无感换号；macOS Apple Silicon（M1/M2/M3/M4等 ARM 架构）用户暂不兼容 无感换号
+  - 需要用auto，Cursor新版本只支持Composer 2.5fast!! 请使用Auto，3.6.21之前的版本
+  - 如果是com2.5模型就回退到auto模型这样额度消耗低很多。 Auto更耐用点Composer2.5fast消耗很快， 强烈建议多使用新建对话，这样消耗就少很多
+  - 如果用量很大而且又着急，可以继续拍一个新的卡密重新在软件助手上注册一个账号去激活这个新卡密，两个卡密搭配着用
+
+- [AnyAPI 商城 ](https://ai.lottoz.vip/shop/AG394CE5)
+  - 周卡-¥58， 月卡-¥168
+  - 无限额度解锁高级模型
+
+- [Cursor Pro、额度包与 AI 编程账号商城 - 小文ai小铺 ](https://yidachuang.top/)
+  - [卡密与 Token 提取工具 - 小文ai小铺 ](https://yidachuang.top/extract)
+  - 各种灰色cursor账号
+  - 30天-¥15, 总额度 $100, 似乎只有50个号
+- [阿权小铺 - 源头好货 | Cursor Pro  ](http://39.97.231.221/)
+  - 各种cursor套餐
+
 - [Cursor 专卖的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/cursor-pro)
   - cursor--¥80
     - 质保十五天！支付宝支付，正价充值
@@ -1970,6 +2001,9 @@ modified: 2026-06-20T15:49:57.019Z
   - cursor日卡-¥10, 不换号-插件计费, 目前只有一人用完，自述连用了18个小时
   - cursor周卡-¥30
   - cursor月卡-¥70, 不换号-插件计费-一天100-200额度
+- [Lyla-精灵小店(gpt, kiro, 各大会员优惠充值)的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lyla)
+  - Cursor月卡=【激活后30天内有效+75个账号（共计15000积分，每次换号消耗200积分）Auto模型+无感秒换号+两台设备+支持win、mac、linux系统】
+  - kiro-infinity插件
 - [CursorAoto月卡低至0.6元/天_闲鱼  ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.6.464919d0EyJ0KW&id=1049251565744&categoryId=201449620)
   - 30天-¥18.00， 24小时50个号，不会一小时内50个号一下放开
 - [Cursor Auto无限-30/d _闲鱼 ](https://www.goofish.com/item?spm=a21ybx.personal.feeds.2.4a996ac2Nu0xlf&id=1057431461577&categoryId=50023914)
@@ -1993,8 +2027,6 @@ modified: 2026-06-20T15:49:57.019Z
   - 30天-¥36.8
 - [Cursor 无限续杯无感换号独享账号\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.3.4761330awGJYXE&id=1070664432013&categoryId=201449620)
   - 独享free：无共享、无限制
-- [Cursor Pro、额度包与 AI 编程账号商城 - 小文ai小铺 ](https://yidachuang.top/)
-  - 30天-¥15, 总额度 $100, 似乎只有50个号
 
 - [cursorpro 会员独享\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.2.4761330awGJYXE&id=1071187204306&categoryId=201449620)
   - 全功能可用，智能补全+多模型切换
@@ -2176,6 +2208,11 @@ modified: 2026-06-20T15:49:57.019Z
 - [转转AI · New API · QuantumNous ](https://api.uu6.top/pricing)
   - kiro 90缓 0.01元/次
 
+- [JinnyAPI ](https://jinnyapi.com/keys), 已充值
+  - 注意充值倍率是 1:10
+  - 大多是中等价格
+  - 低价grok/kiro
+
 - [超超 mouubox  - /Sub2API ](https://sub2api.mouubox.com/dashboard) , 已充值, 副站
   - [/Sub2API ](https://api.mouubox.com/home), 主站
     - 一个主站一副站, 副站sub2api.mouubox.com,
@@ -2188,6 +2225,13 @@ modified: 2026-06-20T15:49:57.019Z
 - [mdkj  - /Sub2API ](https://mdkj.lol/dashboard), 已充值, 廉价但很不稳定
   - plus--0.025
   - 注意倍率调整 
+
+- [聪明AI /sub2api](https://sub2.congmingai.com/keys)
+  - 充值改为u充值了，最低充值500r。小额充值点左边的小铺链接。
+  - 中等价格
+
+- [TK API](https://tkapi.fun/keys)
+  - 邀请返利充值后返利20%
 
 - [Xybbz /Sub2API](https://sub2api.xybbz.xyz/dashboard)
   - plus--0.045, 算是低价，有点中等价格
@@ -2212,6 +2256,9 @@ modified: 2026-06-20T15:49:57.019Z
 - [Code-Plan  /NewAPI](https://code-plan.site/pricing), 已充值
   - [GPT-源头供货-招代理的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/IY16OXB7)
   - AMD 顶级服务器 + 10Gbps 带宽
+- [keria - Sub2API ](https://jjhd.cloud/keys)
+  - [icloud 邮箱 GPT PLUS直营店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/A87R3DZP)
+  - 主营卖号， 中转不稳定
 
 - [liusq API ](https://api.liusq.icu/dashboard)
   - 有低倍率分组，但仅充值可用
@@ -2222,11 +2269,6 @@ modified: 2026-06-20T15:49:57.019Z
   - 提供月卡 90 > 每周100
   - 偶尔能碰到无限额度的天卡, 并发5
   - 夜间偶尔会有超低价分组
-
-- [JinnyAPI ](https://jinnyapi.com/keys)
-  - 注意充值倍率是 1:10
-  - 大多是中等价格
-  - 低价grok/kiro
 
 - [Conpera ](https://code.conpera.ai/), 已充值
   - 仅支持google登录
@@ -2244,7 +2286,10 @@ modified: 2026-06-20T15:49:57.019Z
   - claude--0.3
   - 赞助和额度充值入口：https://afdian.com/a/cong0707
 
-- [zizhucan.xyz ](https://zizhucan.xyz/login)， 有中奖余额
+- [板栗API ](https://banliapi.top/keys)
+  - 低价但不是最低
+
+- [zizhucan.xyz ](https://zizhucan.xyz/)， 有中奖余额
   - 低价但不是最低
 
 - [Kun-Api /sub2api](https://kunkun666.xyz/keys)
@@ -2564,6 +2609,9 @@ modified: 2026-06-20T15:49:57.019Z
   - pp-¥1.6
 
 ## email
+
+- outlook-tools
+  - [星辰邮箱大师 ](https://www.xckj.site/easy-mailbox/)
 
 - [T佬的gmail批发渠道 ](https://ai666.dnxb.cc/)
   - 全tg最便宜gmail邮箱批发
