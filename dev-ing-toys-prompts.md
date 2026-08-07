@@ -782,21 +782,27 @@ This project `redmansion` (also named colanode) is a local-first Slack and Notio
 - please try to analyze and fully understand related data-flow/architecture/code before editing/updating code to make redmansion correct, robust without hallucination. 
 
 - docs/tests/scripts might be outdated, please analyze and recheck related data-flow/code to improve redmansion for every feature above and major offline and syncing related features.  you might refactor/reorganize the architecture/logic if it helps to make it correct, robust, extensible in the long term.
-- analyze all the architecture/data-flow/code related to offline and syncing features, if there are obvious bugs, then make a comprehensive plan to fix all the bugs or improve the architecture if you want
+- analyze all the architecture/data-flow/code related to offline and syncing features, if there are obvious bugs, then make a comprehensive plan to fix all the bugs or improve the architecture if you want.
 
-- no parallel subagents, just explore the code directly
+- no parallel subagents, just explore the code directly.
 
 - if major/important features already work without obvious bugs and have good architecture/data-flow, then please propose the top 2 features related to offline and syncing that is worth it to improve.
 
 - redmansion is still beta software, you might merge/squash the db schema migrations, only use the latest schema is ok, db related compatibility is not required for now. 
 - update you plan, make sure your plan is correct and robust.
 
+- recheck the architecture/data-flow/code of features like page/folder renaimg/creation , desktop-app/webapp should have similar consistent experience, and make offline and syncing related features correct, robust in the long term.
+
+- 
+- 
+- 
 - 
 - 
 
 ### draft-redmansion
 
 - draft
+  - add server target is disabled
   - login user can open cloud workspace
   - improve web/mobile
   - sync status/tips
@@ -857,6 +863,20 @@ This project `redmansion` (also named colanode) is a local-first Slack and Notio
 - 
 - 
 - 
+- 
+- 
+
+### improvements
+
+- 外部修改导致的格式丢失问题，如何处理
+
+- guards
+  - 打开超大文件夹
+
+### settings
+
+- file suffix
+- breadcrumb
 
 ### draft-web
 
@@ -865,6 +885,10 @@ This project `redmansion` (also named colanode) is a local-first Slack and Notio
 - 
 - 
 - 
+
+### draft-later
+
+- default local username: local@redmansion.invalid
 
 ## ilove-image(stirling-image)
 
@@ -1000,6 +1024,8 @@ finally make sure all tests run and pass locally with npm. you can update/fix te
 - tests is a little messy in this monorepo project. in all subpackages, move tests inside src folder to sibling test folders of src like apps/desktop/test, apps/server/test, packages/client/test, packages/durable-fs/test, packages/core/test
 # rafactor
 - legacy/unused code might be refactored and removed.
+
+- analyze related code, then make a plan to improve it, you might refactor exisiting code to reuse/share some common logic.
 
 - analyze the core data-flow/code-logic of major features, find possible bugs and memory leak, improve it for the long term maintenance.
 
