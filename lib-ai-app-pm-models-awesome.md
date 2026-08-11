@@ -314,6 +314,14 @@ modified: 2026-06-20T15:49:57.019Z
     - [LD士多 - LDC积分商城](https://ldst0re.qzz.io/)
 
 - token-news
+  - [Mirasim — One Agent IDE ](https://mirasim.ai/)
+    - 前1000名注册可获得89刀/月的套餐，送1年！每月CC MAX 5x + Codex 5x的额度。
+    - 必须是mac啊
+    - MIRA-37ZP-8X1E-KAWX
+    - 這玩意只是個中轉站，然後用網站+客戶端編造一個很正式的感覺。通過 mac用戶篩選一些高質量人群，然後盜用他們的i/o。新型的騙局而已。
+    - 这玩意会读取你的claude和codex的auth密钥, 保不准会不会上传
+    - 你自己看看 这个pro完全就是假的 压根就没有什么所谓的付款通道
+    - 数据安全这东西，只要agent，都会获取你
   - [GLM 5.2 FREE tier is live on TokenRouter, and running through July 25. ](https://www.tokenrouter.com/console/pricing?search=glm-5.2)
   - [商汤送免费的glm5.2了 - LINUX DO _202607](https://linux.do/t/topic/2504080)
   - [每月50刀免费额度 支持glm5.2 邮箱注册即可 - LINUX DO _202606](https://linux.do/t/topic/2489020)
@@ -1180,6 +1188,10 @@ modified: 2026-06-20T15:49:57.019Z
     - [NVIDIA NIM is inconsistent, so I benchmarked 20+ models every hour : r/SillyTavernAI _202605](https://www.reddit.com/r/SillyTavernAI/comments/1t1zlcj/nvidia_nim_is_inconsistent_so_i_benchmarked_20/)
   - https://github.com/sherman-yang/nvidia-model-info /202604/js
     - Local dashboard for exploring the free models exposed through build.nvidia.com.
+
+- 📌 [AMD Radeon Cloud ](https://developer.amd.com.cn/radeon/tokenfactory)
+  - Daily budget: $1
+  - rpm: 30
 
 - [Groq Rate Limits - Docs](https://console.groq.com/docs/rate-limits)
   - tldr: tpd-100k~500k
@@ -2260,7 +2272,7 @@ modified: 2026-06-20T15:49:57.019Z
   - 中等价格
 
 - [TK API](https://tkapi.fun/keys)
-  - 邀请返利充值后返利20%
+  - 邀请返利 ~~充值后返利20%~~ , 每个用户最高返2元
 
 - [Xybbz /Sub2API](https://sub2api.xybbz.xyz/dashboard)
   - plus--0.045, 算是低价，有点中等价格
@@ -2292,6 +2304,9 @@ modified: 2026-06-20T15:49:57.019Z
 - [liusq API ](https://api.liusq.icu/dashboard)
   - 有低倍率分组，但仅充值可用
   - 不定期提供公益分组
+
+- [yier-lukyface](https://api.lukyface.com/pricing)
+  - 顶级 OVH 服务器, 10G 独享大带宽, 稳抗上万 RPM
 
 - [aimi-api /NewAPI](https://api.58aimi.cn/keys), 已充值
   - [ai资源库的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/89LBYJ36)

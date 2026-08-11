@@ -72,6 +72,8 @@ modified: 2026-04-07T12:53:38.419Z
 - resources
   - [Supercharge your OCR Pipelines with Open Models _202510](https://huggingface.co/blog/ocr-open-models)
   - [Technical Analysis of Modern Non-LLM OCR Engines _202512](https://intuitionlabs.ai/articles/non-llm-ocr-technologies)
+# draft
+- https://dashboard.extend.ai/demo 参考demo做本地化的版本
 # popular
 - https://github.com/docling-project/docling /39.3kStar/MIT/202509/python
   - https://docling-project.github.io/docling
@@ -477,6 +479,13 @@ modified: 2026-04-07T12:53:38.419Z
   - OCR Engines Currently supports EasyOCR (JaidedAI), Tesseract (Google), and Pororo (KakaoBrain).
   - [Show HN: BetterOCR combines and corrects multiple OCR engines with an LLM | Hacker News _202310](https://news.ycombinator.com/item?id=38048228)
 
+- https://github.com/xberg-io/xberg /8.9kStar/MIT/202608/rust
+  - https://docs.xberg.io/
+  - A polyglot document intelligence framework with a Rust core. 
+  - Extract text, metadata, images, and structured data from 101 formats
+  - [Xberg v1: a local, CPU-only document extraction engine for feeding an Ollama RAG (101 formats, OCR) : r/ollama _202608](https://www.reddit.com/r/ollama/comments/1vejt3j/xberg_v1_a_local_cpuonly_document_extraction/)
+    - fully local and CPU-only (no GPU).
+
 - https://github.com/wolfmanstout/screen-ocr /apache2/202510/python
   - screen-ocr package makes it easy to perform OCR on portions of the screen
   - WinRT is a Windows-only backend that is very fast and reasonably accurate.
@@ -574,6 +583,18 @@ modified: 2026-04-07T12:53:38.419Z
   - This project is primarily licensed under AGPLv3
     - However, certain components of this project are licensed under the MIT 
     - The SDKs and some UI components are licensed under the MIT License. 
+- https://github.com/firecrawl/anydoc /10.6kStar/MIT/202608/rust
+  - https://firecrawl.github.io/anydoc/
+  - Fast Rust library that converts documents (Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF) into clean GitHub-Flavored Markdown.
+  - Built in Rust, with Node.js and Python bindings.
+  - It powers Firecrawl Parse, so if you'd rather not run it yourself, the hosted API gives you the same conversion plus our OCR models for the scanned pages anydoc can't read on its own.
+  - the demo page runs the library as WebAssembly, so files are converted locally and never leave your machine.
+- https://github.com/firecrawl/pdf-inspector /13.4kStar/MIT/202608/rust
+  - https://firecrawl.github.io/pdf-inspector/
+  - Fast Rust library for PDF inspection, classification, and text extraction. 
+  - Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.
+  - Built by Firecrawl to handle text-based PDFs locally in under 200ms, skipping expensive OCR services for the ~54% of PDFs that don't need them.
+
 - https://github.com/OpenAISpace/ai-trend-publish /MIT/202502/ts
   - 一个基于 AI 的趋势发现和内容发布系统，支持多源数据采集、智能总结和自动发布到微信公众号
   - 多源数据采集: Twitter/X, 网站内容抓取 (基于 FireCrawl)

@@ -66,7 +66,7 @@ modified: 2026-04-11T01:31:17.720Z
   - multi-column layout
   - hybrid table and doc
 
-project `superdoc` (at folder `../superdoc` ) implements renders, edits, and automates `.docx` files in the browser, headless on the server, and within AI agent workflows. but it is AGPL licensed. 
+project `superdoc` (at folder `../superdoc` ) implements reads, renders, edits, and writes and automates `.docx` files in the browser, headless on the server, and within AI agent workflows. but it is AGPL licensed. 
 - the final goal is to implement a framework-agnostic, modular, extensible, headless ai docx editing solution named `begonia` similar to `superdoc` in current folder to avoid the licensing issues.
 - begonia should be implemented in a modular and extensible architecture for core features, with functional programming style.
 
@@ -111,7 +111,8 @@ you have worked on this problem several times but features are still lacking. Th
 - you have worked on this several times but features are still lacking. They are the most important features at this moment. DO NOT stop untill you achieve full feature parity. 
 
 - you may deep research, and reference the upstream superdoc code(at folder `../superdoc`), you may use similar dependencies, and implement similar logic, but you should rewrite it in functional programming style without licensing issues.
-- you may even do a big code refactor for begonia to match major features of superdoc in a similar architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor for begonia to match major features of superdoc in a similar architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. only if there are obvious bugs or design defects, then you might propose big refactor or huge change. if there is only subtle bugs, just propose to improve the existing architecture.
 
 - you may design feature parity docs at `upstream/superdoc/reports`, when you migrate/implment features, you can recheck and update it. all checking/docs/scripts related to upstream superdoc should be put in folder `upstream`. you may even design a script to automate it.
 - feature parity docs may be outdated, please read related code and recheck/update.
@@ -127,7 +128,8 @@ you have worked on this problem several times but features are still lacking. Th
 - you may analyze related architecture/code and borrow good deisgn from upstream superdoc(source code at folder `../superdoc`) and rewrite it in functional-programming style for begonia to avoid licensing issues.
 - it is unnecessary to search the web for superdoc details, just analyze the source code at folder `../superdoc`.
 
-- please recheck migrated features and improve the implementation in begonia. Analyze core data flow and implementation logic details for every major feature like editor-data-model/rich-formatting, selection range/offset/caret, document viewport/layout-engine(supports multi-column), toggling pagination, virtualized-render, zoom, track-change/diff, comment, OOXML-support, API, SDK, CLI, Agent..., compare the implementation logic/code of begonia with logic/code of superdoc to recheck and enhance the correctness of architecture and logic in begonia, find possible bugs in code and fix them, refactor code if you need, make sure major features implementations in begonia are correct, modular, extensible for long-term maintenance. 
+- please recheck migrated features and improve the implementation in begonia. Analyze core data flow and implementation logic details for every major feature like editor-data-model/rich-formatting, selection range/offset/caret, document viewport/layout-engine(supports multi-column), toggling pagination, virtualized-render, zoom, track-change/diff, comment, OOXML-support, API, SDK, CLI, Agent..., 
+compare the implementation logic/code of begonia with logic/code of superdoc to recheck and enhance the correctness of architecture and logic of begonia, find possible bugs in code and fix them, refactor code if you need, make sure major features implementations in begonia are correct, modular, extensible for long-term maintenance. 
 - core implementation for major features should be framework-agnostic without react, ui wrappers/bindings should be sub packages, react should be used very sparingly. please improve and enhance the modular, extensible, headless core editor to be framework-agnostic, correct, robust.
 
 - prioritize and recheck/improve major features like editor-data-model/rich-formatting, selection range/offset/caret, document viewport/layout-engine(supports multi-column), toggling pagination, virtualized-render, zoom, track-change/diff, comment, OOXML-support, API, SDK, CLI... in begonia, make related features/architecture correct, modular, extensible, robust for long-term maintenance.
@@ -147,7 +149,7 @@ you have worked on this problem several times but features are still lacking. Th
 
 ### draft-begonia
 
-- chart and complicated shapes/drawings may be delayed
+- charts and complicated shapes/drawings may be delayed.
 
 - The current TASK is to refactor/improve the architecture of begonia to be more extensible/modular/headless like superdoc, so that it will be easy to implement a v2 editor without prosemirror in the future. 
   - Superdoc’s headless toolbar/UI already depend on a narrow host contract plus doc access, and the UI controller also uses a structural editor-like contract. These features of superdoc should be a good reference for how to improve begonia.
@@ -174,9 +176,15 @@ you might refactor/reorganize the tests architecture/logic to make it correct, f
 
 - `./superdoc2` is a experimental toy that might be a reference for begonia in the future, just ignore all files at `./superdoc2` for now.
 
-- the latest minified code for superdoc v2 beta is superdoc@v2.3.0 and @superdoc/docx-engine@0.2.0 at `../ superdoc-v2-beta`, please analyze the minified code and related superdoc v1 code, then restore and improve superdoc v2 at `./superdoc2`.
+- the latest minified code for superdoc v2 beta is at `../ superdoc-v2-beta`, please analyze the minified code and related superdoc v1 code if you want, then continue to restore and improve superdoc v2 at `./superdoc2`.
 
 -  `../ superdoc-v2-beta`'s overall architecture is good enough to follow, just try to restore by the minified code.
+
+- please recheck migrated features and improve the implementation at ./superdoc2. Analyze core data flow and implementation logic details for every major feature like editor-data-model/rich-formatting, selection range/offset/caret, document viewport/layout-engine(supports multi-column), toggling pagination, layout modes support vertical/..., multi-column layout supports unequal column widths, virtualized-rendering should use scroll event listeners + spacer-based approach and have good support for horizontal-layout/external-container, lazy virtualized render, zoom in/out, Canvas-based text measurement, performant line-breaking, track-change/diff, overlap handling in track change, comment, OOXML-support, API, SDK, CLI, Agent, compare the implementation logic/code of `./superdoc2` with logic/code of `../ superdoc-v2-beta` to recheck and enhance the correctness of architecture and logic of `./superdoc2` , find possible bugs in code and fix them, refactor code if you need, make sure major features implementations in ./superdoc2 are correct, modular, extensible for long-term maintenance. 
+
+---
+
+- core implementation for major features should be framework-agnostic without react, ui wrappers/bindings should be sub packages, react should be used very sparingly. please improve and enhance the modular, extensible, headless core editor to be framework-agnostic, correct, robust.
 
 ### docx-editor
 
@@ -268,7 +276,7 @@ please make a plan, then improve the core in-place text editing engine to make i
 - you have worked on this several times but still not solve it. 
 
 - you may reference the upstream onlyoffice-pdf-editor code(code is at several git repos in current folder), use similar dependencies, and implement similar logic, but you should rewrite it in functional programming style without licensing issues.
-- you may even do a big code refactor for hardoc to match major features of onlyoffice-pdf-editor in a similar architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor for hardoc to match major features of onlyoffice-pdf-editor in a similar architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - you may design a feature parity doc at `upstream/parity/feature-parity.md`, when you migrate/implment features, you can recheck and update it. all checking/docs/scripts related to upstream onlyoffice-pdf-editor should be put in folder `upstream`. you may even design a script to automate it.
 - research and make a plan, then implement hardoc to match major features of onlyoffice-pdf-editor, or even better than onlyoffice-pdf-editor, without licensing issues.
@@ -315,7 +323,7 @@ DO NOT search the web for onlyoffice pdf api, you should find and read source co
 - you have migrated/reimplemented some features from onlyoffice-spreadsheet-editor to watarble.
 
 - you may reference the upstream onlyoffice-spreadsheet-editor code(code is at several git repos in current folder), use similar dependencies, and implement similar logic, but you should rewrite it in functional programming style without licensing issues.
-- you may even do a big code refactor for watarble to match major features of onlyoffice-spreadsheet-editor in a similar architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor for watarble to match major features of onlyoffice-spreadsheet-editor in a similar architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - you might refactor/reorganize the architecture/code of watoffice/hardoc/watarble to make major features/architecture correct, modular, extensible for long-term maintenance.
 
@@ -370,7 +378,7 @@ Project `grist` (in current folder) is a modern relational spreadsheet. It combi
 - please deep research the existing backbonejs webapp, then can you design a similar solution in react webapp to achieve full feature parity?
 
 - you may deep research and reference the existing backbonejs webapp code, you may use similar dependencies, and implement similar logic, but you should rewrite it in functional programming style with modern tech stacks like typescript-utils/react. 
-- you may even do a big code refactor in react webapp to match major features of backbonejs webapp in a similar architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor in react webapp to match major features of backbonejs webapp in a similar architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - you may design feature parity docs at `upstream/feature-parity.md`, when you migrate/implment features from backbonejs webapp to react webapp, you can recheck and update it. all checking/docs/scripts related to upstream backbonejs webapp should be put in folder `upstream`. you may even design a script to automate it.
 - research and make a plan, then implement the react webapp to match major features of existing backbonejs webapp, or even better than backbonejs webapp.
@@ -451,7 +459,7 @@ you may use similar file/folder names instead of the same file/folder names as t
 
 - you may reference the upstream code, use similar dependencies, and implement similar logic, but you should rewrite it in functional programming style without licensing issues.
 
-- you may even do a big code refactor to match major feature of PPTist in a similar architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor to match major feature of PPTist in a similar architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - research and make a full plan, then implement slaides to match major features of PPTist, or even better than PPTist, without licensing issues.
 
@@ -489,7 +497,7 @@ project jan(at folder `../jan` ) is a apache2-licensed, local, powerful chatgpt-
 - you have migrated/reimplemented some features from upstream jan/transformerlab-app/unsloth-studio to aichorage.
 
 - you may deep research and reference the code of upstream projects(jan, unsloth-studio, transformerlab-app), you may use similar dependencies, and implement similar logic, but you should rewrite it without licensing issues.
-- you may even do a big code refactor for airchorage to match major feature of jan in a extensible architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor for airchorage to match major feature of jan in a extensible architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - you may design a feature parity doc at `upstream/feature-parity.md`, when you migrate/implment features, you can recheck and update it. all checking/docs/scripts related to upstream jan/transformerlab-app/unsloth-studio should be put in folder `upstream`. you may even design a script to automate it.
 - research and make a good design, then implement aichorage to match major features of jan, or even better than jan, without licensing issues.
@@ -619,7 +627,7 @@ project `directus` (at folder `../directus` ) is a source-available licensed, po
 - you have migrated/reimplemented some features from upstream directus to dreamansion.
 
 - you may deep research and refer to the architecture/data-flow/code of upstream directus, you may use similar dependencies, and implement similar logic, but you should rewrite it in functional-programming style for dreamansion without licensing issues.
-- you may even do a big code refactor for dreamansion to match major feature of directus in a extensible architecture, to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor for dreamansion to match major feature of directus in a extensible architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - you may design a feature parity doc at `upstream/feature-parity.md`, when you migrate/implment features, you can recheck and update it. all checking/docs/scripts related to upstream directus should be put in folder `upstream`. you may even design a script to automate it.
 
@@ -760,11 +768,14 @@ project `vscode` in current folder is a popular, open-source, powerful coding id
 - non-goals
   - viewer for large binary files like docx/pdf, just ocred/converted text
 
-This project `redmansion` (also named colanode) is a local-first Slack and Notion alternative that supports writing, databases, subpage and file management. web, desktop, react-native apps are available.
+This project `redmansion` (also named colanode) is a local-first Slack and Notion alternative that supports writing, pages/subpage, databases and file management. web, desktop, react-native apps are available.
 - project joplin(at folder `../joplin`, AGPL license) is a offline-first note taking app that supports markdown, attachments, ocr, and powerful Synchronization. Windows, Linux, macOS, Android and iOS apps are available, NO web app.
 - The goal is to enhance redmansion with offline and syncing related features, making redmansion more powerful and easier to use. You can refer to the architecture/data-flow/code/ideas of joplin, but copying AGPL code should be avoided, you might rewrite it in functional style for redmansion.
-- The goal is to enhance offline-first features for redmansion desktop app: User should be able to open the desktop app and use it directly without configuring a server url, Joplin has very good support for offline usage like that, but for webapp, the existing workflow is ok. The first time to open the redmansion desktop app, please auto create a default user account and a default workspace, so that it is easy to use out of the box. If user want to sync to server, please allow user to configure sync target like in joplin in settings page. You might refer to the joplin syncing architecture for syncing targets like local-folder/local-server/cloud-server/onedrive, then design a robust/extensible syncing architecture for redmansion. But unlike joplin, multiple sync targets should be supported in redmansion desktop app, for example, docs in redmansion can be synced to local folder and server at the same time. for example, if user edits a doc in redmansion desktop app, the local folder of sync target should be updated automatically(joplin supports this), when user edits the file in local folder of sync target using external editor like vscode, changes should also be synced to redmansion. multiple cloud servers as sync targets are not required now, it is too complicated, you should support to sync from desktop app to local folder and one cloud server at this moment.
+- The goal is to enhance offline-first features for redmansion desktop app: User should be able to open the desktop app and use it directly without configuring a server url, Joplin has very good support for offline usage like that, but for webapp, the existing server-backed workflow is ok. The first time to open the redmansion desktop app, please auto create a default local user account and a default local workspace, a default welcome getting started page should open in editor to make it easy to get user onboard, so that it is easy to use out of the box. If user want to sync to server, configuring a cloud/self-hosted server sync target should be supported in settings page. 
+- You might refer to the joplin syncing architecture for syncing targets like local-folder/local-server/cloud-server/onedrive, then design a robust/extensible syncing architecture for redmansion. But unlike joplin, 
+multiple sync targets should be supported in redmansion desktop app, for example, docs in redmansion can be synced to local folder and server at the same time. for example, if user edits a doc in redmansion desktop app, the local folder sync target should be updated automatically, when user edits the file in local folder of sync target using external editor like vscode, changes should also be synced to redmansion. multiple cloud servers as sync targets are not required now, you should support to sync from desktop app to 1 local folder and 1 cloud server at this moment.
 - for syncing, rules in .gitginore file should be supported.
+
 - These features are very challenging, the current architecture in redmansion might be refactored to make it easy to implement more features in the future.
 - analyze related architecture/data-flow/code in redmansion and joplin, then implement a extensible offline and syncing architecture for redmansion.
 
@@ -774,7 +785,7 @@ This project `redmansion` (also named colanode) is a local-first Slack and Notio
 - 
 - 
 
-- you have implemented part of the goals and features, please analyze related data-flow/code, improve the implementation for the offline and syncing related features, you might refactor/reorganize the architecture/logic to make it correct, robust, extensible in the long term.
+- you have implemented part of the goals and features, please analyze related data-flow/code, improve the implementation for the offline and syncing related features, you might refactor/reorganize the architecture/logic to make it correct, robust, extensible in the long term. 
 - review the implementation of the offline and syncing related features, then make a plan to improve it
 
 - docs/tests/scripts might be outdated, recheck code and data flow to improve redmansion.
@@ -791,9 +802,12 @@ This project `redmansion` (also named colanode) is a local-first Slack and Notio
 - redmansion is still beta software, you might merge/squash the db schema migrations, only use the latest schema is ok, db related compatibility is not required for now. 
 - update you plan, make sure your plan is correct and robust.
 
-- recheck the architecture/data-flow/code of features like page/folder renaimg/creation , desktop-app/webapp should have similar consistent experience, and make offline and syncing related features correct, robust in the long term.
+- recheck the architecture/data-flow/code of features related to offline and syncing, desktop-app/webapp should have similar consistent experience, and recheck offline and syncing related features, make it correct, robust in the long term. 
 
-- 
+- you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. only if there are obvious bugs or design defects, then you might propose big refactor or huge change. if there is only subtle bugs, just propose to improve the existing architecture.
+
+- How do you like my idea? if it is OK, make plan to improve it, desktop-app/webapp should have similar consistent experience, and make it work well with the existing offline and syncing related features.
+
 - 
 - 
 - 
@@ -819,20 +833,20 @@ This project `redmansion` (also named colanode) is a local-first Slack and Notio
 - for a existing local folder that has synced to cloud server previously, how to open the local folder in redmansion desktop app again and sync to the cloud server correctly.
 
 - some ideas for the redmansion desktop app to enhance the offline and syncing related features(webapp workflow might stay unchanged or updated to be consistent with the desktop workflow): 
-  - 1 workspace is designed to have only 1 local folder target, 1 cloud/self-hosted server.
-  - when opening redmansion desktop app for the first time, a default user and default workspace is created automatically, and a default folder is also auto created at path `~/Documents/redmansionYYYYMMdd`(use the latest date in code), so a local folder sync target is added automatically, user may add other sync targets like cloud-server/local-server later. Opening redmansion desktop app later will auto open the last workspace.
-  - when redmansion desktop app has a local folder as a sync target, it should auto export the redmansion contents to local folder and markdown files that mirrors file tree structure in redmansion and write metadata at `.redmansion/manifest.json`, every note should be exported as a markdown file, for example, a note like `work/meetings` has subpages, then the note should be exported as a nested folder like `work/meetings/` and the note itself should be exported as `work/meetings/_index.md` (or work/meetings/meetings.md or work/meetings/meetings_readme.md or work/meetings/meetings_readme_.md to avoid name conflict), notes without subpages should be exported as markdown file directly. you might store redmansion id/hash/file-path relations or other metadata at `.redmansion/manifest.json` if you want.
+  - 1 workspace is designed to have 1 local folder target, 1 cloud/self-hosted server.
+  - when opening redmansion desktop app for the first time, a default user and default workspace is created automatically, and a default folder is also auto created at path `~/Documents/redmansionYYYYMMdd`(use the latest date), so a local folder sync target is added automatically, user may add other sync targets like cloud-server/local-server later. Opening redmansion desktop app later will auto open the last workspace.
+  - when redmansion desktop app has a local folder as a sync target, it should auto export the redmansion contents to local folder and markdown files that mirrors file tree structure in redmansion file tree ui and write metadata at `.redmansion/manifest.json` if you want, every note should be exported as a markdown file, for example, a note like `work/meetings` has subpages, then the note should be exported as a nested folder like `work/meetings/` and the note itself should be exported as `work/meetings/_index.md` (or work/meetings/meetings.md or work/meetings/meetings_readme.md to avoid name conflict), notes without subpages should be exported as markdown file directly. you might store redmansion id/hash/file-path relations or other metadata at `.redmansion/manifest.json` if you want.
   - when user uses redmansion desktop app, local sqlite is source of truth, data exported to local folder automatically. when user uses external editor like vscode to edit the local folder, then user opens the same folder with the same .redmansion/manifest.json or redmansion local folder watcher detects the file changes, redmansion desktop should parse all the local markdown files or changed file, then try to update the local sqlite. Before updating local sqlite, if a cloud server sync target is set, check the last sync status and changed files, if no conclict, merge cloud changes to local sqlite first, then update local sqlite with reparsed local markdown files, if conflicts exist, show a conflicts file list and ask the user to select cloud content or local file content to save. I think this workflow in my idea makes it easy to implement and works good enough for one-person workflow. 
   - when user use redmansion desktop app to open local folder, if the folder does not contain .redmansion/manifest.json, a workspace with the same name of the folder should be created automatically, the local folder should be set as sync target automatically, other sync targets like cloud/local-server may be added later. if the folder contains .redmansion/manifest.json, just pull the latest cloud content to local sqlite first, then try to update the local sqlite with reparsed content of local folder as the similar workflow previously mentioned, the local folder should be set as sync target automatically. 
-  - when both app.sqlite and workspace.sqlite are missing: if using colannode to open a folder that does not contain .redmansion/manifest.json, auto create a new user and a workspace with the same name of the folder, the local folder should be set as sync target automatically. if using colannode to open a folder that contains .redmansion/manifest.json, ask the user to login and sync, or just use it locally with syncing to local folder enabled and syncing to server disabled .
-  - when app.sqlite exists but workspace.sqlite is missing: if using colannode to open a folder that does not contain .redmansion/manifest.json, use the user info from app.sqlite, a workspace with the same name of the folder is created automatically, the local folder should be set as sync target automatically. if using colannode to open a folder that contains .redmansion/manifest.json, use the user info from app.sqlite, ask the user to sync, or just use it locally.
-  - generally, local sqlite is the source of truth, before updating local sqlite with reparsed local files, sync the cloud data to local sqlite first, then provide the user with conflicts list if any conflict exists.
+  - when both app.sqlite and workspace.sqlite are missing: if using redmansion to open a folder that does not contain .redmansion/manifest.json, auto create a new user and a new workspace with the same name of the folder, the local folder should be set as sync target automatically. if using redmansion to open a folder that contains .redmansion/manifest.json, ask the user to login and sync, or just use it locally with syncing to local folder enabled and syncing to server disabled .
+  - when app.sqlite exists but workspace.sqlite is missing: if using redmansion to open a folder that does not contain .redmansion/manifest.json, use the user info from app.sqlite, a new workspace with the same name of the folder is created automatically, the local folder should be set as sync target automatically. if using redmansion to open a folder that contains .redmansion/manifest.json, use the user info from app.sqlite, ask the user to sync, or just use it locally with syncing to local folder enabled and syncing to server disabled .
+  - generally, local sqlite is the source of truth, before updating local sqlite with reparsed local files' contents, sync the cloud data to local sqlite first, then provide the user with conflicts list if any conflict exists.
 - redmansion is designed to be offline first, user mostly manage files at local folder or cloud/self-hosted server, local sqlite should be invisible to user: in most cases, before updating local sqlite, fetch cloud content first, then update local sqlite by cloud changes(always succeed), then try to update local sqlite by changes from local files as mentioned above, if conflicts exist, provide the conflicts list.
 - redmansion desktop app is offline-first, if a workspace has a cloud/self-hosted server as a sync target, user can pause/resume syncing manually. if user clicks the pause syncing button, user can still edits the content from desktop ui or external editor like vscode, then when user click the resume syncing button, changes should be handled correctly. the offline editing and syncing implementation has a lot in common with the use case of opening a local folder with valid manifest config. the architecture has been optimized to share some common logic and make the data flow correct, extensible and consistent. manual pause and sync should work for desktop app first, web/mobile is not required now. 
-- downloading files/attachments/binary to local folder sync target should be lazy and follow the file structure in the workspace, for example, a `pets/cat.png` should be only exported to local folder sync target at `pets/cat.png` when it is clicked/opened, to simplify the implementation, generally the attachment/file download result should be success or failure, all or nothing, no crash/intermediate state, interrupted downloads or incompleted downloads like *.part should be auto deleted. no global cache or private .staging design for this feature.
+- downloading files/attachments/binary to local folder sync target should be lazy and follow the file structure in the workspace, for example, a `pets/cat.png` should be exported to local folder sync target at `pets/cat.png` only when it is clicked/opened. to simplify the implementation, generally the attachment/file download result should be success or failure, all or nothing, no crash/intermediate state, interrupted downloads or incompleted downloads like *.part should be auto deleted. no global cache or private .staging design for this feature.
 
 - improve the offline and syncing related features for the use cases of renaming local folder sync target. 
-  - support to rename the sync target of local folder in desktop app ui only, web/mobile is not required. when user clicks the rename button and input new name, just rename the local folder to the new name, related config/logic/watcher should update automatically, and all desktop app features should work after renaming.
+  - support to rename the sync target of local folder in desktop app ui only, web/mobile is not required. in settings page, when user clicks the rename button and input new name, just rename the local folder to the new name, related config/logic/watcher should update automatically, and all desktop app features should work after renaming.
   - when desktop app is open and the local folder is renamed(not from ui, but renamed from filesystem), local folder sync target should be disabled automatically, show a warning at user avatar or notification if you want, most desktop app features should still work with local sqlite. user can add a new local folder sync target later. 
   - when desktop app is closed/not-open and the local folder is renamed, then user opens desktop app and tries to open/restore the last workspace, local folder sync target should be disabled automatically, show a warning at user avatar or notification if you want, most desktop app features should still work with local sqlite. user can add a new local folder sync target later.
   - when both app.sqlite and workspace.sqlite exists, and user open a local folder contains valid manifest config, just pull the latest cloud content to local sqlite first, then try to update the local sqlite with reparsed content of local folder as the similar workflow previously mentioned, the local folder should be set as sync target automatically. 
@@ -840,7 +854,7 @@ This project `redmansion` (also named colanode) is a local-first Slack and Notio
 
 - please analyze offline and syncing related data-flow/code, then make a plan to improve it. 
 
-- for offline use of desktop app, logout does not remove data, logout just show the onboarding page with user avatar that enable login again quickly, if user clicks the avatar to login again, most data/ui before logout just restores. when logout, most data stays unchanged, but cloud-server/local-folder syncing stops if exists; when login again, most data/ui before logout shows again, cloud-server/local-folder syncing auto starts.
+- for offline use of desktop app, logout does not remove data, logout just show the onboarding page with user avatar that enable login again quickly, if user clicks the avatar to login again, most data/ui before logout just restores. when logout, most data stays unchanged, but cloud-server/local-folder syncing stops if it exists; when login again, most data/ui before logout shows again, cloud-server/local-folder syncing auto resumes.
 
 - for offline use of desktop app, when desktop app is open and local folder is edited by external editor like vscode, update only changed files to local sqlite, but if desktop app is not open and a file is edited by external editor, then when desktop is open, how to update only changed files? update your plan to improve it.
 
@@ -862,11 +876,39 @@ This project `redmansion` (also named colanode) is a local-first Slack and Notio
 - 
 - 
 - 
+
+### draft-cloud
+
+- redmansion is offline-first, but it should also work well with client/server architecture.
+- help me design a extensible cloud workflow that also works well with local desktop app.
+- if user does not login, user can still click "create workspace" menu item from top left workspace icon, then the workspace is created locally.
+- if user has login, clicking "create workspace" menu item from top left workspace icon will also auto create a workspace in server, it should work well with local desktop app.
+- generally, if user has login, everything user has done locally should be synced to server automactically.
+
+- when user login, what happens to the local workspace and local user? 
+
+- 
+- 
+- 
+- 
+
+### draft-editor
+
+- 编辑器中的 subpage 无法删除
+
+- please analyze code related to the existing rich text editor, then design a extensible architecture to make it easy to implement a new editor called VibeEditor that just shows the plain text, both the existing editor and the new VibeEditor should be usable and switchable from the a new icon next to the top-right settings icon of editor. 
+  - both editors should work well on desktop-app and webapp.
+
+- 
+- 
+- 
 - 
 - 
 - 
 
 ### improvements
+
+- subpage在editor中无法通过 DEL键 删除
 
 - 外部修改导致的格式丢失问题，如何处理
 
@@ -1023,7 +1065,7 @@ finally make sure all tests run and pass locally with npm. you can update/fix te
 
 - tests is a little messy in this monorepo project. in all subpackages, move tests inside src folder to sibling test folders of src like apps/desktop/test, apps/server/test, packages/client/test, packages/durable-fs/test, packages/core/test
 # rafactor
-- legacy/unused code might be refactored and removed.
+- legacy/unused code might be refactored and removed. compatibility layer is not required.
 
 - analyze related code, then make a plan to improve it, you might refactor exisiting code to reuse/share some common logic.
 
@@ -1034,6 +1076,8 @@ finally make sure all tests run and pass locally with npm. you can update/fix te
 - why do you want to make a big change/refactor? is current architecture not correct or extensible? why is your proposal better?
 
 - i think the design for journal related feature is heavy and bug-prone. please analyze related data-flow/code, make it correct and robust, no stale logs/items, make it correct, clean, consistent. you might do a big refactor or change to the existing journal design. 
+
+- you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. only if there are obvious bugs or design defects, then you might propose big refactor or huge change. if there is only subtle bugs, just propose to improve the existing architecture.
 
 - The goal is to refactor existing code and architecture to be more clear, extensible, functional-programming style, while improving logic correctness at the same time.
 One task is to remove `class extends` inheritance and js prototype. `class extends` inheritance and prototype MUST be avoided by refactoring and rewriting.
@@ -1058,7 +1102,7 @@ Prefer to extract all side effects (logging, API calls, DOM updates) to the func
 
 Identify shared mutable state across modules (globals, singletons, module-level variables), and improve the architecture to make it resuable and clear.
 
-you may do some big code refactor to improve the architecture and data flow logic, to make it easier to maintain in the long term.
+you may do some big code refactor to improve the architecture and data flow logic if it helps to make it easier to maintain in the long term.
 
 make a plan, refactor and improve the codebase progressively.
 
@@ -1094,10 +1138,14 @@ current code is under active development. please review and refactor code if you
   - for database table name or column name or other name in code, the abbreviation `RDMN` or `RDMN_ ` should be updated to `DRMN` or `DRMN_`.
   - code/db/docs/tests should be updated accordingly.
   - after you finish the rename work, major features should still work, all tests should still pass.
+# toolchain
+- make a plan to improve the toolchain architecture/performance.
+  - update typescript to latest v7 and update related toolchain/scripts.
 # toys
 
-# play
+# libs
 
+- you should use npm package @embedpdf/viewer-react@3.0.0-next.1 to implement the pdf viewer, source code is at git repo `../embed-pdf-viewer` , you might refer to the api/docs/examples at the git repo.
 # llm-toolchain
 - DO NOT use parallel subagents, just explore code directly.
 

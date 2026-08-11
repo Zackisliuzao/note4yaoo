@@ -344,7 +344,130 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0809
+
+- 🤔 there are so many markdown flavors/formats, is there any open source formats/proposals that can represent paginated document in markdown?   supporting pagination/page-header/page-footer would be even better.   deep research related solutions/ideas, if you found any open source formats/proposals or inspiration projects, provide overview/url/website for each.
+  - Typst is heavily inspired by Markdown and was built from the ground up to be a modern replacement for LaTeX. Because its primary output is paginated documents (PDF), the concept of a "page" is a native, first-class citizen. 
+
+- prior art
+  - Typst
+  - AsciiDoc + Asciidoctor PDF
+  - Djot: John MacFarlane's (creator of Pandoc/CommonMark) lighter, more consistently-parseable successor to CommonMark, with generic attributes and containers for extensibility. No pagination built in, but its generic-div/attribute system would make adding a clean pagebreak or page-header extension straightforward
+- The pattern that keeps recurring — and is probably your best starting point — is: keep pagination metadata as HTML comments (invisible, backward-compatible) for header/footer/page-number/page-break, and let an actual CSS-Paged-Media engine (Paged.js, Vivliostyle, WeasyPrint) or Typst do the real layout math.
+  - Azure's PageHeader/PageFooter/PageBreak comment convention and Quarto's pagebreak shortcode are the two most pragmatic, widely-copied answers rather than a single unifying spec.
+
+- https://github.com/markuadoc/markua-spec
+  - https://markua.com/
+  - Created by the Leanpub team, Markua is a Markdown flavor explicitly designed for writing long-form books and courses. It deliberately removes inline HTML (which standard Markdown allows) but introduces book-specific pagination concepts.
+  - Markua inherently understands document structure (Frontmatter, Mainmatter, Backmatter), which dictates how page numbers are generated (e.g., roman numerals for the preface). It supports a `{pagebreak}` directive directly in the Markdown syntax.
+
+- https://github.com/vivliostyle/vfm /ts
+  - https://docs.vivliostyle.org/vfm/vfm/
+  - Vivliostyle Flavored Markdown (VFM), a Markdown syntax optimized for book authoring. 
+  - It is standardized and published for Vivliostyle and its sibling projects.
+  - VFM is implemented top on CommonMark and GitHub Flavored Markdown (GFM).
+  - compiles to HTML which Vivliostyle then paginates using CSS Paged Media (running headers, footnotes, page counters, named pages are handled at that layer).
+
+- MyST (Markedly Structured Text)
+  - Page breaks: +++ { "page-break": true }
+
+- Marp / Marpit extends standard Markdown for creating slides.
+  - It uses `---` as a native page break delimiter. More importantly, it natively supports YAML frontmatter and inline directives to handle headers and footers.
+
+- Microsoft Azure Document Intelligence (Layout API) recently proposed an extended Markdown output format to solve the problem of lost page boundaries.
+  - the resulting Markdown uses tags like `<!-- PageHeader="This is a page header" -->, <!-- PageFooter="..." -->, <!-- PageNumber="1" -->, and <!-- PageBreak -->` inline with the standard Markdown content. 
+
+- Docling (IBM Research / LF AI & Data) and similar open-source PDF→Markdown tools (Marker, MinerU)
+  - The community convention that's grown up around these tools is the same idea in miniature: page markers are inserted as HTML comments like `<!-- Page N -->` throughout the Markdown output
+
+- Quarto is the modern, open-source successor to R Markdown, heavily reliant on Pandoc. It is designed to take a single Markdown document and publish it to HTML, PDF, Word, or ePub.
+  - Quarto introduces the `{{< pagebreak >}}` shortcode to abstract page breaks across different output formats
+  - Quarto (successor to R Markdown/bookdown) — a `{{< pagebreak >}}` shortcode inserts a native pagebreak — `\newpage` in LaTeX, a Word-native break in docx, `page-break-after: always` in HTML
+
+- pandoc-ext/pagebreak — a filter that converts a paragraph containing only a LaTeX `\newpage` or `\pagebreak` command into the appropriate page-break markup
+
+- R Markdown + pagedown / bookdown — R's ecosystem for turning (R-flavored) Markdown into paginated HTML or PDF, using CSS paged media
+- Bookdown, Built on R Markdown
+  - extends Markdown by allowing syntax like (PART), (APPENDIX), and explicit page break syntax. It heavily customizes LaTeX templates for PDF and Paged.js for HTML to ensure chapters always start on a new page, with running headers and footers.
+
+- CSS Paged Media
+  - Paged.js
+  - Vivliostyle
+  - WeasyPrint
+
+- Paged.js is an open-source JavaScript polyfill that chunks continuous HTML (rendered from Markdown) into distinct pages in the browser. 
+  - the R Markdown community created Pagedown a tool that takes your Markdown, converts it to HTML, and uses Paged.js to create a beautifully paginated document.
+
+- Typora
+  - `<div style="page-break-after: always;"></div>`
+- Obsidian
+  - page break plugin
+
+- Markdown AST + Document IR approach (future direction)
+  - WordprocessingML
+  - Typst AST
+
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
+## 0808
+
+- continue to improve the multi-users and syncing experience.
+- desktop-app/webapp both supports multi-users and multi-workspaces, clicking the bottom-left avatar icon can show user list, clicking the top-left workspace icon can show workspaces list for current user. clicking a user in user list should switch to the last opened local/remote workspace of the user. if user does not logout, the next time when you open the desktop-app/webapp, the last opened workspace and user will always be used. the same user can open workspaceA on desktop-app and open workspaceB on webapp at the same time.
+- for the webapp, it is always client/server architecture, changes/updates always syncs to server.
+- for the desktop app: The first time to open the redmansion desktop app, please auto create a default local user account and a default local workspace, a default welcome getting started page should open in editor to make it easy to get user onboard. for the desktop app without authenticated user, the default local user is used by default, newly created workspace also belongs to the local user. If user added a cloud/self-hosted server sync target, then the authenticated user of the server target will also be added as owner of current workspace, the authenticated user will display as current user in bottom-left user list, if authed user does not logout, all later edits/updates/actions will belongs to the authed user by default. for example, if the current selected user in bottom-left user list is the authed user, when clicking "create workspace" from the top-left workspace menu, the newly created workspace should belong to the authed user,  and a local folder sync target and cloud server sync target should be added by default. generally all actions belongs to the current user that is selected from the bottom-left user list. a workspace may belong to the default local user and a authed user at the same time, so switching the default local user and a authed user might not change workspace.
+  - if user clicks a cloud workspace in top-left workspaces list, the cloud workspace will be fetched to local and open, and a local folder sync target and cloud server sync target should be added by default. 
+
+- if there are authenticated users, clicking a user in user list should switch to the last opened local/remote workspace of the user, but the existing ui does not change, this is the problem. 
+  - for switching user, the last opened local/remote workspace of the user should show, the last opened page (or first page of the workspace) should show in editor by default.
+  - for switching workspace by clicking workspace name form the top-left menu list, the last opened page (or first page of the workspace) should show in editor by default.
+
+- 
+- 
+- 
+
+ ~~then the default local user will be hidden by default in bottom-left user list~~ 
+
+- 
+- 
+
+- when a user has login into a desktop-app, if user does not logout manually, opening desktop-app later will auto open the last used workspace. webapp should work like this too. the same user can open workspaceA on desktop-app and open workspaceB on webapp at the same time. please make syncing correct, robust.
+- when a user used desktop app first and add a cloud server, then user logins into the webapp, in webapp the last opened workspace of desktop should show in workspace menu items from top-left workspace icon. Similarly, when a user used webapp first, then user logins into the desktop app, in desktop app the last opened workspace of webapp should show in workspace menu items from top-left workspace icon.
+
+- [Chrome 119 Dev Tools: Application > Clear site Data leaves 2GB behind - Stack Overflow ](https://stackoverflow.com/questions/77312345/chrome-119-dev-tools-application-clear-site-data-leaves-2gb-behind)
+  - clear the OPFS for an app by pasting this into the console:
+```JS
+const opfsRoot = await navigator.storage.getDirectory();
+opfsRoot.remove()
+```
+
+## 0807
+
+- PDF upload is supported.
+  - PDF viewing inside the desktop app or web app is not currently supported.
+  - PDFs appear as ordinary file attachments. Opening one shows “No preview available for PDF Document, ” plus metadata and a Save button.
+  - Remote attachment bytes are generally lazy-downloaded, but PDFs are not automatically downloaded when opened because the lazy-download trigger lives inside the preview component—and PDF is excluded from previews.
+- For server-backed workspaces using the private file cache, locally materialized attachments that have not been opened for seven days are evicted and can later be fetched again. Local-only workspaces are not evicted because there would be no recovery source. Folder-projected desktop workspaces also bypass this cache cleanup.
+- PDFs are handled as opaque, uploadable attachments; metadata is synchronized eagerly, bytes are designed to be lazy, but the current PDF UI only offers explicit download—not inline viewing or open-triggered materialization.
+
+- if users has used the desktop app locally for a while, then user login and click the "Add server sync" in settings page, what is the data flow, analyze related code, then explain to me.
+
+- if users has used the desktop app locally for a while, then user click the "Add account" menu item from left bottom avatar icon, what is the data flow, analyze related code, then explain to me.
+
+- Analyze related code, then explain to me how can page/file/folder be deleted in file tree or in other ui? Is delete a hard remove or a soft remove as tombstone? Can deleted item be restored?
+
+- continue to improve the file tree experience: in file tree, add "Delete" menu item to actions-menu/context-menu of every row ui for page/file/folder/database/channel... 
+  - currently only page can be deleted from the settings icon at the top right of the editor , you might reuse the ux if you want. 
+  - when page/file/folder/database/... is deleted from desktop-app/webapp ui, the deleted cannot be restored. if deleted from desktop-app, the file in local folder sync target should be removed to system trash bin by default, not hard remove from disk.
+
 ## 0806
+
+- Directory mode does not automatically revert when the last child disappears.
 
 - the original content in page11.md goes into page11/_index.md, when user clicks folder page11, children file list shows or  content in page11/_index.md shows. when user edits page11/_index.md using external editor like vscode, then if user clicks folder page11, children file list shows or updated content in page11/_index.md shows.
 - auto use Untitled or Untitle 2/3... for new file or folder name, but for Adding folder, the rename input should show to make it easy for user to change the Untitled name, and page focus should goes into the rename input, Untitle text should be auto selected to make it easy to change, just like the rename ux.
@@ -374,7 +497,7 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 
 ## 0804
 
-- this git branch feat/offline-sync-targets supports to use the desktop app without server. the main git branch desktop app must use a server.  when the user starts the desktop for the first time, a local user and workspace is auto created, it is easy to use out of the box, the problem is there is no seed data or test document in the default workspace. Please analyze the onboarding workflow of the main branch, the webapp/desktop app both starts with good welcome doc. then please improve the desktop/web app in this branch, when user opens the default workspace for the first time,  there should exists similar welcome docs, but no welcome discussion and message for desktop/web by default, because chat is not the core feature for now .
+- this git branch feat/offline-sync-targets supports to use the desktop app without server. the main git branch desktop app must use a server.  when the user starts the desktop for the first time, a local user and workspace is auto created, it is easy to use out of the box, the problem is there is no seed data or test document in the default workspace. Please analyze the onboarding workflow of the main branch, the webapp/desktop app both starts with good welcome doc. then please improve the desktop/web app in this branch, when user opens the default workspace for the first time, there should exists similar welcome docs, but no welcome discussion and message for desktop/web by default, because chat is not the core feature for now .
 
 ## 0803
 
@@ -395,12 +518,12 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - Each side is compared against base
 - choices
   - **Journal** — append one line per item to `.colanode/export.journal` right after its bytes are durable; fold into `manifest.json` at the end and delete it. Next pass reads base as manifest + leftover journal. Baseline lives next to the bytes, so it survives a crash *and* an app reset. Cost: one small append+fsync per item, plus a file format to parse defensively.
-  - **Rewrite the manifest after every item** — simplest to reason about, no new file. But it rewrites the whole manifest N times per export; a 5,000-item workspace does 5,000 full rewrites. It's the journal's idea without the append-only optimization.
+  - **Rewrite the manifest after every item** — simplest to reason about, no new file. But it rewrites the whole manifest N times per export; a 5, 000-item workspace does 5, 000 full rewrites. It's the journal's idea without the append-only optimization.
   - **Persist to SQLite** — smallest diff. But it splits baseline across the folder and the private database, and `docs/desktop-offline-sync.md` promises a projection survives an app reset and can be reopened. After a reset the SQLite half is gone and the bug is back.
 
 - fs.appendFile works on a plain path string. Round 18 deliberately removed plain-path I/O from everything below a folder target: every operation goes through ScopedRootFilesystem, which holds an open handle on the root directory and resolves each component with openat/O_NOFOLLOW against that handle. The point isn't tidiness — it's a TOCTOU defence. With a path string, an attacker (or a sync client like Dropbox) can swap a parent directory for a symlink between the check and the write, and your append lands outside the folder. verifyIdentity() exists to confirm the root is still the same directory before a publish.
 
-- The journal isn't just "unbounded in size" — it's unconditional per-pass write amplification. recordExported runs for every entity on every export pass, and each call is a full atomic publish cycle: ensureDirectory + writeFileExclusive + flushFile (an fsync) + replaceFile. The page branch already skips its own byte-write when path and hash match the previous manifest (folder-exporter.ts:225-232), but the journal write immediately after has no such guard. So a completely unchanged 5,000-entity workspace does zero content writes and 5,000 fsync-and-rename cycles, on every 500ms debounce. The journal only exists to describe bytes that are newly durable but not yet in the manifest; an entity whose baseline is byte-identical to the previous manifest has nothing to record.
+- The journal isn't just "unbounded in size" — it's unconditional per-pass write amplification. recordExported runs for every entity on every export pass, and each call is a full atomic publish cycle: ensureDirectory + writeFileExclusive + flushFile (an fsync) + replaceFile. The page branch already skips its own byte-write when path and hash match the previous manifest (folder-exporter.ts:225-232), but the journal write immediately after has no such guard. So a completely unchanged 5, 000-entity workspace does zero content writes and 5, 000 fsync-and-rename cycles, on every 500ms debounce. The journal only exists to describe bytes that are newly durable but not yet in the manifest; an entity whose baseline is byte-identical to the previous manifest has nothing to record.
   - That reframes the fix: gate recordExported on the baseline actually differing from previous.items[id]. That bounds the journal's size too — the unbounded growth in Next item 3 is a symptom of the same missing guard, so one change addresses both.
 
 - 
@@ -429,7 +552,6 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - Add a durable folder-target-rename workspace operation with reserved, filesystem-moved, and catalog-updated phases. Its payload records workspace user, target ID, canonical source/destination paths, and manifest projection identity.
   - Add an app-database migration that expands the workspace_operations kind constraint without losing existing operation records or indexes; bump and validate the operation payload schema version.
   - Start the rename journal before the adapter moves the directory. Mark filesystem-moved immediately after a successful filesystem rename; provider-lease commit marks catalog-updated and completes only after target configuration persistence succeeds.
-
 # dev-07
 
 ## 0731
@@ -563,7 +685,8 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 was compiled against a different Node.js version using
 NODE_MODULE_VERSION 137. This version of Node.js requires
 NODE_MODULE_VERSION 143. Please try re-compiling or re-installing
-the module (for instance, using `npm rebuild` or `npm install`).
+the module (for instance, using `npm rebuild` or `npm install` ).
+
     at process.func [as dlopen] (node:electron/js2c/node_init:2:2617)
     at Module._extensions..node (node:internal/modules/cjs/loader:1980:18)
     at Object.func [as .node] (node:electron/js2c/node_init:2:2617)
@@ -574,12 +697,16 @@ the module (for instance, using `npm rebuild` or `npm install`).
     at Module.require (node:internal/modules/cjs/loader:1563:12)
     at require (node:internal/modules/helpers:152:16)
     at bindings (/Users/yaoo/Documents/repos/ai-ml-llm/all-docai/redmansion/node_modules/bindings/bindings.js:112:48) {
+
   code: 'ERR_DLOPEN_FAILED'
 }
 Error: App is not initialized
+
     at ~/Documents/repos/ai-ml-llm/all-docai/redmansion/apps/desktop/.vite/build/main.js:59261:15
     at AsyncFunction.<anonymous> (node:electron/js2c/browser_init:2:59676)
+
 Error: App is not initialized
+
     at ~/Documents/repos/ai-ml-llm/all-docai/redmansion/apps/desktop/.vite/build/main.js:59261:15
     at AsyncFunction.<anonymous> (node:electron/js2c/browser_init:2:59676)
 
@@ -592,7 +719,7 @@ Error: App is not initialized
 
 ## 0720
 
-- 🤔 there are so many markdown parsers,  is there any open source solutions that implement streaming parsing for markdown so that it can support very large .md file?   supporting both full parsing and streaming parsing would be even better.   deep research related solutions/ideas, if you found any open source solutions or inspiration projects, provide overview/github-repo/website for each.
+- 🤔 there are so many markdown parsers, is there any open source solutions that implement streaming parsing for markdown so that it can support very large .md file?   supporting both full parsing and streaming parsing would be even better.   deep research related solutions/ideas, if you found any open source solutions or inspiration projects, provide overview/github-repo/website for each.
 - Markdown "streaming" actually covers two pretty different problems
   - Input-streaming — the file itself is too big to slurp into memory as one string, so the parser needs to consume it in chunks (or emit output without building a full tree).
   - Forward-only append streaming — this is the LLM-chat-UI problem: text arrives token by token and grows, syntax is often unterminated mid-stream, and you're re-rendering, not re-reading a file.
@@ -612,7 +739,7 @@ Error: App is not initialized
   - the C reference implementation of CommonMark.
   - it exposes both a one-shot cmark_parse_document() and a genuine streaming API
 - https://github.com/micromark/micromark /js/rust
-  - implemented as a state machine tokenizer that explicitly works on chunks.The parser takes chunks and turns them into events — the start or end of a token amongst other events It even ships a Node duplex stream.
+  - implemented as a state machine tokenizer that explicitly works on chunks. The parser takes chunks and turns them into events — the start or end of a token amongst other events It even ships a Node duplex stream.
   - two interfaces: buffering and streaming. The first takes all input at once whereas the last uses a Node.js stream to take input separately. 
 - https://github.com/pulldown-cmark/pulldown-cmark /rust
   - a pull parser for CommonMark
@@ -634,7 +761,7 @@ Error: App is not initialized
 
 - 🤔 I want to develop a saas solution with client/server architecture that provides webapp/electron-app/cli, and the electron-app should just be a thin wrapper of webapp. the electron-app/webapp/cli uses the same server backend/api. is there any popular open source solutions that use similar idea that building electron-app as lightweight webapp wrapper (cli is optional, not required)? deep research related solutions/ideas, if you found any open source solutions or inspiration projects, provide overview/github-repo/website for each.
   - 🌰 
-  - Zulip, Element (Matrix), Mattermost, Rocket.Chat
+  - Zulip, Element (Matrix), Mattermost, Rocket. Chat
   - Trilium Notes, Standard Notes, SiYuan, AFFiNE
   - comfyui
 - well-established patterns in open source
@@ -663,19 +790,19 @@ Error: App is not initialized
 
 ```JS
 // 社区分享的2个配置都没用
- optimizeDeps: {
+optimizeDeps: {
     include: ["@tanstack/react-form-start"],
   },
 
-resolve: { alias: [ { find: "use-sync-external-store/shim/index.js", replacement: "react", } ], }
+  resolve: { alias: [{ find: "use-sync-external-store/shim/index.js", replacement: "react", }], }
 
 // ai给的配置最有用
-  optimizeDeps: {
-    include: [
-      'use-sync-external-store/shim',
-      'use-sync-external-store/shim/with-selector',
-    ],
-  },
+optimizeDeps: {
+  include: [
+    'use-sync-external-store/shim',
+    'use-sync-external-store/shim/with-selector',
+  ],
+},
 ```
 
 - [Dep Optimization Options | Vite ](https://vite.dev/config/dep-optimization-options)
