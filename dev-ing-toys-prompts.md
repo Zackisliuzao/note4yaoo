@@ -176,11 +176,14 @@ you might refactor/reorganize the tests architecture/logic to make it correct, f
 
 - `./superdoc2` is a experimental toy that might be a reference for begonia in the future, just ignore all files at `./superdoc2` for now.
 
-- the latest minified code for superdoc v2 beta is at `../ superdoc-v2-beta`, please analyze the minified code and related superdoc v1 code if you want, then continue to restore and improve superdoc v2 at `./superdoc2`.
+- the latest minified code for `@superdoc/docx-engine` npm package is at `../superdoc-v2-beta/docx-engine`, please analyze the minified code and related superdoc v2 code if you want, then continue to restore and improve superdoc v2 at `./superdoc2/docx-engine`.
 
--  `../ superdoc-v2-beta`'s overall architecture is good enough to follow, just try to restore by the minified code.
+- you might refactor/improve the architecture/code/tests at `./ superdoc2/docx-engine` if it helps to make it correct, robust, extensible in the long term. for `./superdoc2/ docx-engine`, all code is beta software, legacy/unused code might be refactored or removed. compatibility layer is not required.
+- `../ superdoc-v2-beta/docx-engine`'s overall architecture is good enough to follow, make a plan to restore/reimplement/improve it by the minified code, and make it work well with the other superdoc2 related packages.
 
-- please recheck migrated features and improve the implementation at ./superdoc2. Analyze core data flow and implementation logic details for every major feature like editor-data-model/rich-formatting, selection range/offset/caret, document viewport/layout-engine(supports multi-column), toggling pagination, layout modes support vertical/..., multi-column layout supports unequal column widths, virtualized-rendering should use scroll event listeners + spacer-based approach and have good support for horizontal-layout/external-container, lazy virtualized render, zoom in/out, Canvas-based text measurement, performant line-breaking, track-change/diff, overlap handling in track change, comment, OOXML-support, API, SDK, CLI, Agent, compare the implementation logic/code of `./superdoc2` with logic/code of `../ superdoc-v2-beta` to recheck and enhance the correctness of architecture and logic of `./superdoc2` , find possible bugs in code and fix them, refactor code if you need, make sure major features implementations in ./superdoc2 are correct, modular, extensible for long-term maintenance. 
+- please recheck migrated features and improve the implementation at ./superdoc2. Analyze core data flow and implementation logic details for every major feature like editor-data-model/rich-formatting, selection range/offset/caret, document viewport/layout-engine(supports multi-column), toggling pagination, layout modes support vertical/..., multi-column layout supports unequal column widths, virtualized-rendering should use scroll event listeners + spacer-based approach and have good support for horizontal-layout/external-container, lazy virtualized render, zoom in/out, Canvas-based text measurement, performant line-breaking, track-change/diff, overlap handling in track change, comment, OOXML-support, API, SDK, CLI, Agent, compare the implementation logic/code of `./superdoc2/docx-engine` with logic/code of `../ superdoc-v2-beta/docx-engine` to recheck and enhance the correctness of architecture and logic of `./superdoc2/docx-engine` , find possible bugs in code and fix them, refactor code if you need, make sure major features implementations in ./superdoc2/docx-engine are correct, modular, extensible for long-term maintenance. 
+
+- make `./superdoc2/docx-engine` works well with other packages at `./superdoc2`, api/code/tests at `./ superdoc2/docx-engine` might be refactored/updated to match other superdoc2 packages, legacy/unused code at `./superdoc2/docx-engine` might be refactored or removed.
 
 ---
 
@@ -193,10 +196,10 @@ then compare the architecture/implementation of superdoc and docx-editor, explai
 
 ## 📌 hardoc(onlyoffice-pdf)
 
-onlyoffice(code is at several git repos in current folder) implements reads, edits, and file conversions for common office files like .docx/.xlsx/.pptx.
+onlyoffice(code is at several git repos in current folder) implements reads, edits, and file conversions for common office files like .docx/.xlsx/.pptx/.pdf.
 
 onlyoffice-pdf-editor(code is at several git repos in current folder) implements renders, edits, annotates `.pdf` files in the browser, but it is AGPL licensed.
-- the goal is to implement a new headless, extensible pdf solution named hardoc with in-place text editing features similar to onlyoffice-pdf-editor/adobe-acrobat at folder `./watoffice/hardoc` to avoid the licensing issues.
+- the goal is to implement a new headless, extensible, framework-agnostic pdf view/editing solution named hardoc at folder `./watoffice/hardoc` with in-place text editing features similar to onlyoffice-pdf-editor/adobe-acrobat to avoid the licensing issues.
 - hardoc pdf editor should be more of a headless client-server architecture, so that a hardoc pdf web/cli/sdk can be built on the same architecture. the hard web pdf editor ui/ux might be similar to onlyoffice-pdf-editor.
 - hardoc should be implemented in a modular and extensible architecture for core pdf features like viewing and editing, with functional programming style.
 
@@ -243,7 +246,7 @@ project onlyoffice and project at `~/Documents/repos/office/all-pdf/open-pdf-stu
 - the final goal is to implement from scratch a extensible web pdf editor named hardoc with in-place text editing features similar to onlyoffice/adobe-acrobat at folder `./hardoc`  to avoid the licensing issues. 
 
 - 🐛
-- forms, ocr, collaboration, ai-editing, complicated shapes should be planned but implementation may be delayed, so that architecture should support these features later.
+- forms, complicated shapes should be planned but implementation may be delayed, so that architecture should support these features later.
 - please make a plan for the extensible text editing editor first, then implement it at folder `./hardoc`.
 
 - please refactor code structure in hardoc project to use similar architecture and code structure as onlyoffice without licensing issue, to make it easy to migrate more features in the long term. legacy code may be migrated or removed by rewriting.
@@ -276,7 +279,7 @@ please make a plan, then improve the core in-place text editing engine to make i
 - you have worked on this several times but still not solve it. 
 
 - you may reference the upstream onlyoffice-pdf-editor code(code is at several git repos in current folder), use similar dependencies, and implement similar logic, but you should rewrite it in functional programming style without licensing issues.
-- you may even do a big code refactor for hardoc to match major features of onlyoffice-pdf-editor in a similar architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor for hardoc to match major features of onlyoffice-pdf-editor if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - you may design a feature parity doc at `upstream/parity/feature-parity.md`, when you migrate/implment features, you can recheck and update it. all checking/docs/scripts related to upstream onlyoffice-pdf-editor should be put in folder `upstream`. you may even design a script to automate it.
 - research and make a plan, then implement hardoc to match major features of onlyoffice-pdf-editor, or even better than onlyoffice-pdf-editor, without licensing issues.
@@ -311,21 +314,25 @@ DO NOT search the web for onlyoffice pdf api, you should find and read source co
   - For hardoc, it seems the appropriate architecture might be a service-authoritative pdf runtime, rather than trying to force every parity-critical operation through pure TS logic. 
   - hardoc should be more of headless client-server architecture. native/source first, promote only for unsafe contents/objects.
 
-### draft-excel
+### draft-excel/watarble 📈
 
-- onlyoffice(code is at several git repos in current folder) implements reads, edits, and file conversions for common office files like .docx/.xlsx/.pptx. 
-- hardoc at folder `./watoffice/hardoc` implements a pdf editor like onlyoffice-pdf-editor/adobe-acrobat. I also wants to implement a headless, extensible spreadsheet editor like onlyoffice-spreadsheet-editor/microsoft-office-excel at folder `./watoffice/watarble`. 
+- onlyoffice(code is at several git repos in current folder) implements reads, edits, and file conversions for common office files like .docx/.xlsx/.pptx/.pdf. 
+- project hardoc(at folder `./watoffice/hardoc`) implements a pdf editor like onlyoffice-pdf-editor/adobe-acrobat. I also wants to implement a headless, extensible spreadsheet editor like onlyoffice-spreadsheet-editor/microsoft-office-excel at folder `./watoffice/watarble`. 
   - onlyoffice spreadsheet related code exists in several repos/folders, please analyze the core architecture for spreadsheet and pdf. 
 - the goal is to implement a headless, extensible, framework-agnostic excel/spreadsheet editing solution named watarble at `./watoffice/watarble` to avoid the licensing issues. 
   - watarble should be more of a headless client-server architecture, so that a watarble spreadsheet web/cli/sdk can be built on the same architecture. the watarble web spreadsheet editor ui/ux might be similar to onlyoffice-spreadsheet-editor.
+  - onlyoffice spreadsheet has a solid data model for a spreadsheet engine, watarble should implement a similar data model and spreadsheet engine.
   - watarble should be implemented in a modular and extensible architecture with functional programming style.
 
 - you have migrated/reimplemented some features from onlyoffice-spreadsheet-editor to watarble.
 
 - you may reference the upstream onlyoffice-spreadsheet-editor code(code is at several git repos in current folder), use similar dependencies, and implement similar logic, but you should rewrite it in functional programming style without licensing issues.
-- you may even do a big code refactor for watarble to match major features of onlyoffice-spreadsheet-editor in a similar architecture if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
+- you may even do a big code refactor for watarble to match major features of onlyoffice-spreadsheet-editor if it helps to make it easier to maintain and migrate more features in the long term. legacy code may be migrated or removed by rewriting.
 
 - you might refactor/reorganize the architecture/code of watoffice/hardoc/watarble to make major features/architecture correct, modular, extensible for long-term maintenance.
+
+- prioritize and recheck/improve major features like spreadsheet data-model and rich formatting, spreadsheet editing with undo/redo and history, selection range/offset/caret, formula, spreadsheet rendering/zoom, search, pivot table, collaborative-editing... in watarble, make related features/architecture correct, modular, extensible for long-term maintenance. 
+- features might be planned but delayed: VBA, shapes, drawings, smartart, image, chart, sparkline, comment, encryption/signature, translation, AI.
 
 - deep research and make a plan, then implement watarble to match major features of onlyoffice-spreadsheet-editor, or even better than onlyoffice-spreadsheet-editor, without licensing issues.
 
@@ -340,7 +347,7 @@ DO NOT search the web for onlyoffice pdf api, you should find and read source co
 - 
 - 
 
-## 📌 grist-office
+## grist-office
 
 Project `grist` (in current folder) is a modern relational spreadsheet. It combines the flexibility of a spreadsheet with the robustness of a database. 
 - The final goal is to implement an alternative modular, extensible react frontend webapp in folder `./app/client-react` at the current git branch `feat/office-react`, with almost the same features as existing backbonejs frontend webapp at `app/client`, using modern tech stacks like npm, reactjs, typescript, tailwindcss, zustand, @tanstack/react-table, @tanstack/react-router without legacy backbonejs/knockoutjs. After you finished the react webapp,  `npm run start:app` should start the new react webapp, the legacy yarn toolchain/code should still be kept for backward compatibility, the legacy backonejs should still works, so you should implement the react webapp in a way to make it easy to merge code changes from `main` branch to `feat/office-react` branch in the future, so please reuse as many code from main branch as possible.
@@ -806,7 +813,8 @@ multiple sync targets should be supported in redmansion desktop app, for example
 
 - you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. only if there are obvious bugs or design defects, then you might propose big refactor or huge change. if there is only subtle bugs, just propose to improve the existing architecture.
 
-- How do you like my idea? if it is OK, make plan to improve it, desktop-app/webapp should have similar consistent experience, and make it work well with the existing offline and syncing related features.
+- How do you like my idea? if it is ok, make a plan to improve it, desktop-app/webapp should have similar consistent experience, and make it work well with the existing offline and syncing related features.
+- How do you like my idea? if it is ok, make a plan to improve it, and make it work well with the existing offline and syncing related features.
 
 - 
 - 
@@ -1041,13 +1049,16 @@ document what you have migrated from which commit id for future migration refere
 
 - run the full tests to find possible problems, then fix the problems or improve the testing architecture/performance.
 
-- running full tests/scripts may take huge memory and is slow. maybe there is some memory leak or lack of logic to stop running some commands/scripts/tests. 
+- the tests/scripts/commands you just run took up all my cpu up to 97% and make other tasks stopped unexpectedly. Analyze related tests/scripts/commands, refactor/improve it to take up less os cpu/memory, a balance of speed and parallelism would be even better.
 
-- improve the slowest part of tests first, 
-review the whole tests architecture/logic, then improve it
-you might refactor/reorganize the tests architecture/logic to make it correct, fast, robust, maintainable in the long term.
+- the tests/scripts/commands you just run took huge memory and is very slow. maybe there is some memory leak or lack of logic to stop running some commands/scripts/tests. 
+- please recheck related implementation-logic/tests, improve it and make it correct and fast. 
 
-- the tests and related docs are a little messy, simplify it and remove duplicated/repeated/unnecessasy running of tests.
+- try to improve/refactor the full tests to make it faster so that full tests running within 2.5 minutes.
+- improve the slow/complicated/heavy parts of tests, 
+you might refactor/reorganize the tests architecture/logic to if it helps to make it correct, fast, robust, maintainable in the long term.
+
+- the tests and related docs are a little messy, simplify it and remove duplicated/repeated/unnecessasy tests/logic.
 
 - most sequential tests should be avoided , you might deisgn better tests if you want.
 
@@ -1063,9 +1074,9 @@ finally make sure all tests run and pass locally with npm. you can update/fix te
 
 - you have improved the codebase several times, but running the tests/parity/scripts took a lot of time for your every improvement.  please refactor and improve the tests/parity/scripts/devops/ci to make it faster and more maintainable.  you may combine/deduplicate/reduce/clean/redesign some tests/parity/scripts/devops/ci/outdated/legacy if you need. update the readme/docs after your cleanup.
 
-- tests is a little messy in this monorepo project. in all subpackages, move tests inside src folder to sibling test folders of src like apps/desktop/test, apps/server/test, packages/client/test, packages/durable-fs/test, packages/core/test
+- tests is a little messy in this monorepo project. in all subpackages, move tests inside src folder to sibling test folders of src like apps/desktop/test, apps/server/test, packages/client/test...
 # rafactor
-- legacy/unused code might be refactored and removed. compatibility layer is not required.
+- all code is beta software, legacy/unused code might be refactored or removed. compatibility layer is not required.
 
 - analyze related code, then make a plan to improve it, you might refactor exisiting code to reuse/share some common logic.
 
@@ -1131,7 +1142,7 @@ current code is under active development. please review and refactor code if you
 - try to avoid hard-coded config/option
 
 - this is beta software, database migrations may be merged or squashed, no compatibility layer, just use the latest schema. 
-- legacy or unused code can be refactored and removed.
+- legacy or unused code might be refactored or removed.
 
 - the goal for now is to rename this project from `redmansion` to `redmansion`.
   - packages names and import names should update, like from `@redmansion/server` to `@datalking/redmansion-server`, from `@redmansion/client` to `@datalking/redmansion-client`.

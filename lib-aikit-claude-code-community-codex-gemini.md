@@ -9,6 +9,10 @@ modified: 2025-12-18T12:27:14.982Z
 
 # guide
 
+- pi-features
+  - a minimal agent harness
+  - Tree-structured, shareable history
+  - Four modes: tui, Print/JSON, RPC/JSON, SDK
 # draft
 - ✨ kilo-vscode的易用性很强, 不同模式如ask/code可设置默认model, chat可直接在editor区域打开, 还采用了client/server架构
   - 隐藏左右侧边栏 加上 chat在editor区域打开后， 使用自定义模型api, 就可作为一个通用AI前端
@@ -451,6 +455,24 @@ codex --yolo resume --last
 - 写代码这件事情上，还是有IDE窗口更加直观。习惯了cursor，cli不如cursor。
   - 另外近期在研究调用AI生成一些报告，这一块调用claude -p挺好用，这一点也算是cli工具的优势了吧。
   - 为什么采用这种方式，因为工作环境会有很多代码、数据，需要AI进行分析，OpenApi的方式不够友好了
+# discuss-pi-ui
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [Best Pi UI / app options : r/PiCodingAgent _202608](https://www.reddit.com/r/PiCodingAgent/comments/1vi770n/best_pi_ui_app_options/)
+- Paseo is great, and with great pi support. Do let the agents just use the cli to make subagents instead of the built in mcp. Oh and watch out for OOM issues when you have too many subagents 
+
+- I use Pi with Tmux terminal. It's pretty amazing what you can do with that combined interface and a little bit of Bash scripting. Tmux provides ultiple sessions, windows (tabs really), and panes. A plugin provides persistence, so I can reboot it and it can later pick up where it left off.
+
+- I’ve been loving herdr but don’t like that the just got funded by YC so am moving to bb. 
+
+- ## [Mature/better alternatives to pi-web? : r/PiCodingAgent _202608](https://www.reddit.com/r/PiCodingAgent/comments/1vkgwhy/maturebetter_alternatives_to_piweb/)
+
 # discuss-pi
 - ## 
 
