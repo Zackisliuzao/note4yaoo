@@ -2192,6 +2192,9 @@ modified: 2026-06-20T15:49:57.019Z
 
 ## 发卡网
 
+- [学生教育优惠项目导航 ](https://nav.edumails.cn/)
+  - [EDU教育网邮箱注册申请-EDU教育网邮箱官方资讯平台 ](https://www.edumails.cn/)
+
 - [Plati. Market : digital goods marketplace ](https://plati.market/)
   - 很多俄罗斯大佬卖ai
 
@@ -2203,6 +2206,9 @@ modified: 2026-06-20T15:49:57.019Z
 
 - [聊聊AI ](https://talkai.cyou/)
   - gork
+
+- [laogou ](https://laogou.org/)
+  - gpt, grok
 
 - [月亮AI ](https://aimoonai.com/)
 
