@@ -296,6 +296,7 @@ launchctl stop com.donehub && launchctl start com.donehub
 launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.donehub.plist
 
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.newapi.plist
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.newapi.plist
 
 launchctl stop com.cpap && launchctl start com.cpap
 
@@ -343,6 +344,26 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - ?
 - dev-log
   - ?
+
+## 0817
+
+- 
+- 
+- 
+
+## 0816
+
+- in ./superdoc2, please try to refactor and improve the packages stucture. 
+  - please move common/font-system/font-utils/url-validation 4 packages to `./superdoc2/shared` folder, please continue to update toolchain scripts. 
+  - please move document-api/fonts/layout-engine/preset-geometry/react/superdoc/word-layout packages to  `./superdoc2/packages` folder, please continue to update toolchain scripts. 
+  - after your refactor/improvement, most packages under ./superdoc2 should be moved, and use them from `./superdoc2/shared`  or `./superdoc2/packages`. 
+  - finally full tests in ./superdoc2 should still pass.
+
+- `./tsconfig.paths.json` exists to let source-first TypeScript checks resolve published package specifiers such as @datalking/ begonia-document-api/v1 before package dist files exist or while they are stale. It is a compile-time workspace bridge, not a runtime module resolver. 
+  - The current paths/mappings seem messy. generally tsconfig paths should just contain path mapping of package root or entry file. 
+  - Analyze related code/scripts, then try to improve typescript paths/import related architecture. 
+  - I have a idea, make all ts imports only import from the entry file, so there should be no imports from sub path file. for example, for `"@datalking/begonia-ai-assist": [ "./packages/ai-assist/src/index.ts"  ],  "@datalking/begonia-ai-assist/core": [ "./packages/ai-assist/src/core.ts"  ]` , just export `/packages/ai-assist/src/core.ts` to `./packages/ai-assist/src/index.ts` so that other package can import from package default module.
+  - How do you like my idea? Is it correct, extensible? If my idea is good, you might improve my idea, then make a plan to implement it
 
 ## 0815
 
