@@ -1304,7 +1304,7 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 
 - you can login and control the vps by running `ssh root@166.88.` as root user if you want.
 
-- ssh should only be used for the first deploy, later devops should not use ssh, daily devops should work with workflow like `github push > woodpecker update` .
+- ssh should only be used for the first deployment, later devops should not use ssh, daily devops should work with workflow like `github push > woodpecker update` .
 
 - please review existing apps/services architecture/implementation, analyze all the services/docs/code if you want, then make a comprehensive plan to improve the docker architecture/servces in a single vps, making all the services correct, robust, extensible in the long term. 
 
@@ -1324,6 +1324,8 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 - this repo is still beta software/stack, you might merge/squash the db schema migrations, only use the latest schema is ok, db related compatibility is not required for now. 
 - legacy/unused code might be refactored or removed. compatibility layer is not required.
 
+- you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. only if there are obvious bugs or design defects, then you might propose big refactor or huge change. if there is only subtle bugs, just propose to improve the existing architecture.
+
 ## bootstrap
 
 ## updates/maintenance
@@ -1336,7 +1338,34 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 
 ## multi-nodes
 
-- make docker services like beszel/woodpecker work in a multi-node architecture like leader/follower.
+- make docker services like beszel/woodpecker work in a multi-node architecture like controller/worker.
+
+- please refactor and improve this project to be able to automate devops on multiple vps nodes in a multi-nodes high-availability architecture, with environment variables or interactive shell scripts for automation.
+  - ssh should only be used for the first deployment for all vps, later devops should not use ssh, daily devops should work with workflow like `github push > woodpecker update` . 
+- current architecture of Foundation apps/services and Consumer apps/services is good.
+  - caddy docker service should be the foundation of all services on all vps nodes.
+  - for foundational apps/services like beszel/woodpecker, the deployment should use controller/worker modes. for example, beszel Hub is controller, beszel agent is worker, woodpecker-server is controller, woodpecker-agent is worker.
+- on the first deployment, ask the user if the current vps node is Leader/Follower node: 
+  - if current vps is Leader node and not Follower node, foundational apps/services will be deployed as controller mode, Consumer apps/services will not be deployed on Leader node. one special case is beszel agent should also be installed on Leader node by default, mostly worker should not be installed on Leader node.
+  - if current vps is Follower node and not Leader node, foundational apps/services will be deployed as worker mode, Consumer apps/services will be deployed on Follower node.
+  - Leader node will always be the entry of requests, caddy will proxying requests to Follower node for Consumer apps/services.
+- To simplify the deployment, all services should be enabled by default, no more enable/disable feature by environment variables. if user wants to disable a service, configuration should be supported on Leader node. Is this a good idea? 
+- the architecture should be extensible to add new Consumer apps/services later.
+
+- you should make sensitive configurations in environment variables, not hard-coded.
+  - i have 3 vps, the leader is 198.46.182.199, the worker is 166.88.160.139 and 23.254.182.254. 
+  - please make it configurable/extensible/flexible to change which ip will be leader/follower, so that i can update vps ip easily.
+  - i have configured domain/dns in cloudflare as status.aichorage.de (for beszel), ci.aichorage.de(for woodpecker), newapi.aichorage.de(for new-api), cpa.aichorage.de
+(for CLIProxyAPI).
+
+- code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. source code for new-api has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for your reference.
+- please review existing apps/services like caddy/beszel/woodpecker/new-api/CLIProxyAPI, analyze all the services/docs/code if you want, then make a comprehensive plan to refactor/improve for a multi-nodes high-availability architecture, making all the services correct, robust, extensible in the long term. 
+
+- for a multi-nodes high-availability architecture, new-api should not use sqlite, neon postgresql will be used, it should be configurable in environment variables. beszel/woodpecker might use sqlite on Leader node. 
+
+## security
+
+- review the config on all vps, make the architecture more secure, robust in the long term.
 # more
 
 ```prompt

@@ -105,6 +105,18 @@ modified: 2020-12-12T19:01:56.749Z
   - A Bash script to automate the initial configuration and security hardening of Debian and Ubuntu servers.
   - It is idempotent, safe, and suitable for production environments, providing a secure baseline for further customization. The script runs interactively, guiding users through critical choices while automating essential security and setup tasks.
 
+- https://github.com/ye4wzp/vps-init /MIT/202607/python
+  - 一键 VPS 初始化 & 安全加固工具箱 The Ultimate VPS Setup & Hardening Toolkit
+  - 无需安装任何依赖，纯 Python 标准库实现。
+    - 👀 环境需要提供python
+  - 创建用户
+  - SSH 加固
+  - 防火墙	UFW
+  - Fail2Ban
+  - BBR 加速
+  - Swap 配置
+  - 内核加固	sysctl 安全参数
+
 ## vps-deploy
 
 - https://github.com/ovexro/dockpanel /AGPL/202608/rust/ts

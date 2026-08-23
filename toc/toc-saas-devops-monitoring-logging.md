@@ -115,7 +115,11 @@ modified: 2024-02-11T15:11:31.598Z
   - a session replay suite you can host yourself, that lets you see what users do on your web app, helping you troubleshoot issues faster.
   - [OpenReplay Administration ](https://docs.openreplay.com/en/deployment/openreplay-admin/)
     - sink	Reads data from the streaming pipeline (Redis or Kafka for enterprise edition) and inserts into a temp storage (NFS)
-    - 
+    - db Reads and writes into various databases (Postgres + ClickHouse for enterprise edition)
+  - [Deploy with Docker Compose ](https://docs.openreplay.com/en/deployment/deploy-docker/)
+    - OpenReplay cannot run in local, so even with Docker you’d still need a server. 
+    - The minimum specs are 2 vCPUs, 8 GB of RAM, 50 GB of storage
+  - [Deployment ](https://docs.openreplay.com/en/deployment/)
 
 - https://github.com/ccfos/nightingale /12.5kStar/apache2/202510/go
   - 夜莺 Nightingale 是中国计算机学会接受捐赠并托管的第一个开源项目，是一个 All-in-One 的云原生监控工具，

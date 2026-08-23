@@ -38,7 +38,7 @@ modified: 2022-12-19T01:51:01.389Z
   - https://github.com/zackyang000/node-odata
 
 - https://github.com/dxc-technology/halstack-client
-  - Our Javascript SDK for abstracting the consumption and creation of hypermedia API resources expressed in **HAL**
+  - Our Javascript SDK for abstracting the consumption and creation of hypermedia API resources expressed in **HAL** 
   - Halstack Client for JavaScript enables developers to easily work with hypermedia-based APIs in a declarative manner. 
 # rest-api
 - https://github.com/heerey525/express_mongoDB /202203/js
@@ -225,7 +225,7 @@ modified: 2022-12-19T01:51:01.389Z
     - 应该是教程年久失修，还有几个前情提要没写上。 我用的mysql5.7，原配置文件用的utf8，我按要求建立数据库用的utf8，应该是后来数据库更新了，但是配置和说明都没有变更，直接跑，直接挂了，
     - 把数据库改成utf8mb4, 连接也改了utf8mb4 立马就可以运行了
 
-- https://github.com/flipped-aurora/gin-vue-admin /23.8kStar/apache2+logo/202510/go/ts/vue
+- https://github.com/flipped-aurora/gin-vue-admin /23.8kStar/apache2+logo > BSL/202510/go/ts/vue
   - http://demo.gin-vue-admin.com/
   - Vite+Vue3+Gin拥有AI辅助的基础开发平台，企业级业务AI+开发解决方案，支持TS和JS混用。
   - 它集成了JWT鉴权、权限管理、动态路由、显隐可控组件、分页封装、多点登录拦截、资源权限、上传下载、代码生成器、表单生成器和可配置的导入导出等开发必备功能
