@@ -32,8 +32,23 @@ modified: 2024-02-11T15:11:31.598Z
   - Native multi-tenancy — organizations and streams as first-class concepts with complete data isolation
   - [OpenObserve Architecture ](https://openobserve.ai/docs/architecture/)
     - OpenObserve is an observability platform with a distributed architecture composed of five node types — Router, Ingester, Compactor, Querier, and Scheduler — that runs in either single-node mode (SQLite with local disk or object storage) or high-availability mode (NATS, PostgreSQL, and object storage).
-    - Single-node mode with SQLite and local disk is the default way to run OpenObserve. Use it for light usage and testing or if you don't require HA. You can still ingest and search over 2 TB on a single machine per day.
+    - Single-node mode with SQLite and local disk is the default way to run OpenObserve. Use it for light usage and testing or if you don't require HA. You can still ingest and search over 2 TB on a single machine per day. Based on our tests (using an Apple M2 chip), you can ingest data at approximately 31 MB per second with the default configuration. This is equivalent to 1.8 GB per minute or 2.6 TB per day.
     - HA mode does not support local disk storage. Running OpenObserve in HA mode requires: Kubernetes (with Helm) to orchestrate the nodes.
+  - [Open source observability - what is your take? : r/devops _202601](https://www.reddit.com/r/devops/comments/1q2u17c/open_source_observability_what_is_your_take/)
+    - OpenObserve is actually designed to be very lightweight, we even have people running it on Raspberry Pis. Per CPU core and GB of RAM, it’s usually one of the most efficient options out there.
+    - It's capacity planning. You need better hardware for the amount of data that you are running it on. It's not a bug.
+    - We actually built OpenObserve specifically to be lightweight and easier to set up than the heavyweights like Graylog or ELK
+  - [So OpenObserve is ‘open-source’… until you actually try using it : r/opensource _202510](https://www.reddit.com/r/opensource/comments/1ohmsso/so_openobserve_is_opensource_until_you_actually/)
+    - RBAC, SSO, fine-grained access — all locked behind “Enterprise.” The OSS version is fine for demos, but useless for real production use.
+    - Even Grafana offers proper RBAC in OSS. 
+
+- https://github.com/uptrace/uptrace /4.3kStar/AGPL/202606/go/ts/vue
+  - https://uptrace.dev/get/hosted/open-source-apm
+  - open source APM that supports distributed tracing, metrics, and logs
+  - Uptrace comes with an intuitive query builder, rich dashboards, alerting rules, notifications, and integrations for most languages and frameworks.
+  - Uptrace uses OpenTelemetry framework to collect data and `ClickHouse` database to store it. 
+  - It also requires `PostgreSQL` database to store metadata such as metric names and alerts.
+  - Uptrace: lightweight, open-source, OTel-native, S3 storage support. Works great with PHP & Python and way lighter than SigNoz/OpenObserve.
 
 - https://github.com/hyperdxio/hyperdx /9.9kStar/MIT/202608/ts
   - https://hyperdx.io/
@@ -143,7 +158,7 @@ modified: 2024-02-11T15:11:31.598Z
   - An open-source alternative to Datadog, Elasticsearch, Loki, and Tempo.
   - Elasticsearch-compatible API, use Quickwit with any Elasticsearch or OpenSearch client
 
-- https://github.com/parseablehq/parseable /AGPLv3/202402/rust
+- https://github.com/parseablehq/parseable /2.4kStar/AGPLv3/202608/rust
   - https://parseable.com/
   - a lightweight, cloud native log observability and analytics engine. 
   - It is written in Rust and uses Apache Arrow and Parquet.

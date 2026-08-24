@@ -18,7 +18,7 @@ modified: 2022-11-11T06:57:09.670Z
   - crdt: automerge
   - git-like: codex-cli/server
   - utils:  arrow
-  - toolchain: rspack+unplugin
+  - toolchain: rspack+unplugin, openobserve
   - ui: gpui(by zed), tauri/pake
   - ai: janai
   - more: wasm, json-parser, tree, kanban, 
