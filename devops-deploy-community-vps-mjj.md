@@ -31,7 +31,12 @@ modified: 2026-06-19T06:15:35.007Z
 - forums
   - [LowEndTalk – Web Hosting Forum & Community ](https://lowendtalk.com/discussions)
 # vps-xp
+- ports
+  - nginx不常用端口 33777
+
 - 如何隐藏服务器ip
+
+## tips
 
 - usecases
   - opengraph
@@ -297,6 +302,7 @@ evoxt my 半价翻倍和炒鸡多流量款
 - 亚太最昂贵的区域，JP 地区的最佳建议就是：能玩专线别玩直连。基本上所有线路晚高峰都是爆炸的，太拥挤了。如果还是选择直连，很难推荐出一款完美的产品，只能说性价比不错，各有千秋。
 
 - ## 🔒 ¡[After spinning up way too many VPS servers, this is the checklist I now run every single time : r/selfhosted _202603](https://www.reddit.com/r/selfhosted/comments/1rob0cj/after_spinning_up_way_too_many_vps_servers_this/)
+  - 类似参考 [新 VPS 上线前 10 分钟安全加固指南 ](https://www.ssdnodes.com/learn/lang/zh-hans/new-vps-first-10-minutes)
 - After setting up dozens of servers over the years (for projects, game servers, infrastructure, etc.) I realized many beginners skip some really basic things in the first minutes.
 - First thing I always do: Update the system.
   - apt update && apt upgrade -y
@@ -342,6 +348,47 @@ Since then I always assume a server is being scanned immediately after it gets a
 - Monitoring is really important too. Something like Beszel can be really useful. I've tossed around the idea of centralized logging but without an idea of a service to go through the logs, haven't bothered yet. 
 
 - I do the same, but I also change the SSH port, set the timezone, and install some essentials like Docker, etc. Automate with Ansible.
+
+- ## [保护你的小鸡! VPS 安全探讨分享 _202309](https://www.nodeseek.com/post-25170-1)
+- 系统更新
+- SSH 务必配置密钥登陆, 避免使用密码登陆, 更不用说弱密码!
+
+- Nginx 泄露源站证书, 导致源站暴露是相当常见问题了. 自 1.19.4 起, Nginx 支持 ssl_reject_handshake 参数, 设置为 on, 当客户端传过来的 SNI 与已配置的 server name 都不匹配时, 会拒绝 SSL 握手, 进而避免证书泄露.
+
+- 不要设置 DNS 直接指向源站, 使用泛域名证书
+  - 不要设置 DNS 直接指向源站! 就算后面改为 CNAME 到 CDN 的域名, DNS 记录是可以查历史的!
+  - 其次, 子域名爆破是查源站常用方法了, 有个非常好用的查子域名的方法是 crt.sh, 原理是查 SSL 证书颁发记录, 所以, 推荐使用泛域名证书.
+  - 还有 RDNS, 不过一般没人会将自己服务器 IP 的 RDNS 配置为自己的域名, 许多商家也没提供这个功能, 此处按下不表.
+
+- Zerotier 组建虚拟内网, tailscale 等其他虚拟内网方案我没用过.
+  - 为什么要虚拟内网? 原因很简单, 搭建非公开的服务, 如个人的 emby 媒体库服务只给认识的人用, 还有自己管理的服务器间通过 socks5 等非加密代理协议访问对方, 使用虚拟内网服务器无需暴露相应端口, 大大降低安全风险. 好处多多可以说了. 使用虚拟内网后, 服务器只需要暴露 9993 端口(zerotier), SSH 都不用暴露在公网, 除非 zerotier 出了致命零日漏洞, 否则安全的很.
+
+- Cloudflare ZeroTrust 里面的 Tunnel 功能做到服务器不暴露 HTTPS 端口建站, 安全性 UP 一大截
+
+- 尽量不要使用服务器面板, 尤其是宝塔这种不开源的, 分分钟爆 0day, 更不用说弱密码等. 嫌麻烦确实要用可以看看开源的使用 Go 编写的 1Panel, 风险低一点. 但也要切记设置强密码, 同时更改面板端口, 最好搭配虚拟内网使用.
+
+- 没有安全组的服务器，当你用默认docker部署一个项目时如果有端口映射，它将会突破你的防火墙，无视你的规则直接把端口暴露在外。
+
+- ## [VPS基本安全措施 - 开发调优 - LINUX DO _202607](https://linux.do/t/topic/267502)
+- 加一个在登录 ssh 时候自动发通知到企业微信机器人，以防偷家不知道。 可以通过 PAM 模块在每次 ssh 登录时触发脚本来实现。
+- 限定 SSH 登录 IP
+
+- 隐藏公网 IP
+  - 隐藏公网 IP 并不是所有 VPS 使用者的共同安全需求，有一个胡诌的针对未来（指 ipv6 广泛使用）的方案就是只暴露源站 v6 地址给 CDN 用，这样 Censys 这样强扫的工具耗时会很长，不过也还是要配白名单。
+- 防止 SSL 证书泄露 IP
+  - 注册并且登录 ZeroSSL
+  - 配置证书并且设置禁止 IP 80/433 的 HTTP 访问
+
+- 只能确保攻击者无法通过直接访问 ip 获取默认证书来推断域名信息。然而又没有规定说攻击者只能用这种方式获取 IP 与域名的对应关系。可以看出，前文的规则依赖于 server_name 的匹配。攻击者完全可以携带正确的 server_name 握遍所有可能的非已知 CDN 的 IP 段，记录正确响应的目标。下面是判断（不包含遍历）的简单实现
+
+- Cloudflare 不仅提供 CDN 服务，还有一系列其他产品，比如 Workers 和 WARP。而这些服务有一些需要注意的特点： 能对外发出请求; 用的是 Cloudflare 的 IP 段
+  - 虽然 Cloudflare 对于滥用肯定是限制的，但是为了以防万一，我们还可以再做点安全措施 —— 经过身份验证的源服务器拉取。
+  - 必须确保 SSL/TLS 加密模式为完全或者完全（严格）
+
+- 没必要用 ufw 来管理 docker 的端口开放，docker 会自己写入 iptables 规则用以管控端口
+
+- 
+- 
 
 - ## 🔒 [拿到新的小鸡（VPS）后，你应该先做什么？（入门安全篇） - LINUX DO _202507](https://linux.do/t/topic/817769)
   - 在你开始部署网站、搭建应用之前，务必先花上15-30分钟，完成一些至关重要的基础设置。这不仅能保护你的服务器免受最常见的网络攻击，还能为你未来的管理工作提供便利。

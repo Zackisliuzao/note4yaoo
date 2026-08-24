@@ -20,6 +20,7 @@ modified: 2025-09-01T05:52:34.241Z
 
 - cons
   - Code Interpreter 未开源
+  - db使用mongo, 与其他系统共享数据不方便
 
 - features
   - Web Search: Combines search providers, content scrapers, result rerankers 
@@ -150,4 +151,6 @@ modified: 2025-09-01T05:52:34.241Z
 
 - [[Bug]: error: [getAvailableTools] MCPManager has not been initialized. _202509](https://github.com/danny-avila/LibreChat/issues/9437)
   - 导致添加stable-diffusion工具失败，更新到最新代码就可以了
+# devops
+- The production image is built with NODE_MAX_OLD_SPACE_SIZE baked in
 # more

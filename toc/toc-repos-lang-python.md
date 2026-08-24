@@ -56,6 +56,8 @@ modified: 2025-02-26T15:04:15.883Z
   - react, chakra-ui
   - Tests with Pytest.
   - [How to use Sqlite instead Postgresql _202403](https://github.com/fastapi/full-stack-fastapi-template/discussions/1132)
+  - [prestart.sh scaling to multiple nodes _202010](https://github.com/fastapi/full-stack-fastapi-template/issues/289)
+    - 202601: The project has gone through several refactors and currently targets deployments with a simple Docker Compose, so the prestart.sh would only be run once.
 
 - https://github.com/adr1enbe4udou1n/fastapi-realworld-example-app /202504/PostgreSQL
   - https://fastapirealworld.okami101.io/api

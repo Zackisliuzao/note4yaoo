@@ -15,6 +15,7 @@ modified: 2023-01-12T10:24:24.591Z
 - scaling-examples
   - authentik
   - 观测类: openobserve, PostHog
+  - open webui, librechat
   - 工作流计算类: n8n, activepieces
   - Unleash
   - outline, colanode
@@ -37,6 +38,9 @@ modified: 2023-01-12T10:24:24.591Z
 - PostHog: When an event hits PostHog, a stateless web node validates the payload and immediately writes it to Apache Kafka, returning a HTTP 200 OK to the client.
 - Sentry: Sentry uses Python (Django) for its stateless web nodes, but delegates almost all business logic to asynchronous Celery workers backed by Redis and Kafka
 - Mattermost: use a Redis cluster (or a gossip protocol) as a high-speed pub/sub backplane. Node 1 publishes the event to Redis; Node 2 is subscribed to it, sees the message, and forwards it to User B.
+
+- [Scaling Open WebUI / Open WebUI ](https://docs.openwebui.com/getting-started/advanced-topics/scaling/)
+  - Open WebUI follows a stateless, container-first architecture
 
 - Unleash [Scaling Unleash for enterprise workloads  ](https://docs.getunleash.io/guides/scaling-unleash)
   - Unleash API server: a Node.js-based, stateless API. It can be scaled horizontally by running multiple instances behind a load balancer, ideally across different Availability Zones (Multi-AZ).

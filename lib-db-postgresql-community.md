@@ -9,6 +9,8 @@ modified: 2022-06-13T03:01:05.956Z
 
 # guide
 
+# awesome-pg-free
+- [Top PostgreSQL Database Free Tiers in 2026 _202601](https://www.koyeb.com/blog/top-postgresql-database-free-tiers-in-2026)
 # discuss-not-yet
 - ## 
 

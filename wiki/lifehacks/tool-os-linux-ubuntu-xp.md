@@ -40,32 +40,56 @@ modified: 2021-01-01T22:26:57.773Z
   - only works with Xorg and XWayland.
   - If you are on Wayland and app won't run through XWayland you can force it via command: `GDK_BACKEND=x11 app_name`
 # ubuntu-starter 🚀
-- [拿到新的小鸡（VPS）后，你应该先做什么？（入门安全篇） _202507](https://linux.do/t/topic/817769)
+- starter-ubuntu
+  - [拿到新的小鸡（VPS）后，你应该先做什么？（入门安全篇） _202507](https://linux.do/t/topic/817769)
+  - [VPS基本安全措施 - 开发调优 - LINUX DO _202607](https://linux.do/t/topic/267502)
 
 ```sh
-ssh root@ip
 uname -a 
 
+ssh root@ip
+
 sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y vim ufw fail2ban git
+apt update && apt upgrade -y && apt dist-upgrade -y && apt full-upgrade -y 
+sudo apt install -y vim ufw fail2ban btop htop git 
+
+sudo apt autoremove -y
+
+reboot
 
 # 创建新用户并授予管理员权限
 adduser your_username
+# passwd your_username
 usermod -aG sudo your_username
+sudo apt update -y
+
 # logout
 ssh your_username@ip
 
-# 禁用 root 用户远程登录
-sudo nano /etc/ssh/sshd_config
+# ssh client
+# 用邮箱来标识这个密钥是谁的、用在哪台电脑上，方便管理
+ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-copy-id your_username@server_ip
+
+# 先把新增用户设置完，再禁用root登陆
+sudo vi /etc/ssh/sshd_config
+PermitRootLogin prohibit-password
 # PermitRootLogin no
+# 直接禁掉 root 登录 PermitRootLogin no 我也不常用，更习惯和其他 sudoer 一样配密钥然后禁止密码登录仅允许密钥登录。我是一般能操做线下集群的机子才会这么配，不然出个故障没 root 用不了了，比如存储满了远程 ssh session 都建立不了。
+
+# u 26.04
+# sudo systemctl restart sshd
+# u 24.04
+sudo systemctl restart ssh
 
 # UFW (Uncomplicated Firewall) 
 # 设置默认规则: 先禁止所有传入连接，允许所有传出连接。这是一个安全的基准。
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 
-sudo ufw allow http  # 80端口
-sudo ufw allow https # 443端口
+# open 80, 443
+sudo ufw allow http
+sudo ufw allow https
 
 sudo ufw allow ssh
 # 如果你改了 SSH 端口 (例如 2233)
@@ -76,8 +100,34 @@ sudo ufw status verbose
 
 # 安装 Fail2ban 防御工具
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+sudo vi /etc/fail2ban/jail.local
+
+[DEFAULT]
+ignoreip = 127.0.0.1/8  # 白名单IP
+bantime = 3600          # 封禁时长（秒）
+findtime = 600          # 检测时间段（秒）
+maxretry = 5            # 最大尝试次数
+
+# SSH服务配置
+[sshd] 
+port = 22
+enabled = true 
+ignoreip = 127.0.0.1/8
+filter = sshd
+maxretry = 6
+# 多少秒以内最大尝试次数规则生效
+findtime = 300
+# 封禁多少秒，-1是永久封禁（不建议永久封禁）
+bantime = 600
+# 禁用方式
+banaction = iptables-multiport
+# 不需要发邮件通知就这样设置
+action = %(action_)s[port="%(port)s", protocol="%(protocol)s", logpath="%(logpath)s", chain="%(chain)s"]
+logpath = /var/log/auth.log # SSH 登陆日志位置
+
 sudo systemctl restart fail2ban
 sudo systemctl enable fail2ban 
+systemctl status fail2ban 
 
 sudo fail2ban-client status
 sudo fail2ban-client status sshd
@@ -86,16 +136,18 @@ sudo fail2ban-client status sshd
 sudo timedatectl set-timezone Asia/Shanghai
 timedatectl
 
-# ssh client
-# 用邮箱来标识这个密钥是谁的、用在哪台电脑上，方便管理
-ssh-keygen -t ed25519 -C "your_email@example.com"
-ssh-copy-id your_username@server_ip
+```
 
+
+
+```sh
 # docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo usermod -aG docker $USER
 
+docker --version
+docker compose version
 ```
 
 - https://github.com/buildplan/du_setup /767Star/MIT/202608/sh
