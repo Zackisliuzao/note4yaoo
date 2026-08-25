@@ -348,6 +348,73 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0826
+
+- current architecture of Foundation apps/services and Consumer apps/services is good.
+  - foundation services have a single leader, like beszel/woodpecker.
+  - consumer services can have a single node or multi-nodes, like librechat/aichorouter/cpapi.
+  - I want to refactor observer(openobserve) from single-node consumer service to a foundation service, so that it can collect important logs from other services. observer should be deployed at leader node. it should collect logs from woodpecker. aichorouter logging might also be supported if it is not too complicated. other docker logs might also be supported if not too complicated.
+  - most config for existing observer is good: single node, sqlite, minimal resource usage.
+  - logs can be saved for 30 days by default, up to 8 GB at most.
+
+-  How do you like my idea? if it is OK, please design a correct, robust, extensible logging/observing system for the ecosystem
+
+- Do not add all-node Woodpecker log forwarding in this change.
+  - The current Observer Vector shipper collects labeled containers on the Observer host, but it does not receive:
+    - Woodpecker server/deployer logs from the Leader.
+    - Worker 2 logs.
+    - Transient deployment-runner containers unless they are explicitly labeled and collected on that host.
+  - A complete solution would add a bounded log collector/socket proxy to every VPS and forward securely to the singleton Observer. That should be a separate observability project after deployment reliability is fixed. 
+
+## 0825
+
+- commands compasison: `ssh -t `  vs `ssh -tt ` 
+- ssh -t
+  - SSH normally allocates a PTY only when you are connecting interactively (no command specified). -t overrides that behavior.
+  - Normally, when you connect to a remote server and run a command directly (e.g., ssh user@host 'top'), SSH does not allocate a pseudo-terminal. It just connects standard input and standard output.
+  - If the command you are trying to run requires an interactive screen (like top, vim, nano, or sudo which needs a password prompt), it will fail with an error like: Pseudo-terminal will not be allocated because stdin is not a terminal.
+- ssh -tt
+  - -tt means force PTY allocation even more strongly.
+  - equivalent to specifying -t twice.
+  - Sometimes, you might try to use ssh -t, but your local SSH client doesn't actually have a terminal attached to it. This happens when you run SSH from a background process, like a cron job, a shell script, a CI/CD pipeline (like Jenkins or GitHub Actions), or when you pipe data into the SSH command. If you use a single -t in these scenarios, SSH will see that you don't have a local TTY and will refuse to allocate a remote one, throwing this error: tcgetattr: Inappropriate ioctl for device
+  - -tt: It forces TTY allocation on the remote machine no matter what, completely ignoring whether your local machine has a TTY or not.
+  - Because -tt forces a terminal environment, the remote server will format the output as if it's printing to a physical screen. This means it often converts standard line breaks (\n) into carriage return + line feed (\r\n).
+
+- 🤔 whether i run this project locally on my mac  or on my cloud vps with docker, when i use the web ui, oftentimes it logout automatically, then i tried to login again, but the error show "request failed with status code 429". the docker config for cloud vps is at folder `~/Documents/repos/devops/llm-hub-lite`. Please analyze related source code and deployment config, Explain to me the reason, The propose a solution to fix it
+- The most likely sequence is:
+  01. The dashboard access JWT expires after 15 minutes (service/auth_token.go:17).
+  02. The frontend receives 401 and automatically calls /api/user/auth/refresh (web/src/lib/http-client.ts:105).
+  03. Refresh is protected by the same strict IP-based CriticalRateLimit as login: 20 requests per 20 minutes (router/api-router.go:68, common/init.go:129).
+  04. If several dashboard requests fail simultaneously, each can trigger another refresh attempt. Once the IP reaches the limit, both refresh and login return 429.
+  05. The rate limiter returns an empty HTTP 429 response (middleware/rate-limit.go:135), so Axios displays the generic message Request failed with status code 429.
+- The important detail is that 429 itself does not log the user out. The frontend treats refresh 429 as a temporary error (web/src/lib/auth-session.ts:251). Logout/redirection happens when refresh returns 401, 403, or a terminal session mismatch/race. Therefore, the actual logout is probably caused by one of these conditions, followed by rate- limit exhaustion:
+  - The refresh cookie was not sent. In production this can happen if HTTPS, cookie domain, or SESSION_COOKIE_TRUSTED_URL is wrong.
+  - The session was revoked or the refresh token became invalid.
+  - Multiple replicas do not share the same SESSION_SECRET.
+  - Multiple browser tabs race refresh requests.
+  - The reverse proxy reports an incorrect client IP, causing many users to share one rate-limit bucket.
+
+- To confirm which branch is occurring, inspect browser Network responses for:
+  - /api/user/auth/refresh
+  - /api/user/login
+  - If the 429 body is empty and has Retry-After, it is the IP rate limiter. If the body contains code: "AUTH_SESSION_ISSUANCE_LIMIT", the account has reached the default 100-session-per-day issuance limit (service/auth_session.go:388). 
+  - If refresh returns 401 or 403 before the 429, investigate cookie attributes, shared secrets, and trusted origins first.
+
+- When you run uptime or top, you see three numbers like: load average: 0.52, 0.68, 0.71
+  - These represent the average number of processes that are either running on the CPU or waiting for a resource (CPU or uninterruptible I/O), averaged over the last 1, 5, and 15 minutes.
+  - load average is not the same as CPU usage percentage. It's a queue-length metric.
+- nproc   # shows core count
+Load < cores	System has headroom, not fully utilized
+Load = cores	System is fully utilized, no queueing (ideal ceiling)
+Load > cores	Processes are queued/waiting — contention exists
+
+- The three numbers (1/5/15 min) also tell a story:
+1-min ≫ 15-min: a sudden spike just started
+1-min ≪ 15-min: a spike is subsiding
+All three high and similar: sustained, chronic load problem
+
+- One practical note for VPS specifically: many providers (especially budget/burstable tiers) throttle CPU credits or share I/O across tenants, so a load spike may be a host-level limit, not something you can fix inside the guest OS.
+
 ## 0824
 
 - set -Eeuo pipefail

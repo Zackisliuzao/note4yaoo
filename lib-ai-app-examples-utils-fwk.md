@@ -1225,6 +1225,9 @@ modified: 2025-02-21T18:20:42.624Z
   - `npx cursor-api-proxy login account1` = `NO_OPEN_BROWSER=1 agent login` + isolated named account dir + proxy pool integration.
     - For multi-account: run login once per account over SSH, verify with cursor-api-proxy accounts, start the proxy without a global CURSOR_API_KEY.
     - At proxy startup, the repo auto-discovers authenticated accounts, Each API request gets the next account via round-robin, and spawns agent with that account’s CURSOR_CONFIG_DIR
+  - [Map OpenAI reasoning effort to Cursor model variants  _202608](https://github.com/anyrobert/cursor-api-proxy/issues/39)
+    - Cursor CLI exposes reasoning levels as separate model IDs (for example, gpt-5.6-sol-low, gpt-5.6-sol-high, and gpt-5.6-sol-max). OpenAI-compatible clients instead send a logical model plus reasoning_effort (Chat Completions) or reasoning.effort (Responses).
+    - Today the proxy ignores those controls, so clients such as DeepSeek Harness cannot change reasoning level without treating every Cursor variant as a separate model.
 
 - https://github.com/standardagents/composer-api /MIT/202608/swift/ts
   - https://api-for-cursor.standardagents.ai/
@@ -1241,6 +1244,10 @@ modified: 2025-02-21T18:20:42.624Z
   - 导入 CPA xai-*.json 或 Grok CLI auth.json，由内嵌代理提供稳定的本地 URL/key 并自动刷新 token
   - Grok 多账号池：批量导入、定时自动巡检、健康分类、坏号自动隔离、健康号轮换与单账号回退
   - 内置 Grok Build AI 对话工作台：流式回复、工具权限、历史会话续接与工作目录选择
+
+- https://github.com/dwgx/WindsurfAPI /3kStar/MIT/202608/js
+  - 把 Windsurf / Devin 的 100+ AI 模型（Claude、GPT、Gemini、DeepSeek、Kimi、GLM、SWE…）变成 OpenAI / Anthropic / Gemini 三套标准 API。零 npm 运行时依赖。
+  - 严禁商业使用、转售、代部署、挂后台对外提供服务、包装成中转服务出售
 
 ## browser2api
 
