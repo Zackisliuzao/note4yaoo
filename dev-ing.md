@@ -348,7 +348,43 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0824
+
+- set -Eeuo pipefail
+  - "strict mode" header for robust bash scripts
+  - It turns on four safety settings that make a script __fail fast and fail loudly__ instead of continuing in a broken state
+  - abort on any error, including inside pipelines and functions; refuse to use undefined variables.
+
+- 🤔 when devops shell scripts become too long, what is the best practice to deal with it in the industry?  deep research related solutions/ideas,  provide overview/url for each.
+  - Break the monolith into functions with local variables, split reusable logic into sourced library files (lib/*.sh), and give each piece a single responsibility with one small orchestrator script that calls the rest.
+- Turn it into a proper CLI instead of a script: tools like Bashly generate the argument parsing, help text, and subcommand routing from a YAML spec, so you only write the logic for each command.
+- Migrate to High-Level Languages (Python, Go, or Google zx)
+  - Rewrite in a general-purpose language Python is the usual default (readability, stdlib, easy JSON/YAML handling); Go when you want a single portable static binary; Rust for performance-sensitive CLI tools.
+
+- Decompose with Modern Task Runners (Taskfile / Make)
+
+- ShellCheck (bugs/quoting/portability issues) and shfmt (formatting) are the de facto standard tooling — ShellCheck does not attempt to enforce formatting itself, which is why it's paired with shfmt.
+
 ## 0823
+
+- i have domain on cloudflare, i have configured dns to my vps ip. but i do not understand the proxy status.
+  - Proxied: Cloudflare responds to DNS queries. HTTP/S traffic is sent to the Cloudflare network and handled by security, caching, performance, and the developer platform.
+  - DNS only: Cloudflare only responds to DNS queries. HTTP/S traffic is **not** sent to the Cloudflare network, because proxying is off or the record type is not eligible.
+  - Please explain to me the differences, and whether my VPS IP is exposed to public.
+- Proxied (Orange Cloud)
+  - How traffic flows: Visitor ➔ Cloudflare Network ➔ Your VPS.
+  - What happens if someone pings your domain: They will see one of Cloudflare's IP addresses, not your VPS IP.
+  - Because Cloudflare sits in the middle, they can block malicious traffic (DDoS protection, firewalls), cache your website's images/files so they load faster around the world, and provide a free SSL/HTTPS certificate.
+  - Limitation: Cloudflare's proxy only works for web traffic (HTTP and HTTPS). If you try to connect to your VPS via SSH (Port 22), run a Minecraft server, or use FTP through a proxied domain, it will fail because Cloudflare blocks those non-web ports by default.
+  - Proxying only covers HTTP/HTTPS (and a couple of other protocols on paid plans). If you SSH into the VPS, run a mail server, or expose other ports/services, those still go directly to your VPS regardless of the proxy toggle
+- DNS Only (Grey Cloud)
+  - How traffic flows: Visitor ➔ Your VPS.
+  - What happens if someone pings your domain: They will see your exact VPS IP address.
+  - Benefits: It allows all types of traffic to pass through. You would use this for subdomains that handle non-web traffic. For example, if you have ssh.yourdomain.com or mail.yourdomain.com, you must set them to "DNS Only" so those specific services can connect directly to your server.
+
+- If you initially set your domain to "DNS Only" (even for just a few minutes while setting it up) and then switched it to "Proxied," your VPS IP might still be logged in historical public DNS databases (like SecurityTrails or Shodan). Therefore, if someone really wants to find your VPS IP, they might look at your domain's history.
+
+- If you do want the IP genuinely hidden and only reachable through Cloudflare, it's worth also configuring your VPS firewall to only accept web traffic from Cloudflare's published IP ranges — otherwise someone who does find the real IP can bypass Cloudflare entirely and hit your server directly.
 
 - 🤔 I am developing a SaaS webapp, I want to use a free redis-compatible service for testing, which provider provides the most generous free quota? Deep research related projects or products, then explain to me the popular free db in the industry
 - Aiven for Valkey (Most Generous Raw Capacity)

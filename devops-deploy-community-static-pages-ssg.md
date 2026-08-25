@@ -87,7 +87,9 @@ modified: 2026-06-17T05:57:03.299Z
 
 - ## 
 
-- ## 
+- ## [各位前辈有遇到过CF的Pages上传不了的情况吗 _202608](https://www.nodeseek.com/post-892286-1)
+- cf祖传bug之一，用wrangler就飞速传上去了，但网页有时候非常玄学
+  - 有时候打开 DevTools，你甚至可以看到cf用waf拦截了自己的api请求
 
 - ## [How much traffic can Cloudflare's free plan handle? : r/CloudFlare _202410](https://www.reddit.com/r/CloudFlare/comments/1g17a6y/how_much_traffic_can_cloudflares_free_plan_handle/)
 - One of my websites on Cloudflare’s free plan got DDoS’d and received over 1.4 billion requests without any issues so you should be fine with pretty much any amount of traffic!

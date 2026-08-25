@@ -28,6 +28,10 @@ modified: 2023-08-28T06:08:27.303Z
 - who is using #golang
   - 国内: 
   - .
+# draft
+- 打包为可运行的二进制 
+  - https://github.com/mvdan/sh  /shfmt
+  - https://github.com/google/yamlfmt
 # dev
 
 # resources

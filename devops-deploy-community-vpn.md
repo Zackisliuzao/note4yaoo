@@ -1395,6 +1395,24 @@ ChatGPT 解锁
 - 以前广州也是这样，只能接二手网，不过便宜是真的便宜，就是经常掉。后面直接整改了。没想到深圳还这么离谱。
 
 - 外地人才知道有大习宽带这种 真黑心啊
+# discuss-gfw-clash
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## default clashx port should be 7890, why does it change to 7893?  in clashx meta settings ui, the proxy port 7890 input box is gray, api port input box 9090 is also gray. is there any problem with clashx meta on my mac?
+- Why the port boxes are gray? That's by design
+  - In ClashX Meta these fields are display-only — the ports come from your active profile's YAML config, not the UI. Your current state confirms it
+- Where 7893 actually came from 
+  - You have multiple proxy apps installed
+  - Earlier, /Applications/ClashX.app (the original, non-Meta one) was running, picked up that profile's port, and set the macOS system proxy to 7893 (which scutil --proxy confirmed)
+- Since then, the original ClashX quit and ClashX Meta restarted (its logs show restarts at 03:55–03:57); it's now listening on 7890/9090 as root (my earlier lsof checks missed it because non-root lsof can't see root-owned sockets), and system proxy is back to 7890.
+  - Quit and ideally remove the old original ClashX app (and consider cleaning up the leftover ClashX Pro / Clash Verge Rev services too — I saw a verge service daemon still registered with ports 7897-7899/9097). Running several proxy apps means whichever launches last rewrites the system proxy port, and anything hardcoded to another port (like git was) breaks silently.
+
 # discuss
 - ## 
 

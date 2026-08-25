@@ -1358,10 +1358,21 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
   - i have configured domain/dns in cloudflare as status.aichorage.de (for beszel), ci.aichorage.de(for woodpecker), newapi.aichorage.de(for new-api), cpa.aichorage.de
 (for CLIProxyAPI).
 
-- code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. source code for new-api has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for your reference.
+- code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. source code for new-api has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for reference.
 - please review existing apps/services like caddy/beszel/woodpecker/new-api/CLIProxyAPI, analyze all the services/docs/code if you want, then make a comprehensive plan to refactor/improve for a multi-nodes high-availability architecture, making all the services correct, robust, extensible in the long term. 
 
 - for a multi-nodes high-availability architecture, new-api should not use sqlite, neon postgresql will be used, it should be configurable in environment variables. beszel/woodpecker might use sqlite on Leader node. 
+
+## single-node
+
+- a solution has been designed to support to deploy a new docker service to any follower node by new environment variables or new interactive shell scripts, so that requests still go to leader node. for services that high-availability is not required, these services can be deployed to a single server.
+- continue to improve the architecture that supports to deploy a new docker service to any follower node, using aichorouter/cpapi as example, making the architecture correct, robust, extensible.
+- please design a solution to deploy a openobserve service called `observer` to any follower node user specified.  also deploy it to worker_1 node, just like aichorouter/cpapi. `observer.aichorage.de` has been configured at cloudflare.
+- source code for openobserve has been cloned at folder `../all-logging/openobserve` for reference if you want.  you might use the provided docker config or custom docker config.
+- optimize observer for single vps deployment with minimal cpu/ram resources.
+- review your implementation, make both single-consumer app and multi- nodes-consumer apps work correctly, Make a comprehensive plan to implement/improve observer.
+
+- review your implementation, make both single-consumer app and multi- nodes-consumer apps work correctly, Make a comprehensive plan to implement/improve aichorouter and cpapi.
 
 ## security
 
