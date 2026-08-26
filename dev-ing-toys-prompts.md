@@ -1358,7 +1358,12 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
   - i have configured domain/dns in cloudflare as status.aichorage.de (for beszel), ci.aichorage.de(for woodpecker), newapi.aichorage.de(for new-api), cpa.aichorage.de
 (for CLIProxyAPI).
 
-- code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. source code for new-api has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for reference.
+- code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. 
+- code/docs for woodpecker has been cloned at `../all-cicd/woodpecker` for reference if you want.
+- code/docs for new-api has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for reference if you want.
+- code/docs for CLIProxyAPI has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/CLIProxyAPI` for reference.
+- code/docs for openobserve has been cloned at `../all-logging/openobserve` for reference if you want.
+
 - please review existing apps/services like caddy/beszel/woodpecker/new-api/CLIProxyAPI, analyze all the services/docs/code if you want, then make a comprehensive plan to refactor/improve for a multi-nodes high-availability architecture, making all the services correct, robust, extensible in the long term. 
 
 - for a multi-nodes high-availability architecture, new-api should not use sqlite, neon postgresql will be used, it should be configurable in environment variables. beszel/woodpecker might use sqlite on Leader node. 
