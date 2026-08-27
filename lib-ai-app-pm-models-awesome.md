@@ -1506,11 +1506,12 @@ modified: 2026-06-20T15:49:57.019Z
     - 小铺还有很多其他产品: kiro, windsurf, 接码, 虚拟卡, 手机号, visa
   - ~~搜索: 手工, 质保, 源头, 印尼~~ 
   - 转换 [CPA <-> sub2api ](https://gtxx3600.github.io/CPA2sub2API/)
-    - https://lywqfvjb.feiyus.com
-    - https://session.nloop.cc
-    - https://json.chatai.codes
+    - https://github.com/gtxx3600/CPA2sub2API
     - [ChatGPT Session -> CPA / sub2api / Cockpit / AxonHub / Codex-Manager ](https://gtxx3600.github.io/GPTSession2CPAandSub2API/)
-      - 只支持单向转换
+  - [CPA / sub2api 账号格式转换 ](https://cvt.okcode.cc.cd/)
+  - [Sub / CPA 在线互转 ](http://xgrok.xdo.icu:18363/)
+  - https://session.nloop.cc
+  - https://json.chatai.codes
   - [Codex或CPA、sub2跳手机验证的解决方法-2026-05-29部分有效 - Feishu Docs _202605](https://millionweekend.feishu.cn/wiki/JS47wPzs6iDHLZkLMHAc8rhun0e)
   - [鲸商城鲸软JingSoft - 专业软件解决方案服务商【鲸软】 ](https://www.jingsoft.com/)
 
@@ -1997,8 +1998,15 @@ modified: 2026-06-20T15:49:57.019Z
 2. 买好后是我一个人用吗，还是多人用, 我不想买共享的
 3. 下个月几号到期, auto模型用了多少了， 用的不多我能接受
 4. 我不会反代，就正常用auto模型， 如果掉号会质保换号对吗
-提前问清楚了，免得售后麻烦，大家都方便 🌹
+提前问清楚了，免得售后麻烦，大家都方便 
 ```
+
+- cursor-tools
+  - ?
+
+- grok-tools
+  - [Grok 账号管理系统 ](https://grok-distribute.131518.xyz/)
+    - 支持 sso 转换为 cpa/grok2api
 
 - supergrok支持 grok-composer-2.5-fast, fast的价格是2.5的6倍，
   - 所以 ¥25的supergrok 提供的composer模型 不如 ¥20的cursor pro提供的100刀auto池
@@ -2741,6 +2749,7 @@ modified: 2026-06-20T15:49:57.019Z
 
 - outlook-tools
   - [星辰邮箱大师 ](https://www.xckj.site/easy-mailbox/)
+  - [Outlook 快速取件 ](https://mail.leadbee.cn/)
 
 - [T佬的gmail批发渠道 ](https://ai666.dnxb.cc/)
   - 全tg最便宜gmail邮箱批发
@@ -2759,6 +2768,7 @@ modified: 2026-06-20T15:49:57.019Z
 
 - tips
   - [使用邮箱管理工具踩过的坑 - LINUX DO _202608](https://linux.do/t/topic/2728175)
+    - 最后，我下载了 Outlook 安卓应用，添加微软邮箱，OK；添加谷歌邮箱，OK；QQ 邮箱，LinuxDo 邮箱，都能成功通过，界面看起来也比较清爽。（我尝试的多个平台中，唯一无法添加的只有沃邮箱，应该是不支持 imap 协议）
 
 - https://github.com/assast/outlookEmail /1.5kStar/MIT/202608/python/ts
   - https://aso.de5.net/
@@ -2768,11 +2778,15 @@ modified: 2026-06-20T15:49:57.019Z
   - 普通邮箱本地保留开关 normal_mail_local_retention_enabled 默认关闭。用户需要在系统设置中明确开启后，普通 Outlook/Hotmail 与标准 IMAP 邮箱才会把列表元数据和已查看、补齐过的部分正文保存到本机 SQLite。
   - Flask 3.0, SQLite, requests, IMAP4_SSL, Microsoft Graph API
   - 原生 JavaScript - 无框架依赖
+  - 2GB+ 内存
   - [【开源】outlookEmail做了个比较大的更新，完美支持hotmail及其别名邮箱，接入了gmail等主流其他邮箱，支持TG SMTP转发，支持各类邮箱别名 - LINUX DO _202604](https://linux.do/t/topic/1929862)
 
-- https://github.com/daimon3332/OutlookManage /NALic/202608/python/js
+- https://github.com/daimon3332/OutlookManage /112Star/NALic/202608/python/js
   - Outlook / Hotmail 本地账号管理 WebUI，支持账号批量导入、状态检测（存活/封禁）、令牌刷新与同步。
   - 以 SQLite 为唯一权威数据源
+  - 相关项目
+    - OutlookRegister — 账号注册。 自动注册 Outlook / Hotmail 账号，并获取 Microsoft Graph OAuth2 refresh_token。
+    - Outlook OAuth GetToken — 单独获取令牌。 为已有微软邮箱单独完成 OAuth2 授权并获取 refresh_token。
   - [【开源】OutlookManage：Outlook/Hotmail 本地管理台（协议测试 + Token 刷新 + 远程池同步 + 滥用封禁） - LINUX DO _202607](https://linux.do/t/topic/2655051)
     - Outlook/Hotmail 注册机把注册了几千上万隔账号，人工管理非常麻烦。github 有个很好的 Outlook 管理开源项目是：outlookEmail。但是这个项目不方便在本地管理，而且缺少一定的测试功能。
     - 批量协议测试： 测试邮箱是否被封禁？如果邮箱存活，可以测出来邮箱开通了哪几个协议（Graph / IMAP / POP / SMTP ）？
@@ -2788,6 +2802,7 @@ modified: 2026-06-20T15:49:57.019Z
   - 批量导入与分组整理 支持批量导入、标签、搜索、分组、导出
   - 导入兼容更广：支持主流邮箱导入（Gmail、QQ、163 等），也支持自定义 IMAP 服务器。即使是自建邮箱也能使用；内置 CF Worker 临时邮箱，支持多域配置与 Admin Key 加密，大幅降低注册场景的隐私泄露风险。
   - 通知能力 支持业务邮件通知、Telegram 推送和测试发送
+  - 参考了以下项目的思路：assast/outlookEmail, gblaowang-i/MailAggregator_Pro
 
 - https://github.com/gblaowang-i/MailAggregator_Pro /MIT/202603/python/ts/inactive
   - 基于IMAP协议的多品牌邮箱聚合管理平台

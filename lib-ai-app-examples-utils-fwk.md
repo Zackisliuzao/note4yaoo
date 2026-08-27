@@ -1225,6 +1225,12 @@ modified: 2025-02-21T18:20:42.624Z
   - `npx cursor-api-proxy login account1` = `NO_OPEN_BROWSER=1 agent login` + isolated named account dir + proxy pool integration.
     - For multi-account: run login once per account over SSH, verify with cursor-api-proxy accounts, start the proxy without a global CURSOR_API_KEY.
     - At proxy startup, the repo auto-discovers authenticated accounts, Each API request gets the next account via round-robin, and spawns agent with that account’s CURSOR_CONFIG_DIR
+  - There's a second, completely browser-free auth path: CURSOR_API_KEY / CURSOR_AUTH_TOKEN. 
+    - This is an integration API key from https://cursor.com/dashboard/integrations. The proxy passes it straight to the spawned CLI/ACP children and skips the ACP authenticate step entirely
+    - This is exactly what the official Dockerfile / docker-compose.yml use.
+  - The docker-compose.yml sets only CURSOR_API_KEY: ${CURSOR_API_KEY} and one port forward. 
+    - It never sets CURSOR_CONFIG_DIRS, and it never mounts the ~/.cursor-api-proxy/accounts volume — so the container sees a single account (the one key). The pooling code works fine in Docker; the compose file just doesn't wire it up. 
+    - And Docker has the same browser problem: you can't run cursor-api-proxy login inside the container (no GUI), so you'd have to bind-mount pre-authenticated account dirs anyway.
   - [Map OpenAI reasoning effort to Cursor model variants  _202608](https://github.com/anyrobert/cursor-api-proxy/issues/39)
     - Cursor CLI exposes reasoning levels as separate model IDs (for example, gpt-5.6-sol-low, gpt-5.6-sol-high, and gpt-5.6-sol-max). OpenAI-compatible clients instead send a logical model plus reasoning_effort (Chat Completions) or reasoning.effort (Responses).
     - Today the proxy ignores those controls, so clients such as DeepSeek Harness cannot change reasoning level without treating every Cursor variant as a separate model.
@@ -1248,6 +1254,26 @@ modified: 2025-02-21T18:20:42.624Z
 - https://github.com/dwgx/WindsurfAPI /3kStar/MIT/202608/js
   - 把 Windsurf / Devin 的 100+ AI 模型（Claude、GPT、Gemini、DeepSeek、Kimi、GLM、SWE…）变成 OpenAI / Anthropic / Gemini 三套标准 API。零 npm 运行时依赖。
   - 严禁商业使用、转售、代部署、挂后台对外提供服务、包装成中转服务出售
+
+- https://github.com/chenyme/grok2api /7.5kStar/MIT/202608/go/ts
+  - Multi-account API gateway for Grok Build, Grok Web, and Grok Console
+
+- https://github.com/AaronL725/grok-register /MIT/202608/python
+  - Grok Register 使用真实 Chromium / Chrome 完成注册流程，并把 GUI、CLI 和 WebUI 都接到同一套注册核心上。
+  - 自动打开注册页、提交邮箱、轮询验证码、填写资料并获取 SSO cookie。
+  - 支持 DuckMail / YYDS / Cloudflare 临时邮箱 / Cloud Mail 四种邮箱来源。
+  - 支持 GUI / CLI / WebUI 三种操作入口。
+
+- https://github.com/kaibush/grok-register /MIT/202608/go/python/ts
+  - 基于 FastAPI、React 和 Playwright 浏览器适配层的 Web 注册管理工具。Camoufox 保持默认，同时可切换到 CloakBrowser，支持注册任务、账号管理，以及 CPA / Grok2API 授权文件生成。
+  - 最低能跑	2 GiB + 2 GiB swap	1–2 vCPU	仅 --thread 1；清障 + 1 个 Chromium
+  - [【开源推广】一键全自动Grok注册机，已深度集成Outlook邮箱支持 - LINUX DO _202608](https://linux.do/t/topic/2698860)
+
+- https://github.com/msdsj/grok-account-manager-main /MIT/202608/go
+  - grok注册机，支持域名邮箱和微软邮箱和谷歌邮箱自动化注册获取SSO、RT、AT
+  - 本项目允许免费使用、学习和二次开发。网关源码和 Dockerfile 已内置在 gateway/，运行时不依赖外部 grok2api 仓库或镜像。
+  - 把 Outlook 账号池保存为本地文件，例如 outlook_accounts.txt。该文件已被 .gitignore 忽略。账号字段支持 ---- 或 | 两种分隔符。
+  - [送一些grok sso账号 - LINUX DO _202607](https://linux.do/t/topic/2629715)
 
 ## browser2api
 

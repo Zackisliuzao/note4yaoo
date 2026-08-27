@@ -1299,7 +1299,12 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 
 ## codex
 
-# vps
+# llm-hub-lite/vps
+- i have deployed this repo to my 3 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys aichorouter/cpapi/librechat, worker_2 node deploys librechat. 
+  - All requests should go to leader node first, then proxying to worker nodes.
+  - aichorouter url is https://aichorouter.aichorage.de, cpapi url is https://cpapi.aichorage.de. 
+- analyze related architecture/scripts/code, then 
+
 - analyze the core architecture/docs/scripts/code, then explain to me step by step how to deploy this repo from scratch to my vps 
 
 - you can login and control the vps by running `ssh root@166.88.` as root user if you want.
@@ -1307,6 +1312,12 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 - ssh should only be used for the first deployment, later devops should not use ssh, daily devops should work with workflow like `github push > woodpecker update` .
 
 - please review existing apps/services architecture/implementation, analyze all the services/docs/code if you want, then make a comprehensive plan to improve the docker architecture/servces in a single vps, making all the services correct, robust, extensible in the long term. 
+
+- code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. 
+- code/docs for woodpecker has been cloned at `../all-cicd/woodpecker` for reference if you want.
+- code/docs for aichorouter(new-api) has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for reference if you want.
+- code/docs for cpapi(CLIProxyAPI) has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/CLIProxyAPI` for reference.
+- code/docs for observer(openobserve) has been cloned at `../all-logging/openobserve` for reference if you want.
 
 - caddy/beszel/woodpecker are the foundation of the whole docker stack, they should be correct and robust for bootstrapping and restarting. other apps/services should be extensible to add/disable/enable, for example, new-api and cliproxyapi should be enabled by default, but they should support to be disabled by environment variables like `APP_NEWAPI_DISABLE=true` or `APP_CLIPROXYAPI_DISABLE=true`. 
 - please design a extensible architecture to support to add/disable/enable new apps/services in the future. docker/config for foundational caddy/beszel/woodpecker should not be coupled to other apps/services.
@@ -1338,9 +1349,9 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 
 ## multi-nodes
 
-- make docker services like beszel/woodpecker work in a multi-node architecture like controller/worker.
+- make docker services like beszel/woodpecker work in a multi-node architecture like controller/worker mode.
 
-- please refactor and improve this project to be able to automate devops on multiple vps nodes in a multi-nodes high-availability architecture, with environment variables or interactive shell scripts for automation.
+- please refactor/improve this project to be able to automate devops on multiple vps nodes in a multi-nodes high-availability architecture, with environment variables or interactive shell scripts for automation.
   - ssh should only be used for the first deployment for all vps, later devops should not use ssh, daily devops should work with workflow like `github push > woodpecker update` . 
 - current architecture of Foundation apps/services and Consumer apps/services is good.
   - caddy docker service should be the foundation of all services on all vps nodes.
@@ -1358,24 +1369,29 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
   - i have configured domain/dns in cloudflare as status.aichorage.de (for beszel), ci.aichorage.de(for woodpecker), newapi.aichorage.de(for new-api), cpa.aichorage.de
 (for CLIProxyAPI).
 
-- code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. 
-- code/docs for woodpecker has been cloned at `../all-cicd/woodpecker` for reference if you want.
-- code/docs for new-api has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for reference if you want.
-- code/docs for CLIProxyAPI has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/CLIProxyAPI` for reference.
-- code/docs for openobserve has been cloned at `../all-logging/openobserve` for reference if you want.
-
 - please review existing apps/services like caddy/beszel/woodpecker/new-api/CLIProxyAPI, analyze all the services/docs/code if you want, then make a comprehensive plan to refactor/improve for a multi-nodes high-availability architecture, making all the services correct, robust, extensible in the long term. 
 
 - for a multi-nodes high-availability architecture, new-api should not use sqlite, neon postgresql will be used, it should be configurable in environment variables. beszel/woodpecker might use sqlite on Leader node. 
 
 ## single-node
 
-- a solution has been designed to support to deploy a new docker service to any follower node by new environment variables or new interactive shell scripts, so that requests still go to leader node. for services that high-availability is not required, these services can be deployed to a single server.
+- a solution has been implemented to support to deploy a new docker service to any follower node by new environment variables or new interactive shell scripts, so that requests still go to leader node then proxied to follower node. for services that high-availability is not required, these services can be deployed to a single server.
 - continue to improve the architecture that supports to deploy a new docker service to any follower node, using aichorouter/cpapi as example, making the architecture correct, robust, extensible.
+
+- please design a solution to deploy a cursor-api-proxy service called `cursorapi` to any follower node user specified. deploy it to worker_1 node by default, just like aichorouter/cpapi. `cursorapi.aichorage.de` has been configured at cloudflare.
+- source code for cursorapi(outlookEcursor-api-proxymail) has been cloned at folder `~/Documents/repos/ai-ml-llm/all-router-token/cursor-api-proxy` for reference if you want.  you might use the provided docker config or custom docker config with CURSOR_API_KEY configured by user manually.
+
+- please design a solution to deploy a outlookEmail service called `pigeon` to any follower node user specified. deploy it to worker_2 node by default, just like aichorouter/cpapi. `pigeon.aichorage.de` has been configured at cloudflare.
+- source code for pigeon(outlookEmail) has been cloned at folder `~/Documents/repos/ai-ml-llm/all-router-2api/outlookEmail` for reference if you want.  you might use the provided docker config or custom docker config.
+
 - please design a solution to deploy a openobserve service called `observer` to any follower node user specified.  also deploy it to worker_1 node, just like aichorouter/cpapi. `observer.aichorage.de` has been configured at cloudflare.
 - source code for openobserve has been cloned at folder `../all-logging/openobserve` for reference if you want.  you might use the provided docker config or custom docker config.
-- optimize observer for single vps deployment with minimal cpu/ram resources.
-- review your implementation, make both single-consumer app and multi- nodes-consumer apps work correctly, Make a comprehensive plan to implement/improve observer.
+
+- optimize cursorapi for single-node, minimal cpu/ram resources.
+
+- review exising code/implementation, make both single-consumer app and multi- nodes-consumer apps work correctly, make a comprehensive plan to implement/improve cursorapi.
+
+- you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. only if there are obvious bugs or design defects, then you might propose big refactor or huge change. if there is only subtle bugs, just propose to improve the existing architecture.
 
 - review your implementation, make both single-consumer app and multi- nodes-consumer apps work correctly, Make a comprehensive plan to implement/improve aichorouter and cpapi.
 
