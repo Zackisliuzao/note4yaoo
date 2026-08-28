@@ -242,6 +242,19 @@ modified: 2024-06-30T11:17:28.971Z
 
 - ## 
 
+- ## 
+
+- ## 
+
+- ## [Github Container Registry (GHCR) vs Docker Hub? : r/selfhosted _202601](https://www.reddit.com/r/selfhosted/comments/1q28xf5/github_container_registry_ghcr_vs_docker_hub/)
+- Docker hub has somewhat restrictive rate limits. 
+- You can also selfhost a registry, push to both or use any of the other offerings. 
+
+- Ghcr doesn't support ipv6 only connections. 
+
+- Docker and GHCR are functionally identical. I suppose an argument can be made that your published image is closer to your source code if you have it on GHCR. 
+- Quay is another popular container registry - mostly Redhat backed projects use that.
+
 - ## [Docker Hub, or GHCR, or ECR: Lazy man’s guide _202402](https://blog.devops.dev/docker-hub-or-ghcr-or-ecr-lazy-mans-guide-4da1d943d26e?gi=ccf8216e773b)
 - docker-hub downsides
   - First of all, Docker Hub is no longer (very) friendly to open source project.

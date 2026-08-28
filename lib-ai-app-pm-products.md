@@ -361,6 +361,12 @@ modified: 2025-03-22T16:10:24.856Z
 - harness
   - harness工具越来越多, 每个都有自己的配置、特性, 统一管理的难度大、更新维护的复杂度高
   - 🤔 可考虑不做agent的管理, 只做 context的共享、产物的共享、skills的共享
+
+- 能帮用户盈利的工具更值得做(最好是需求大到付费都难有好的体验)
+  - ai
+  - coding工具
+  - 指纹浏览器: 免费产品都不好用, 付费的都不便宜
+    - 还能深入浏览器内核
 # 💎🚀 aichorage - local llm with joy, 提供模型API、rag可靠性、pdf文本操作
 
 > hybrid local/cloud ai assistant/harness designed to work with documents and mitigate your token anxiety.

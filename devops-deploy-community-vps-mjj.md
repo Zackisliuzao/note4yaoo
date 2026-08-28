@@ -599,7 +599,7 @@ openclaw/herness
 - 我部署了一个可以查询任意 Chrome extension 信息的接口，传入插件 Id 就可以直接查询
 
 - openlist、hermes，好像没了
-# discuss-vps-cicd 👾
+# discuss-vps-落地
 - ## 
 
 - ## 
@@ -608,62 +608,21 @@ openclaw/herness
 
 - ## 
 
-- ## [How do you set up automatic deployment from GitHub to a Hetzner server? : r/hetzner _202512](https://www.reddit.com/r/hetzner/comments/1ps0itc/how_do_you_set_up_automatic_deployment_from/)
-- Build image on GitHub actions, rsync into the server, run docker command
+- ## 
 
-No registry
+- ## 
 
-No frills
+- ## [问大家一个问题：你们找落地机都要满足什么条件？ _202608](https://www.nodeseek.com/post-887896-1)
+  - 是只需要他的IP好，比如是ISP住宅就行，还是有其他的附加条件
+- 最起码，就是解锁好（广播ip，自带DNS解锁）< ip干净原生 < 双isp住宅ip <全都要。
 
-Straight forward
+- 最终还是选择动态家宽独享鸡
 
-- Self hosted GitHub action runner on the server, and GitHub action in target branch. Inspired by fastapi docs
+- 最好大厂，固定IP，国际互联不要太差
 
-https://github.com/fastapi/full-stack-fastapi-template/blob/master/deployment.md
+- 没有滥用标记就差不多了，伪家宽和机房区别不大情况，我个人更看重国际互联
 
-- I'm using https://github.com/adnanh/webhook with custom bash scripts to receive webhooks from github in case i push something, merge something, etc. Based on this i run the custom script to checkout, build and run my code.
-
-- Just set up a self hosted runner in the server, set up dockerfile and docker-compose file, create a workflow file in .github/workflows to make runner pick them up. Than just push to the repos, ci/cd.
-
-Edit: dokploy is good afaik.
-
-- Caddy + Docker compose is good enough. You can automate your build with GitHub actions. For your static stuff just host on firebase or GitHub pages
-
-- ## [Methods to automatically deploy docker image to a VPS after CI build. : r/devops _202603](https://www.reddit.com/r/devops/comments/1rmj21i/methods_to_automatically_deploy_docker_image_to_a/)
-- Things I have considered
-  - running ansible from ci. Ansible in another repo still doable by calling another GitHub action for the build GitHub action. But storing ssh keys with sudo access level in GitHub secrets doesn’t sound that safe to me.
-  - also similar with running command to docker to update from the ci to server.
-  - creating a bash script to may be check images and update containers and run it via cron or systemd service regualar interval of may be 5 min or so. It is a pull base so more secure but a tricky to deploy specific versions.
-
-- The pull-based approach you described (server checks a repo for version changes) is the right instinct. It avoids storing SSH keys in CI and gives you an audit trail of what's deployed via git history.
-  - What I've done: a lightweight agent on the VPS that polls a config endpoint or watches a git repo. When the desired image tag changes, it pulls and restarts the container. Basically a stripped-down ArgoCD for single-server Docker. The agent authenticates with a pre-shared key derived from something stable on the server, so no SSH keys in CI at all.
-  - For something off-the-shelf, Watchtower can watch for new image tags and auto-update, but it lacks the "deploy a specific version" control you'd want. The cron/systemd script checking a deployment repo is honestly the simplest reliable option for a single VPS.
-
-- I’d probably go pull-based, not “CI SSHes into prod.” The closest thing to ArgoCD-on-a-VPS is usually: keep a small deploy repo with your compose.yaml, pin the app image to an immutable tag or digest, then have the server poll that repo with a systemd timer and run docker compose pull && docker compose up -d when it changes; Docker’s own docs support that workflow cleanly. watchtower exists and can auto-update containers when a new image is pushed, but it tracks the exact tag a container is already using, so it’s great for “always follow this tag, ” less great if you want an auditable “promote version X to prod” flow.
-  - For your case, I’d treat CI as “build + push image + update deploy repo, ” and treat the VPS as “reconcile desired state.” That gives you version control, rollback history, and avoids keeping a prod SSH key with sudo in GitHub secrets.
-- Super easy with a simple cronjob git pull ; compose up. You can run this every minute. There. You got yourself continous deployment
-
-- If it's a single VPS, don't overthink it: run a systemd timer on the box that docker pulls :latest (or better, a pinned tag) and docker compose up -d. CI just pushes the image. No SSH keys with sudo in GitHub, no remote exec roulette. Bonus: deploy still works when GitHub Actions is having a day.
-
-- I setup github webhooks on push event and just pull the repo onto my vps and rebuild on pull on vps
-
-- 
-- 
-- 
-
-- ## [Best method for continuous deployment of a Docker Compose stack from GitHub? : r/selfhosted _202506](https://www.reddit.com/r/selfhosted/comments/1lely9q/best_method_for_continuous_deployment_of_a_docker/)
-- What I've Considered
-  - Portainer and Watchtower — I don't need Portainer and would prefer not to run a heavy container like Portainer or Watchtower to handle this.
-  - GitHub Actions SSH to server — I'm not comfortable opening up SSH access.
-  - Recurring cron job — This could be a backup option but I'd prefer a real-time solution that deploys immediately after a merge to main.
-  - GitHub Actions Self-Hosted Runner — This seems like the 'best' option but I haven't tested it out yet as the setup seems daunting.
-  - SSH over Tailscale from GitHub Actions — Another option. I would need to set up Tailscale on my homelab machine.
-
-- What I do is just store an ssh key in Secrets, then ssh into the vm in the action, and do compose up -f ..
-
-- Forgejo (fork of Gitea) + Woodpecker (fork of Drone), both selfhosted.
-
-- Komodo is your answer. Has a great integration with Git repos like GitHub, supports webhooks to trigger actions from GitHub into your Komodo instance, etc.
+- 真正的家宽很贵，一般只找一些nq看起来还可以的就行了
 # discuss-free/awesome
 - ## 
 

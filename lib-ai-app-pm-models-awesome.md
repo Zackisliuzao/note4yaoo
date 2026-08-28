@@ -1458,7 +1458,7 @@ modified: 2026-06-20T15:49:57.019Z
 
 - tips
   - 有时api请求慢, 可能不是卖家/服务器的问题, 换个ip看看
-  - 重度开发时间，优先买天卡(10元/天)， 按量太贵
+  - 重度开发时间，优先买天卡(10元/天) 或 速刷号 ， 按量太贵
     - 不要花过多时间比价, 一般1亿token在2-4元就已经是业内非常划算的了, 节省时间去做研发
   - 优先高级模型， 价格贵一点， 但减少返工， 一般新模型速度会快点因为厂商会给更多硬件资源
     - 应该早点用最新模型，实际使用体验是新模型的high比旧模型的xhigh更强，并且更省token
@@ -2002,7 +2002,7 @@ modified: 2026-06-20T15:49:57.019Z
 ```
 
 - cursor-tools
-  - ?
+  - cursor的风控限制了机器码, 不需要买过多账号
 
 - grok-tools
   - [Grok 账号管理系统 ](https://grok-distribute.131518.xyz/)
@@ -2065,6 +2065,7 @@ modified: 2026-06-20T15:49:57.019Z
   - [卡密与 Token 提取工具  ](https://yidachuang.top/extract)
   - [临期变红 ](https://yidachuang.top/expiring-red-bill)
     - 先免费检测账号资格。仅临期（账期剩余 ≤ 2 天）的 Pro / Pro+ / Ultra 可下单， Pro--¥5, Pro+--¥30, ultra--¥60
+  - [痕心的号池的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/1QIQULXZ)
   - 各种灰色cursor账号
   - 30天-¥15, 总额度 $100, 推算似乎不超过50个号
   - 红账单最低45， 实付成品号100起偏贵
@@ -2094,32 +2095,11 @@ modified: 2026-06-20T15:49:57.019Z
 - [Lyla-精灵小店(gpt, kiro, 各大会员优惠充值)的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lyla)
   - Cursor月卡=【激活后30天内有效+75个账号（共计15000积分，每次换号消耗200积分）Auto模型+无感秒换号+两台设备+支持win、mac、linux系统】
   - kiro-infinity插件
-- [CursorAoto月卡低至0.6元/天_闲鱼  ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.6.464919d0EyJ0KW&id=1049251565744&categoryId=201449620)
-  - 30天-¥18.00， 24小时50个号，不会一小时内50个号一下放开
-- [Cursor Auto无限-30/d _闲鱼 ](https://www.goofish.com/item?spm=a21ybx.personal.feeds.2.4a996ac2Nu0xlf&id=1057431461577&categoryId=50023914)
-  - 30天-¥18.8， 每天限制30个号
-  - 1天-¥0.8
-- [Cursor无限续杯！账号自动登录！\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.11.65cd1c31vjYkt7&id=1070494617734&categoryId=201449620)
-  - 30天-¥18.8， 每天限制40个号
-- [Cursor 三十天无限续杯免费试用\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.6.3a5c3c64bRMh8A&id=1053179367510&categoryId=201449620)
-  - 30天-¥26.60
-  - 支持无感换号，也支持自动无感换号
-  - 无限续杯：额度用完一键切换，无需繁琐操作，持续服务不间断
-  - 24小时（无限用）：2.6¥七天（无限用）：12.6¥十五天（无限用）：16.6¥三十天（无限用）：26.6¥
-  - [Cursor无限续杯月卡\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.12.3a5c3c64bRMh8A&id=1048817506951&categoryId=201449620)
-- [cursor 无限续杯不限额度不限次数\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.7.3a5c3c64bRMh8A&id=890720573627&categoryId=201449620)
-  - 30天-¥21.49
-- [CURSOR PRO续额—官方无限额\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.10.3a5c3c64bRMh8A&id=1066953368656&categoryId=201453616)
-  - 无需换号，即可用无线额
+
 - [Cursor登录助手 ](https://www.xxdlzs.top/)
   - [AI续杯工具官方授权店铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/xxdlzs)
   - kiro, cursor
   - 30天-¥36.8
-- [Cursor 无限续杯无感换号独享账号\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.3.4761330awGJYXE&id=1070664432013&categoryId=201449620)
-  - 独享free：无共享、无限制
-
-- [cursorpro 会员独享\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.2.4761330awGJYXE&id=1071187204306&categoryId=201449620)
-  - 全功能可用，智能补全+多模型切换
 - [Cursor不限量不限速无限爽玩-天卡 _闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.4.3a5c3c64bRMh8A&id=1059427654555&categoryId=201449620)
   - 天卡-¥15， 无限使用全高级模型
   - 月卡-¥300， 可用时长：每天不限时，不限量
@@ -2144,8 +2124,6 @@ modified: 2026-06-20T15:49:57.019Z
   - [词元神 - 全球AI聚合平台 ](https://ciyuanshen.top/)
   - cursor--¥50
     - 日抛速刷号无质保，默认一天内掉Pro订阅，token登录
-- [小小工头的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/IFMZTI8P)
-  - 品类多
 - [Lyla-精灵小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lyla)
   - cursor 天卡/周卡/月卡 - 5/19/50
     - Cursor月卡=【激活后30天内有效+75个账号（共计15000积分，每次换号消耗200积分）Auto模型+无感秒换号+两台设备+支持win、mac、linux系统】
@@ -2153,10 +2131,13 @@ modified: 2026-06-20T15:49:57.019Z
     - 插件只支持win10以上电脑，支持mac,而且支持ssh
 - [Gemini Pixel 设备认证 ](https://autopixel.qzz.io/blackcat)
   - 品类多
-- [奥仔小铺的小店 - 链动小铺  ](https://pay.ldxp.cn/shop/aozai)
-  - Cursor Free Auto 白号
 - [阿C小店 - 在线购买 ](https://chan.vei1.com/)
   - kiro, cursor
+- [奥仔小铺的小店 - 链动小铺  ](https://pay.ldxp.cn/shop/aozai)
+  - [奥仔小铺的小店 - 云猫寄售 ](https://catfk.com/shop/aozai)
+  - Cursor Free Auto 白号--¥0.5, 微软邮箱，可自充升级
+  - 卡密：邮箱----邮箱密码----Cursor密码----Token
+  - 手机接ma：遇验证可去 getdoubao.com 免费接ma（非100%必达，可能失效或收不到，勿频繁操作，介意勿拍）。
 - [ai gaga的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/EEY89GS3)
   - 品类多
 
@@ -2226,8 +2207,7 @@ modified: 2026-06-20T15:49:57.019Z
 - [金金Ai源头批发（招实力代理）的小店 - 云猫寄售 ](https://catfk.com/shop/jinjin)
   - Grok Super直充月卡（30刀，质保不掉订阅版）, ¥65
 - [聊聊AI ](https://talkai.cyou/)
-  - gork
-
+  - Grok
 - [自行车 Ai 店铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/zxc)
   - 普号 Grok AI 长效 微软邮箱 账密 SSO 支持 web/build/con ole, ￥0.52
 - [柠檬酱小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lemon123)
@@ -2378,6 +2358,8 @@ modified: 2026-06-20T15:49:57.019Z
 - [Code-Plan  /NewAPI](https://code-plan.site/pricing), 已充值
   - [GPT-源头供货-招代理的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/IY16OXB7)
   - AMD 顶级服务器 + 10Gbps 带宽
+- [Pdh API ](https://pdhlzy.com/keys)
+  - 很早卖号
 - [keria - Sub2API ](https://jjhd.cloud/keys)
   - [icloud 邮箱 GPT PLUS直营店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/A87R3DZP)
   - 主营卖号， 中转不稳定
