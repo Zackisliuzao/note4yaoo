@@ -18,6 +18,16 @@ modified: 2024-01-25T13:33:23.267Z
 # discuss-stars
 - ## 
 
+- ## 
+
+- ## 
+
+- ## Sandbox companies are temporary. Because they are just another compute primitive.
+- https://x.com/flybayer/status/2093329703297761449
+  - Web servers. Workers. Cron jobs. Databases. Caches. Sandboxes.
+  - Every serious compute platform will eventually offer them.
+  - "Sandbox provider" is a transitional category. Today's vendors will either become tomorrow's compute platforms or features within them.
+
 - ## [Incredibly slow performance · Issue · codesandbox/codesandbox-client _201810](https://github.com/codesandbox/codesandbox-client/issues/1220)
 - import * as am4charts from "@amcharts/amcharts4/charts"; 
   - The first two imports are what makes the execution quite slow.

@@ -183,11 +183,23 @@ modified: 2020-12-12T19:01:56.749Z
   - File Browser: Browse, upload, and download files from containers
   - Base: own OS layer built from scratch using `Wolfi` packages via apko. Every package is explicitly declared in the Dockerfile.
 # ci/cd
-- https://github.com/woodpecker-ci/woodpecker /7.7kStar/apache2/202608/go
+- https://github.com/woodpecker-ci/woodpecker /7.7kStar/apache2/202608/go/vue
   - https://woodpecker-ci.org/
   - a simple, yet powerful CI/CD engine with great extensibility.
   - Woodpecker can be installed in various ways (see the Installation Instructions) and runs with SQLite as database by default. It requires around 100 MB of RAM (Server) and 30 MB (Agent) at runtime in idle mode.
   - Woodpecker is used as the main CI/CD engine at Codeberg, an alternative Git hosting platform with a focus on privacy and free software development.
+  - https://codefloe.com/crowci/crow /apache2/202608/go/vue
+    - https://crowci.dev/
+    - Fast and resource-efficient CI/CD. A streamlined pipeline engine for Git forges with a focus on low overhead and ease of deployment.
+    - Crow has been forked from Woodpecker CI (v3.0.0) in January 2025. Motivation for the fork was built around the improvement of infrastructure-related processes (releases, docs, governance) 
+    - Woodpecker itself is a fork of Drone CI (v0.8.91, April 2019) 
+    - 🆚 Crow vs. Woodpecker (unique features exist in Crow)
+      - Log retention: Each repository can define its own retention policy.
+      - External secret store integration
+      - DAG support
+      - Server can run in HA with leader election
+      - Maintenance panel to perform period cleanup 
+      - Multi-org agents
 
 - https://github.com/moghtech/komodo /12kStar/GPL/202608/rust/ts
   - https://komo.do/

@@ -20,6 +20,9 @@ modified: 2025-03-25T19:15:23.591Z
 - tips
   - 与外部系统通信可考虑使用统一workflow平台, 内部模块间通信优先events/rpc
 
+- usecases
+  - devops领域的cicd就是典型的工作流系统, 并且经常涉及到外部files/sandbox
+
 - products
   - ifttt
   - zapier alternative

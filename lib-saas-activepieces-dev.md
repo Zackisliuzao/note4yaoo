@@ -46,7 +46,8 @@ modified: 2025-03-31T17:38:17.881Z
   - Keep It Extensible: Automation pieces framework has minimal abstraction and allow you to extend for any usecase
 
 - tips
-  - ?
+  - devops领域的cicd就是典型的工作流系统, 并且经常涉及到外部files/sandbox
+  - task > workflow > pipeline
 
 - resources
   - [280+ Open Source MCPs · Activepieces](https://www.activepieces.com/mcp)

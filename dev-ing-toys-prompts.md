@@ -1201,6 +1201,10 @@ finally make sure all tests run and pass locally with npm. you can update/fix te
 - you have improved the codebase several times, but running the tests/parity/scripts took a lot of time for your every improvement.  please refactor and improve the tests/parity/scripts/devops/ci to make it faster and more maintainable.  you may combine/deduplicate/reduce/clean/redesign some tests/parity/scripts/devops/ci/outdated/legacy if you need. update the readme/docs after your cleanup.
 
 - tests is a little messy in this monorepo project. in all subpackages, move tests inside src folder to sibling test folders of src like apps/desktop/test, apps/server/test, packages/client/test...
+
+## testing-mac/linux
+
+- running tests is slow on my mac, please refactor/improve to make it fast, also make it correct and fast in ci .github/workflows/validate.yml .
 # rafactor
 - all code is beta software, legacy/unused code might be refactored or removed. compatibility layer is not required.
 
@@ -1302,7 +1306,7 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 ## codex
 
 # llm-hub-lite/vps
-- i have deployed this repo to my 3 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys aichorouter/cpapi/librechat/cursorapi, worker_2 node deploys librechat. 
+- i have deployed this repo to my 3 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys librechat/aichorouter/cpapi/cursorapi, worker_2 node deploys librechat. 
   - All requests should go to leader node first, then proxying to follower/worker nodes.
 
 - analyze related architecture/scripts/code, then 

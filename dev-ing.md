@@ -348,6 +348,12 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0828
+
+- The full suite passed, but the timing exposed a real test-architecture problem: deployment-rollback-test.sh took 131s and platformctl-test.sh took 254s, while CPU was mostly idle.
+
+- the current git changes will be a huge breaking change, analyze the latest foundation/consumer architecture, then explain to me step by step how to deploy this repo to 3 vps: leader first, then worker_1, then worker2. the existing deployment might be cleaned and redeployed if latest architecture is not compatible.
+
 ## 0826
 
 - current architecture of Foundation apps/services and Consumer apps/services is good.
