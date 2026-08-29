@@ -44,6 +44,7 @@ modified: 2025-03-31T17:38:17.881Z
   - Builder Features: Loops, Branches, Auto Retries, HTTP
   - Keep It Simple: accessible for everyone, regardless of their background and technical expertise
   - Keep It Extensible: Automation pieces framework has minimal abstraction and allow you to extend for any usecase
+  - 将计算类的任务如文件转换都作为模版提供了
 
 - tips
   - devops领域的cicd就是典型的工作流系统, 并且经常涉及到外部files/sandbox

@@ -61,10 +61,10 @@ reboot
 adduser your_username
 # passwd your_username
 usermod -aG sudo your_username
-sudo apt update -y
 
 # logout
 ssh your_username@ip
+sudo apt update -y
 
 # ssh client
 # 用邮箱来标识这个密钥是谁的、用在哪台电脑上，方便管理

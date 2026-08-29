@@ -2269,8 +2269,9 @@ modified: 2026-06-20T15:49:57.019Z
     - [【富可敌国】想钱想疯了，佬们一起来做个中转站 - LINUX DO _202607](https://linux.do/t/topic/2587271)
   - https://dddai.dev/pricing  /0.2x--0.04--0.004/作者加入L站时间短
     - [【富可敌国】Claude Fable 5 / Gemini 3.7 / Grok 4.6 都能用，gpt-5.6-luna 不限制 _202608](https://linux.do/t/topic/2737252)
-    - 闲时倍率为 0.2x0.98, 还有日卡/月卡
+    - 闲时倍率为 0.2x0.98(=0.196×), 还有日卡/月卡, 注意月卡混合号池的倍率是 1x
     - Luna 在 default 分组已开启，若不可用就是额度不足临时关闭, 资源紧张时会关luna
+    - default分组包含sol/terra/luna, 倍率都是 0.2x
     - 晚上会开禁言
   - [FastAI 模型 ](https://www.fastaitoken.com/keys) /0.3x
     - 仅0.3x的pro分组支持luna

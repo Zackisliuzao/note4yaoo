@@ -29,6 +29,19 @@ modified: 2026-06-30T23:04:11.000Z
 - Obsidian has always considered notes to be the smallest unit. You cannot assign tags to blocks, you cannot assign properties to blocks, you cannot meaningfully link from a block to a note (the backlink shows the note, not the block), and you can only link to a block as part of a note.
 
 - It’s simply not a block based editor - it’s file system based. That has always been the opinionated take. You can look into anytype if you want something like that, it’s much more rigid tho.
+# discuss-md-database
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [Markdown Database Pattern : r/Markdown _202608](https://www.reddit.com/r/Markdown/comments/1w0rvud/markdown_database_pattern/)
+  - [The Markdown Database Pattern | The Way of Markdown ](https://wayofmarkdown.com/markdown-database)
+- Not sure if you've seen https://mdbase.dev, u/callumalpass even has a way to interoperate with other schemas called contracts. Might be a good way to reach more people.
+
 # discuss-showcase/examples 🌰
 - ## 
 
