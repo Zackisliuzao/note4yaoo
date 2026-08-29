@@ -10,7 +10,7 @@ modified: 2021-01-04T19:34:22.729Z
 # guide
 
 - who is using #vuejs
-  - gitea
+  - gitea, woodpecker
   - comfyui
   - PPTist
   - vue-fabric-editor

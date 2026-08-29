@@ -1458,12 +1458,12 @@ modified: 2026-06-20T15:49:57.019Z
 
 - tips
   - 有时api请求慢, 可能不是卖家/服务器的问题, 换个ip看看
-  - 重度开发时间，优先买天卡(10元/天)， 按量太贵
+  - 重度开发时间，优先买天卡(10元/天) 或 速刷号 ， 按量太贵
     - 不要花过多时间比价, 一般1亿token在2-4元就已经是业内非常划算的了, 节省时间去做研发
   - 优先高级模型， 价格贵一点， 但减少返工， 一般新模型速度会快点因为厂商会给更多硬件资源
     - 应该早点用最新模型，实际使用体验是新模型的high比旧模型的xhigh更强，并且更省token
   - 直接在电报搜索倍率如 0.08 , 能快速找到候选商家, 优先选提供交流群和通知频道的, 在频道可以查看历史倍率是否正常
-  - 稳定的高缓存 比 经常断的低倍率 更低价, 特别在高倍率如 0.1x 以上时缓存省钱特别明显
+  - 👀 稳定的高缓存 比 经常断的低倍率 更低价, 特别在高倍率如 0.1x 以上时缓存省钱特别明显
     - 0.15x的gpt-5.6-sol 大概 ¥1 ~ 6M token, 100M token ~ ¥15
   - 站内直接充值时三思， 冲进去可能就跑路了退不了， 平台有保障
   - 当购买一个商品有很多渠道时，优先选择可靠的平台，售后/质保/退款更方便
@@ -1506,11 +1506,12 @@ modified: 2026-06-20T15:49:57.019Z
     - 小铺还有很多其他产品: kiro, windsurf, 接码, 虚拟卡, 手机号, visa
   - ~~搜索: 手工, 质保, 源头, 印尼~~ 
   - 转换 [CPA <-> sub2api ](https://gtxx3600.github.io/CPA2sub2API/)
-    - https://lywqfvjb.feiyus.com
-    - https://session.nloop.cc
-    - https://json.chatai.codes
+    - https://github.com/gtxx3600/CPA2sub2API
     - [ChatGPT Session -> CPA / sub2api / Cockpit / AxonHub / Codex-Manager ](https://gtxx3600.github.io/GPTSession2CPAandSub2API/)
-      - 只支持单向转换
+  - [CPA / sub2api 账号格式转换 ](https://cvt.okcode.cc.cd/)
+  - [Sub / CPA 在线互转 ](http://xgrok.xdo.icu:18363/)
+  - https://session.nloop.cc
+  - https://json.chatai.codes
   - [Codex或CPA、sub2跳手机验证的解决方法-2026-05-29部分有效 - Feishu Docs _202605](https://millionweekend.feishu.cn/wiki/JS47wPzs6iDHLZkLMHAc8rhun0e)
   - [鲸商城鲸软JingSoft - 专业软件解决方案服务商【鲸软】 ](https://www.jingsoft.com/)
 
@@ -1997,8 +1998,15 @@ modified: 2026-06-20T15:49:57.019Z
 2. 买好后是我一个人用吗，还是多人用, 我不想买共享的
 3. 下个月几号到期, auto模型用了多少了， 用的不多我能接受
 4. 我不会反代，就正常用auto模型， 如果掉号会质保换号对吗
-提前问清楚了，免得售后麻烦，大家都方便 🌹
+提前问清楚了，免得售后麻烦，大家都方便 
 ```
+
+- cursor-tools
+  - cursor的风控限制了机器码, 不需要买过多账号
+
+- grok-tools
+  - [Grok 账号管理系统 ](https://grok-distribute.131518.xyz/)
+    - 支持 sso 转换为 cpa/grok2api
 
 - supergrok支持 grok-composer-2.5-fast, fast的价格是2.5的6倍，
   - 所以 ¥25的supergrok 提供的composer模型 不如 ¥20的cursor pro提供的100刀auto池
@@ -2057,6 +2065,7 @@ modified: 2026-06-20T15:49:57.019Z
   - [卡密与 Token 提取工具  ](https://yidachuang.top/extract)
   - [临期变红 ](https://yidachuang.top/expiring-red-bill)
     - 先免费检测账号资格。仅临期（账期剩余 ≤ 2 天）的 Pro / Pro+ / Ultra 可下单， Pro--¥5, Pro+--¥30, ultra--¥60
+  - [痕心的号池的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/1QIQULXZ)
   - 各种灰色cursor账号
   - 30天-¥15, 总额度 $100, 推算似乎不超过50个号
   - 红账单最低45， 实付成品号100起偏贵
@@ -2086,32 +2095,11 @@ modified: 2026-06-20T15:49:57.019Z
 - [Lyla-精灵小店(gpt, kiro, 各大会员优惠充值)的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lyla)
   - Cursor月卡=【激活后30天内有效+75个账号（共计15000积分，每次换号消耗200积分）Auto模型+无感秒换号+两台设备+支持win、mac、linux系统】
   - kiro-infinity插件
-- [CursorAoto月卡低至0.6元/天_闲鱼  ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.6.464919d0EyJ0KW&id=1049251565744&categoryId=201449620)
-  - 30天-¥18.00， 24小时50个号，不会一小时内50个号一下放开
-- [Cursor Auto无限-30/d _闲鱼 ](https://www.goofish.com/item?spm=a21ybx.personal.feeds.2.4a996ac2Nu0xlf&id=1057431461577&categoryId=50023914)
-  - 30天-¥18.8， 每天限制30个号
-  - 1天-¥0.8
-- [Cursor无限续杯！账号自动登录！\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.11.65cd1c31vjYkt7&id=1070494617734&categoryId=201449620)
-  - 30天-¥18.8， 每天限制40个号
-- [Cursor 三十天无限续杯免费试用\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.6.3a5c3c64bRMh8A&id=1053179367510&categoryId=201449620)
-  - 30天-¥26.60
-  - 支持无感换号，也支持自动无感换号
-  - 无限续杯：额度用完一键切换，无需繁琐操作，持续服务不间断
-  - 24小时（无限用）：2.6¥七天（无限用）：12.6¥十五天（无限用）：16.6¥三十天（无限用）：26.6¥
-  - [Cursor无限续杯月卡\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.12.3a5c3c64bRMh8A&id=1048817506951&categoryId=201449620)
-- [cursor 无限续杯不限额度不限次数\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.7.3a5c3c64bRMh8A&id=890720573627&categoryId=201449620)
-  - 30天-¥21.49
-- [CURSOR PRO续额—官方无限额\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.10.3a5c3c64bRMh8A&id=1066953368656&categoryId=201453616)
-  - 无需换号，即可用无线额
+
 - [Cursor登录助手 ](https://www.xxdlzs.top/)
   - [AI续杯工具官方授权店铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/xxdlzs)
   - kiro, cursor
   - 30天-¥36.8
-- [Cursor 无限续杯无感换号独享账号\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.3.4761330awGJYXE&id=1070664432013&categoryId=201449620)
-  - 独享free：无共享、无限制
-
-- [cursorpro 会员独享\_闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.2.4761330awGJYXE&id=1071187204306&categoryId=201449620)
-  - 全功能可用，智能补全+多模型切换
 - [Cursor不限量不限速无限爽玩-天卡 _闲鱼 ](https://www.goofish.com/item?spm=a21ybx.search.searchFeedList.4.3a5c3c64bRMh8A&id=1059427654555&categoryId=201449620)
   - 天卡-¥15， 无限使用全高级模型
   - 月卡-¥300， 可用时长：每天不限时，不限量
@@ -2136,8 +2124,6 @@ modified: 2026-06-20T15:49:57.019Z
   - [词元神 - 全球AI聚合平台 ](https://ciyuanshen.top/)
   - cursor--¥50
     - 日抛速刷号无质保，默认一天内掉Pro订阅，token登录
-- [小小工头的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/IFMZTI8P)
-  - 品类多
 - [Lyla-精灵小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lyla)
   - cursor 天卡/周卡/月卡 - 5/19/50
     - Cursor月卡=【激活后30天内有效+75个账号（共计15000积分，每次换号消耗200积分）Auto模型+无感秒换号+两台设备+支持win、mac、linux系统】
@@ -2145,10 +2131,13 @@ modified: 2026-06-20T15:49:57.019Z
     - 插件只支持win10以上电脑，支持mac,而且支持ssh
 - [Gemini Pixel 设备认证 ](https://autopixel.qzz.io/blackcat)
   - 品类多
-- [奥仔小铺的小店 - 链动小铺  ](https://pay.ldxp.cn/shop/aozai)
-  - Cursor Free Auto 白号
 - [阿C小店 - 在线购买 ](https://chan.vei1.com/)
   - kiro, cursor
+- [奥仔小铺的小店 - 链动小铺  ](https://pay.ldxp.cn/shop/aozai)
+  - [奥仔小铺的小店 - 云猫寄售 ](https://catfk.com/shop/aozai)
+  - Cursor Free Auto 白号--¥0.5, 微软邮箱，可自充升级
+  - 卡密：邮箱----邮箱密码----Cursor密码----Token
+  - 手机接ma：遇验证可去 getdoubao.com 免费接ma（非100%必达，可能失效或收不到，勿频繁操作，介意勿拍）。
 - [ai gaga的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/EEY89GS3)
   - 品类多
 
@@ -2218,8 +2207,7 @@ modified: 2026-06-20T15:49:57.019Z
 - [金金Ai源头批发（招实力代理）的小店 - 云猫寄售 ](https://catfk.com/shop/jinjin)
   - Grok Super直充月卡（30刀，质保不掉订阅版）, ¥65
 - [聊聊AI ](https://talkai.cyou/)
-  - gork
-
+  - Grok
 - [自行车 Ai 店铺的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/zxc)
   - 普号 Grok AI 长效 微软邮箱 账密 SSO 支持 web/build/con ole, ￥0.52
 - [柠檬酱小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/lemon123)
@@ -2282,14 +2270,21 @@ modified: 2026-06-20T15:49:57.019Z
   - https://dddai.dev/pricing  /0.2x--0.04--0.004/作者加入L站时间短
     - [【富可敌国】Claude Fable 5 / Gemini 3.7 / Grok 4.6 都能用，gpt-5.6-luna 不限制 _202608](https://linux.do/t/topic/2737252)
     - 闲时倍率为 0.2x0.98, 还有日卡/月卡
-  - [FastAI 模型 ](https://www.fastaitoken.com/keys)
+    - Luna 在 default 分组已开启，若不可用就是额度不足临时关闭, 资源紧张时会关luna
+    - 晚上会开禁言
+  - [FastAI 模型 ](https://www.fastaitoken.com/keys) /0.3x
     - 仅0.3x的pro分组支持luna
   - https://www.rightapi.ai/models  /0.4x--0.08--0.008/10rpm
   - https://codexapis.com/pricing   /0.085--0.0085
   - https://tkapi.cc.cd/keys   /0.1x/似乎不能用
-  - https://kuaipao.pro/pricing  /0.5x
+  - https://kuaipao.pro/pricing  /1.5x/签到0.005
     - [【快跑AI】长期GPT-5.6 特价分组 0.08倍率 180+稳定渠道 已同步Luna/terra 支持企业对公开清单 LINUX DO _202608](https://linux.do/t/topic/2679908)
-    - gpt-5.6-luna 因蒸馏问题已全部下架
+  - https://www.acsgw.top/app/usage /0.35x
+    - [ACS Gateway 主打长期稳定可靠 gpt-5.6-luna模型依旧开放   _202608](https://linux.do/t/topic/2806212)
+    - pro 号池 倍率 0.35 codex plus 倍率 0.15 Claude 倍率 1.25
+  - https://aixoras.com/pricing /0.35x
+    - 分组 GPT 优质
+    - 实际倍率让人困惑 0.35/0.035/2.1
 
 - [zzshu /NewAPI ](https://zzshu.cc/pricing)  , 长期运营
   - [吱吱鼠AI的小店 - 云猫寄售 ](https://catfk.com/shop/SXS913NA)
@@ -2370,6 +2365,8 @@ modified: 2026-06-20T15:49:57.019Z
 - [Code-Plan  /NewAPI](https://code-plan.site/pricing), 已充值
   - [GPT-源头供货-招代理的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/IY16OXB7)
   - AMD 顶级服务器 + 10Gbps 带宽
+- [Pdh API ](https://pdhlzy.com/keys)
+  - 很早卖号
 - [keria - Sub2API ](https://jjhd.cloud/keys)
   - [icloud 邮箱 GPT PLUS直营店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/A87R3DZP)
   - 主营卖号， 中转不稳定
@@ -2741,6 +2738,7 @@ modified: 2026-06-20T15:49:57.019Z
 
 - outlook-tools
   - [星辰邮箱大师 ](https://www.xckj.site/easy-mailbox/)
+  - [Outlook 快速取件 ](https://mail.leadbee.cn/)
 
 - [T佬的gmail批发渠道 ](https://ai666.dnxb.cc/)
   - 全tg最便宜gmail邮箱批发
@@ -2759,6 +2757,7 @@ modified: 2026-06-20T15:49:57.019Z
 
 - tips
   - [使用邮箱管理工具踩过的坑 - LINUX DO _202608](https://linux.do/t/topic/2728175)
+    - 最后，我下载了 Outlook 安卓应用，添加微软邮箱，OK；添加谷歌邮箱，OK；QQ 邮箱，LinuxDo 邮箱，都能成功通过，界面看起来也比较清爽。（我尝试的多个平台中，唯一无法添加的只有沃邮箱，应该是不支持 imap 协议）
 
 - https://github.com/assast/outlookEmail /1.5kStar/MIT/202608/python/ts
   - https://aso.de5.net/
@@ -2768,11 +2767,15 @@ modified: 2026-06-20T15:49:57.019Z
   - 普通邮箱本地保留开关 normal_mail_local_retention_enabled 默认关闭。用户需要在系统设置中明确开启后，普通 Outlook/Hotmail 与标准 IMAP 邮箱才会把列表元数据和已查看、补齐过的部分正文保存到本机 SQLite。
   - Flask 3.0, SQLite, requests, IMAP4_SSL, Microsoft Graph API
   - 原生 JavaScript - 无框架依赖
+  - 2GB+ 内存
   - [【开源】outlookEmail做了个比较大的更新，完美支持hotmail及其别名邮箱，接入了gmail等主流其他邮箱，支持TG SMTP转发，支持各类邮箱别名 - LINUX DO _202604](https://linux.do/t/topic/1929862)
 
-- https://github.com/daimon3332/OutlookManage /NALic/202608/python/js
+- https://github.com/daimon3332/OutlookManage /112Star/NALic/202608/python/js
   - Outlook / Hotmail 本地账号管理 WebUI，支持账号批量导入、状态检测（存活/封禁）、令牌刷新与同步。
   - 以 SQLite 为唯一权威数据源
+  - 相关项目
+    - OutlookRegister — 账号注册。 自动注册 Outlook / Hotmail 账号，并获取 Microsoft Graph OAuth2 refresh_token。
+    - Outlook OAuth GetToken — 单独获取令牌。 为已有微软邮箱单独完成 OAuth2 授权并获取 refresh_token。
   - [【开源】OutlookManage：Outlook/Hotmail 本地管理台（协议测试 + Token 刷新 + 远程池同步 + 滥用封禁） - LINUX DO _202607](https://linux.do/t/topic/2655051)
     - Outlook/Hotmail 注册机把注册了几千上万隔账号，人工管理非常麻烦。github 有个很好的 Outlook 管理开源项目是：outlookEmail。但是这个项目不方便在本地管理，而且缺少一定的测试功能。
     - 批量协议测试： 测试邮箱是否被封禁？如果邮箱存活，可以测出来邮箱开通了哪几个协议（Graph / IMAP / POP / SMTP ）？
@@ -2788,6 +2791,7 @@ modified: 2026-06-20T15:49:57.019Z
   - 批量导入与分组整理 支持批量导入、标签、搜索、分组、导出
   - 导入兼容更广：支持主流邮箱导入（Gmail、QQ、163 等），也支持自定义 IMAP 服务器。即使是自建邮箱也能使用；内置 CF Worker 临时邮箱，支持多域配置与 Admin Key 加密，大幅降低注册场景的隐私泄露风险。
   - 通知能力 支持业务邮件通知、Telegram 推送和测试发送
+  - 参考了以下项目的思路：assast/outlookEmail, gblaowang-i/MailAggregator_Pro
 
 - https://github.com/gblaowang-i/MailAggregator_Pro /MIT/202603/python/ts/inactive
   - 基于IMAP协议的多品牌邮箱聚合管理平台

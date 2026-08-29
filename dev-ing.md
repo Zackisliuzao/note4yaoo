@@ -348,6 +348,12 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0828
+
+- The full suite passed, but the timing exposed a real test-architecture problem: deployment-rollback-test.sh took 131s and platformctl-test.sh took 254s, while CPU was mostly idle.
+
+- the current git changes will be a huge breaking change, analyze the latest foundation/consumer architecture, then explain to me step by step how to deploy this repo to 3 vps: leader first, then worker_1, then worker2. the existing deployment might be cleaned and redeployed if latest architecture is not compatible.
+
 ## 0826
 
 - current architecture of Foundation apps/services and Consumer apps/services is good.
@@ -365,6 +371,11 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
     - Worker 2 logs.
     - Transient deployment-runner containers unless they are explicitly labeled and collected on that host.
   - A complete solution would add a bounded log collector/socket proxy to every VPS and forward securely to the singleton Observer. That should be a separate observability project after deployment reliability is fixed. 
+
+- 🤔 In Google search result, previously, even if a page is deleted, I can still see the content in Google cached result, but now where can I see the Google cached result?
+  - Google completely removed its native "Cached" feature in early 2024. However, you can still view older or deleted versions of web pages directly from Google Search through a new partnership they launched with the Internet Archive's Wayback Machine in September 2024
+  - Go to https://web.archive.org/, Paste the exact URL of the deleted page into the search bar
+  - If you need a very recent cached version of a page (rather than a historical snapshot), Microsoft's Bing search engine still maintains its native caching feature
 
 ## 0825
 

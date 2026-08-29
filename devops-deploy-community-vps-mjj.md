@@ -576,7 +576,20 @@ Since then I always assume a server is being scanned immediately after it gets a
 
 - ## 
 
-- ## 
+- ## [vps可以用来干什么 - LINUX DO _202607](https://linux.do/t/topic/2645317)
+- 探针，节点
+还有一些其他玩法？
+sub2api/cpa/new api
+matrix 私服
+searxng，搜索，可以给 openclaw 当搜索用
+openclaw/herness
+订阅节点聚合（站内佬友的 sublink pro，非常好用）
+
+- 游戏联机，游戏私服，爬虫，代理，注册机
+
+- 你可以理解为端口映射，不过内网穿透这个说法确实是安全圈说的比较多，但是内网穿透一般是用类似 frp 这种软件搭建好隧道，并且流量可以根据需求的不同用不同的协议正常转发。
+
+而端口映射只是把内网的端口通过路由或者光猫等网络设备映射成公网可以直接访问的状态
 
 - ## [佬们在自己的网站/服务器上部署了什么有趣的服务（除了博客） - LINUX DO _202606](https://linux.do/t/topic/2451712)
   - https://awesome-selfhosted.net/
@@ -586,7 +599,7 @@ Since then I always assume a server is being scanned immediately after it gets a
 - 我部署了一个可以查询任意 Chrome extension 信息的接口，传入插件 Id 就可以直接查询
 
 - openlist、hermes，好像没了
-# discuss-vps-cicd 👾
+# discuss-vps-落地
 - ## 
 
 - ## 
@@ -595,62 +608,21 @@ Since then I always assume a server is being scanned immediately after it gets a
 
 - ## 
 
-- ## [How do you set up automatic deployment from GitHub to a Hetzner server? : r/hetzner _202512](https://www.reddit.com/r/hetzner/comments/1ps0itc/how_do_you_set_up_automatic_deployment_from/)
-- Build image on GitHub actions, rsync into the server, run docker command
+- ## 
 
-No registry
+- ## 
 
-No frills
+- ## [问大家一个问题：你们找落地机都要满足什么条件？ _202608](https://www.nodeseek.com/post-887896-1)
+  - 是只需要他的IP好，比如是ISP住宅就行，还是有其他的附加条件
+- 最起码，就是解锁好（广播ip，自带DNS解锁）< ip干净原生 < 双isp住宅ip <全都要。
 
-Straight forward
+- 最终还是选择动态家宽独享鸡
 
-- Self hosted GitHub action runner on the server, and GitHub action in target branch. Inspired by fastapi docs
+- 最好大厂，固定IP，国际互联不要太差
 
-https://github.com/fastapi/full-stack-fastapi-template/blob/master/deployment.md
+- 没有滥用标记就差不多了，伪家宽和机房区别不大情况，我个人更看重国际互联
 
-- I'm using https://github.com/adnanh/webhook with custom bash scripts to receive webhooks from github in case i push something, merge something, etc. Based on this i run the custom script to checkout, build and run my code.
-
-- Just set up a self hosted runner in the server, set up dockerfile and docker-compose file, create a workflow file in .github/workflows to make runner pick them up. Than just push to the repos, ci/cd.
-
-Edit: dokploy is good afaik.
-
-- Caddy + Docker compose is good enough. You can automate your build with GitHub actions. For your static stuff just host on firebase or GitHub pages
-
-- ## [Methods to automatically deploy docker image to a VPS after CI build. : r/devops _202603](https://www.reddit.com/r/devops/comments/1rmj21i/methods_to_automatically_deploy_docker_image_to_a/)
-- Things I have considered
-  - running ansible from ci. Ansible in another repo still doable by calling another GitHub action for the build GitHub action. But storing ssh keys with sudo access level in GitHub secrets doesn’t sound that safe to me.
-  - also similar with running command to docker to update from the ci to server.
-  - creating a bash script to may be check images and update containers and run it via cron or systemd service regualar interval of may be 5 min or so. It is a pull base so more secure but a tricky to deploy specific versions.
-
-- The pull-based approach you described (server checks a repo for version changes) is the right instinct. It avoids storing SSH keys in CI and gives you an audit trail of what's deployed via git history.
-  - What I've done: a lightweight agent on the VPS that polls a config endpoint or watches a git repo. When the desired image tag changes, it pulls and restarts the container. Basically a stripped-down ArgoCD for single-server Docker. The agent authenticates with a pre-shared key derived from something stable on the server, so no SSH keys in CI at all.
-  - For something off-the-shelf, Watchtower can watch for new image tags and auto-update, but it lacks the "deploy a specific version" control you'd want. The cron/systemd script checking a deployment repo is honestly the simplest reliable option for a single VPS.
-
-- I’d probably go pull-based, not “CI SSHes into prod.” The closest thing to ArgoCD-on-a-VPS is usually: keep a small deploy repo with your compose.yaml, pin the app image to an immutable tag or digest, then have the server poll that repo with a systemd timer and run docker compose pull && docker compose up -d when it changes; Docker’s own docs support that workflow cleanly. watchtower exists and can auto-update containers when a new image is pushed, but it tracks the exact tag a container is already using, so it’s great for “always follow this tag, ” less great if you want an auditable “promote version X to prod” flow.
-  - For your case, I’d treat CI as “build + push image + update deploy repo, ” and treat the VPS as “reconcile desired state.” That gives you version control, rollback history, and avoids keeping a prod SSH key with sudo in GitHub secrets.
-- Super easy with a simple cronjob git pull ; compose up. You can run this every minute. There. You got yourself continous deployment
-
-- If it's a single VPS, don't overthink it: run a systemd timer on the box that docker pulls :latest (or better, a pinned tag) and docker compose up -d. CI just pushes the image. No SSH keys with sudo in GitHub, no remote exec roulette. Bonus: deploy still works when GitHub Actions is having a day.
-
-- I setup github webhooks on push event and just pull the repo onto my vps and rebuild on pull on vps
-
-- 
-- 
-- 
-
-- ## [Best method for continuous deployment of a Docker Compose stack from GitHub? : r/selfhosted _202506](https://www.reddit.com/r/selfhosted/comments/1lely9q/best_method_for_continuous_deployment_of_a_docker/)
-- What I've Considered
-  - Portainer and Watchtower — I don't need Portainer and would prefer not to run a heavy container like Portainer or Watchtower to handle this.
-  - GitHub Actions SSH to server — I'm not comfortable opening up SSH access.
-  - Recurring cron job — This could be a backup option but I'd prefer a real-time solution that deploys immediately after a merge to main.
-  - GitHub Actions Self-Hosted Runner — This seems like the 'best' option but I haven't tested it out yet as the setup seems daunting.
-  - SSH over Tailscale from GitHub Actions — Another option. I would need to set up Tailscale on my homelab machine.
-
-- What I do is just store an ssh key in Secrets, then ssh into the vm in the action, and do compose up -f ..
-
-- Forgejo (fork of Gitea) + Woodpecker (fork of Drone), both selfhosted.
-
-- Komodo is your answer. Has a great integration with Git repos like GitHub, supports webhooks to trigger actions from GitHub into your Komodo instance, etc.
+- 真正的家宽很贵，一般只找一些nq看起来还可以的就行了
 # discuss-free/awesome
 - ## 
 
@@ -933,7 +905,62 @@ Edit: dokploy is good afaik.
 
 - ## 
 
-- ## 
+- ## [有没有硬盘IO比较好的鸡鸡啊？ _202608](https://www.nodeseek.com/post-864645-1)
+- 可以 zRAM + zswap，这样可以往死里开并且还对 IO 不太敏感
+
+- ## [有没有硬盘好的便宜鸡（首选亚太？） _202604](https://www.nodeseek.com/post-689923-1)
+  - 鸡多了之后发现挂komari服务端的鸡io阻塞严重，websocket频繁断连，刷新一下也要等好久。准备换掉现在挂服务的阿里云鸡了
+
+- 腾讯阿里的硬盘io都烂完了 腾讯和阿里的99年付鸡 甚至不如超开的狐蒂云
+  - 大厂的存储是这样，分布式存储为了弹性狠狠牺牲性能？
+
+- ## [为何大型云服务商的磁盘性能都很差？(aws/oracle等) _202404](https://www.nodeseek.com/post-92634-1)
+- 测试了oracle和aws的服务器，磁盘性能都极差，就算把block storage的性能调整到最高，4K测试，连续读写的性能都很差。和那些小型的主机商性能都不是一个量级别，有谁知道原因吗？
+
+我在aws开了100G的io2存储（性能最高的）IOPS调整了到50000（性能容量比最大是1:500），
+fio disk speed测试下来4K性能大概也只有52MB/s(13.1K)，64K 122MB/s(1.9k)的性能水平，
+oracle把block storge的性能调整到UHP(最高性能)，4K也是50-60MB/s的水平。
+
+- 因为后端架构完全不一样。
+大厂都是高可用虚拟机。后端有个高可用存储集群，通过网络挂载空间给虚拟机。这样子就算母鸡挂了，因为数据在后端集群上所以可以立马在其他地方起个虚拟机并且不丢失数据。做的好的话甚至可以母鸡挂了小鸡也不会掉线, 会被自动热转移到其他可用的母鸡上。
+优点就是高可用很难丢数据。缺点就是非常昂贵，难以配置且有性能限制。硬件成本和管理人力成本都很高。
+
+至于小主机商，硬盘直接用母鸡硬盘。自然速度非常快。但是母鸡挂了就指望商家比较良心有做备份或者冗余。无论如何小鸡都会挂一阵子。
+
+- 我在aws开了100G的io2存储（性能最高的）IOPS调整了到50000（性能容量比最大是1:500），
+fio disk speed测试下来4K性能大概也只有52MB/s(13.1K)，64K 122MB/s(1.9k)的性能水平，
+oracle把block storge的性能调整到UHP(最高性能)，4K也是50-60MB/s的水平。
+
+- 加钱。阿里可以上本地盘。要多快有多快
+
+- OCI, AWS的磁盘性能是和硬盘大小相关的，OCI你把磁盘拉到1T性能比肩sata
+
+- 很简单啊，你用大厂的本地盘服务器就知道了。
+云盘用的硬件带宽，非网络带宽，nas才是网络带宽
+
+- 大厂基本都是云盘，云盘小文件io比不过本地ssd的，想要性能好买baremetal啊
+
+- azure的bare metal有1.2亿的IOPS
+
+- ## [我觉得cloudnium 0.54/month 现今比 dedirock 6.45刀/year更有性价比。。。 _202607](https://www.nodeseek.com/post-844717-1)
+- cloudnium配置2c2g 20gb 6.48$/year
+dedirock配置1c2.5g 15gb 6.45$/year
+
+我这里电信两者测速白天也能跑到400m左右，晚高峰在200m左右
+价格差不多但是性能方面却有差，且现在dedirock push或者改邮需要5刀，cloudnium随便改邮
+
+- 流量吧，dedirock有4t，另一个只有一半
+- 我用超了也没有关机的
+
+- 如果确定cpu是8168不会换就好了，重启有概率换cpu还是不太敢买
+  - 客服有解释过，而且你被换了发工单他也会给你换回来且有补偿
+
+- 别忘了，dedirock的tos是有对资源使用限制的，我记得是25%以上cpu使用率不得超过90秒。现在是不管，说不定什么时候就要用这个条款来杀鸡了
+
+- dedirock服务态度很好
+
+- [现在终于开始意识到了牛马云cloudnium的价值了吗。价格上涨就是最好的证明 _202608](https://www.nodeseek.com/post-853097-1)
+  - cloudnium重启换u需要与客服battle才能换
 
 - ## [Virmach到底怎么了？？？ _202607](https://www.nodeseek.com/post-840654-1)
 - 之前的四大金刚之一。和Rn齐名，之前还在CCS机房的时候，服务非常的好，稳定性也不错。主要是有CCS机房的技术服务帮他擦屁股。
@@ -1274,6 +1301,31 @@ Gemini、Reddit 被拉黑；
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## [我发现其实硬盘才是对网站性能影响最大的 _202510](https://www.nodeseek.com/post-468057-1)
+- 以前一直以为是CPU, 但是根据我发现, 
+CPU型号一样, 一款2C8G的硬盘是NVME SSD, 
+另一款8C8G 普通SSD, 
+2核 NVME的居然比8核普通SSD的快80%以上
+
+- 这不应该是典型的木桶效应的问题吗？你如果CPU两者差很多，那你换再好的硬盘，两者之间谁更快也犹未可知。只不过你当前的场景中，制约A和B两款服务器性能差异的恰好是硬盘。
+而且你还有一个很明显的误区，认为8核就一定强于2核，多核只在并行任务时有优势，在单线程任务上就要看两个CPU的单核能力了，所以还是要看具体场景，并非核心多就一定在所有场景下都比少核心强。
+
+- cpu只有在高并发时候才会体现优势
+
+- 确实io很重要，古董机换上固态起飞就是例子
+
+- 实际上感觉差不多，现在都有缓存，和界面压缩，我论坛采集了六万多个帖子，用cc的hdd建站的，打开也就花了两秒不到
+
+- 我建站直接上memdisk了，毕竟内存够用，就让缓存去处理这些吧！内存读写总比硬盘快得多！
+
+- 一般来说，不用太高吧。我网站放4k随机读写12mb和160mb。强制刷新缓存，我发现首页的图片加载速度都不差，秒出。除非是只有1. 几的垃圾盘吧
+
+- 数据库读写还是吃cpu和硬盘读写的
 
 - ## [大妈dmit都是优质机房ip吗，还是要随机 - IDC Flare _202608](https://idcflare.com/t/topic/122141)
 - 只保证线路不保证 ip 的

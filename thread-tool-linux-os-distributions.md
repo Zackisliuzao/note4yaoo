@@ -65,6 +65,19 @@ modified: 2026-06-18T14:27:48.210Z
   - I'm getting worse performance in llama.cpp than in DGX OS, but faster initial model loading.
 
 - if he wants Ubuntu specifically, NVIDIA officially supports it too: https://docs.nvidia.com/dgx/dgx-os-7-user-guide/installing_on_ubuntu.html
+# discuss-linux-mac
+- ## 
+
+- ## 
+
+- ## 
+
+- ## The volunteers bringing Linux to Apple MacBooks are almost ready to ship it on the M3, with zero help from Apple.  _202608
+- https://x.com/twtayaan/status/2093331013166334423
+  - This is Asahi Linux. A tiny team that has spent years reverse-engineering Apple Silicon from scratch. And they are getting dangerously close.  
+  - Webcam support now works on M3. USB 3.0 and Thunderbolt work too. The team had to reverse-engineer Apple's changing USB controller designs just to get there.  
+  - A full M3 release is expected in the coming weeks.  And they're already working on M4.  
+
 # discuss-dist-ubuntu/debian
 - ## 
 
