@@ -38,6 +38,10 @@ modified: 2026-01-21T04:22:29.956Z
 # new-api
 - 容易自动退出登录，然后点击再次登录会提示 Request failed with status code 429
   - 本地 和 云端 部署都会碰到此问题
+
+## docs
+
+- Multi-machine deployments must use the same database and the same SESSION_SECRET. Redis may be shared by all nodes, deployed independently per node, or omitted
 # donehub/one-api
 - anthropic-api
   - 有的中转站的claude反代出的api配置参数有差异， 不能走donehub的再次转发，如uu6， 但大多数中转站反代出的没问题

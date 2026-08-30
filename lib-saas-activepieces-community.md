@@ -102,7 +102,27 @@ modified: 2025-03-31T17:39:01.892Z
   - The same could be achieved in other ways, such as sending multiple requests on other flows, but this would be uncomfortable.
 
 - These ideas (Parallel converging gateways) have been explored in BPMN
+# discuss-usecase
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [Best methods to scrape web data with n8n - My experience after 10+ projects : r/aiagents _202601](https://www.reddit.com/r/aiagents/comments/1qr6utg/best_methods_to_scrape_web_data_with_n8n_my/)
+  - Anyone scraping data with n8n has into this: when trying to use an HTTP request to collect web data, and we either can’t get it to work, or it breaks after 10 requests. Blocking, site changes, and scalability are all big issues.
+  - 1 - Look for official APIs when available
+  - 2 - Find pre-built scrapers on the Apify Store: pre-built scrapers for thousands of websites
+  - 3 - General-purpose Scrapers with AI parsing: If a pre-built scraper is not available, use a general scraper
+  - 4 - Custom development with open-source libraries
+
 # discuss
+- ## 
+
+- ## 
+
 - ## 
 
 - ## 

@@ -21,6 +21,7 @@ modified: 2025-09-01T05:52:34.241Z
 - cons
   - Code Interpreter 未开源
   - db使用mongo, 与其他系统共享数据不方便
+  - 不支持在ui上添加model
 
 - features
   - Web Search: Combines search providers, content scrapers, result rerankers 

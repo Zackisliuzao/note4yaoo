@@ -23,6 +23,10 @@ modified: 2025-03-31T17:38:17.881Z
 
 - cons
   - paid: permissions, Audit logs, Collaborate using Git, Customize branding
+    - templates, Control Pieces
+    - Event Streaming: Forward every audit event we emit to a webhook, then handle it elsewhere
+    - Embedding
+    - ee: SSO, RBAC, API keys, Secret Managers
     - open: Flow History, Custom Pieces	
     - [Editions - Activepieces](https://www.activepieces.com/docs/about/editions)
   - 💫 node节点的执行进度无法实时显示，动画体验不如triggerdotdev
@@ -49,6 +53,15 @@ modified: 2025-03-31T17:38:17.881Z
 - tips
   - devops领域的cicd就是典型的工作流系统, 并且经常涉及到外部files/sandbox
   - task > workflow > pipeline
+
+- usecases(AI也能设计实现工作流, 但AI需要server/环境/runtime来执行任务)
+  - 所有的定时任务都可以是简单的工作流: All scheduled tasks go there. Mostly backups.
+  - 多步骤的任务, 使用工作流操作会很清晰
+  - 数据/文件处理转换， 批处理
+  - 爬虫， RSS
+  - 状态监控
+  - 通知别人， 通知收集， 邮件处理
+  - git devops: cicd
 
 - resources
   - [280+ Open Source MCPs · Activepieces](https://www.activepieces.com/mcp)

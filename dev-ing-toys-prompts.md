@@ -1322,8 +1322,9 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 - code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. 
 - code/docs for woodpecker has been cloned at `../all-cicd/woodpecker` for reference if you want.
 - code/docs for aichorouter(new-api) has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for reference if you want.
-- code/docs for cpapi(CLIProxyAPI) has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/CLIProxyAPI` for reference.
+- code/docs for cpapi(CLIProxyAPI) has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/CLIProxyAPI` for reference if you want.
 - code/docs for observer(openobserve) has been cloned at `../all-logging/openobserve` for reference if you want.
+- code/docs for librechat has been cloned at `~/Documents/repos/ai-ml-llm/LibreChat` for reference if you want.
 
 - caddy/beszel/woodpecker are the foundation of the whole docker stack, they should be correct and robust for bootstrapping and restarting. other apps/services should be extensible to add/disable/enable, for example, new-api and cliproxyapi should be enabled by default, but they should support to be disabled by environment variables like `APP_NEWAPI_DISABLE=true` or `APP_CLIPROXYAPI_DISABLE=true`. 
 - please design a extensible architecture to support to add/disable/enable new apps/services in the future. docker/config for foundational caddy/beszel/woodpecker should not be coupled to other apps/services.
@@ -1407,7 +1408,8 @@ in a multi-nodes high-availability architecture
 - please design a solution to deploy a outlookEmail service called `pigeon` to any follower node user specified. deploy it to worker_2 node by default, just like aichorouter/cpapi. `pigeon.aichorage.de` has been configured at cloudflare.
   - source code for pigeon(outlookEmail) has been cloned at folder `~/Documents/repos/ai-ml-llm/all-router-2api/outlookEmail` for reference if you want.  you might use the provided docker config or custom docker config.
 
-- please design a solution to deploy a openobserve service called `observer` to any follower node user specified.  also deploy it to worker_1 node, just like aichorouter/cpapi. `observer.aichorage.de` has been configured at cloudflare.
+- observer has been migrated to foundation
+  - please design a solution to deploy a openobserve service called `observer` to any follower node user specified.  also deploy it to worker_1 node, just like aichorouter/cpapi. `observer.aichorage.de` has been configured at cloudflare.
   - source code for openobserve has been cloned at folder `../all-logging/openobserve` for reference if you want.  you might use the provided docker config or custom docker config.
 
 - optimize flowy for single-node, minimal cpu/ram resources. if required, cloudflare r2 might be used.
