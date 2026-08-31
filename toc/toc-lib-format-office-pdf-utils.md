@@ -46,6 +46,10 @@ modified: 2022-11-11T10:46:41.519Z
     - Convert to PDF/A
     - Linearize PDF: Optimize PDFs for fast web viewing.
   - ⚖️ [Change Licence to AGPL v3 _20251025](https://github.com/alam00000/bentopdf/commit/e0a253be83af58325273de309f56589b31d52b92)
+  - [v2.8.8  _202608](https://github.com/alam00000/bentopdf/releases/tag/v2.8.8)
+    - BentoPDF can now edit text, image, shapes 
+    - there are two new engines Kura and Hyper Compress. 
+    - [BentoPDF can edit existing PDF Text and two new engines : r/selfhosted _202608](https://www.reddit.com/r/selfhosted/comments/1w1ltg9/bentopdf_can_edit_existing_pdf_text_and_two_new/)
   - [BentoPDF is now open sourced : r/webdev _202510](https://www.reddit.com/r/webdev/comments/1o6lkwf/bentopdf_is_now_open_sourced/)
   - What does it do better / different compared to Stirling pdf?
     - Runs fully client side

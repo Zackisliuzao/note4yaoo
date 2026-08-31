@@ -348,6 +348,19 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 0830
+
+- 🤔 i  have a  vps with 1 core cpu and 2gb ram, i have installed https://beszel.dev/ monitoring service on the ubuntu 24.04 os.
+  - i can see the cpu takes up 62.1%, ram takes up 43.1%,  disk takes 62.3%,  but the system load number is `1.29 1.57 1.39` .  for a vps with only 1 cpu, oftentime i see the system load is red warning. 
+  - if all cpu/ram is normal,  why would this happen? what can i do to lower the system load to make it healthy? or is it doesnot matter at all?
+- load average and CPU% measure two different things.
+- Beszel's CPU% is roughly "how much of the CPU's actual compute cycles were used" — a snapshot of the processor doing work.
+- Linux's load average is the average number of processes that were either running on the CPU or waiting in queue — and critically, that queue includes processes stuck in uninterruptible sleep (state D), which is almost always a process waiting on disk or network I/O, not CPU.
+  - CPU "Steal Time" (Noisy Neighbors): Because you are on a VPS, you are sharing a physical CPU with other customers. If the physical host server is overloaded, the "hypervisor" will literally steal CPU cycles away from your VPS to give to someone else. 
+- So a process can be sitting there doing basically nothing to your CPU, but if it's blocked waiting for disk to respond, it still counts toward load average.
+  - On a 1-core box, 1.0 load means "on average, exactly one thing wanted the CPU/resources at once and got them immediately." Your 1.29–1.57 means there was consistently 30–60% more demand than one core could immediately satisfy — which is why Beszel flags it red even though the CPU% snapshot looks fine.
+  - Given your CPU is only at 62% but load is above 1, the leading suspects are: I/O wait (disk-bound processes queuing), swap activity
+
 ## 0828
 
 - The full suite passed, but the timing exposed a real test-architecture problem: deployment-rollback-test.sh took 131s and platformctl-test.sh took 254s, while CPU was mostly idle.

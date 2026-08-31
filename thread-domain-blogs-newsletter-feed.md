@@ -9,6 +9,25 @@ modified: 2025-05-11T08:44:21.140Z
 
 # guide
 
+# resources
+- news-sources
+  - v2ex直接提供api, 但返回的是 Unicode escape sequences. It ensures that the data transfers safely across the internet without text-encoding glitches. 
+  - [HN Search API | HN Search powered by Algolia ](https://hn.algolia.com/api)
+    - hacker news: curl 'https://hn.algolia.com/api/v1/search?tags=front_page'
+    - We are limiting the number of API requests from a single IP to 10,000 per hour. 
+    - https://hn.algolia.com/api/v1/search?tags=front_page
+    - https://hn.algolia.com/api/v1/search_by_date?tags=story
+
+- [Scrape Creators API Documentation - Extract Data from TikTok, Instagram, YouTube & More ](https://docs.scrapecreators.com/)
+  - extract public data from 37+ social media platforms including TikTok, TikTok Shop, Instagram, Telegram, YouTube
+  - Scrape Creators does not enforce API rate limits. For now, we recommend keeping usage below 500 concurrent requeststo ensure the best performance and reliability.
+  - free: 100 credit ~ 100 requests
+
+- [API Direct ](https://apidirect.io/docs/pricing)
+  - API Direct is a pay-as-you-go API that lets you search real-time data across social media and news through a single, unified interface.
+  - API Direct uses a pay-per-request pricing model. There are no monthly fees, subscriptions, or minimum commitments.
+  - Every account gets free requests per endpoint per month — 50 for most endpoints, 20 for Places Search, Place Reviews, and Place Photos. No credit card required. Free requests reset on the 1st of each month.
+  - 50 free requests per endpoint each month 
 # discuss-stars
 - ## 
 
