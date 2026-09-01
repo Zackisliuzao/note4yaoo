@@ -298,9 +298,6 @@ launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.donehub.plist
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.newapi.plist
 launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.newapi.plist
 
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.omniroute.plist
-launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.omniroute.plist
-
 launchctl stop com.cpap && launchctl start com.cpap
 
 # DATA_DIR=~/sub2api-local-data ./sub2api -setup
@@ -347,6 +344,47 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - ?
 - dev-log
   - ?
+
+## 0831
+
+- 
+- 
+- 
+- 
+- 
+
+- [How to speed up SCP of 100GB file between two servers over public internet? : r/sysadmin _202105](https://www.reddit.com/r/sysadmin/comments/no7pbb/how_to_speed_up_scp_of_100gb_file_between_two/)
+- rsync over ssh. Don’t use -z. Do use -W This will also handle situations where the network borks. The job is entirely restartable.
+
+- I’ve had good results with rclone and multiple threads, especially for very large amounts of very small files. Watch the load average and IOs when you increase the number of threads.
+
+- Use HPN-SSH library if you can.
+
+The stock SSH library limits TCP Window size to 64K... because who will ever need more?
+
+TCP Window size is needed for transmission over long pipes.
+
+- 🤔 i have 4 vps:
+vps A - 2c4g unlimited bandwidth
+vps B - 2c4g 10TB bandwidth
+vps C - 1c2g 4TB bandwidth
+vps D - 2c2g 3TB bandwidth
+i want to deploy a suite of services to 4 vps,  with a leader node with mostly caddy reverse proxy and no business services, and 3 nodes with heavy business services that might consume high ram.
+i want to choose a vps for my leader node, which vps might be better, can you design a high-availability architecture for me?
+since the leader node is always the entry of all requests then proxied to other nodes, will it consume very high network bandwidth? if i configure proxy for leader node in cloudflare, can it lower the network usage, especially ddos?
+
+- Leader → VPS A. Since every request and every response byte for all three backend services transits the leader, bandwidth is the binding constraint for that role, not CPU or RAM. Caddy itself is light (a few hundred MB RAM, modest CPU except under heavy TLS handshake load), so 2c4g is comfortably enough compute.
+  - it sees the sum of everything going to B, C, and D combined, since 100% of requests pass through it.
+- With a single leader, that node is a single point of failure
+  - Standby leader + Cloudflare Load Balancer. Run a second Caddy instance on VPS B as a warm standby. Cloudflare's load balancer does DNS-based routing with active health checks against your origins so traffic is only sent to servers that respond to health probes,
+  - Cloudflare Tunnel from both A and B, no public IP exposed on either — Cloudflare routes to whichever tunnel is healthy. More setup work, but also removes the origin-IP-exposure question entirely.
+- Does Cloudflare in front lower bandwidth?
+  - Caching — anything cacheable (static assets, cacheable API responses if you configure it) gets served straight from Cloudflare's edge and never touches your leader at all.
+  - DDoS absorption — this is the bigger win. Volumetric and L3/L4/L7 attacks get scrubbed at Cloudflare's edge, and DDoS mitigation and CDN bandwidth are included on every plan including free, with no per-request charges
+  - Origin IP hiding — but this only works if you also firewall VPS A to only accept connections from Cloudflare's published IP ranges.
+  - leader's ports 80/443 only accept Cloudflare IPs (nftables/ufw with CF's published ranges) — otherwise attackers who find the IP bypass CF entirely. Even better: use Cloudflare Tunnel (cloudflared outbound from A), then A has no inbound ports at all and direct-to-origin attacks are impossible.
+- A couple of things Cloudflare's proxy won't help with: non-HTTP(S) traffic (raw TCP/UDP protocols need their paid Spectrum product), and it doesn't do anything for the internal leader→backend hop — that traffic still crosses the public internet between your VPS unless they share a provider's private LAN. 
+  - Worth putting a lightweight encrypted mesh (WireGuard or Tailscale) between all four nodes so that internal traffic isn't sitting in plaintext on the public internet.
 
 ## 0830
 

@@ -65,6 +65,14 @@ modified: 2026-06-19T06:15:35.007Z
   - text search
 # vps-vendors
 
+## colocrossing
+
+- [Can I change the location of my VPS? - ColoCrossing Cloud ](https://cloud.colocrossing.com/index.php?rp=/knowledgebase/2/Can-I-change-the-location-of-my-VPS.html)
+  - $3 for swap ip
+  - ColoCrossing allows location changes on Cloud VPS plans purchased at standard pricing from our website
+  - Your VPS qualifies for a location change if: It was purchased at standard pricing directly from colocrossing.com
+  - Location changes are not available for: Special order VPS plans
+
 ## dartnode
 
 - [DartNode - Affordable Cloud Hosting, Dedicated Servers & VPS Solutions ](https://dartnode.com/warehouse-deals)

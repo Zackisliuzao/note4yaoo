@@ -36,7 +36,8 @@ modified: 2024-06-30T11:20:53.755Z
   - The `docker system prune` command is a shortcut that prunes images, containers, and networks. Volumes aren't pruned by default
 
 ```shell
-docker system prune
+# docker system prune (without -a) only removes dangling images(with no tag), stopped containers and unused networks
+docker system prune -a
 docker builder prune
 
 docker container prune
