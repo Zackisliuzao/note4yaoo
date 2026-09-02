@@ -35,9 +35,12 @@ modified: 2026-06-19T06:15:35.007Z
   - nginx不常用端口 33777
 
 - 如何隐藏服务器ip
-
-## tips
-
+# vps-vpn
+- vendor的内网策略
+  - [【已出】剩余价值-5 RakSmart 2核心，2G内存，50G HDD，大陆优化 VIP，带宽5G/3T流量 _202609](https://www.nodeseek.com/post-908183-1) 
+    - 因为要组内网所以重新买在同一个账号下了 ，这个号的这台机器出了
+    - 同一个账号下 同一个区域的机器 可以组内网 流量算单向
+# tips
 - usecases
   - opengraph
   - blogs

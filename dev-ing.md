@@ -362,7 +362,11 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 
 - Just run Hysteria 2's own installer on each VPS independently, and use a multi-node-aware client to switch between them.
 
-- 🆚 [V2Ray protocols: What is the difference between VLESS and Vmess? | Medium _202304](https://medium.com/@louizo79/v2ray-protocols-what-is-the-difference-between-vless-and-vmess-4c75dc4371a7)
+- 🤔 i have deployed a hysteria 2 server  with official docker and udp protocol.
+  - i want to use a android client to connect to the hy2 server, it would be better to input the connect string like hysteria2://password@host:443/?sni=xxx#Name​ in android app.
+  - please deep research related solutions/projects, if you found any open source products or inspiration projects in android that supports to use the connect string, provide overview/github-url/website for each.
+
+- ### 🆚 [V2Ray protocols: What is the difference between VLESS and Vmess? | Medium _202304](https://medium.com/@louizo79/v2ray-protocols-what-is-the-difference-between-vless-and-vmess-4c75dc4371a7)
 - VLESS and Vmess are different V2Ray protocols. Project V is a collection of utilities that enable you to construct a personalized privacy network on the Internet. 
 - VLESS is a protocol developed by V2Ray that provides better security and performance compared to the original V2Ray protocol. VLESS uses the same underlying technology as V2Ray, which is based on the Transport Layer Security (TLS) protocol.
 - The main difference between VLESS and V2Ray is that VLESS uses a simplified handshake process and eliminates unnecessary features to reduce the attack surface. VLESS also uses the latest version of TLS to provide better encryption and authentication.

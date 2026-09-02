@@ -497,6 +497,12 @@ flatpak run com.discordapp.Discord --proxy-server="socks5://127.0.0.1:1080"
   - https://unsplash.dogedoge.com/
 # video/tv
 
+## youtube
+
+- [Pipepipe, does it work way better than Grayjay for you? : r/grayjay _202510](https://www.reddit.com/r/grayjay/comments/1o4pmqb/pipepipe_does_it_work_way_better_than_grayjay_for/)
+  - Pipepipe is a more customizable, a bit faster version of NewPipe. Its definitely faster than Grayjay, well I think everything is faster than Grayjay, but I would say Grayjay is overall a better app with more options and depth. Hopefully the video loading speed can be worked on.
+  - Pipepipe is Newpipe but with more options and a bit faster
+
 ## wiki
 
 - [NeoDB - 发现](https://neodb.social/discover/)

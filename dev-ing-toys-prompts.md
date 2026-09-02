@@ -1306,7 +1306,7 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 ## codex
 
 # llm-hub-lite/vps
-- i have deployed this repo to my 5 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys librechat/aichorouter/cpapi/cursorapi, worker_2 node deploys librechat/wapdf, worker_3 deploys flowy, worker_4 deploys wabase.
+- i have deployed this repo to my 5 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys librechat/aichorouter/cpapi/cursorapi, worker_2 node deploys librechat/wapdf, worker_3 deploys flowy, worker_4 deploys wabase/verge.
   - all services are running well on my 5 vps.
   - the current architecture of Foundation apps/services and Consumer apps/services is good.
   - All requests should go to leader node first, then proxying to follower/worker nodes.
@@ -1488,7 +1488,9 @@ in a multi-nodes high-availability architecture
 - 
 - 
 
-- some problem is that current `worker_2` node(192.3.91.103) has logical id `worker_3`.
+- some problem is that current `worker_2` node(192.3.xxx.xxx) has logical id `worker_3`.
+
+- you might run `ssh root@ip` and do whatever you want.
 
 ## security
 
@@ -1496,14 +1498,20 @@ in a multi-nodes high-availability architecture
 
 ## woodpacker
 
-- recent woodpacker tasks/pipelines mostly take 20/13/ minutes.
+- recent woodpacker tasks/pipelines mostly take 13/13/12/13/10/... minutes.
 - it is too slow and driving users impatient/crazy.
-- please review the architecture of woodpacker cicd and core devops scripts/code, then design a correct, robust, fast, extensible solution to speed up the cicd experience. the goal is when user git push to github, woodpacker can handle the tasks correctly and fast, the auto deployment workflow should be intuitive and fluent.
+- please review the architecture of woodpacker cicd and core devops scripts/code, then design a correct, robust, fast, extensible solution to speed up the cicd experience. the goal is that when users run `git push` to github, woodpacker can handle the tasks correctly and fast, the auto deployment workflow should be intuitive and fluent.
 - you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. 
-- after your improvement, all services should still work, all config/secrets should be lost, most data should not be lost.
-
+- please design a correct/robust/extensible architecture for cicd, use parallel design if it helps and without too much complexity, serial tasks might still be used for correctness and simplicity.
+- when implementing parallelism for ci tasks, take care of the task order for important use cases like updating foundational services like caddy/besze/woodpecker/observer, you might prioritze leader node first then follower if helps.
 - this repo is still beta software.
 - legacy/unused code might be refactored or removed. compatibility layer is not required. just using the latest code/logic is ok.
+
+- after your refactor/improvement, all services should still work, all config/secrets should not be lost, most data should not be lost, single-node consumer services, multi-nodes consumer services, orphan-node services should all work correctly.
+
+- review exising code/implementation, then make a comprehensive plan to refactor/improve the cicd architecture/experience.
+
+- review exising code/implementation, then continue to improve the cicd architecture/experience.
 # more
 
 ```prompt

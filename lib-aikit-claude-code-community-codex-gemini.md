@@ -682,6 +682,43 @@ codex --yolo resume --last
 - 模型不同，Antigravity里面用的是opus
 
 - 同感。有时候我感觉google他们家的ai coding领域的工具和理念自成一派，甚至会怀疑是不是自己不会用，怎么会这么难用。
+# discuss-codex-internals
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## the life of a codex conversation on disk _202607
+- https://x.com/alxfazio/article/2081415650912727439
+  - This article follows a conversation through its whole life on disk, from your first message to the day you delete it. 
+  - Everything comes from reading the open-source Codex code at version 0.145.
+  - a thread is the conversation. The databases use this name (thread_history_1.sqlite)
+  - a session is the older name for the same conversation. It survives in folder names (sessions/, session_index.jsonl)
+  - a rollout is the conversation’s journal file. It’s the word in every journal filename (rollout-….jsonl)
+- Every conversation lives in a `journal` , one append-only JSONL file where each line is one JSON object recording one event (a message, a reply, a tool call). 
+  -  The SQLite databases next to it are copies (indexes and caches Codex can mostly rebuild from the journals). 
+  -  All of it sits in one per-user folder in your home directory
+- As you chat, your thread’s journal collects everything, live, one line per event. 
+  - In go your prompts, the model’s replies, its reasoning summaries, every shell and tool call with its output, token counts, and the session’s metadata (working directory, git branch and remote, sandbox and approval policy). 
+  - The raw reasoning is the one exception. When it’s stored at all, it’s an encrypted blob only OpenAI’s servers can decode
+- While you chat, the copies fill in behind the journal. The thread catalog (state_5.sqlite) gets its update immediately after each append, and the page-by-page copy of the conversation (thread_history_1.sqlite) catches up whenever the thread is next read.
+
+- Compaction doesn’t rewrite the journal. It appends one more line, carrying the summary itself plus an instruction to future readers: “use this instead of the older turns”. The old turns stay in the file, unread by the model but fully present on disk.
+
+- codex resume doesn’t load a saved snapshot. It opens the journal and replays it from the first line, applying compaction records along the way, then keeps appending to the same file. 
+
+- The -wal and -shm files next to each database are its sidecars (recently committed data and coordination state), one living unit with the database. Copying state_5.sqlite alone while Codex runs can silently miss data.
+
+- Run `/delete` inside a conversation, or delete a thread from the desktop app, and you get a hard delete, the closest thing Codex has to a real eraser. It removes the journal (plain and compressed, active or archived), the thread’s entries in the old name index (session_index.jsonl), the page-by-page conversation copy (implementation), and the catalog row.
+  - Deleting files by hand is weaker. rm on a journal file kills the original but not its copies. The thread’s catalog row stays in state_5.sqlite, title and first-message preview included, and whatever conversation content was already copied into thread_history_1.sqlite stays there too. 
+  - thread_history_1.sqlite is safe to remove. You lose nothing, because Codex rebuilds it from the journals as threads are read again, and if the catalog breaks, thread listing switches to scanning the files directly (file-scan fallback).
 # discuss-codex-tips/tricks
 - ## 
 

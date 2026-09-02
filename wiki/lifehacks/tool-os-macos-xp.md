@@ -433,6 +433,22 @@ redis-cli shutdown
 
 - ## 
 
+- ## 
+
+- ## 
+
+- ## [macOS Ventura - Background Items 收集 - V2EX _202210](https://v2ex.com/t/889619)
+- clashx pro 的进程是 west2online, 为什么是这家公司?
+  - [我的 login item 有两项很奇怪的 item, 看起来是国内公司 app, 但是在进程和 find 里面都找不到 - V2EX _202211](https://v2ex.com/t/892522)
+  - ClashX 就是 这个域名的
+
+- ## [What is /System/Volumes/Data/private/var/db/diagnostics/Persist _202404](https://discussions.apple.com/thread/255586335)
+- According to Apple developer information, the var folder refers to “per-user temporary files and caches.” This means that this is a temporary or cache file that is not in the Home folder. This way, cache data — which Apple is keen to store — is not transferring data over a network.
+
+- https://apple.stackexchange.com/questions/176371
+- /private/var/folders/ holds temporary files that macOS and apps create for various system functions. Deleting these files can help free up disk space, but macOS will regenerate necessary files as needed, so it’s generally safe to remove them.
+- Anything withinin the hierarchy of /private/var/folders/* can be deleted. zz included.
+
 - ## [Safari Tab Suspension?  _202410](https://talk.macpowerusers.com/t/safari-tab-suspension/38676)
   - I keep a lot of tabs open and tab suspension helps with memory/battery. I didn’t see this any explicit setting in safari. Does safari support tab suspension? Any extension that does it?
 - I think the OS will suspend ‘automatically’… in Activity Monitor, you will see that Safari has “App Nap = yes” Under Energy tab., you could expand the toggle and see all the tabs and whether they have App Nap or not, but I don’t think you can individually turn it on or off.
@@ -441,7 +457,7 @@ redis-cli shutdown
   - 路径通用结构：/private/var/folders/xx/随机字符/X/com.google. Chrome.code_sign_clone。
 
 - [Detect and crash Chromium bots | Hacker News _202505](https://news.ycombinator.com/item?id=43916622)
-  - Since a couple months ago, if you use Chrome via playwright etc. on macOS, it will deposit a copy of Chrome (more than 1GB) into /private/var/folders/kd/<...>/X/com.google. Chrome.code_sign_clone/, and if you exit without a clean browser.close(), the copy of Chrome will remain there. I noticed after it ate up ~50GB in two days. No idea what's the point of this code sign clone thing, but I had to add --disable-features=MacAppCodeSignClone to all my invocations to prevent it, which is super annoying.
+  - Since a couple months ago, if you use Chrome via playwright etc. on macOS, it will deposit a copy of Chrome (more than 1GB) into `/private/var/folders/kd/<...>/X/com.google.Chrome.code_sign_clone/`, and if you exit without a clean browser.close(), the copy of Chrome will remain there. I noticed after it ate up ~50GB in two days. No idea what's the point of this code sign clone thing, but I had to add --disable-features=MacAppCodeSignClone to all my invocations to prevent it, which is super annoying.
 - That's an open bug at the minute, but the one saving grace is that they're APFS clones so don't actually consume disk space.
 
 - [Chrome instances created in code_sign_clone are not cleared on MacOS · Issue #2795 · teamcapybara/capybara _202502](https://github.com/teamcapybara/capybara/issues/2795)
