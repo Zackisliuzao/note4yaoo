@@ -1306,9 +1306,10 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 ## codex
 
 # llm-hub-lite/vps
-- i have deployed this repo to my 5 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys librechat/aichorouter/cpapi/cursorapi, worker_2 node deploys librechat, woker_3 node deploys flowy, worker_4 node deploys wabase.
+- i have deployed this repo to my 5 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys librechat/aichorouter/cpapi/cursorapi, worker_2 node deploys librechat/wapdf, worker_3 deploys flowy, worker_4 deploys wabase.
+  - all services are running well on my 5 vps.
+  - the current architecture of Foundation apps/services and Consumer apps/services is good.
   - All requests should go to leader node first, then proxying to follower/worker nodes.
-  - all services are running well on my 4 vps.
 
 - analyze related architecture/scripts/code, then 
 
@@ -1320,7 +1321,7 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 
 - please review existing apps/services architecture/implementation, analyze all the services/docs/code if you want, then make a comprehensive plan to improve the docker architecture/servces in a single vps, making all the services correct, robust, extensible in the long term. 
 
-- code/docs for beszel/woodpecker has been cloned locally at `../all-vps-monitor` and `../all-cicd/woodpecker` for reference if you want. 
+- code/docs for beszel has been cloned at `../all-vps-monitor` for reference if you want.
 - code/docs for woodpecker has been cloned at `../all-cicd/woodpecker` for reference if you want.
 - code/docs for aichorouter(new-api) has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/new-api` for reference if you want.
 - code/docs for cpapi(CLIProxyAPI) has been cloned at `~/Documents/repos/ai-ml-llm/all-router-token/CLIProxyAPI` for reference if you want.
@@ -1386,7 +1387,7 @@ in a multi-nodes high-availability architecture
   - bootstrap leader node first, then other nodes.
   - the current design of copying config/secrets from leader to follower nodes is good.
   - bootstrap scripts `ops/bootstrap-vps.sh` should be correct and robust for both first deployment and manual re-deployment.
-  - restic backup should be enabled and use local backup on local vps by default, remote s3-like/R2 backup should be optional.
+- restic backup should be enabled and use local backup on local vps by default, remote s3-like/R2 backup should be optional.
 
 - please review existing apps/services, analyze all the services/docs/code if you want, then make a comprehensive plan to refactor/improve for both single-node and multi-nodes architecture, making all the services correct, robust, extensible in the long term. 
 
@@ -1399,6 +1400,9 @@ in a multi-nodes high-availability architecture
 
 - a solution has been implemented to support to deploy a new docker service to any follower node by new environment variables or new interactive shell scripts, so that requests still go to leader node then proxied to follower node. for services that high-availability is not required, these services can be deployed to a single server.
 - continue to improve the architecture that supports to deploy a new docker service to any follower node, using aichorouter/cpapi as example, making the architecture correct, robust, extensible.
+
+- please design a solution to deploy a bentopdf service called `wapdf` to any follower node user specified. deploy it to worker_2 node by default, just like aichorouter/cpapi. i have configured wapdf.aichorage.de to leader ip and worker2-wapdf-origin.aichorage.de to worker-2 ip .
+  - source code for wapdf(bentopdf) has been cloned at folder `~/Documents/repos/office/ilove-bentopdf` for reference if you want.
 
 - please design a solution to deploy a grist service called `wabase` to any follower node user specified. deploy it to worker_4 node by default, just like aichorouter/flowy/... `wabase.aichorage.de` has been configured at cloudflare.
   - source code for wabase(grist) has been cloned at folder `~/Documents/repos/saas/all-airtable/grist-core` for reference if you want. 
@@ -1416,11 +1420,11 @@ in a multi-nodes high-availability architecture
   - please design a solution to deploy a openobserve service called `observer` to any follower node user specified.  also deploy it to worker_1 node, just like aichorouter/cpapi. `observer.aichorage.de` has been configured at cloudflare.
   - source code for openobserve has been cloned at folder `../all-logging/openobserve` for reference if you want.  you might use the provided docker config or custom docker config.
 
-- optimize wabase for single-node, sqlite, minimal cpu/ram resources. 
+- optimize wapdf for single-node, minimal cpu/ram resources. 
   - the max cpu should be 0.9, the max ram should be 1.5gb.
   - if required, cloudflare r2 might be used.
 
-- review exising code/implementation, make both single-node consumer app and multi-nodes consumer apps work correctly, make a comprehensive plan to implement/improve wabase.
+- review exising code/implementation, make both single-node consumer app and multi-nodes consumer apps work correctly, make a comprehensive plan to implement/improve wapdf.
 
 - you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. only if there are obvious bugs or design defects, then you might propose big refactor or huge change. if there is only subtle bugs, just propose to improve the existing architecture.
 
@@ -1431,6 +1435,40 @@ in a multi-nodes high-availability architecture
 - you might do multi-stage implementation to deploy wabase, you might run `ssh root@198.46.182.199` as worker-4 node and do whatever you want.
 
 - in cloudflare, i have configured wabase.aichorage.de to leader ip and worker4-wabase-origin.aichorage.de to worker-4 ip .
+
+## single-orphan-node
+
+- continue to improve the architecture that supports to deploy a new docker service to any follower node, using aichorouter/cpapi as example, making the architecture correct, robust, extensible.
+
+- please design a solution/architecture to support to deploy a new docker service to any follower node by new environment variables or new interactive shell scripts, so that requests always go to the follower node directly without leader node, just like a orphan service. a orphan service is intentionally single-node; high availability is out of scope.
+- use hysteria as a example use case of this architecture/solution.
+
+- please design the solution to deploy a hysteria service called `verge` to any follower node user specified. deploy it to worker_4 node by default. in cloudflare i have configured verge.aichorage.de to worker_4 node ip .
+  - source code for verge(hysteria) has been cloned at folder `../all-vpn-proxy/hysteria` for reference if you want.
+
+- optimize verge for single-node, minimal cpu/ram resources. 
+
+- please also improve the bootstrap/restart related scripts for the use case of restarting vps so that when vps is restarted, all the services including orphan services can restore correctly and quickly, without data loss. 
+  - bootstrap leader node first, then other nodes.
+  - the current design of copying config/secrets from leader to follower nodes is good.
+  - bootstrap scripts `ops/bootstrap-vps.sh` should be correct and robust for both first deployment and manual re-deployment.
+
+- you might reuse existing utils/scripts if it hepls. 
+- if this feature is very different from existing services, you might design it as a standalone feature with standalone scripts.
+
+- review exising code/implementation, make single-node consumer services, multi-nodes consumer services, orphan-node services all work correctly, make a comprehensive plan to implement/improve verge.
+
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
+- this repo is still beta software.
+- legacy/unused code might be refactored or removed. compatibility layer is not required. just using the latest code/logic is ok.
 
 ## changing-vps
 
@@ -1455,6 +1493,17 @@ in a multi-nodes high-availability architecture
 ## security
 
 - review the config on all vps, make the architecture more secure, robust in the long term.
+
+## woodpacker
+
+- recent woodpacker tasks/pipelines mostly take 20/13/ minutes.
+- it is too slow and driving users impatient/crazy.
+- please review the architecture of woodpacker cicd and core devops scripts/code, then design a correct, robust, fast, extensible solution to speed up the cicd experience. the goal is when user git push to github, woodpacker can handle the tasks correctly and fast, the auto deployment workflow should be intuitive and fluent.
+- you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. 
+- after your improvement, all services should still work, all config/secrets should be lost, most data should not be lost.
+
+- this repo is still beta software.
+- legacy/unused code might be refactored or removed. compatibility layer is not required. just using the latest code/logic is ok.
 # more
 
 ```prompt

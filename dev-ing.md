@@ -345,13 +345,37 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
-## 0831
+## 0901
 
-- 
-- 
-- 
-- 
-- 
+- beszel: worker-4’s fingerprint is identical to worker-3’s, so Beszel treats the new agent as the existing worker-3 system and never creates a worker-4 record. This comes from cloned VPS machine identity data; I’m assigning worker-4 a unique persisted fingerprint and restarting only its Beszel agent.
+
+- 🤔 i bought several vps, 1 racknerd in LA, 1 colocrossing in new york, 1 dedirock in LA. i live in guangzhou, China.
+  - i plan to deploy a custom vpn with hysteria 2 protocol.   
+  - which vps should i choose for deploy vpn? which vendors provide free ip change or low pricing for ip change?
+  - what is the ready-to-use solution or best practice to do it?
+  - please deep research related solutions/projects, if you found any open source products or inspiration projects, provide overview/github-url/website for each.
+- RackNerd: 1 free IP change if requested within the first 72 hours of purchase. After 72 hours, it costs a $3.00 one-time fee per IP replacement
+- ColoCrossing:  $3.00 one-time fee to change your VPS IP
+
+- Hysteria 2 is built on a modified QUIC protocol (UDP) designed to aggressively fight packet loss and high latency.
+- Don't try to put Cloudflare's proxy (orange cloud) in front of it. Hysteria 2 is UDP/QUIC — Cloudflare's HTTP(S) proxy only handles TCP, so you'd need DNS-only (grey cloud) records pointed straight at the VPS IP. This is also why the IP-change policy actually matters here: the VPS IP is your exposed endpoint.
+
+- Just run Hysteria 2's own installer on each VPS independently, and use a multi-node-aware client to switch between them.
+
+- 🆚 [V2Ray protocols: What is the difference between VLESS and Vmess? | Medium _202304](https://medium.com/@louizo79/v2ray-protocols-what-is-the-difference-between-vless-and-vmess-4c75dc4371a7)
+- VLESS and Vmess are different V2Ray protocols. Project V is a collection of utilities that enable you to construct a personalized privacy network on the Internet. 
+- VLESS is a protocol developed by V2Ray that provides better security and performance compared to the original V2Ray protocol. VLESS uses the same underlying technology as V2Ray, which is based on the Transport Layer Security (TLS) protocol.
+- The main difference between VLESS and V2Ray is that VLESS uses a simplified handshake process and eliminates unnecessary features to reduce the attack surface. VLESS also uses the latest version of TLS to provide better encryption and authentication.
+- VLESS is designed to provide a more lightweight and efficient alternative to V2Ray, making it ideal for use on low-end devices and in resource-constrained environments. It also provides better security by using stronger encryption and authentication mechanisms.
+
+- Vmess is a protocol used for communication between a client and a server in a Virtual Private Network (VPN) setup. 
+  - Vmess stands for “VMessage” and is based on the Transport Layer Security (TLS) protocol, which provides a secure and encrypted communication channel between the client and server.
+
+- Trojan is another open-source network proxy that is designed to provide similar functions as V2Ray, but with a different approach to obfuscation. Trojan disguises network traffic as HTTPS traffic, making it difficult for firewalls to detect and block it.
+
+# dev-08
+
+## 0831
 
 - [How to speed up SCP of 100GB file between two servers over public internet? : r/sysadmin _202105](https://www.reddit.com/r/sysadmin/comments/no7pbb/how_to_speed_up_scp_of_100gb_file_between_two/)
 - rsync over ssh. Don’t use -z. Do use -W This will also handle situations where the network borks. The job is entirely restartable.
