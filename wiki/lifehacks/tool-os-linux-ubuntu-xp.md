@@ -119,6 +119,7 @@ maxretry = 6
 findtime = 300
 # 封禁多少秒，-1是永久封禁（不建议永久封禁）
 bantime = 600
+
 # 禁用方式
 banaction = iptables-multiport
 # 不需要发邮件通知就这样设置

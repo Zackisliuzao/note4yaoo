@@ -510,6 +510,49 @@ https://dlercloud.com/user/shop
   - 青云梯：96/年，60G/月
   - 肥猫云：72/年，60G/月
   - HK-BEUP:69/年（兑换码优惠），100G/月
+# discuss-vpn-server
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [个人用户入坑半年经验总结 _202601](https://www.nodeseek.com/post-593805-1)
+- 不知不觉进入NS已经半年了，把自己半年的经验总结梳理一下，供参考。
+
+个人需求：AI，油管和国内被墙的常用网站。
+
+最终选择：一个美西三网优化且解锁较好的VPS，一个一线主流机场。
+
+首先是前者，选择美西主要考虑就是为了AI不降智的问题，而这一条也是很多个人用户入站自建的出发点。AI降智背后逻辑常人不得而知，且没有必要去尝试搞清楚，只要大多数时间不影响自己的体验即可。
+但是一定要独享，且AI应用固定使用这一个节点连接。不要乱跳IP，也无需使用指纹浏览器，AI知道你是用的VPN，不需要家宽那种纯净度；
+一定要独享，无论是机房还是家宽，你只要分享了，超过一定数量的同IP连接，大概率就会降智，而且拼车这个问题，你是不知道同车的人会干什么，除非认识，否则极度不建议去拼车；
+至于选择哪家，这个没有固定的，这个月人少，好了，下个月人多，又差了，只能自己寻找，且最好避开热门线路比如DMIT和搬瓦工这类，家宽的话个人只推荐购买vicrs，且AI应用使用常规付费而非教师、拼车以及学生这类账号；
+地点个人建议选择美西。
+自建大多数情况是稳定的，和机场在稳定性上个人没有感觉出差别，AI使用VPS解决后，因为美西的VPS确实因为地理位置原因延迟较高，亚太机的VPS价格较高，个人购买的难以和机场质量相比，所以入一个一线机场的基本套餐结合使用，对IP要求不高的时候很好。。选择结合海豚以及毒药网站推荐购买。
+另外关于大流量emby的问题，这个对于IP更没有要求了，直接拼车或者买个AWS机场即可。但是近几年来买了很多emby，付费和公益服都用过。常年闲置，还是自己想看什么，去PT找相应资源即可。
+
+买到了VPS以后就别看网站了，这东西初入简单，但是深了以后细节很多，为了追求一点细节提升，成天泡在上面挺浪费时间的。不要在意活动价格，一般也就几十块钱差价。
+
+最后一句话，需要啥买啥。与君共勉。
+
+想了下把搭建VPS的过程发一下。1. 购买VPS。2. 搭建节点，正常机器推荐使用youtube上面的教程。使用s-ui搭建vless+reality搭建，使用v2rayN. Alpine使用一键脚本
+
+- DMIT/搬瓦工+小众VPS，日常常规使用，没有啥问题，家宽需求许多都是一些商家刻意制造紧张氛围，好卖他家的货，一般人根本不需要伪加宽需求，该用啥用啥
+
+- 线路一般和解锁以及 ip 质量不兼得，要想体验好一点减少降智的概率还是配一个冷门的落地就可以，vps+落地来应付 ai 和需要 ip 质量的场景，机场应付大流量场景，落地也不太需要家宽，家宽太贵了，nat 家宽不如干净一点的落地
 # discuss-vpn-client/clash/v2ray
 - ## 
 
@@ -518,6 +561,107 @@ https://dlercloud.com/user/shop
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## [问一下大佬们 安卓现在最好用的代理软件和模式是什么 _202511](https://www.nodeseek.com/post-514353-1)
+- 一类
+FlClash
+全协议支持、分流、相对省电、异常勤快的更新频率，对Meta写法的配置文件可视化适配极佳 仿 Surfboard UI（但功能上青出于蓝），覆写可选项比CMFA少
+
+Nekobox ～自建党/单节点梭哈
+全协议支持、稳定、简单易用、链式代理易操作 分流繁琐；UI走经典的Material Design公模风
+
+Clash Meta for Android (CMFA)
+全协议支持、分流、更新积极、覆写可选项全、MetaCubeX/Mihomo官方分支 UI一般/交互逻辑不太合乎直觉，对带icon的proxy-group及rule-providers等Meta写法的配置文件可视化效果一般
+
+Sing-box for Android
+全协议支持、分流、最强DNS处理、省电优化好、衔接Tailscale内网穿透、更新积极、免费，迭代激进/屎山代码风险小，基本能做到一个配置文件通杀《全平台》 GUI极其简陋、学习曲线陡峭；配置难度高/覆写全靠手搓config.json；迭代激进/旧配置文件可能跨版本不兼容
+
+二类
+Husi (虎兕) ～自建党/单节点梭哈
+基于sing-box核心，稳定、简单易用、链式代理易操作 新协议、新特性都迅速跟进，纵向对比各平台 App/Core，都属协议覆盖率的前列 分流繁琐，但好在提供 Rule-set 匹配查询功能；UI走经典的Material Design公模风
+
+Exclave ～自建党/单节点梭哈
+基于v2ray核心，稳定、简单易用、链式代理易操作 🟢新协议、新特性都迅速跟进，纵向对比各平台 App/Core，都属协议覆盖率的第一！ 分流繁琐；UI走经典的Material Design公模风
+
+Karing
+基于sing-box核心，分流规则开箱即用、对新手最友好的sing-box GUI之一，全平台通用 覆写可选项少，最大缺点可能是UI一般！
+
+V2rayNG 自建党/单节点梭哈
+基于v2ray/xray核心，最早问世的代理工具之一，成熟稳定、简单易用 分流短板；UI走经典的Material Design公模风；👴🏻老同志App
+
+Surfboard (冲浪板) ✂✂✂ 阉割主流协议
+魔改v2ray核心的分流，UI 美观并对 Android 代理工具的审美情趣有极大贡献！ 协议残缺严重(如SS2022/TUIC/Vless-Reality/HY2/anyTLS)，覆写可选项比FlClash少，核心本身已进入👴🏻老同志序列
+
+三类
+ShadowSocks-Android 当代代理工具的开山鼻祖（2014.07） ✂✂✂ 阉割主流协议
+... 分流短板；UI走经典的Material Design公模风；👴🏻老同志App
+
+InsightBox (原v2rayInsight)
+基于v2ray和sing-box核心的分流、简单易用、UI简洁美观 仿Surfboard的UI，v2ray核心本身已进入👴🏻老同志序列
+
+Xray GUI
+基于Xray核心，主流协议支持较全 分流短板
+
+Clash Mi
+基于Mihomo核心，全协议支持、分流，Mihomo核心的其他优点 KaringX的新开项目
+
+MikuBox for Android 🆕
+基于sing-box核心，全协议支持、分流，其他参考Nekobox 从 Nekobox fork 的新项目，其他参考Nekobox
+
+Vproxy 自建党/单节点梭哈
+基于Xray核心，颇有想法的三位一体（VPS 节点搭建探针代理客户端），界面美观 较新的项目；分流短板（至少目前如此），导致仅匹配“自建党”的需求
+
+Hiddify 🔴伊朗2024.11拆墙后，已断更
+魔改sing-box核心，简单易用，波斯风味app 虽基于singbox但分流短板；因断更已久，anyTLS等新协议支持不足
+
+FlyClash
+Mihomo类的另一GUI客户端，界面美观 较新的项目；仍在测试，apk安装包待发布；代码质量遭非议
+
+另类（依赖Root）
+Box for Root
+一站式包揽mihomo/Clash、sing-box、v2ray、xray等全明星阵容核心库，支持redir/TProxy/TUN等多模式 依赖 Magisk Manager、KernelSU Manager 或 APatch 安装
+
+Box4Magisk
+一站式包揽mihomo/Clash、sing-box、v2ray、xray等全明星阵容核心库，支持redir/TProxy/TUN等多模式 依赖 Magisk Manager、KernelSU Manager 或 APatch 安装
+
+Box for Android🆕
+从成熟项目Box for Root分支而来，一站式包揽mihomo/Clash、sing-box、v2ray、xray等全明星阵容核心库 较新的项目
+
+akashaProxy 🆕
+基于mihomo，支持TProxy/TUN模式 依赖 Magisk Manager 或 KernelSU Manager
+
+Clash MIX 🆕
+基于mihomo，支持TUN模式 依赖 Magisk Manager 或 KernelSU Manager
+
+其他
+V2ray/V2fly [裸核] ✂ 阉割主流协议 当代代理工具的里程碑（2015.09）
+成熟稳定、消耗少 分流很折腾，需要手写定义outbound；跑裸核过于原教旨主义；虽有V2fly团队后继，但协议等跟进缓慢，👴🏻老同志
+
+Xray [裸核] V2ray的演进（2020.11）
+协议高大全、性能强 基于该核心的App/插件相对较少，跑裸核过于原教旨主义
+
+Mihomo [裸核] (原Clash. Meta) 社区最活跃的代理核心（2021.12）
+协议高大全、易用性高 跑裸核过于原教旨主义
+
+Sing-box [裸核] 正在发展的潜力股代理核心（2022.08）
+协议高大全、性能强；极致体验党的福音，哪怕real-ip、哪怕不采用auto_redirect，它仍属迄今"最快国内体感最快国外体感"的唯二方案（另一是爱快/RouterOS虚拟网卡"伪多拨回环"分流方案，体感更极致但也更难部署） 部署对新手不友好；新兴核心的迭代过于激进，尤其1.10.x版本前/后，导致config.json很难向下兼容；跑裸核过于原教旨主义
+
+一些已不再活跃的Apps，不再赘述 🔴已断更
+
+补充：由于全球最大广告公司Google在Android 7.0（2016年8月）后不再允许非官方证书进行中间人(MitM)攻击，其后的安卓系统都无缘像iOS同类型Apps使用MitM去广告等。
+
+- 如果clash系的话，那我只推荐flclash，因为你配置文件里面写的是怎么样的，它就怎么执行。而别的的话，多少会有一点复写，在 DNS 分流这方面的话，尤其明显
+
+- Clash meta在用，主要多节点分流方便，SingBox配置要不停的跟着版本走。其他的不能分流或者不方便。要么就是套壳
+
+- v2rayNG，分应用代理很好用，而且不用管clash系繁琐的配置文件，就直连，黑名单，大陆以外三种模式
+
+- nekobox可以针对不同规则选择不同节点进进行分流
+V2rayNG只能选择三种模式
 
 - ## [机场专属客户端的优化真有这么厉害？延迟92ms变7ms - LINUX DO _202606](https://linux.do/t/topic/2415184)
 - 我通过cx逆向了，不同客户端请求，返回的地址不一样，而且还有加密
@@ -1414,6 +1558,12 @@ ChatGPT 解锁
   - Quit and ideally remove the old original ClashX app (and consider cleaning up the leftover ClashX Pro / Clash Verge Rev services too — I saw a verge service daemon still registered with ports 7897-7899/9097). Running several proxy apps means whichever launches last rewrites the system proxy port, and anything hardcoded to another port (like git was) breaks silently.
 
 # discuss
+- ## 
+
+- ## 
+
+- ## 
+
 - ## 
 
 - ## 

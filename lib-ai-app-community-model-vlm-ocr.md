@@ -743,7 +743,32 @@ modified: 2025-11-06T18:49:13.977Z
 
 - ## 
 
-- ## 
+- ## 🤔 发票识别我们做过两版
+- https://x.com/bingwujinyi/status/2094363065588343138
+第一版 OCR 加规则，识别率九成七，单张成本几乎为零，跑在自己机器上
+第二版换成多模态模型，图它能直接理解版式，不用为每种票据写模板。综合识别率九成五，比 OCR 低两个点，但省掉了模板维护
+上线之后出了一次事。有一张发票的金额栏被折痕挡了一半。OCR 那版会返回空值，走人工
+多模态那版返回了一个完整的金额：8, 640.00
+
+那张票的真实金额中间那位被挡住了。模型补了一个 4
+
+它不是识别出了 4。它是觉得这里应该有一位数字，而 8640 是个合理的金额
+
+我们回查了三个月的记录，类似的补全有七处，其中两处对不上账
+
+后来改回混合方案：结构化字段走 OCR，版式理解走模型
+
+有人问结构化的为什么要用 OCR
+
+我说因为它便宜。而且它看不清的时候会返回空，它不会自己编一个字出来
+
+- 多模态大模型用来做 OCR 还有提示词注入攻击的风险
+
+- 怎么判断哪些要走人工？我们现在用的系统 PDF 英文识别都出错
+
+- 评论真有意思，一直反复强调发票 OCR 有现成的 api 调用，为什么还要自己做。你不做 他也不做，api 调用是哪来的，天上掉下来的吗？有人做了你不做没有了竞争产品怎么提高？如果你的业务量一天识别百万千万次，你也要去买 api 吗？发票这种数据这么敏感，使用 api 是否会泄密都是要考虑的因素
+
+- 理论上所有之前ocr反空甚至是走人工的数据和相应的结果标注可以作为一套非常好的后训练数据或者是上下文来喂给多模态的模型
 
 - ## 🌰 [Local VLMs (Qwen 3 VL) for document OCR with bounding box detection for PII detection/redaction workflows (blog post and open source app) : r/LocalLLaMA _202602](https://www.reddit.com/r/LocalLLaMA/comments/1r8smbk/local_vlms_qwen_3_vl_for_document_ocr_with/)
   - I have now implemented OCR with bounding box detection into the Document redaction app 

@@ -159,6 +159,12 @@ modified: 2026-06-30T17:32:43.131Z
 - 
 - 
 
+## draft-ocr
+
+- cpu 比 大模型便宜得多, 允许用户手动指定大模型处理
+  - remote 和 local 结合
+  - gpu 和 cpu 结合
+
 ## draft-ai
 
 - features

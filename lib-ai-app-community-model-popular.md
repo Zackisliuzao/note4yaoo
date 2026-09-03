@@ -871,7 +871,14 @@ My biggest lesson: reasoning effort does not replace model capability. Luna xhig
 
 - ## 
 
-- ## 
+- ## [技术上讲，llama 4到底失败在哪里？ - 知乎 _202507](https://www.zhihu.com/question/1923759516484367396)
+- Scout和behemoth的架构可能有问题。至少和Deepseek，Qwen3和gpt-oss这种稀疏化专家的方向不一致。这方面的insight甚至不如AI2的olmoe，就和Llama3.2对比Molmo一样。Maverick我觉得潜力还是有的，做到比Gemini2.5-Flash略好的水平应该没问题。
+  - 后训练相比Llama3时期没有明显提升，更是没有追上r1带领的reasoning模型的潮流。
+
+- [如何评价 Meta 刚刚发布的 LLama 4 系列大模型？ - 知乎 _202504](https://www.zhihu.com/question/1892119259968165459)
+- Meta颓势尽显，从llama3.1起，技术上insight就慢慢落后了。回首往昔，llama2还真是最巅峰。
+
+- 感觉就是很混乱.... 整体给人一种这俩模型不是一个团队训的的感觉.... 小模型和大的模型是不同的配置方案（甚至我怀疑他们都不是相同的 pretrain 数据....）
 
 - ## [What version of Gemma 4:12b should I run on Macos : r/ollama _202606](https://www.reddit.com/r/ollama/comments/1u08jtc/what_version_of_gemma_412b_should_i_run_on_macos/?sort=top)
 - I tried gemma4:12b and gemma4:12b-mlx and decided to stick with the gemma4:12b model for now because it uses less RAM and also seemed slightly faster on my MacBook Air (M4, 16GB RAM). Also, there didn't seem to be much difference in the quality of the responses between the two models in the few cases that I tested. I tried one of the smaller Qwen models but gave up on it after it couldn't answer a fairly simple probability question because it couldn't count the number of letters in a word.

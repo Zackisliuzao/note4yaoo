@@ -81,6 +81,7 @@ modified: 2022-11-07T10:25:12.034Z
 - [NodeSeek](https://www.nodeseek.com/)
   - [NodeSeek 邮箱 ](https://seek.li/)
   - [Nodeimage 图床](https://www.nodeimage.com/)
+  - [NodeSeek-管理记录 ](https://www.nodeseek.com/ruling)
 # vps-dns-domain
 - sites
   - [IDC Flare - 域名、主机等信息集散地](https://idcflare.com/about)
@@ -495,6 +496,12 @@ flatpak run com.discordapp.Discord --proxy-server="socks5://127.0.0.1:1080"
 - unsplash镜像战
   - https://unsplash.dogedoge.com/
 # video/tv
+
+## youtube
+
+- [Pipepipe, does it work way better than Grayjay for you? : r/grayjay _202510](https://www.reddit.com/r/grayjay/comments/1o4pmqb/pipepipe_does_it_work_way_better_than_grayjay_for/)
+  - Pipepipe is a more customizable, a bit faster version of NewPipe. Its definitely faster than Grayjay, well I think everything is faster than Grayjay, but I would say Grayjay is overall a better app with more options and depth. Hopefully the video loading speed can be worked on.
+  - Pipepipe is Newpipe but with more options and a bit faster
 
 ## wiki
 
@@ -968,6 +975,13 @@ export https_proxy=http://127.0.0.1:7890;export http_proxy=http://127.0.0.1:7890
   - ClashX / ClashX Pro / ClashX Meta 只是一个代理工具，不提供任何代理服务器
   - Clash. Meta Core
   - Tun mode support
+  - The macOS project is a wrapper: it launches a separate Mihomo/Clash. Meta core and forwards your YAML to it.
+    - ClashX Meta v1.4.44 bundles Mihomo Meta v1.19.30. 
+    - The matching code for that exact core version confirms that YAML order is preserved and evaluated top-to-bottom; there is no automatic “more specific domain wins” sorting.
+    - Mihomo evaluates rules from top to bottom. It stops at the first matching rule.
+  - [Route Rules - mihomo docs ](https://wiki.metacubex.one/en/config/rules/)
+    - Rules will be matched in order from top to bottom, with the rules at the top having higher priority than those below.
+    - If the request is for UDP and the proxy node does not support UDP (for example, if the ss node does not have udp: true specified), it will continue to match downwards.
   - 💡 [新手教程 · Issue _202405](https://github.com/MetaCubeX/ClashX.Meta/issues/80)
     - build from source
   - [[Bug]Tun模式选项无法保存 _202401](https://github.com/MetaCubeX/ClashX.Meta/issues/58)
