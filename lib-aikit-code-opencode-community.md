@@ -58,6 +58,18 @@ modified: 2026-01-17T22:41:25.867Z
 
 - ## 
 
+- ## 
+
+- ## people ask us if we'll train our own model and the answer currently is no
+- https://x.com/thdxr/status/2095351710105448698
+  1. we are too dumb to
+  2. there's plenty of other well funded efforts
+  3. we need to remain a neutral ground for models to battle
+- Do you guys worry about what happened with Cursor happening to opencode? They were getting squeezed hard by the labs b/c they couldn't compete on inference subsidies and had to pivot to their own model. Do you think you'll need your own model for opencode at some point? Perhaps a finetuned one specifically for the harness?
+  - we are in the same position as cursor. there are two options in this position cursor took the first option which is try to become a lab - which they did via acquisition. we're taking the second option
+
+- One thing I don't understand about you guys' business model is how you deal with being worked out of the equation on your own product.  If Opencode is just a conduit, then the products are Zen and Go, and you're essentially in a race to the bottom on token pricing.
+
 - ## OpenCode is the first time i could justify event sourcing in a real system
 - https://x.com/thdxr/status/2088326451103699363
   - everything that happens is an event which gets projected into the sqlite db

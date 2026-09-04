@@ -216,7 +216,10 @@ modified: 2023-10-26T21:54:54.201Z
 
 - ## 
 
-- ## 
+- ## 四个月以前我认为飞书多维表格是小企业信息化的救星。 现在我已经觉得这玩意拖累了小企业信息化进程了。
+- https://x.com/ixiaowenz/status/2094402843440726368
+  - cli 性能太差了，和 AI 不搭感觉
+- 不是广告，属实就是眼下的workbuddy不需要学习就可以搞定
 
 - ## [Docmost is one of the best open source notion alternative out there : r/selfhosted _202502](https://www.reddit.com/r/selfhosted/comments/1iyfig5/docmost_is_one_of_the_best_open_source_notion/)
 - No, it's absolutely not a Notion alternative. It's a good note taking app and wiki, but it has nothing of what makes Notion special. It doesn't even have databases, which is one of the major features of Notion.

@@ -2016,6 +2016,14 @@ modified: 2026-06-20T15:49:57.019Z
   - 只能使用auto模型，约200W+ token（$2额度）。有限的Tab 补全。
   - 所以100个free号大概能提供 2亿 token
 
+- antigravity
+  - [Catiecli - gcli2api](https://catiecli.sukaka.top/dashboard)
+    - GCLI/ build/ 反重力/ gemini api云反代
+    - 上传一个pro凭证（学生pro或者企业pro） → 获得 **500 额度** （可以吃kimi-k3 glm5.3）
+    - 上传一个free凭证 只能吃flash (但是可以吃glm5.2 glm5.3f dsv4f)
+    - kimi-k3和glm5.2也需要上传有效CLI凭证才能吃
+    - AGY额度获取: 上传以后自己吃自己的
+
 ━━━ ✨ChatGPT 账号✨━━━
 👉 https://pay.ldxp.cn/shop/tuoling
 👉 https://pay.ldxp.cn/shop/7HVUEC3Y

@@ -1346,6 +1346,12 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 
 - you might refactor/reorganize/improve the architecture/logic if it helps to make it correct, robust, extensible in the long term. only if there are obvious bugs or design defects, then you might propose big refactor or huge change. if there is only subtle bugs, just propose to improve the existing architecture.
 
+- you might run `ssh root@107.175.66.2` as worker_1 node and do whatever you want.
+
+- after you finish the fixes and improvements, please push to github to auto trigger the woodpecker ci. 
+  - after the success of re-deployment, you might do some tests to recheck 
+  - you might run `ssh root@107.175.66.2` as worker_1 node(or `ssh root@ip` for other vps node) and do whatever you want. 
+
 ## bootstrap
 
 - the current git changes contain huge breaking changes, I will commit and push to github right now. 
@@ -1411,7 +1417,8 @@ in a multi-nodes high-availability architecture
   - source code for flowy(activepieces) has been cloned at folder `~/Documents/repos/saas/activepieces` for reference if you want. 
 
 - please design a solution to deploy a cursor-api-proxy service called `cursorapi` to any follower node user specified. deploy it to worker_1 node by default, just like aichorouter/cpapi. `cursorapi.aichorage.de` has been configured at cloudflare.
-  - source code for cursorapi(cursor-api-proxy) has been cloned at folder `~/Documents/repos/ai-ml-llm/all-router-token/cursor-api-proxy` for reference if you want.  you might use the provided docker config or custom docker config with optional CURSOR_API_KEY configured by user manually.
+  - source code for cursorapi(cursor-api-proxy) has been cloned at folder `~/Documents/repos/ai-ml-llm/all-router-2api/cursor-api-proxy` for reference if you want. 
+  - you might use the provided docker config or custom docker config with optional CURSOR_API_KEY configured by user manually.
 
 - please design a solution to deploy a outlookEmail service called `pigeon` to any follower node user specified. deploy it to worker_2 node by default, just like aichorouter/cpapi. `pigeon.aichorage.de` has been configured at cloudflare.
   - source code for pigeon(outlookEmail) has been cloned at folder `~/Documents/repos/ai-ml-llm/all-router-2api/outlookEmail` for reference if you want.  you might use the provided docker config or custom docker config.
@@ -1432,7 +1439,8 @@ in a multi-nodes high-availability architecture
 
 - worker-4 is not bootstraped for now, i will run `ops/bootstrap-vps.sh` script on worker-4 node after your configuration and implementation.
 
-- you might do multi-stage implementation to deploy wabase, you might run `ssh root@198.46.182.199` as worker-4 node and do whatever you want.
+- you might do multi-stage implementation to deploy wabase, 
+- you might run `ssh root@107.175.66.2` as worker_1 node and do whatever you want.
 
 - in cloudflare, i have configured wabase.aichorage.de to leader ip and worker4-wabase-origin.aichorage.de to worker-4 ip .
 

@@ -479,6 +479,10 @@ modified: 2023-08-29T10:12:22.345Z
   - Self-hosted pastebin powered by Git
   - All snippets are stored in a Git repository and can be read and/or modified using standard Git commands, or with the web interface. 
   - It is similiar to GitHub Gist, but open-source and could be self-hosted.
+# git-s3
+- https://github.com/crabbuild/crab /apache2/202609/rust
+  - https://crab.build/
+  - Serverless Git for large files: store models, datasets, and assets in your own S3, GCS, Azure, or S3-compatible bucket.
 # integrations
 - https://github.com/mhutchie/vscode-git-graph /NonCommercial/202109/ts/inactive
   - https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph

@@ -16,6 +16,17 @@ modified: 2025-03-25T19:15:23.591Z
 - workflow-ux
   - progress
   - human in the loop
+
+- workflow vs coding/agent
+  - runtime: n8n comes with js/python, coding agent requires environment
+  - clean orchestration
+  - observability: progress, logs, easier to debug
+  - reusable steps
+  - workflow is much cheaper than tokens
+  - saas features: multi-user, permission
+  - N8N for deterministic flows, agent for hard problems
+  - less hallucination
+  - interactive ux: easy for non-technicals
 # pm-workflow
 - tips
   - 与外部系统通信可考虑使用统一workflow平台, 内部模块间通信优先events/rpc
@@ -39,6 +50,87 @@ modified: 2025-03-25T19:15:23.591Z
 - You're not wrong. There is a lot of really great wisdom in append-only patterns mixed with state machines/FSM, etc. 
 
 - How is this different from event sourcing stream projections?
+# discuss-pm-workflow
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [Agentic coding has kind of made n8n obsolete : r/n8n _202609](https://www.reddit.com/r/n8n/comments/1w44pgj/agentic_coding_has_kind_of_made_n8n_obsolete/)
+  - Saw this from Josh Sorenson on LinkedIn and it hit close, I killed my own n8n server about two weeks ago for basically the same reason.
+  - His thoughts: "n8n didn't break or do anything wrong. Claude got good enough that writing the actual code is faster than dragging nodes around. Almost everything those servers were doing now runs as Python on Vercel, with Trigger. dev handling the long jobs"
+  - Same deal for me. What used to be a pile of n8n nodes is now just a script, Claude/Codex wrote most of it with me steering, and it's way easier to open and fix.
+  - Not trashing n8n though. It's genuinely how you figure out which automation ideas are even worth building before you burn real time coding them. It got me here, I just don't need it for this anymore.
+
+- I don't really see Claude/Codex and n8n as substitutes. I see them working at different layers.
+
+I'm currently building the automation behind a training business, and it's actually a good example.
+
+A new enrollment comes in through Stripe. From there the system has to update PostgreSQL, handle invoicing, generate and store the invoice PDF in the right place, send the student the correct information for that specific course edition, and finally notify me whether the whole process completed successfully or something failed.
+
+Could I ask Codex to turn all of that into Python? Absolutely.
+
+But I don't particularly want one large application doing all of it. n8n gives me an orchestration layer where I can see the business process, isolate failures, retry individual branches, change integrations and inspect what happened to a particular enrollment.
+
+And I still use AI/code inside that architecture whenever code is the better tool.
+
+For me, agentic coding hasn't made n8n obsolete. It has made the boundary clearer:
+
+code implements things; n8n orchestrates things.
+
+Sometimes a script is all you need. Sometimes the workflow itself is part of the system.
+
+- The orchestration layer point is underrated, retry on a single branch beats debugging a script any day.
+- Exactly. And I think observability is the other half of it.
+
+When something fails six months from now, I don't just want to know that "the automation failed". I want to see which step failed, with which input, retry that part if appropriate, and understand what already completed before the failure.
+
+You can absolutely build all of that in code. But at some point you're building your own orchestration layer.
+
+That's where I think the "n8n vs code" comparison becomes a bit misleading.
+
+- I build n8n workflows by driving Claude rather than clicking nodes. Most of the work happens through the n8n-mcp MCP server wired into Claude Desktop or CLI, which gives Claude direct read/write access to my n8n instance — I describe the flow I want in plain language, Claude scaffolds the nodes, and I iterate node-by-node with n8n_update_partial_workflow rather than re-pushing whole workflow JSON (targeting by nodeName is far more reliable than by name).
+
+- You can run an n8n automation far cheaper and more reliably than agentic.
+
+Burning tokens to run an output a low cost n8n automation will produce is myopic.
+
+An n8n modular production automation can easily be updated without rewriting code and burning tokens too bug fix the LLM's memory gaps.
+
+- I mean, I am using Claude Code to write n8n workflows via MCP. I am not dragging any nodes around.
+So the question is not speed. The question is where do you host your automations, Claude or n8n.
+
+I prefer platforms that give me a runtime. n8n gives me scheduling, retries, credential storage, and execution logs. If I move the same job to a script, I must build all of that again or pay someone else for it.
+
+As someone who is not that proficient in coding, it is also much easier to learn and to see what happens in a node based system. When a run fails, I open the execution and I see the data at each step. With a script I would need to understand and navigate through logs.
+
+- They do two completely different things. I use N8N for secure deterministic flows, sometimes with agents in it, and agentic coding and general ai for work that either does not have to be serviceable by a broader team, or requires deeper integration. They compliment each other, not substitute
+
+- We’ve moved almost all of our flows into N8n and rely on “AI” for very little. Clear controllable boundaries at each layer with direct control over the exact information and almost no room for hallucination.
+In fact, since moving over our use case for AI has dropped significantly.
+
+We offer it as a service to customers to help build and manage their own workflows because we’ve started challenging that it isn’t AI that they want it is workflow orchestration instead.
+
+- The script is always the small part. Mine was about 200 lines and everything around it, scheduling, retries with backoff, somewhere to keep the credentials, an alert for when it silently stops, ended up longer than the actual logic. Went back to n8n for one client purely because they wanted to edit the message text themselves without me deploying anything.
+
+- people waste time creating workflows by hand when AI can produce workflows within N8N I made a project that demonstrates this, issue is that workflows are made in JSON which AI hates writing more than actual code.
+
+- Yes. Cron and scheduled tasks too
+
+- N8n was just scripts triggering other scripts with extra steps
+
+- n8n is still highly relevant if you are in an industry that cares about control, trust, and transparency. I work in healthcare and want complete control of my agents. I need to be able to show and explain to my clients and collaborators what the agents are doing and how they are built. I like being able to share transparent workflows. I like to be in complete control of my workflows. n8n checks all these boxes.
+
+- I still prefer n8n because it’s easier to make changes and troubleshoot with nodes. Much more difficult if you have to go through (or have Ai go through) that much code to fix a simple error in a node. Also everything feels so much more organized in n8n with credentials, integration, etc..
 # discuss-bpmn(Business Process Management Initiative)
 - ## 
 
