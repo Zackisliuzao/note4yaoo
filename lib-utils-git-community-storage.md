@@ -15,7 +15,76 @@ modified: 2025-01-01T16:03:02.565Z
 - ## 
 
 - ## 
+# discuss-git-s3
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 🚀 Today I’m open-sourcing Crab: serverless Git for large files at any scale, released under Apache 2.0.
+- https://x.com/haipingfu/status/2094863027682386215
+  - Git remains one of the best interfaces for collaborative work: add, commit, branch, merge, push, clone. The problem isn’t the workflow—it’s the weight behind it.
+  - Modern repositories often mix source code with model checkpoints, datasets, videos, game assets, scientific outputs, and build artifacts. Store everything as ordinary Git blobs and repositories become slow and expensive. Move large files elsewhere and you lose Git’s biggest advantage: one exact, branchable history.
+  - Crab keeps that history intact. Git stores compact pointers, while Crab splits large files into content-defined chunks, deduplicates and packs them, and writes them directly to the same object-storage bucket as the repository. Your bucket is the single storage layer. There is no Crab data server or separate database, an object store bucket is all you need.
+  - You can clone lazily, hydrate only what a person or job needs, dehydrate clean files to reclaim space, and keep using normal Git commands.
+  - Crab is written in Rust. The open-source repository includes the complete CLI, Git remote helper, storage crates, architecture notes, documentation, and tests.
+- crab + bucket is a great fit for code agent. Crab uses git packfile for incremental push, and it also provides operational commands like ‘crab repack’ to optimize packfile storage and clone/fetch latency. I’d hope crab would be the truly distributed way for agentic development.
+
+- Content-defined chunking pays off hardest on model checkpoints, where a fine-tune touches a slice of the tensors and the rest dedupes away.
+  - Yes it’s like versioned objects, and crab is a good fit in this area thanks to `xet` protocol by huggingface.
+
+- Git LFS had the same pitch and bolted a metered server in front of the bucket. GitHub's bandwidth quota was the product. Pointers straight into your own storage is the version that should have shipped in 2015.
+  - Exactly. That’s basically the idea behind Crab: Git pointers, your own object storage, no LFS server or bandwidth tax in the middle/tram will pay S3 bandwidth though
+
+- How are you handling authentication?  How about impersonation?
+  - Team or developer would use their bucket credentials when publish commits to their bucket, I have managed auth coming soon.
+- This will need to be in pre-receive hook for validation and you’ll need to compare the git commits signature to the users e-mail for the push.  When I was at GH this was one of the first slow downs we saw
+
+- Crab and Archil feel like different products focused on different layers.
+
+Crab is more of a Git extension: it lets Git use object storage as the remote backend.
+
+Archil, from what I understand, is focused more on the storage layer, though their product scope is obviously much broader than storage alone. If it speaks S3, Crab should be able to store Git repos on Archil too.
+
+- ## Introducing Crab: a serverless Git remote storage solution for teams working with large files. _202606
+- https://x.com/haipingfu/status/2068501689267830894
+  - Git is still the best collaboration model we have for software: branches, commits, review, rollback, CI, and history.
+  - But modern repositories no longer contain only code.
+  - They contain model weights, datasets, media assets, simulation outputs, build artifacts, checkpoints, design files, and other large binary payloads that can easily reach gigabytes or terabytes.
+  - That creates a painful tradeoff. Plain Git bloats history. Git LFS adds another server, endpoint, quota model, and operational surface. Manual object-storage buckets keep bytes somewhere durable, but they separate the data from Git history and make collaboration harder to reason about.
+  - Crab is built around a simpler idea: Keep Git as the interface. Use your cloud object storage as the backend. Remove the server layer in between.
+  - The repository stays lightweight because Git carries metadata and tiny pointer files, while the real payloads live durably in your bucket.
+  - Under the hood, Crab uses Git remote-helper and filter-process concepts to make large-file handling feel native. The developer works in Git, while Crab manages chunking, deduplication, upload, checkout, hydration, and storage layout.
+  - The technical model is designed for large binary data.
+  - Large files are split into content-defined chunks, so small edits do not necessarily rewrite the entire file. Crab can identify which chunks are already known and which chunks are new. Known chunks skip upload. New chunks upload once. Chunks are packed into xorbs to reduce duplicate storage, bandwidth, and object request volume.
+  - Clone and checkout are also designed for large repos. Instead of forcing every user or CI job to materialize terabytes immediately, Crab can clone metadata first. Teams can inspect branches, review code, and start work quickly with lightweight pointer checkout, then hydrate real bytes only when needed.
+  - Crab does not require a central LFS server or a new database service. Storage stays in your cloud account. Your buckets, IAM, lifecycle rules, encryption posture, and identity model remain the control plane.
+  - The goal is not to replace Git. The goal is to let Git keep doing what it is excellent at: collaboration, review, history, and coordination.
+  - Crab turns object storage into an enterprise Git remote for large files. Git-native large files. Your cloud. No server layer.
+
+- Is everything persisted in object storage? Do you employ some kind of a local caching layer to improve read/write latency?
+  - Yes, all stored in a bucket, including the metadata and chunks, shards etc. we used different layers of caching mechanism to improve reading/writing latency, repo level cache, localhost cache, dedicate cache server and lastly the object store.
+
+- https://x.com/haipingfu/status/2095223602757214362
+  - Crab isn’t just for large files. It works well for normal code/text repos too.
+  - It stores Git packfiles directly in your bucket and supports incremental push/fetch/pull.
+  - For coding agents, that’s a pretty good model: your local repo ↔ your object store. No Git hosting server in the middle, no extra service to operate, and no dependency on GitHub request limits.
+
+- is crab only suitable for large files?
+  - Small files should be working, large file pointers are small files and indexed by git ODB. I used k8s repo and replayed 1000 commits to object store, didn’t get any issues, I can show you how to setup the credentials if you need.
+
+- https://x.com/haipingfu/status/2094948857205727360
+  - When Crab compares with Git LFS, DVC and Huggingface Hub/Bucket:
+  - Crab uses your own object-store bucket as the Git remote, with Xet-style chunking and dedup built in.
+  - No LFS server. No storage platform. Just Git and a bucket.
 # discuss-git-fs/web
+- ## 
+
+- ## 
+
+- ## 
+
 - ## 
 
 - ## 

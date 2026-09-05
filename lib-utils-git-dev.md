@@ -37,6 +37,10 @@ modified: 2023-08-29T10:11:26.348Z
   - best-integrations: 💠 vscode, jupyter
   - known: gitlens
 
+- git-alternatives
+  - epic为游戏场景设计的 lore
+  - huggingface为code/model/dataset设计的 xet
+
 - tips
   - git的广泛使用一个原因是与现有的文件和工具都集成方便，设计架构时要考虑现有格式与集成
     - 拆分核心内容和周边功能，split git-src and issues/pr/wiki, split txt/docx/xlsx and api
