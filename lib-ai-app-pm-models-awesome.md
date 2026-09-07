@@ -24,6 +24,16 @@ modified: 2026-06-20T15:49:57.019Z
 
 - features
 
+- 用多个手机号来注册多账号来使用token的思路不太可行
+  - 🤔 充钱可以避免下面各种方式的折腾， 过度折腾不如直接买 token
+  - 同一手机号最多绑定4个google账号
+    - google验证支持国内手机号, 但codex/claude这些不支持国内手机号
+  - esim随时会被风控, 如esim.gg在25年被google禁止验证码
+  - 厂商的不确定性太大， google不停加强风控, 就算能用网页版pro, 也行还是用不了反重力
+  - 很多厂商明确不支持虚拟卡/esim， 如OpenAI 的条款里面是不支持的
+  - 厂商如opencode会根据ip来限制请求, 此时多个账号没用
+  - 很多国产模型登录账号后甚至需要实名才能用
+
 ## models-bases
 
 - tips
@@ -2017,6 +2027,9 @@ modified: 2026-06-20T15:49:57.019Z
   - 所以100个free号大概能提供 2亿 token
 
 - antigravity
+  - antigravity需要google账号支持gcp: 美区邮箱 + gcp/agy + 12个月套餐, 手机接码风险高
+  - 过度折腾不如直接买 gemini token
+  - https://gemini.google.com/gems/create?hl=en-US&pli=1
   - [Catiecli - gcli2api](https://catiecli.sukaka.top/dashboard)
     - GCLI/ build/ 反重力/ gemini api云反代
     - 上传一个pro凭证（学生pro或者企业pro） → 获得 **500 额度** （可以吃kimi-k3 glm5.3）
@@ -2172,15 +2185,21 @@ modified: 2026-06-20T15:49:57.019Z
 - [黑鹅的闲置的小店 - 云猫寄售 ](https://catfk.com/shop/ithte)
   - google one gemini pro
 - [Gemini源头供货商的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/pixelshop)
+  - https://wzyp.cn/shop/gemini123
   - gemini年卡--¥18
 - [gemini专家的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/gemini123)
   - 反重力--¥18
+- [以太 AI服务订阅充值 ](https://google7676.top/)
+  - gemini pro, 反重力贵一点
 - [Gemini pro 18个月激活卡密，JIO渠道，只包激活无售后 - LD士多 ](https://ldcstore.com/product/12047)
   - JIO渠道链接提取自助卡密，卡密使用后，登录账号打开链接激活
   - 自查账号地区，地区没问题，支付和地址不是国内，年龄成年，就可以
   - [Ai小铺的小店 - 链动小铺 ](https://wzyp.cn/shop/WPXSCE1B/)
-- [以太 AI服务订阅充值 ](https://google7676.top/)
-  - gemini pro, 价格较贵
+- [Ai2You智友社，让更多的人用上更好的AI的小店 - 链动小铺 ](https://wzyp.cn/shop/282D9KDL)
+  - 购买账号后，先上反重力，反重力测试正常后，再去修改2FA验证、更换辅助邮箱 和 剔除设备（请保留您自己的设备），此外为防止风控，请您不要再进行其他任何的修改，请7日后再修改账户密码
+  - 如果登陆跳手机绑定，请绑定您自己的国内号码即可
+  - 请用第三方反重力软件cockpit-tools跳转官方反重力软件antigravity（支持批量，记得切换账号）
+  - 反重力使用方法：先同时安装好cockpit-tools跟antigravity，然后先打开 cockpit-tools，打开软件后选择 添加账号，在Refresh Token输入您收到卡密的refresh_token即可，选择启动账号自动打开antigravity，在打开的浏览器完成登陆授权即可。
 - [AKMOZ-魔卡AI的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/AKMOZ)
   - gemini年卡--¥65
 - [Antipro（请看店铺公告）的小店 - 云猫寄售 ](https://catfk.com/shop/Antipro)
@@ -2243,13 +2262,13 @@ modified: 2026-06-20T15:49:57.019Z
 ## 发卡网
 
 - [AI号探 - ChatGPT/Claude/Gemini/Grok等AI账号的发卡平台比价探针 ](https://www.aihaotan.com/)
+- [AI 比价雷达 _202606](https://priceai.cc/)
+  - https://github.com/physics-dimension/PriceAI
+  - [【开源推广】PriceAI：我vibe了一个ai订阅卡网渠道聚合比价平台，拒绝中间商赚差价 - LINUX DO _202606](https://linux.do/t/topic/2294440)
 
 - [阿华的AI比价聚合站 ](https://ahua-ai-price-aggregator.onrender.com/)
 - [AI 商品库存聚合搜索工具 ](https://goods.moo.kim/)
   - [售票处的小店 - 链动小铺](https://pay.ldxp.cn/shop/T6UJ4L1M)
-- [AI 比价雷达 _202606](https://priceai.cc/)
-  - https://github.com/physics-dimension/PriceAI
-  - [【开源推广】PriceAI：我vibe了一个ai订阅卡网渠道聚合比价平台，拒绝中间商赚差价 - LINUX DO _202606](https://linux.do/t/topic/2294440)
 
 - [学生教育优惠项目导航 ](https://nav.edumails.cn/)
   - [EDU教育网邮箱注册申请-EDU教育网邮箱官方资讯平台 ](https://www.edumails.cn/)
@@ -2262,6 +2281,9 @@ modified: 2026-06-20T15:49:57.019Z
 
 - [KnauHip-Ai — 高级 AI 工具发卡站 ](https://www.payline.pics/)
   - 很多低价帐号如kiro/cursor都是10个起购
+
+- [zhanghao66 - 全网最低批发ai账号店铺 ](https://www.zhanghao66.com/)
+  - 各种gmail/gemini/google接码
 
 - [聊聊AI ](https://talkai.cyou/)
   - gork
@@ -2719,10 +2741,13 @@ modified: 2026-06-20T15:49:57.019Z
 - [[富可敌国]【daNew ai】daNew ai GPT代充服务正式上线了! - LINUX DO _202608](https://linux.do/t/topic/2764583)
   - [Recharge Portal ](https://cdk.danew.cc/)
 
-## sms/code
+## sms/code/接码
 
 - [superman的小店的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/superman)
   - codex接码 一个号码可以接三次，小概率号码无效，不一定能接到，无质保，如果连续三个有问题，找我退款问题账号
+
+- [幻境MirageAI的小店 - 链动小铺 ](https://wzyp.cn/shop/mirage)
+  - 不保证都能接上码懂的在拍，接不上需要隔一段时间再接，可以换个IP亦或开无痕再试（大部分不用，就是ip问题）
 
 - [La shop的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/aisell)
   - 加拿大接码
@@ -2765,7 +2790,13 @@ modified: 2026-06-20T15:49:57.019Z
 - [Smz - 数字商品自动发卡平台 ](https://shop.smz6.com/)
   - pp-¥1.6
 
-## email
+## email 📧
+
+- gmail-tools
+  - antigravity需要google账号支持gcp: 美区邮箱 + gcp/agy + 12个月套餐
+  - [谷歌账号检查器 Gmailcheck ](https://gmailcheck.com/)
+  - 尽量不要买随机地区的账号, 通常是印度/孟加拉, 默认打不开gemini
+  - 部分gmail账号默认打不开 gemini.google.com, 变通方式是打开 https://gemini.google.com/gems/create?hl=en-US&pli=1 , 在这个页面可以chat
 
 - outlook-tools
   - [星辰邮箱大师 ](https://www.xckj.site/easy-mailbox/)
@@ -2774,9 +2805,28 @@ modified: 2026-06-20T15:49:57.019Z
 - [T佬的gmail批发渠道 ](https://ai666.dnxb.cc/)
   - 全tg最便宜gmail邮箱批发
   - Gemini专区：美区/随机2022--2024谷歌邮箱/指定地区gmail邮箱
+  - 登录后不要马上修改密码，会风控出手机验证，但是登录后请一定修改2Fa，（不改2fa不售后）辅助邮箱 
+  - 如果出现无法验证本人， 这个就是ip问题，换下ip，找优质ip登录更换
+  - 首次登录不要着急踢设备，因为异地首登有保护，过两周养好账号权重再挂常用设备后在踢设备，改密码 修改2fa和辅助邮箱后，账户绝对安全。 
+  - 修改2fa可以用 https://2fa.show/ 网站修改，也可以下载Authenticator（身份验证器）进行修改。 后续依次修改 密码 踢设备
+
+- [gmailgood ](https://gmailgood.com/)
+  - 全新gmail || 注册时间：2005-2015年 || 所属地区：随机 2FA
+  - 全新google cloud Platform || 手工注册 || 300$额度 预付费50$ （48小时包首登）
 
 - [91的小店 ](https://gmail91.shop/)
   - gmail-5/6: 美区, 混合地区
+
+- [海外邮箱大全 - Gmail/Yahoo/Outlook邮箱账号与API自动发货 ](https://qan8.com/)
+  - 个人谷歌邮箱
+  - 企业谷歌邮箱
+  - 各国邮箱综合版
+
+- [zhanghao66 - 全网最低批发ai账号店铺 ](https://www.zhanghao66.com/)
+  - 各种gmail/gemini/google接码
+
+- [以太 AI服务订阅充值 ](https://google7676.top/)
+  - gemini pro, 价格较贵
 
 - [AI账号乐园的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/SB9T68JP)
   - https://wzyp.cn/shop/SB9T68JP
@@ -2785,6 +2835,15 @@ modified: 2026-06-20T15:49:57.019Z
 - [陆柒科技的小店 - 链动小铺 ](https://wzyp.cn/shop/M18V0XVF)
   - 邮箱丰富
   - [自行车 Ai 店铺的小店 - 链动小铺 ](https://wzyp.cn/shop/zxc)
+
+- [CodeFree铺子的小店 - 链动小铺 ](https://wzyp.cn/shop/N0IK02WR)
+  - 帐号格式（就是卡密格式）: 账号|密码|辅助邮箱|2fa密钥|时间|地区
+  - Gmail邮箱质保首登无售后均已验活, 随机地区大多是印度, 👀 默认登录不了gemini, 但能登录aistudio
+  - 拿到货立即检查状态，售出后一天内保首登，其余一概不管。之后不退不换，批量可谈
+  - 检查无误后，改2FA，检查转发，7-14天后改密码。不要上号就改密码，可以改2fa
+
+- [牛店的小店 - 链动小铺 ](https://wzyp.cn/shop/7KJU4N9A)
+  - 品类丰富
 
 - [极速的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/jishu)
   - Gmail母号 邮箱，正规账号，单账号独立注册。 可用opus4.6  4.7

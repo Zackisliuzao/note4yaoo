@@ -255,6 +255,22 @@ mineru paddleocr site:github.com -inurl:"github.com/opendatalab/" -inurl:"github
 # reddit
 - 修改一个帖子内的评论排序 best/top/new 会导致其他帖子的排序也会变化, 也就是修改是全局的
 # google
+- resources
+  - [谷歌账号管理常用网址 - LINUX DO](https://linux.do/t/topic/1567759)
+
+- 养号日常
+  - gmail, gemini, youtube
+  - https://gemini.google.com/gems/create?hl=en-US&pli=1
+
+- cloud
+  - https://console.cloud.google.com
+  - https://shell.cloud.google.com
+
+- phone-number
+  - 目前绑定了手机的号: liju, aichor, jiya
+  - You can create up to four Gmail accounts using the same phone number for verification.
+  - https://myaccount.google.com/phone
+
 - To ensure a 'Payments profile' is the same 'COUNTRY/REGION' as the family manager who invited you:
   - https://policies.google.com/country-association-form
 
