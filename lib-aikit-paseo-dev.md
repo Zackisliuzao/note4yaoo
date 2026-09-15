@@ -11,7 +11,9 @@ modified: 2026-09-05T00:27:42.212Z
 - pros
   - license: apache2
   - remote control: local server, remote server
+    - webapp添加本地paseo app作为host后，可以直接从web控制本地电脑
     - 移动端登录时会自动同步workspace/session
+    - 👀 如果要通过webapp控制本地的paseo app, 需要手动修改配置 daemon.cors.allowedOrigins
   - existing coding agents, use it  on your own device
   - providers: Bring your own
   - plugins: add server-side functionality, modify the client with custom components
@@ -25,7 +27,13 @@ modified: 2026-09-05T00:27:42.212Z
 
 - cons
   - Paseo manages other agents, it doesn't ship one.
+  - 依赖用户本地的环境， 如果用paseo之前的agent没配置好， 那也需要先配好再用paseo
+  - 适合个人用户私有化部署, 但不适合作为saas对外提供， 因为自定义host需要支持存储/计算/git操作/开发环境...
+    - 一个host似乎只能一个用户使用， scale成本太高
+    - By delegating to `gh` and `git`, Paseo automatically inherits your existing developer setup
+    - 🤔 可尝试将用户本地的secrets复制到云端， 这种方案好吗
   - 不方便使用多账号, 这是设计目标的取舍
+  - local隔离模式下, 不支持历史记录
 
 - [features](https://paseo.sh/docs/why)
   - clients: The native mobile app has full feature parity with desktop.
@@ -38,10 +46,12 @@ modified: 2026-09-05T00:27:42.212Z
 # draft
 - agent-base
   - built-in agent
-  - external: deepseek-harness, cursor-cli
+  - external: deepseek-harness, cursor-cli, commandcode
 
 - cowork/workbuddy-like
-  - implement integrations for google-docs/msoffice like github/gitea
+  - implement integrations for google-docs/msoffice/lark like github/gitea
+
+- local folder as project/workspace
 
 - sandbox
 
@@ -50,6 +60,8 @@ modified: 2026-09-05T00:27:42.212Z
 
 - cloud的易用性改进
   - chat history
+  - project快速跳转到github repo, workspace快速跳转到branch
+  - chat-turn-mark + content-toc
 
 - transparency
   - show thinking/tools
@@ -70,12 +82,48 @@ modified: 2026-09-05T00:27:42.212Z
   - telegram
   - 支付系统接入ldc
 
+- paseo-hub
+  - 用 n8n/activepieces 替代
+
+- voice
+  - toggle speech models
+
+- 
+- 
+- 
+
+## ux
+
+- thinking content height
+  - thinking内容的markdown未渲染为富文本元素
+
+- 更明显的relay引导和提示
+
+- 
+- 
+- 
+
+## terminal-hiding
+
+- git operations
+  - commit/push/pull
+
+- 
 - 
 - 
 - 
 - 
 
 # dev-xp
+- webapp to local
+  - 如果要通过webapp控制本地的paseo app, 需要手动修改配置 daemon.cors.allowedOrigins
+  - ws://localhost:6767/ws means the browser is talking to the daemon on your Mac directly.  JavaScript running in Chrome opened a WebSocket directly to the Paseo daemon listening on your Mac.
+  - Chromium implements the W3C _Secure Contexts_ specification, which explicitly designates `127.0.0.1` and `localhost` as **"potentially trustworthy origins"** (loopback exception).
+  - Apple's WebKit takes a strict security stance and **does not grant a mixed-content exemption to `localhost` ** . An HTTPS origin is **strictly forbidden** from loading any unencrypted subresources ( `http://` or `ws://` ).
+  - If you want to use Safari instead of Chrome/Edge, you cannot use an unencrypted `ws://localhost` connection from an HTTPS site.
+  - Use Paseo's Encrypted Relay (Recommended for Safari)
+  - paseo daemon pair --relay
+
 - Daemon Spawns the Pi Subprocess
   - pi --mode rpc --model gemini-3.8-flash --thinking high --extension /tmp/paseo-ext-...
   - It spawns the `pi` binary as a child process with its working directory set to your workspace
@@ -104,6 +152,23 @@ modified: 2026-09-05T00:27:42.212Z
 - why workspace
   - 🌹 By introducing Workspaces (especially Git worktrees): Paseo lets you spin up a new workspace in one click. Agent 1 works in Worktree A, Agent 2 works in Worktree B. Both belong to the same **Project** , but their files and Git branches are isolated.
   - Multi-Agent Collaboration in the Same Workspace: Tab 1 Claude Code , Tab 2 codex. Because **Workspace** is the environment container, you can switch providers or have multiple agents and terminals cooperate on the same working tree.
+
+- paseo relies on the host system's **GitHub CLI (`gh`)** and local **Git configuration** (SSH keys, Git credential helper, or PAT).
+  - Local-First & Zero Credential Relaying: Paseo never stores, relays, or refreshes GitHub OAuth tokens or client secrets on its servers or across remote devices.
+  - Environment Inheritance: By delegating to `gh` and `git`, Paseo automatically inherits your existing developer setup: 适合个人用户，不适合服务端
+  - No Centralized Cloud Proxy: your machine communicates directly with GitHub.
+- Paseo abstracts Git hosting platforms under a **Git Forge** layer (which supports GitHub, GitLab, Gitea, Forgejo, and Codeberg). GitHub is implemented as an adapter in this forge registry.
+- clone from github
+  - gh auth status
+  - **Repository search:** Runs `gh repo list --json ...` for user repos or `gh search repos <query>` for public repos.
+  - daemon executes `git clone <url> .paseo-clone-<temp>`
+  - gh pr view <number> --json ...
+
+- There is one place where a **GitHub App is used**: **Paseo Hub** 
+  - Hub uses environment variables to receive GitHub webhooks and mint scoped installation access tokens.
+
+- you can add your local Mac as a host to the web app running at `https://aichor.aichorage.de`, but it requires using Paseo's **Encrypted Relay** (or an HTTPS tunnel) rather than a direct `localhost` connection, due to web browser security policies.
+  - because you already installed the Paseo Mac App, you can also do the reverse (and often much better) setup: add your VPS to your Mac App.
 
 - 
 - 

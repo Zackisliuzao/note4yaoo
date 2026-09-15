@@ -40,11 +40,11 @@ modified: 2026-09-05T00:28:18.805Z
 - Claude: ClaudeAgentSDK, claude CLI
   - in-process `query()`, not a spawned CLI
   - Managed via the SDK's `query()` factory (`query.ts`). Paseo spawns the `claude` subprocess through the SDK wrapper.
-  - **Native Features** : Directly controls Claude's native `allowedTools`,                        `disallowedTools`, extended thinking tokens, UltraCode mode, and token compaction.
+  - **Native Features** : Directly controls Claude's native `allowedTools`, disallowedTools, extended thinking tokens, UltraCode mode, and token compaction.
 - Codex: stdio JSON-RPC, codex app-server 
   - proprietary __app-server JSON-RPC over stdio__, via a custom transport
   - Spawns `codex app-server` as a long-running subprocess.
-  - Directly bridges Codex's OS sandbox modes (`sandbox_workspace_write`, writable roots, network proxy settings) and approval policies (`auto-review`,                      `full`).
+  - Directly bridges Codex's OS sandbox modes (`sandbox_workspace_write`, writable roots, network proxy settings) and approval policies (`auto-review`, full).
   - **Native Features** : Supports conversation branch rollbacks, thread forks, and Codex Goals.
 - OpenCode: HTTP/SSE Client, opencode server
   - HTTP __server API__ + a Paseo-authored __bridge plugin__ injected into OpenCode 
@@ -55,7 +55,7 @@ modified: 2026-09-05T00:28:18.805Z
   - PI: Custom __JSONL-RPC over stdio__
   - OMP: Its own __RPC / RPC-UI protocol__ , omp --mode rpc-ui
   - Spawns `pi --mode rpc` or `omp --mode rpc-ui` using `JsonlRpcProcess`.
-  - Intercepts Pi RPC interactive extension dialogs (`select`,            `input`,            `editor`,            `confirm`) and translates them into Paseo question permission cards, sending the answer back via `extension_ui_response`.
+  - Intercepts Pi RPC interactive extension dialogs (`select input editor confirm`) and translates them into Paseo question permission cards, sending the answer back via `extension_ui_response`.
 - This is why native providers get deep features ACP can't express: subagent sidechain tracking and workflow output folding (Claude), file+conversation rewind via provider-native persistence (Claude/Codex/OpenCode), provider-native `providerOptions` schemas (only claude/codex/opencode have a `ProviderContract` with a real options schema in `provider-registry.ts:158-162`), and exact MCP preapproval for Hub unattended runs.
 
 - External providers communicate over the Agent Client Protocol (ACP), an open standard (similar to Language Server Protocol, but for AI coding agents) using JSON-RPC 2.0 over stdio.
@@ -77,6 +77,32 @@ modified: 2026-09-05T00:28:18.805Z
   - `WorkspaceGitService` runs an incremental `git status` and `git diff`.
   - The daemon emits a workspace checkout update.
   - In your workspace UI: The **Changes** tab / Git panel automatically highlights under Modified files.
+# plugins
+- Paseo recently introduced a comprehensive **full-stack plugin system** (in v0.8).
+- Unlike simple UI plugins or basic terminal hooks, Paseo plugins are **dual-runtime extensions**: they can execute code in a **Node.js daemon child process** on your development machine, while simultaneously delivering **rich React Native UI** to every connected mobile, desktop, or web client.
+
+- In `plugin-examples/`, Paseo maintains canonical examples demonstrating key plugin patterns:
+  - Example 1: External Context Integration (`plugin-examples/linear`), Allows developers to search Linear issues directly from Paseo's message composer and attach them as rich context cards to any agent prompt.
+  - Example 2: Lifecycle Actions & Policy Governance (`plugin-examples/lifecycle-actions`), Demonstrates how plugins can enforce security policies, automate git workflows, and handle agent errors.
+  - Example 3: Adding Custom Coding Agents (`plugin-examples/provider-direct` & `provider-acp-transformer`)
+  - Example 4: Transcript Customization (`plugin-examples/timeline-items` & `inline-thinking`), Transforms raw agent tool invocations into beautiful native UI components.
+  - Example 5: Themes (`plugin-examples/catppuccin`), Adds custom visual themes across the entire Paseo app.
+
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
 # client-web/electron
 
 ## mac
@@ -85,6 +111,53 @@ modified: 2026-09-05T00:28:18.805Z
 - 桌面版没有独立 daemon，它就是 App 内部的一个 worker。App 退了，daemon 就没了（除非有僵尸 worker，见 坑 #2）
   - 密码	一般不需要（loopback）
 
+- 
+- 
+- 
+- 
+
+# isolation/worktree
+- for Non-Git Folder, worktree is not supported.
+
+- local: Your actual filesystem folder (e.g. `/Users/you/project`).
+  - No file isolation. Edits happen immediately in your working folder and editor. 
+  - If two agent sessions run concurrently in the same directory and edit the same file, **they will overwrite each other's edits** . Paseo does not lock filesystem files.
+    - **Provider-level protection:** Most agent providers (Claude Code, Pi, Codex) perform check-before-write in their `edit` tool. If Agent 1 edits lines in `index.ts` while Agent 2 is also modifying it, Agent 2’s tool invocation fails with an `oldText did not match` error.
+  - Shares the main repository's `.git/index` and checked-out branch.
+  - for **Workspace Archive / Deletion** , Only archives workspace metadata/chat history. **Files are never touched or deleted.** 
+    - For `local_checkout` and non-git `directory` workspaces, archiving removes the workspace record from Paseo's UI and daemon registry, but **never deletes the directory on your disk** .
+  - Dev server port collisions must be handled manually.
+- worktree: A dedicated directory under `~/.paseo/worktrees/{slug}`.
+  - **Full physical isolation.** Changes are completely secluded in the worktree folder. each worktree has its own physical copy of files on disk.
+  - Completely isolated `.git/worktrees/{name}/index` and dedicated branch.
+  - Each worktree maintains its own independent index file under `.git/worktrees/<name>/index`, so worktree Git mutations do not lock the main repo.
+  - If Paseo owns the worktree, archiving the workspace deletes the worktree folder via `git worktree remove`.
+  - Runs setup scripts defined in `paseo.json` (e.g. `npm ci`, build steps).
+  - Injected with `PASEO_WORKTREE_PORT` and ephemeral port allocation.
+
+- for Simple Non-Git Folder (`kind: "directory"`), The daemon creates a workspace record with `isGit: false` `currentBranch: null`, and `cwd: /path/to/folder`.
+  - When you run an agent session (Claude, Codex, Pi, etc.) or open a terminal, the daemon spawns the process with `process.cwd` set to that directory.
+  - Git-specific panels (Git diff, branch switcher, forge PR/MR integration) are automatically disabled. 
+  - The file explorer, composer, agent transcripts, and terminals operate directly on the folder.
+
+- for Local Git Repo with `local` Isolation (`kind: "local_checkout"`), The daemon inspects your repo via `workspaceGitService.getCheckout()`, detecting your Git root and current branch.
+  - Agents run directly in your main repo. Any file edited by Claude, Codex, or Pi is instantly visible in your IDE (VS Code, Cursor, etc.) and in `git status`.
+  - Paseo allows you to open multiple workspaces pointing to the exact same local folder.
+  - Directory-backed state (Shared across same-directory workspaces): Includes Git status, Git diff, forge PR/MR status, and file contents. Both workspaces see the identical on-disk reality.
+  - Workspace-owned state (Strictly isolated per workspace): Includes agent sessions, chat transcripts, terminals, draft messages, review draft comments, and file explorer expanded trees. 
+  - Agent running status (`running` vs `idle`) is isolated to the owning workspace
+
+- for Local Git Repo with `worktree` Isolation (`kind: "worktree"`), Executes `git worktree add <worktreePath> -b <newBranch> <baseRef>`.
+  - Writes `.paseo/worktree.json` with metadata (`baseRef`  `changeRequestLookupTarget`), and seeds `paseo.json` from the source repository.
+  - Writes `.paseo/worktree.json` with metadata (`baseRef`  `changeRequestLookupTarget`), and seeds `paseo.json` from the source repository.
+  - If the worktree directory is accidentally deleted,  `workspace-recovery-service.ts` can reconstruct the worktree from `mainRepoRoot` + `baseBranch`.
+
+- When multiple agents or background polling tasks run `git status` or `git diff` simultaneously, standard Git repos can crash due to index locking.
+  - All read-only Git operations (polling, diffing, status checks, rev-parse) inject `GIT_OPTIONAL_LOCKS: "0"`, This tells Git not to acquire index locks during read operations.
+  - A centralized concurrency scheduler git-process-scheduler.ts limits concurrent Git processes and prioritizes user operations over background polling.
+  - 
+- 
+- 
 - 
 - 
 - 
