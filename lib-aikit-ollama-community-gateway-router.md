@@ -356,7 +356,7 @@ RAG 检索
 - /v1/models 通常用于列出可用模型或查询模型详情。
 
 - 流式输出也不是统一格式
-# discuss-ai-api-gateway-devops
+# discuss-ai-2api-devops
 - ## 
 
 - ## 
@@ -364,6 +364,15 @@ RAG 检索
 - ## 
 
 - ## 
+
+- ## [开源共建. 虚拟机内核 claude codex to api. 全新架构. 防封. 一共测废了10+max 20个pro账号 - LINUX DO _202609](https://linux.do/t/topic/2910046)
+  - 采用独家 console api. setup token 转换为 console 可用 api. 取代 oauth 获取的 at rt. 让 claude 认为你是 console api. 而不是 oauth.
+  - 虚拟机采用 docker / 真虚拟机.
+  - 拟真物理机指纹.— 欢迎提供方案，现在物理机指纹是在攻克的问题.
+  - 虚拟机内使用 claude code 原生 subagent 转发。最大支持 20 并发.
+  - 用户请求 —> 协议清洗 —>/v1/messages—> 接入 claude code subagent—>tcp 转发 —>console api endpoint.—> 透明转发给用户.
+  - 遥测全量发送，让 claude 认为你是完全独立的电脑并且无其余特征.
+  - https://github.com/dofastted/vm2api
 
 - ## [cpa / sub2api 怎么做好安全管理防患于未然？ - LINUX DO _202608](https://linux.do/t/topic/2722451/3)
   - 由于好多人有 cc, codex 订阅转 API 的需求，所以会直接把账号添加到 cpa 和 sub2api ，但是这俩放到公网会一直被扫，大家有没有防护经验？（假如开了 cf tunnel access 邮箱验证还能访问 api 吗？）
@@ -441,12 +450,12 @@ v6封不完
 据笔者的使用体验来看，不会，但是会限速。如果您的CODEX被降智，那更多可能是普遍的bug问题而不是您的账户风险。就像Android端，桌面端，CODEX都是分开的风控体系，但也有一定的关联性。CODEX的限速表现在首字token和整体速度下降，但很难完全跟本地网络质量和服务器高载的影响因素脱离，本身这种情况也并不多见。
 
 - 逐点剖析————行为特征
-01.         单次复杂度过高：
+01.            单次复杂度过高：
 Pro Extend Thinking的复杂对话中，具体是5.4超过2小时，5.5超过1小时的高负载任务。其实具体分为两个部分：一个是思考时长[反映的是思考token耗费]，一个是输入输出内容。为什么5.5是1小时，5.4是2小时呢？其实business的限制可以放更长一些。因为Pro订阅的模型token速度更快，business速度要慢，以及5.5的算力平台较新，token速度脱离套餐本身就更快。
-01.         新注册账号：
+01.            新注册账号：
 新注册账号是典型的高风险场景。新注册帐号建议至少7天后再开付费套餐或您的背景特征较优秀，也是完全没问题，但对背景特征(如IP)的要求就较高。
 
-01.         支付方式与地区：
+01.            支付方式与地区：
 低价区也是风控的高峰，但这里，OPENAI对于支付地区的权重远比支付方式要高得多。Anthropic对于支付方式和支付地区抓的都严[如果想要听后续可以出Anthropic版本]。OPENAI对于低价区的风控水平明显高于其他地区，比如土区、菲区，误杀也会显著增加。
 
 - 逐点剖析————背景特征
@@ -2661,7 +2670,13 @@ https://makerich.club/ chong 这个渠道不是源头，也是流传最久的渠
 
 - ## 
 
-- ## 
+- ## [哈哈道爷我成啦，ChatGPT 可以当作无限 Codex 来用（并非 2api） - LINUX DO _202609](https://linux.do/t/topic/2904360)
+- 最大的问题就是太降智，网页端降智太狠
+- 网页版 6pro 现在用多了就会降智，而且还不提示，会写一堆垃圾代码。
+
+- 我也缺额度，但是担心用这种方法薅会被 O / 制裁，现在这个不降智的 20x 号还是挺珍贵的，纠结
+
+- 和 webcodex 比呢？现在在纠结
 
 - ## [CPA 反代gemini 到那个harness最有好啊 - LINUX DO _202609](https://linux.do/t/topic/2897453)
 - 我用在 claude code 里面的，还行吧，试过接到 DSH 里面，也还行
@@ -3100,13 +3115,13 @@ Hugging Face 🇺🇸 Llama 3.3 70B, Qwen2.5 72B, Mistral 7B +many more. $0.10/m
 - 一个是卖钱的正式版，一个是对话用于训练的免费公测版。测试版不一定弱，但 Ta 是测试版。
 
 - ## 💡 [【长期更新-授人以鱼不如授人以渔】公益站渠道公示（人人都可搭公益？） _202601](https://linux.do/t/topic/1477161)
-  01.                                                                     q2api(claude)
-  02.                                                                     英伟达ai平台（大部分开源模型）
-  03.                                                                     hf抱脸（大部分开源模型）
-  04.                                                                     groq平台
-  05.                                                                     硅基流动平台
-  06.                                                                     富可敌国平台（duck已许可分发付费站anti, 正在申请分发max）
-  07.                                                                     杂七杂八的短效羊毛平台（国外）
+  01.                                                                       q2api(claude)
+  02.                                                                       英伟达ai平台（大部分开源模型）
+  03.                                                                       hf抱脸（大部分开源模型）
+  04.                                                                       groq平台
+  05.                                                                       硅基流动平台
+  06.                                                                       富可敌国平台（duck已许可分发付费站anti, 正在申请分发max）
+  07.                                                                       杂七杂八的短效羊毛平台（国外）
 
 - [还有可以白嫖opus的平台嘛  ](https://linux.do/t/topic/1510785)
 
