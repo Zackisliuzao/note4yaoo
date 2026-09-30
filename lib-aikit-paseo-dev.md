@@ -19,6 +19,7 @@ modified: 2026-09-05T00:27:42.212Z
   - providers: Bring your own
   - plugins: add server-side functionality, modify the client with custom components
     - 支持从多种来源安装plugin: github, npm
+    - 🐛 plugin的依赖关系不支持
   - parallel work with optional git worktree: Per-worktree services. Each worktree gets allocated ports for dev servers and databases, 
   - automation: cli, mcp
   - browser tools
@@ -162,7 +163,7 @@ modified: 2026-09-05T00:27:42.212Z
 - 
 - 
 
-## built-in agent 👾
+## built-in agent
 
 - agent-providers
   - external: deepseek-harness, cursor-cli, commandcode
@@ -173,7 +174,14 @@ modified: 2026-09-05T00:27:42.212Z
   - 💡 可基于profile实现 auto mode
   - 要支持让移动端使用built-in agent执行
 
-- 
+- doc skills hub
+  - install skills to workspace
+  - skills with example docs
+  - 甚至可为其他本地app开发集成: obsidian, office
+  - later
+    - 类似workbuddy的skills， 快速接入本地数据和工作流: 专家skills, 灵感同款html
+    - skills usage statistics: 作者发布的skills支持 optional telemetry
+
 - 
 - 
 - 
@@ -228,6 +236,12 @@ modified: 2026-09-05T00:27:42.212Z
 ## server
 
 - 方便部署为 saas 的server
+- paseo daemon 现有架构不适合scaling
+
+- 
+- 
+- 
+- 
 
 ## remote-control
 
@@ -252,6 +266,12 @@ modified: 2026-09-05T00:27:42.212Z
 - 
 
 - 
+- 
+- 
+- 
+
+## ocr 👓
+
 - 
 - 
 - 
