@@ -1376,7 +1376,7 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 ## bootstrap
 
 - the current git changes contain huge breaking changes, I will commit and push to github right now. 
-- analyze the latest foundation/consumer architecture, then explain to me step by step how to deploy/redeploy this repo to 4 vps by scripts like ops/bootstrap-vps.sh : leader node(23.254.182.254) first, then worker_1 node(166.88.160.139), then worker_2 node(192.3.91.103), then worker_3 node(198.46.182.199), including dns configuration in cloudflare like *.aichorage.de. 
+- analyze the latest foundation/consumer architecture, then explain to me step by step how to deploy/redeploy this repo to 4 vps by scripts like ops/bootstrap-vps.sh : leader node(23.254.182.254) first, then worker_1 node(166.88.160.139), then worker_2 node(166.88.160.139), then worker_3 node(198.46.xx.xx), including dns configuration in cloudflare like *.aichorage.de. 
 - the existing deployment might be cleaned and redeployed if latest architecture is not compatible, data loss is allowed. 
 
 ## updates/maintenance
@@ -1529,7 +1529,7 @@ in a multi-nodes high-availability architecture
 
 - please design a solution to deploy a hysteria service called `verge2` to any follower node user specified. deploy it to worker_2 node by default. in cloudflare i have configured verge2.aichorage.de to worker_2 node ip .
   - verge2 and verge have the same features and use the same docker image, but they are 2 unrelated services as 2 orphan service without high availability.
-  - source code for verge(hysteria) has been cloned at folder `../all-vpn-proxy/hysteria` for reference if you want.
+  - source code for verge/verge2(hysteria) has been cloned at folder `../all-vpn-proxy/hysteria` for reference if you want.
   - source code for clashx meta has been cloned at folder `../all-vpn-proxy/ClashX.Meta` for reference if you want.
 
 - you might refer to how wabase/verge are configured on worker_4 node. requests to wabase still go to leader node first, but requests to verge goes directly to worker_4 node.
