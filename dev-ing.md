@@ -115,7 +115,8 @@ HOST=0.0.0.0 PORT=8080 react-scripts start
 next dev -H 0.0.0.0 -p 3000
 
 npm i -g npm yarn pnpm corepack serve @dotenvx/dotenvx opencode-ai @openai/codex @kimuson/claude-code-viewer   @deepseek-ai/dsh @github/copilot
-npm up -g skills @getpaseo/cli @earendil-works/pi-coding-agent @openai/codex
+@ooxml-dev/cli
+npm up -g skills @getpaseo/cli @earendil-works/pi-coding-agent  
 ```
 
 - dev-goals 不能在产品中检验的技术不玩，注意产品化
@@ -344,6 +345,98 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - ?
 - dev-log
   - ?
+
+## 1007
+
+- i want to deploy caddy and hysteria2-proxy/other-consumer-services on the same vps. caddy service should be the foundation of all other services . All requests should go to caddy first, then proxying to other consumer services.
+  - Hysteria (verges) is UDP/QUIC-based and Caddy's HTTP/3 also wants UDP 443 — they conflict. Which port strategy is better?
+  - option A: Hysteria owns UDP 443 (best camouflage: masquerades as the site's HTTP/3 endpoint). Caddy serves TCP 80/443 only (h1/h2). Standard hysteria2 deployment pattern.
+  - option B: Caddy keeps 443/udp for its own HTTP/3 on all sites. Hysteria listens on e.g. UDP 8443 (configurable). Clients must specify the port.
+
+- a manual VPS restart will fully restore everything automatically.
+  - restart: always in docker-compose.yml
+
+## 1006
+
+- 🐛 when i visit https://aichorouter.aichorage.de/usage-logs/common, on chorme it works well, but on safari, no logs show, it just shows a "Network Error". 
+  - 只有safari存在这个问题, chrome/firefox都不存在此问题, zcode排查很久也没找到问题
+  - CAUGHT IT! The app's own requests are captured, and there's a smoking gun: Safari requests GET /api/log — without the trailing slash — and gets ERROR status=0. Chrome's successful calls are all GET /api/log/ — with the slash. A no-slash URL hits gin's trailing-slash 301 redirect. 
+  - The 301 with a clean relative Location: /api/log/?p=1&... is confirmed via curl. So the app always requests /api/log (no slash), browsers follow the redirect, and gin logs the post-redirect /api/log/ — Chrome's path. The question is where Safari's chain breaks.
+  - MAJOR BREAKTHROUGH — the live log shows the full picture: at 16:49:38–39, Safari's GET /api/log → 301 → followed GET /api/log/ → 200 — the chain worked! But at 16:46:13/21 (the diag=4 load the user saw fail), the same request never reached Caddy at all. So the failure is intermittent — it dies somewhere between Safari and Cloudflare, sometimes, ~7s after page load. 
+- 💡 
+  - Your Safari has a poisoned cached redirect for the URL path /api/log. The panel's log page requests GET /api/log (no trailing slash); the backend answers that with a 301 redirect to /api/log/. 
+  - At some point in the past — almost certainly while the origin-host routing was being reworked (commit da66075) — Safari cached a bad 301 for that path, and WebKit replays cached redirects by path, instantly, without touching the network and even in Private windows. 
+  - I proved this from inside the page: a request to `/api/log?never_seen_before=<random>` — a URL that had never existed — failed in 0 ms with zero packets leaving the Mac, while the same request with the trailing slash made a normal round-trip. So: server healthy, Cloudflare fine, Clash fine, no extensions involved — one sticky browser cache entry. Chrome works because it never cached the bad redirect; it follows the (now clean) 301 every time.
+  - Leader Caddy (live now): added a rewrite so /api/log and /api/channel (the two no-slash paths the SPA uses) are served as their canonical slash forms directly — the backend no longer emits a 301 at all, so no browser can cache a new poison.
+  - Durable fix in the repo: committed the same rewrite to apps/aichorouter/route.leader.caddy and route.follower.caddy
+- purge the poison in Safari: 
+  - Safari → Settings → Privacy → Manage Website Data…
+  - Search for aichorage, select it, click Remove (alternatively: Develop menu → Empty Caches, or quit and reopen Safari after the removal)
+- stay-userscript-manager's Privacy filter list (30,198 rules) contains this content-blocker rule:
+  - {"trigger": {"url-filter": "^[^:]+:(//)?([^:/]+)+/api/log\\?"}, "action": {"type": "block"}}
+  - That regex blocks any URL whose path is exactly /api/log?... — a generic anti-tracking rule (aimed at analytics endpoints) that perfectly, accidentally collides with new-api's log-list API.
+  - Failed in Private windows	Content blockers apply in Private too
+  - Survived website-data purge, cache wipe, restart, redeploys	The rule is re-applied from Stay's filter subscriptions, independent of site data
+
+## 1005
+
+- 👷: 实测同一模型的不同thinking effort对tool calling的理解和使用不同， step-3.7-flash 的high 能快速理解paseo的browser tools, 但medium程度的思考有时找不到browser tools
+  - 实测启用pi最新的codemode后 grok-4.7 xhigh 极少概率能找到并使用 browser tools, 大多数时候都找不到tools; 不启用 codemode 时一直找不到
+  - gpt-6-luna/gemini-3.6-flash一直能轻松找到
+
+- ⚠️ fix dartnode mining
+  - this is XMRig cryptominer malware, not a memory leak. It mines Monero to pool.supportxmr.com — the 2.28 GB RSS is exactly the RandomX dataset size. 
+  - The miner was launched from SSH session 7311, RemoteHost 104.28.205.21 at 2026-10-04 15:49:46. 
+  - Second malware component found: /tmp/bp_2161.sh — a Bitping botnet dropper (Russian comments, hides containers as kworker-poll/systemd-update with --restart=always, wipes bash history). 
+  - 22 successful root password logins from 5 attacker IPs (185.121.108.3, 104.28.237.x, 104.28.205.21, 108.165.12.55)
+  - SSH hardening verified: new key sessions work, password auth refused. 
+- [怀疑 DartNode 服务商侧初始密码泄露——我的两台 VPS 被挖矿了 _20260930](https://www.nodeseek.com/post-955971-1)
+  - 入侵来源 IP：
+  - 185.121.108.3（乌克兰，AS43815 Nash Prostir LLC）
+  - 103.29.127.12（孟加拉，AS38067 Radiant Communications）
+  - 108.165.12.55（与受害机同机房的内网段）
+  - 104.28.205.19 / 104.28.237.19（Cloudflare WARP 共享出口，仅作参考）
+
+## 1004
+
+- [fix(xai): bump pinned grok client version to 1.0.44 for chat-proxy by ggbdpq · Pull Request · router-for-me/CLIProxyAPI _202610](https://github.com/router-for-me/CLIProxyAPI/pull/6252)
+  - Confirming this fix on v8.0.4 (Windows). Same HTTP 426 "Your Grok CLI version (0.2.120) is outdated" on every xAI OAuth chat request through cli-chat-proxy.
+  - As a stopgap until this merges, I set "headers": {"x-grok-client-version": "1.0.44", "User-Agent": "xai-grok-workspace/1.0.44"} in the xAI auth JSON. applyXAIChatHeaders applies auth-file headers after the pinned ones, and inference works again, so 1.0.44 is accepted by the server.
+- 👷: 实测的修复方法, 让agent找到cpa grok oauth 的json, 将内容中相关的版本升级，即可正常使用grok模型了
+- [请教一下，grok+cpa+ccsswitch报客户端版本低，搞不定了 - LINUX DO _202610](https://linux.do/t/topic/2973418)
+  - 你在凭证加一下请求头就行
+
+## 1003
+
+- [求助，antigravity 登录报错是为什么？There was an unexpected issue setting up your account.An error occurred. - LINUX DO _202606](https://linux.do/t/topic/2285357/2)
+  - 👷: ip问题， 换到自建节点就能正常使用了
+
+- 🤔 i want to Build as a Custom Plugin to create a rich text markdown editor ux. 
+  - analyze related code, explain to me more details about how to build a custom plugin with prosemirror-view, prosemirror-state, prosemirror-model ... using dom without react.
+  - the ux might be like,  when user chats with paseo agent in main chatbox and mentions a markdown file, user can right click the file path and show a context menu with menu items to open the markdown editor in sidebar panel or new tab, or any better ux ...
+  - How do you like my idea? If it is okay, you might improve it,  then exmplain to me step by step how to implement it
+- "Sidebar panel or new tab" maps perfectly to the existing API — openPanel("editor", { location: "explorer" }) for the sidebar, { location: "workspace" } for a workspace tab (panels use one persisted plugin workspace-tab target, so it survives reload).
+- Dynamic import, never static. The bundle is one file evaluated on every platform
+  - Gated await import() compiles to a lazy require — the module body only runs when the web branch executes.
+
+- 🤔 Is there any possible solution or workaround to use react-dom or other dom libs/utils in my custom plugin while making the plugin compiling well and works well with the paseo app?
+- Route 1 — Don't use react-dom; bundle DOM libs that don't need React
+- Route 2 — Bundle react-dom as a self-contained "island"
+  - I compiled react-dom + react-dom/client with the plugin compiler's settings. Result: it compiles cleanly 
+  - Ship a process shim, imported first. react-dom/index.js is a runtime branch on process.env.NODE_ENV
+  - Dynamic-import it behind the web gate. Otherwise every phone evaluates 1.4 MiB at plugin load 
+  - Mount your own root into a container div you own — never render into, or take ownership of, a node the host React tree renders.
+  - React context does not cross roots. Context objects come from the shared react, but the provider stack is per-root, so the island sees only defaults. 
+  - Two event systems. React 17+ attaches listeners at each root container, so a click inside the island also bubbles to the host root's listeners. Avoid putting handlers on both sides of the same gesture.
+- Route 3 — The host patch: make react-dom a first-class host module (best long-term)
+- Route 4 — Skip the plugin bundler completely: iframe a real web app
+
+- 🤔 in paseo right sidebar, the "Files" tab show a file tree of workspace folder. but only .md markdown file is supported to read/edit. Most popular files like .pdf/.docx/.xlsx/... all shows "Binary preview unavailable".  the current "Files" related features are too simple and limited.
+  - plugin paseo-file-viewer (at folder `../paseo-plugins/paseo-file-viewer`) provides a alternative file viewer that can be used as a new "Viewer" tab like "Files" tab, but it shows all files as flat list, no nested folders like native file system.
+  - the goal is to implement a new "File Explorer" feature that reimplement most features of paseo-file-viewer, but support to show file tree just like native nested file system. but i want to make the architecture of File Explorer" different from paseo-file-viewer. core file tree of "File Explorer" feature should be built with react componnet with react-dom, designed for web/desktop only, not for mobile. the final goal is to implement file editor for all popular files, but currently focus on file viewer(no editor) and pdf file. "File Explorer" should be built with react components and tailwindcss. `react-dom` might be bundled in this plugin so you might use it for any ui in the file tree or viewer if you want. a "build" step in paseo-plugin.json might be added to extract/compile tailwindcss before plugin execution. i do not want you to build file tree and file viewer from scratch, but might use extend-ui(based on shadcn/base-ui, at folder `~/Documents/repos/ai-ml-llm/all-docai/extend-ui`) by referring to the code/example like /Users/yaoo/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/file-system.tsx , /Users/yaoo/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/pdf-viewer.tsx . support to view .pdf first, other file viewer/editor might be planned but implemented later.
+
+- Reuse extend-ui via Direct File Copy (Vendor)
+  - Can strip Next.js-specific code ("use client" directives)
 
 ## 1002
 

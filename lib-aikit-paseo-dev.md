@@ -46,8 +46,6 @@ modified: 2026-09-05T00:27:42.212Z
   - 不方便使用多账号, 这是设计目标的取舍
   - local隔离模式下, 不支持历史记录
   - 在paseo的web-terminal(xtermjs)中执行 `git pull` 会出现异常，但ssh到vps的repo目录执行pull可以成功
-  - ux
-    - webapp不支持很多桌面端的快捷键
 
 - [features](https://paseo.sh/docs/why)
   - clients: The native mobile app has full feature parity with desktop.
@@ -66,6 +64,10 @@ modified: 2026-09-05T00:27:42.212Z
 
 - 在paseo的web-terminal(xtermjs)中执行 `git pull` 会出现异常，但ssh到vps的repo目录执行pull可以成功
 
+- In Paseo’s current plugin SDK
+  - does not currently expose an API to inject custom items into the built-in chat link right-click menu
+
+- 
 - 
 - 
 - 
@@ -74,7 +76,7 @@ modified: 2026-09-05T00:27:42.212Z
 - 是否支持daemon主机上的port forwarding, 比如运行webapp然后直接暴露
   - https://github.com/itsjustanks/paseo-plugin-daemon  /cf-tunnel/relay/ssh-forward
   - Open a remote project's dev server from Paseo in one press.
-# aichor
+# autumn-studio
 - aichor as paseo bundle
   - paseo + custom-agent + ocr-skills + ui
 
@@ -97,6 +99,7 @@ modified: 2026-09-05T00:27:42.212Z
 - 与im平台的集成，类似openclaw
   - telegram
   - qq
+  - codebuddy/workbuddy
 
 - cowork/workbuddy-like
   - implement integrations for google-docs/msoffice/lark like github/gitea
@@ -105,6 +108,13 @@ modified: 2026-09-05T00:27:42.212Z
   - qmd
 
 - local folder as project/workspace
+
+- filetree
+  - hide . DS_Store
+
+- ux
+  - webapp不支持很多桌面端的快捷键
+  - 
 
 - sandbox
   - 移动端的sandbox如何处理
@@ -167,6 +177,7 @@ modified: 2026-09-05T00:27:42.212Z
 
 - agent-providers
   - external: deepseek-harness, cursor-cli, commandcode
+  - codebuddy/workbuddy
 
 - built-in agent: 移动端可以直接执行agent，而不依赖桌面端或外部agent
   - 需要支持已有的 agent profile 配置

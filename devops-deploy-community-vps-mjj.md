@@ -20,6 +20,13 @@ modified: 2026-06-19T06:15:35.007Z
   - 支持7天无理由退款的很方便
   - 一号一鸡容易转手
 
+- mjj-options
+  - 偏线路? 偏性能?
+  - ip能访问、 未送中, 打开google访问的不是 google.com.hk
+
+- vps-vpn/落地
+  - 可考虑 普通线路 + 优质落地 的组合， 就是要折腾下
+
 - comparison
   - [VPS值得买！ 产品库存状态 ](https://stock.vpszdm.com/)
     - [BWH 产品库存状态 ](https://stock.bwh91.com/)
@@ -218,6 +225,24 @@ modified: 2026-06-19T06:15:35.007Z
   - 日常价格贵， 需要等活动
 # discuss-stars
 - ## 
+
+- ## 
+
+- ## 
+
+- ## 💡 [【教程】成功把送中的ip拉回日本，只用了一周时间 _202511](https://www.nodeseek.com/post-503481-1)
+  - 前段时间绿云多个ip段被集体送中，我是其中之一，虽然是集体送中，但也拉回来了，下面是方法。
+  - 第一，先去向谷歌报告IP问题
+  - 第二，用插件改定位， 安装Location Guard https://github.com/mrfanii/Location-Guard-V3
+  - 打开Location Guard插件，选择Fixed Location，在地图上点击你IP想要拉回去的位置，比如我的原本是日本，就找到日本东京，点击一下地图上的位置。
+  - 来到Options选项，Default level默认设置改为Use fixed location
+  - 打开Google地图 https://www.google.com/maps 点击右下角获取定位，此时就会定位到你刚才在插件里所点击的位置，说明成功了
+  - Google随便搜索一下，滑到底部，点击 update location 来更新位置。
+  - 之后每天用一下Google搜索和YouTube就行了，我是用了一周就成功了，集体送中的话，最好是人多力量大，发个贴让你那个ip段的人一起参与进来。
+
+- https://github.com/anthonysgro/geospoof 
+  - https://geospoof.com/
+  - Browser extension and iOS app that spoofs your gps, geolocation & timezone, and auto-syncs to your VPN. Firefox, Chrome, Edge, Brave & Safari.
 
 - ## 🧩 [ [小白入门科普]服务器行业黑话大全 - 知乎 _202412](https://zhuanlan.zhihu.com/p/15029600004)
 - 小鸡
@@ -639,265 +664,6 @@ openclaw/herness
 - 没有滥用标记就差不多了，伪家宽和机房区别不大情况，我个人更看重国际互联
 
 - 真正的家宽很贵，一般只找一些nq看起来还可以的就行了
-# discuss-free/awesome
-- ## 
-
-- ## 
-
-- ## 
-
-- ## [有什么提供免费主机的idc服务商 - 茶馆 - IDC Flare _202509](https://idcflare.com/t/topic/5602)
-  - oracle
-  - vercel/netlify
-  - webhostmost 虚拟主机
-
-- Netlify支持Function，所以也能部署动态网站，看你会不会写
-- Vercel 也能跑后端，不过是类似云函数，需要对已有的程序做一点改造。额度其实也不算多，放个 demo 差不多吧
-
-- 有意思，第一次听说wasm，好像是可以把PHP解释器 + SQLite数据库整个打包编译成Wasm，并放到了用户的浏览器里运行的方式，这也算是动态的吧
-
-- 我提一个，mofh，只要自己有域名，就能自己当admin，就是文档有点旧
-- infinityfree送的二级域名容易出问题，有时候整个域名要停几个月。还有就是数据库好像有点问题，经常动不动数据库无法访问，连接什么都没改，但过几个小时就又正常了，就很迷 
-
-- 老生常谈，都不好搞了
-
-- 托管这块可以增加一些老生常谈的容器化部署平台？ koyeb render 这些 还有railway(这个好像取消免费了但是老用户可以删除账号重新注册 每个月 5USD) fly.io
-
-- 建议玩gcp, 一直续杯就行
-
-- ## [坛里这么多注册机，有甲骨云的注册机么 - LINUX DO _202603](https://linux.do/t/topic/1812619)
-- 有, 但是最好别用, 因为甲骨文除了ABC还有后封
-  - 服务器又不像GPT, 封了大不了换个号继续用, 反正聊天记录在本地
-  - 服务器被封了我还得花时间迁移…
-
-- 有肯定是有的, 只不过有这个的都发财去了，之前有过一阵子突然冒出一堆甲骨文新号，还是域名邮箱的，只是别人一个号卖3位数的没理由给你开源的
-
-- 已经试过了，注册了一星期毛都没有，反而卡里被冻了十几新币
-
-- 自己让AI + 浏览器MCP，写个扩展辅助填写不就行了。
-
-- IP库和卡台才是关键的
-
-- 别想了，手动都是abc，还注册机
-- 手动注册每天坚持abc呀，之前注册机跑域名邮箱，跑了两千多个号，没一个成功的，卡里被冻了那么多，不知道还会不会退回来，就停了
-
-- ## [hf开始封滥用的帐号了 - LINUX DO _202603](https://linux.do/t/topic/1801888)
-  - huggingface有免费的高配docker容器可以白嫖，当然之前一部分项目会触发滥用规则，其实就是各种2api，爬虫之类的项目，但是今天，我部署了2个2api项目，其实就是顺带测试一下看看hf的出口ip，马上干掉了我的space，还把我的账号封掉了，并且原因就是滥用space。各位佬注意咯，不要中招了。其实cf也有类似的规则，但是还算友好，只是封你的项目，不会干掉你的账号。
-- hf 一直是在封各种 2api，青龙啥的
-
-- ## [Basic free VPS : r/VPS](https://www.reddit.com/r/VPS/comments/1mud4dp/basic_free_vps/)
-- Cloudflare does not offer any VM services that I’m aware of. Workers is not a VPS.
-  - GitHub has their code spaces, but they’re also not a VPS in the traditional sense, since they are intended to be used as coding apps in the cloud.
-  - Oracle has the only “forever free” stuff, but as you said it’s complicated to set up.
-  - On a side note, why would you go with a VPS if you already have compute at home? A VPS is just a computer hosted by someone else. It’s nothing special.
-
-- Cloudflare doesn’t give you actual VMs, just edge functions and Workers with storage options. Oracle Free Tier does provide proper VPS instances, though the setup can feel clunky at first. GitHub Codespaces is another route but it’s more for dev work than a true always-on server.
-
-- ## [Free VPS. low performance is fine : r/VPS](https://www.reddit.com/r/VPS/comments/1l05w5g/free_vps_low_performance_is_fine/)
-- Yes, you can get a free VPS using Oracle Cloud or Google Cloud that offer a 'free forever' instance. Those do require a card, and I recommend using privacy.com to create a $1-2 limit card for verification just incase you don't get an unintended charge.
-
-- There is no “free” VPS that is usable. I don’t like using Google Cloud, Oracle, and others because you have to use a card to sign up and risk being billed a ton of money accidentally.
-
-- ## [Is this true? GCP provides e2-micro always free : r/googlecloud _202505](https://www.reddit.com/r/googlecloud/comments/1kjw4u7/is_this_true_gcp_provides_e2micro_always_free/)
-  - Does this mean that GCP provides e2-micro one instance free every month for always even after 300USD credits gets over?
-
-- If I create more than 1 VM and each VM usage does not exceed the limit - is it still Free?
-  - Yes, you are charged on the basis of time not on instance. Your limit is 730 hours
-  - Your Free Tier e2-micro instance limit is by time, not by instance. Each month, eligible use of all of your e2-micro instances is free until you have used a number of hours
-  - Compute Engine free tier does not charge for an external IP address.
-
-- I follow the above to create the VM Instance and I somehow still get charged
-  - Turnoff scheduled snapshot, and delete all existing snapshots, then you won't be charged by compute engine.
-- Thank you . It works now. Filtered by SDK and found that snapshot actually grouped under compute engine.
-
-- [Free VPS really exist ? : r/selfhosted](https://www.reddit.com/r/selfhosted/comments/14p8qq9/free_vps_really_exist/)
-  - they wont accept my credit card, just like oracle
-  - it says only 1gb outbound/ month?
-
-- ## [有没有比较好的免费云服务器推荐？ - 知乎](https://www.zhihu.com/question/638923115/answers/updated)
-- aws里面有一款2核2g的免费套餐，可以用一年
-
-- 免费套餐：阿里云提供了“飞天加速计划”，针对学生和开发者提供免费的云服务资源，包括ECS云服务器、对象存储OSS等。这些资源通常有一定的使用期限和资源限制。
-# discuss-paid-vps
-- ## 
-
-- ## 
-
-- ## 
-
-- ## 
-
-- ## [海外服务器购买，有哪些推荐，以及哪些坑需要注意？ - V2EX _202606](https://v2ex.com/t/1196279)
-- 稳定且性价比高选 Netcup 、便宜大碗选 racknerd
-
-- 如果你要稳定性、又要性价比，因为 KYC 莫名其妙被封号的，排除 Hetzner （ KYC 严格、涨价、贵）、OVH （ KYC 严格，不欢迎中国人、涨价、贵）。
-  - 可以看看 Netcup
-
-- ## [做中转站推荐用哪个机？目前知晓以下4个鸡 - LINUX DO _202605](https://linux.do/t/topic/2238660)
-- 看你用户数量，一般推荐HostDZire，但是有缺点，就是三年付绑定太长了，而且由于是分销商，所以无法更换ip，如果ip出问题了很难换，不过性能肯定是最强的，
-  - 然后是绿云，绿云的问题的硬盘小，核心有30%限制，
-  - 然后是Chicago，这家和ccs是一家，超售大王，可能会遇到容易关机的问题
-  - 但是买HostDZire要考虑周期问题，三年付太长了，而且ip出问题了很难换ip，不过还是最推荐HostDZire，因为中转站并发肯定很多，所以绿云肯定不适合，因为有30%核限制，长时间超过就停机，所以这就是为什么我把绿云在排最后的原因，有核限制，无法程度并发高的任务
-- 推荐HostDZire，个人目前在用HostDZire做开发鸡，rn和ccs的3c4g都持有但是这俩基本都因为有超售存在容易重启，HostDZire目前没有遇到问题
-
-- HostDZire 作为落地还好，套CF，直连都不适合作为中转使用，我目前也是用的HostDZire 只能说凑合用，晚高峰丢包还是挺严重的
-
-- hostdzire性价比不错，建站套CF就行，就是需要三年付要考虑一下，像VPS的G口带宽一般都是共享的吧，商家不可能允许长时间占满带宽
-- 之前我站就是hostdzire，4c6g sfo月付，说实话不好用，cpu性能不好，超售了
-
-- ## [大佬们总结聊聊稳的、值得推荐的VPS运营商 _202605](https://www.nodeseek.com/post-745439-1)
-- 线路机就那么几家吧，亚太龙系和小秘书，大妈好像也可以，美国就瓦工大妈还有小秘书
-  - 建站机除了大厂就nc吧，hd是三哥开的不太敢用，rn和ccs还有cc稳定性还是差了点
-
-- 越来越多人直接用 AWS、Oracle 这些大厂了，虽然不一定便宜，但稳定性和生态确实舒服。
-
-- netcup应该算很稳的建站了，然后就是一些大厂，腾讯云、阿里云、甲骨文、aws、azure、digitalocean，最近看到的DigitalFyre也不错，性价比也极高也很稳定。
-
-- ## [最近一直在看vps相关的，一些小心得体会 - LINUX DO _202606](https://linux.do/t/topic/2313988)
-  - 看站里的测评啊，还有猫猫整理的资料什么的，发现这种像走流量的机子，除去涨价RN（已经变成了20刀了），大多都是10-15刀之间，甚至有的还会8刀（按年算）。这种都是1c1g。（我看的都是便宜的，不看超级优化线路的，那种略过 ）
-  - 然后一些可能配置稍微好点的，低价的，大多都是美东，像CCS 这些。20-25刀应该就能拿下至少2c2g的，稍微贵点的像rn（总觉得涨的有点离谱）36刀也能拿下同配置。
-  - 结果：像我这种一个月都用不了100G流量的，最近部署docker服务什么的都少很多，真的是放在那吃灰，而且像2c2g的说实话也运行不了什么龙虾呀什么的，折腾半天回过头发现自己竟然没那么多需求，基本都是用别人现成的服务。
-
-- 去年在dedirock上 买了一个一年7刀的，感觉对我来说挺够用的了。
-
-- 还是得有自己的稳定机子，甲骨文杀龟太突然了，没办法部署一些需要长时间稳定的
-
-- hostdirze是36刀年付 4c6g（有同配置三年70刀的）
-- CCS洛杉矶3c4g 年付22刀也还行
-
-- ## [想找个年费100以内的大盘鸡 - LINUX DO _202606](https://linux.do/t/topic/2400758)
-- 现在硬盘这么贵大盘鸡1个t的少说也要六七十刀（这还是几年前有活动的价格）
-
-- dedirock客服挺积极的，我在他家买了两台，一台1.5T HDD一台2.5T HDD，有时候会出问题但是发工单回复很及时，他家好像隔段时间就发邮件说维护一次，具体冷备份的话应该无影响就是断线一小会而已，感觉性价比还是很不错 
-
-- 最后买了Interserver的2.4刀月付试试咸淡，是钻石盘，Fio只有我绿云2T的十分之一，不过这个价格确实也没办法，我绿云2T年付要80刀。。。
-
-- ## [🍀平替Racknerd美西！【5月10日售罄】CCS洛杉矶补货了，可能是目前美西最便宜的机器了，CCS低价机，不是优化线路，备用机优选美西 - 测评 - IDC Flare _202604](https://idcflare.com/t/topic/77833)
-- 中国大陆到美国的优化线路或者无优化线路，几乎都是走洛杉矶，物理延迟低，买其他地方的也要经过洛杉矶，例如去美东的纽约，水牛城，美中的亚特兰大，芝加哥，都要经过洛杉矶。 目前确实是最便宜的，量也是最大，服务也稳定。其他品牌的不清楚，但ccs是十几年的牌子，跑路概率不大。
-
-- 狐蒂云难民来了, 便宜一时爽，跑路火葬场
-  - 我推aff也是看商家下菜，看起来不靠谱的都不敢推
-  - 现在ccs算是最便宜的靠谱机器了，无优化，无优化，无优化，会玩的佬友都玩的很溜
-
-- 开了台纽约的4c8g玩。不过这个开机真的好久啊。
-  - 他们老外下班了就不上班的，一般下午或者晚上买开机会快一点
-- 我半夜买的买完就开机了，纽约的2+2。虽然说听松弛，但是我之前中午找他们换IP啥的回复也挺快的
-
-- ## dartnode [RN闪购建站鸡平替 2C4G100G 仅需13.99/y - IDC Flare _202606](https://idcflare.com/t/topic/99797)
-  - 两家最大区别
-  - RN 服务售后好
-  - DN IP原生 解锁好，售后服务响应慢 支持PP支付
-  - 我特意标注了pp，遇事不决上pp，敢上pp还是有点实力的
-
-- 会有跑路风险吗
-  - 我用了两年，就是售后慢，其他与这个价格匹配，跑路应该不至于，let上他们认过
-
-- ## [HostDzire他没有push通道吗 _202609](https://www.nodeseek.com/post-913404-1)
-- 不能push
-- 还不能修改邮箱
-
-- ## [日经贴, 小白求推荐个建站小鸡 - IDC Flare _202603](https://idcflare.com/t/topic/72945)
-- hostdare 和 hostdzire 不是一家，后者是 leaseweb 的十多年的分销商，而 leaseweb 是始建于 1999 年的老牌厂商
-
-- ## 国内的云服务器快到期了，不打算续了。准备全部搞到海外服务器，但又不想用aws，调研一番，
-- https://x.com/wsygc/status/1856623132087558565
-  - 似乎digital ocean + dokploy是个不错的选择，兼具了便捷与可定制化。 有实战经验的推友分享下吗？
-- 刚实战完，dokploy 非常好用
-- 我看dokploy官方视频演示的就是 Hetzner ，算是官推首选了，有点介意的是“德国”产品，会不会延迟比较高
-
-- 然后你的域名还需要转移出去，否则没法用，因为海外没法备案，然后你把域名从国内转移到国外会发现有多麻烦。 而国外域名往国内转就有想收个验证码的事儿
-
-- ## [有哪些性价比高的高配美国服务器 强调cpu和内存 线路似乎无所谓? - LINUX DO _202603](https://linux.do/t/topic/1792158)
-  - 仔细计算 此帖应该终结了 我决定自己组建一台128gx86 或者直接mac, 这边问题是国内上行宽带升级一下 还有做好代理就好
-- 
-- 还有高配到底是啥高配，CPU单核强的，还是核数多的？还是内存大的，还是硬盘大的，还是带宽大流量足的，还是全都要？
-
-- 直接干独服
-
-- 我觉得最大预算会花在国内上行上
-
-- 套cf只能不挑IP吧，带宽不够，访问速度一样上不来啊
-# discuss-paid-cn
-- ## 
-
-- ## 
-
-- ## 
-
-- ## [亚洲优化线路感觉100%被通信运营商人为控制在高价位 _202606](https://www.nodeseek.com/post-786732-1)
-  - 最近用了几个亚洲落地鸡，国际互联都非常优秀，而且价格都很便宜。由此让我对亚洲优化线路机器的售价远远超过美西优化线路鸡这种现象产生了深深的质疑。抛开最近由于硬件涨价导致亚洲优化线路机器一机难求。以香港举例，国际互联优秀的机器并不贵，但是内地优化线路机器比非优化线路贵很多倍。硬件、空间占用、电力、IP等资源这些两种机器应该是没太大区别，那么溢价就出在香港到内地的优化通信线路。而香港到深圳，不过隔了一条河，可以说建设跨境通信线路远远低于美西海底光缆。成本更低，卖得还更贵？还是说内地人就应该花高价用这么贵的线路？应该感恩？
-- 建一堵墙，然后在墙上开几个洞，守在洞口收钱就可以赚大钱。
-
-- ## 🆚 [一文看懂: 阿里云轻量与ECS服务器区别：价格、使用、网络及限制对比 - 知乎 _202604](https://zhuanlan.zhihu.com/p/2030928067451994982)
-- 轻量服务器
-  - 自动创建VPC网络资源，实例创建完成后默认配置了一个公网IP地址，不支持更换公网IP地址。
-  - 带宽为套餐内指定，不支持自定义调整带宽。
-  - 不支持安装虚拟化软件和二次虚拟化。
-  - 不支持声卡应用。
-  - 内网连通性上存在一定限制。
-  - 仅支持挂载一个数据盘，且数据盘只能在创建轻量应用服务器时挂载。
-  - 不支持部署集、资源编排、弹性伸缩、标签和资源组等ECS支持的高级功能。
-  - 不支持配置IPv6地址。
-  - 灵活变配支持升级为更高配置的套餐；也支持将服务器数据平滑迁移至ECS实例
-  - 简便运维提供基础的运维操作，包括远程登录、服务器监控、简单的防火墙配置、数据备份与迁移、应用管理 、操作日志等。
-
-- ECS
-  - 支持自行规划和维护网络，通过专有网络、交换机等功能自行规划私网。通过安全组、网络ACL等功能自行控制流量。
-  - 仅弹性裸金属服务器和超级计算集群支持二次虚拟化，其他规格族不支持安装虚拟化软件和二次虚拟化。
-  - 不支持声卡应用。
-  - 可以根据不同场景灵活变配。
-  - 提供弹性扩容能力，实例与带宽均可随时升降配，云盘可扩容。
-  - 提供丰富的OpenAPI。
-
-- ECS公网带宽是独享的，购买云服务器ECS选择带宽的话会分配独立公网IP地址，轻量应用服务器公网IP也是独享的。
-  - 目前阿里云轻量应用服务器升级到200Mbps峰值带宽，200M带宽是指该实例在公网出方向和入方向所能达到的瞬时最大带宽上限为200 Mbps，但该带宽值不作为业务承诺指标，啥意思？就是虽然标的是200M，但是实际达不到的意思。
-  - ECS的固定200M带宽有区别，ECS固定带宽就是固定独享的，即便是网络高峰时段也不会出现丢包的现象，ECS的固定带宽是有保障的，轻量不承诺无保障，以实际为准。
-
-- 出于安全考虑，阿里云服务器ECS和轻量应用服务器默认只开放了22和3389端口，其他的如网站所需的80、443端口，数据库3306端口等都需要手动设置开启。云服务器ECS是通过安全组来管理的，而轻量应用服务器是通过防火墙来操作的。
-
-- ## [国内长期服务器求推荐 ](https://linux.do/t/topic/1350199)
-  - 起因是题主2年前买的服务器最近快到期了，续费价格突然从一年400暴涨到2000+，转了一圈下来发现国内大厂都是这个策略，前期低价使用，后期高价续费。
-  - 2年下来想迁移各类服务也蛮烦的，所以想请教下各位佬，有没有国内长期价格稳定的厂商，年付300-500，用途主要是建站+国内中转。续费刺客太吓人了
-  - tips：因为手里还有境外的线路机，所以目前的想法是把一些网络环境需求不高的服务，比如博客，工具站、导航等等一些都放到境外的服务器上。但一些类似FRP和虚拟组网的服务就难办了。 
-
-- 国内全这样，新人首单便宜，续费就是刺客~
-  - 每年一换吧，VPS和域名都要备案，不备案就骚扰你，还有可能真的被封~所以真累了~
-  - 腾讯流量刺客，超出后要付费，而且无法超出后自动实时停止。
-  - 华为云方向很模糊，域名整个部门都不玩了，让人很担心~对了，白嫖华为代金券不错，而且华为这一点很赞，常年有各种活动，可以白嫖代金券
-  - 其他的不是一线梯队大厂，不敢尝试~
-
-- 不仅是VPS，国内域名也有续费刺客。。
-
-- 阿里云99一年，可以续费三年，但是带宽有点子小3MB
-
-- ## 现在阿里云服务器也这么贵了吗··· 4GB内存的低配，一年都要1000多，大家现在在哪买服务器...
-- https://x.com/caiyue5/status/2051159488548450540
-- 国内的服务器没有便宜的 海外的话过 cf 的话买啥都行
-
-- 2核4g的服务器，企业实名认证的情况下，第一台一年只需要199，而且每年续费都是199，促销活动页里，是一个长期活动。
-- 阿里云还是挺优惠的，双核4G ECS 199年，开通自动续费每年都是199。不过只能薅一台。不限地域。
-  - ECS要流浪费吧
-
-- digital ocean 也算小厂了吗
-  - do是流氓厂，网上搞ddos攻击，无时不刻乱扫端口试图碰撞破解的，7成以上都是do的机器
-
-- 搜轻量云服务器就得了，足够用了。你这个 ECS 是做主站分发用的，不适合你
-
-- @Vultr这个可以，我用了六年了，最低2.5$一个月的美国节点，纯净IP
-
-- 之前朋友找了一家香港的云服务，4核8g一年300多点，不定期断网、故障、联系不到人、设备数据丢失。
-
-- 我穷，只买racknerd，配置tailscale，保证安全又节省了梯子
-
-- greencloudvps性价比高，但是你要自己做安全防护。
-
-- 我推荐几个，都是自己在用，比较稳定的服务器厂商，非常适合出海产品/外贸独立站：
-  1. NetCup 这家我给很多做欧美的客户部署系统用的，非常经济实惠，可以买VDS，性能嘎嘎好，真正的独享资源；
-  2. Ovh 超级划算的独服务，挺适合存储需求大的场景；
-  3. Heztner 这个和ovh有点接近，我最近用的少了
-  - Vultr / Digital Ocean 等这种算是云厂商里比较出名的，就是比较贵，对我来说使用没有感觉有什么优势，可能对非技术人员来说操作简单一些。
-
-- nube.sh/invite/897602750V27SC 我最近用这家还可以，1cpu 2gRAM 3usd左右，关键是AMD 服务器zen3 CPU，现在VPS市场5usd以下套餐基本都是用10年前的inter服务器 CPU
 # discuss-vps-vpn
 - tips
   - 2种方案: 
@@ -908,6 +674,182 @@ openclaw/herness
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 💡 [【教程】成功把送中的ip拉回日本，只用了一周时间 _202511](https://www.nodeseek.com/post-503481-1)
+  - 前段时间绿云多个ip段被集体送中，我是其中之一，虽然是集体送中，但也拉回来了，下面是方法。
+  - 第一，先去向谷歌报告IP问题
+  - 第二，用插件改定位， 安装Location Guard https://github.com/mrfanii/Location-Guard-V3
+  - 打开Location Guard插件，选择Fixed Location，在地图上点击你IP想要拉回去的位置，比如我的原本是日本，就找到日本东京，点击一下地图上的位置。
+  - 来到Options选项，Default level默认设置改为Use fixed location
+  - 打开Google地图 https://www.google.com/maps 点击右下角获取定位，此时就会定位到你刚才在插件里所点击的位置，说明成功了
+  - Google随便搜索一下，滑到底部，点击 update location 来更新位置。
+  - 之后每天用一下Google搜索和YouTube就行了，我是用了一周就成功了，集体送中的话，最好是人多力量大，发个贴让你那个ip段的人一起参与进来。
+
+- https://github.com/anthonysgro/geospoof 
+  - https://geospoof.com/
+  - Browser extension and iOS app that spoofs your gps, geolocation & timezone, and auto-syncs to your VPN. Firefox, Chrome, Edge, Brave & Safari.
+
+- ## [大佬们推荐一下性价比高的美西线路鸡 _202610](https://www.nodeseek.com/post-964307-1)
+- 不溢价就只有lightlayer 4.9，超出你预算了
+
+- ## [有没有用DMIT的？Claude的封号情况怎么样？ - LINUX DO _202607](https://linux.do/t/topic/2544132?tl=en)
+- 封号和 dmit 无关，机房 ip 不是封号的主要原因。用家宽的照样有被封的..
+
+- 如果你在 VPS 上用 Claude，那么风险分 - 20，如果是连到 VPS 的代理然后本地跑 CC，那么风险分 + 20，如果本地 CC 之前封过账号，那么风险分 + 40。
+
+- 我是在 vps 上布置 cc，然后远程桌面 ssh 登陆用，目前还比较稳
+  - 我在甲骨文机器上装的 cc, 目前用的没问题
+  - 你想美国程序员租用机房 vps 远程开发也是正常用途吧，注册账号可以用家宽 IP，但远程用甲骨文 cc 没问题啊
+
+- 感觉 DMIT IP 段对于 A\ 来说很脏，之前忽然在 IOS 上一直登录不进去，后面发现是有一个 cdn 走了默认的 dmit ip，把这个 cdn 加到家宽以后就能进了，应该最近的 dmit 被机场滥用了导致的
+
+- 我的洛杉矶 dmit 的节点给 5x 用，一直都很稳，反而我的 vircs 的家宽容易封号。感觉这事情非常玄学
+
+- ## [你们 Claude 用的什么 IP？qqpw 这种够了不？ _202608](https://www.nodeseek.com/post-853850-1)
+- 感觉ip不是最主要因素，我用cogent伪家宽也没事。
+而且感觉是否独享比是否真家款要重要
+
+- ovh的机房IP照样用
+
+- 獨享 活半年了， 不一定要家寬
+
+- 独享比真家宽重要
+
+- ## [求推荐跑Claude code的服务器ip _202607](https://www.nodeseek.com/post-849453-1)
+  - 最近被封麻了，准备系统改英文、时区改海外、再部署个🪜独立干净ip来跑Claude code。有推荐的服务器吗老铁们。
+
+- 连坐了
+
+- 套sock5家宽，服务器本身IP无所谓
+
+- 感觉通过苹果订阅安全系数稍微高点
+可能我是最低级的20美元订阅，不值得他封，普通的vps美西，一直用没遇到过被封
+
+- Claude针对中国用户，不但追踪邮件、记录系统时间、默认语言、甚至github 登陆的账号都会被记录，被封过后即使伪装的再好，还是有办法封你。除非换全新设备并且更换github仓库。
+
+我觉得IP不是最主要的原因。一旦被封后你的很多特征都被记录，下次使用还是会追踪到你。
+
+- ## [vmiss的IP干净吗？ _202608](https://www.nodeseek.com/post-887100-1)
+- 担心这些就去找落地机用，线路机的IP质量只是摆设
+
+- 没有一直干净的ip 你不搞事情，不代表你的邻居不搞事情，所以没啥意义，勤换落地
+
+- gpt随随便便解锁，线路机ip也就那样，gpt不会因为ip封号，但会有降智问题。claude那边貌似对ip质量比较敏感，可能会因此封
+
+- ## [vmiss的ip也是捞完了 _202608](https://www.nodeseek.com/post-882343-1)
+  - 38 207 216都一样
+- 线路鸡需要搭配落地鸡。不仅对vmiss，所有厂家都一样。
+
+- 请问有啥落地鸡推荐的吗？感觉便宜的都又时候会送中
+  - 我用的面包云 然后他的ipv6是家宽 分流给ai使用
+
+- 任何需要ip纯净度的时候，首先就别想着线路机
+  - 只要是线路机器，1个月必被人蹬得风险度拉满
+
+- ## [求推荐三网优化大陆 _202605](https://www.nodeseek.com/post-707621-1)
+有没有三网优化的 晚高峰不丢包的
+现在用的白丝云的圣何塞大陆优化BGP
+但是硬盘太小了才10G
+有推荐吗
+月5刀 更便宜更好
+
+- 你买的白丝云 4837 这款嘛？ 晚高峰用起来怎么样？ 我也想入手这个。
+  - 挺不错的 晚高峰不丢包 直连很爽 就是硬盘太小了 问了客服也不能付费加硬盘
+
+- DMIT 搬瓦工 VMISS VMRack 哪个能买到就去买哪个
+
+- ## [三网精品vps比较 _202402](https://www.nodeseek.com/post-70417-1)
+- 你列的有几个可以归类到一起
+Kurun系：Kurun、怪兽云、ZGO、图安云、Akile（Lax premium）
+
+1、kurun系列：怪兽云，图安云三网精品、akile(Lax premium) 三网双程优化，单线程限制150mbps左右，测速去程变普通线路
+2、v.ps系列：三网精品 三网双程优化
+3、dmit系列： 三网gia 回程优化
+4、Nearoute：wap usp（1刀款单线程限制50mbps）回程优化
+5、艾云系列：艾云 akile（lax pro）回程优化
+
+- kurun1.5更便宜但50的口子。ak119也不错 流量少
+
+- 没用过其他的，如果不缺预算，首先排除kurun系的
+
+- 大部分三网精品出自kurun
+
+- ## [三网优化有什么推荐的🐔吗 _202405](https://www.nodeseek.com/post-110514-1)
+- 第一梯队: 搬瓦工36刀CN2GIA、DMIT37刀CN2GIA、39刀cmin2
+  - 二梯队: 年付159白丝云、咸鱼云的洛杉矶4837
+  - 三梯队: 穷人套餐BYTEVIRT、WAWO、AKILE的4837一年五六十块
+  - RN CC的洛杉矶机房也不错，能搭梯还能放点应用
+
+- ## [除了vmiss，还有什么其他低价的三网优化？ _202610](https://www.nodeseek.com/post-962328-1)
+- 有电信就要上cn2
+
+- 价格和他差不多的，没他稳，价格比他高的，除了口子，不见得比他稳。被炒起来也不是没有道理，现在变成物以稀为贵了。
+
+- isvoro，vmrack，lightlayer，光锥云
+- 三网灵车有 isvoro, shandun，Matrixidc, lamhosting，双网的话推荐Lightlayer，只是这鸡联通有些残疾
+- isvoro 22块一个月，200m，500g，三网优化
+- 白丝159
+
+- 光锥云在我这有点差，我发过避雷贴。
+
+- TY云有一个三网优化的机器10元一个月，50Mbps的口子，我体验下来除了加载稍微慢点其他的和我的大妈没区别，关键无限流量就很爽
+
+- shandun的三网优化和tri一样的配置我记得好像4刀一个月
+
+- 上游netlab的那几家三网优化还算便宜
+
+- 线路机器就是直连用的，IP方面可以直出，也可以拉起来一些线路不是很好的机器。比如我用vmiss 9929中转 aitr的att机器，延迟网速都不错。
+
+- 可以看看nosla家的圣何塞，三网优化，或者洛杉矶电联9929移动cmin2。现在国庆特惠价格还不错
+
+- ## [有没有美国三网优化或者CN2的灵车， 不怕灵就怕你不够便宜， _202610](https://www.nodeseek.com/post-961556-1)
+- raksmart $3.99 1G带宽 1T流量，其实这家算老商家了，硬说也算不上灵吧，就是bug很多，然后ip质量很烂
+- raksmart $2.99 4837做出口 $3.99 CN2做入口
+单程CN2又不是不能用
+
+- nosla家的国庆特惠，339 三网优化，可以看看
+
+- ## 📌 [替我家小鸡问一下佬们，关于各家对更换IP的政策 _202410](https://www.nodeseek.com/post-175828-1)
+1、🌹 DMIT dmit.io 每15天可以免费换一次ip，立即更换5刀一次，工单申请
+2、CLAW claw.cloud IP被墙不能更换，花钱也不行，官方有回复的，只能等墙把你放出来
+3、🌹 绿云 greencloudvps.com 3刀一次，工单申请
+4、狐蒂云 szhdy.com 更换一次ip10元，工单申请
+5、🌹 CCS colocrossing.com 交换IP地址需要一次性支付3美元。请注意，我们不保证被替换的IP在这种情况下会处于更可用的状态，工单申请
+6、糖果 sugarhosts.com 更换一次90元，工单申请
+7、JTTI jtti.cc 免费，工单申请
+8、搬瓦工 bwh81.net 8刀一次，工单申请
+9、🌹 Cloudcone cloudcone.com 2刀一次，工单申请
+10、deluxhost.net 工单询问是否可以更换及费用，回复：NO
+11、🌹 Racknerd.com 第一次免费，后面的3刀，工单申请
+12、massivegrid.com 免费, 工单申请
+13、Vmiss.com 购买5CAD的IP Replace订单，然后工单要求更换
+14、yxvm.com 更换一次也是5刀
+
+- ## [除了龟壳还有那些服务商可以免费换IP? _202501](https://www.nodeseek.com/post-246228-1)
+- AWS GCP AZ Oracle 这些大厂都可以随便换没有限制
+二线我知道的是DMIT wikihost 可以免费换，但是都有一些限制，比如DMIT是15天可以免费换一次IP（必须要完全被q） wiki是60天可以免费换次IP，但是这家已经如跑了
+
+- ## [各位大佬，你们在用什么鸡能在晚高峰4K畅爽 _202607](https://www.nodeseek.com/post-810019-1)
+- MEAGABOX、RN HY2 4K也能跑
+
+- 4k有啥难的，随便啥烂线路用hy2都能看啊
+- ipv6 + hy2 基本都可以应该
+
+- 我是个新人，个人需求就是ai和偶尔看看油管。跟着论坛和大家学习，一路买了不少机子。现在大大小小有15个了。zgo和akko，都能畅跑。14.99的cloudcone我也能畅看4k油管。至于softshell和greecloud的机子，晚高峰，点个视频等3-5秒，也就可以4k畅看了。除了zgo和akko是三网优化，其余都是普通的。前段时间当云也可以，现在限速了。等dmit放货了，我也买个看看，为啥呼声那么高，实际使用体验差异化到底在哪里。
+
+- neburst、光帆、vmiss
 
 - ## 🤔 [DMIT 大佬们都用啥协议 _202511](https://www.nodeseek.com/post-499226-1)
 个人使用，以前用bwg时一年ip正常，是 vmess+reality。
@@ -1121,6 +1063,345 @@ Claude 账号用了好几年，升级 pro 也 3 个多月了。自己用 Google 
 
 - ## [【自建线路】cloudflare自选优选ip，sing-box搭建快速低延迟的vpn教程 - LINUX DO _202607](https://linux.do/t/topic/2639989)
 
+# discuss-free/awesome
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [有什么提供免费主机的idc服务商 - 茶馆 - IDC Flare _202509](https://idcflare.com/t/topic/5602)
+  - oracle
+  - vercel/netlify
+  - webhostmost 虚拟主机
+
+- Netlify支持Function，所以也能部署动态网站，看你会不会写
+- Vercel 也能跑后端，不过是类似云函数，需要对已有的程序做一点改造。额度其实也不算多，放个 demo 差不多吧
+
+- 有意思，第一次听说wasm，好像是可以把PHP解释器 + SQLite数据库整个打包编译成Wasm，并放到了用户的浏览器里运行的方式，这也算是动态的吧
+
+- 我提一个，mofh，只要自己有域名，就能自己当admin，就是文档有点旧
+- infinityfree送的二级域名容易出问题，有时候整个域名要停几个月。还有就是数据库好像有点问题，经常动不动数据库无法访问，连接什么都没改，但过几个小时就又正常了，就很迷 
+
+- 老生常谈，都不好搞了
+
+- 托管这块可以增加一些老生常谈的容器化部署平台？ koyeb render 这些 还有railway(这个好像取消免费了但是老用户可以删除账号重新注册 每个月 5USD) fly.io
+
+- 建议玩gcp, 一直续杯就行
+
+- ## [坛里这么多注册机，有甲骨云的注册机么 - LINUX DO _202603](https://linux.do/t/topic/1812619)
+- 有, 但是最好别用, 因为甲骨文除了ABC还有后封
+  - 服务器又不像GPT, 封了大不了换个号继续用, 反正聊天记录在本地
+  - 服务器被封了我还得花时间迁移…
+
+- 有肯定是有的, 只不过有这个的都发财去了，之前有过一阵子突然冒出一堆甲骨文新号，还是域名邮箱的，只是别人一个号卖3位数的没理由给你开源的
+
+- 已经试过了，注册了一星期毛都没有，反而卡里被冻了十几新币
+
+- 自己让AI + 浏览器MCP，写个扩展辅助填写不就行了。
+
+- IP库和卡台才是关键的
+
+- 别想了，手动都是abc，还注册机
+- 手动注册每天坚持abc呀，之前注册机跑域名邮箱，跑了两千多个号，没一个成功的，卡里被冻了那么多，不知道还会不会退回来，就停了
+
+- ## [hf开始封滥用的帐号了 - LINUX DO _202603](https://linux.do/t/topic/1801888)
+  - huggingface有免费的高配docker容器可以白嫖，当然之前一部分项目会触发滥用规则，其实就是各种2api，爬虫之类的项目，但是今天，我部署了2个2api项目，其实就是顺带测试一下看看hf的出口ip，马上干掉了我的space，还把我的账号封掉了，并且原因就是滥用space。各位佬注意咯，不要中招了。其实cf也有类似的规则，但是还算友好，只是封你的项目，不会干掉你的账号。
+- hf 一直是在封各种 2api，青龙啥的
+
+- ## [Basic free VPS : r/VPS](https://www.reddit.com/r/VPS/comments/1mud4dp/basic_free_vps/)
+- Cloudflare does not offer any VM services that I’m aware of. Workers is not a VPS.
+  - GitHub has their code spaces, but they’re also not a VPS in the traditional sense, since they are intended to be used as coding apps in the cloud.
+  - Oracle has the only “forever free” stuff, but as you said it’s complicated to set up.
+  - On a side note, why would you go with a VPS if you already have compute at home? A VPS is just a computer hosted by someone else. It’s nothing special.
+
+- Cloudflare doesn’t give you actual VMs, just edge functions and Workers with storage options. Oracle Free Tier does provide proper VPS instances, though the setup can feel clunky at first. GitHub Codespaces is another route but it’s more for dev work than a true always-on server.
+
+- ## [Free VPS. low performance is fine : r/VPS](https://www.reddit.com/r/VPS/comments/1l05w5g/free_vps_low_performance_is_fine/)
+- Yes, you can get a free VPS using Oracle Cloud or Google Cloud that offer a 'free forever' instance. Those do require a card, and I recommend using privacy.com to create a $1-2 limit card for verification just incase you don't get an unintended charge.
+
+- There is no “free” VPS that is usable. I don’t like using Google Cloud, Oracle, and others because you have to use a card to sign up and risk being billed a ton of money accidentally.
+
+- ## [Is this true? GCP provides e2-micro always free : r/googlecloud _202505](https://www.reddit.com/r/googlecloud/comments/1kjw4u7/is_this_true_gcp_provides_e2micro_always_free/)
+  - Does this mean that GCP provides e2-micro one instance free every month for always even after 300USD credits gets over?
+
+- If I create more than 1 VM and each VM usage does not exceed the limit - is it still Free?
+  - Yes, you are charged on the basis of time not on instance. Your limit is 730 hours
+  - Your Free Tier e2-micro instance limit is by time, not by instance. Each month, eligible use of all of your e2-micro instances is free until you have used a number of hours
+  - Compute Engine free tier does not charge for an external IP address.
+
+- I follow the above to create the VM Instance and I somehow still get charged
+  - Turnoff scheduled snapshot, and delete all existing snapshots, then you won't be charged by compute engine.
+- Thank you . It works now. Filtered by SDK and found that snapshot actually grouped under compute engine.
+
+- [Free VPS really exist ? : r/selfhosted](https://www.reddit.com/r/selfhosted/comments/14p8qq9/free_vps_really_exist/)
+  - they wont accept my credit card, just like oracle
+  - it says only 1gb outbound/ month?
+
+- ## [有没有比较好的免费云服务器推荐？ - 知乎](https://www.zhihu.com/question/638923115/answers/updated)
+- aws里面有一款2核2g的免费套餐，可以用一年
+
+- 免费套餐：阿里云提供了“飞天加速计划”，针对学生和开发者提供免费的云服务资源，包括ECS云服务器、对象存储OSS等。这些资源通常有一定的使用期限和资源限制。
+# discuss-vps-trading
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [VPS交易避坑指南：原油、改邮、PUSH与交易所模式深度解析 (含搬瓦工/DMIT/NetCup实战) _202601](https://www.nodeseek.com/post-577764-1)
+本文将为您详细拆解这四种模式（原邮、改邮、官方 PUSH、交易所），并结合 搬瓦工、DMIT、NetCup、RackNerd 等代表性商家进行分析。
+
+第一种：原邮
+定义：
+“原邮”（圈内常称“原油”）指的是用户在 VPS 商家注册账号时第一次使用的邮箱账户。通常是 Outlook、Gmail 或自建邮局账号。
+
+特征：邮箱内通常保留着商家发送的第一封“Welcome”欢迎邮件。
+风险：交易时涉及移交邮箱账号本身，因此必须考虑邮箱被找回的风险。
+1. Outlook 邮箱的安全清洗
+如果是 Outlook 邮箱，在接收账号后必须进行彻底的防找回设置。我之前专门写过一篇教程：
+
+文章地址：拒绝被找回！MJJ必修课：Outlook邮箱交易后的“防回手”安全设置全攻略
+
+2. 代表商家：搬瓦工 (BandwagonHost)
+搬瓦工的交易一般分成两种，分为“原油”和“改邮”两种，这两个在交易的时候容易价格方面差距明显：
+
+带原邮：最安全，价格最高。没有找回的风险，也是交易的时候最受欢迎的。
+改邮：有很高的风险。因为搬瓦工的机器账户可以通过“原始邮箱”和“支付凭证”进行申诉找回。如果买到的是没有原始邮箱的改邮账号，很有可能被第一任号主，也就是原始邮箱的拥有者 “毁号”或“找回”的风险，因为有的搬瓦工账户被交易了很多次，追踪第一任号主有的时候是一件很麻烦的事情。
+
+第二种：改邮（修改绑定邮箱）
+定义：
+“改邮”是指在 VPS 商家后台将账户绑定的邮箱地址更改为买家的新邮箱。这通常意味着账户归属权的变更。
+
+与搬瓦工不同，对于大多数支持改邮的商家，只要官方允许修改，交易通常是安全的。
+
+1. 代表商家一：DMIT
+DMIT 可以通过后台修改邮箱界面完成账户邮箱的修改。
+需要注意的是：新注册的账户或新购买的机器自带 10天冷却期。在此期间无法修改邮箱或转移机器（这是我曾在交易新机时踩过的坑）。
+安全建议：DMIT 改邮后基本无找回风险，具体操作可参考我的另一篇文章。
+2. 代表商家二：RackNerd
+RackNerd 除了部分特定的闪购套餐（Flash Sale）会限制修改邮箱，大多数套餐的账户都可以通过发工单的方式申请修改绑定的邮箱，但是一般只能修改一次，如果次数过多可能要求，使用官方的PUSH（需要收费，一次8美元)。
+
+第三种：官方 PUSH（最稳妥）
+定义：
+官方 PUSH 是指通过商家提供的平台功能，将账号内的某一台特定机器转移（Push）到买家的账号下。
+
+优势：只涉及机器转移，不涉及账号、密码和原始邮箱的交接。这是三种方式中最稳妥、最方便的。
+1. 代表商家一：NetCup
+NetCup 提供了非常成熟的过户机制，这家的交易我想大家都应该很熟悉了，通过转移码完成机器的过户操作。
+
+费用：免费。
+条件：必须付清当前季度的账单。
+操作：卖家在后台生成转移码，买家输入即可接收，怕大家不知道，我这里加上了我以前写的教学文章。
+2. 代表商家二：RackNerd
+费用：RackNerd 的 Push 费用是 $8，通过提交工单的方式完成机器的过户。
+需要注意的：RN 的 Push 费用是按次数（工单）收费，而不是按台数收费。如果你一次性 Push 多台机器给同一个账号，只需要支付一次 $8，所以如果一次性转移多台机器到另一个账户还是很划算的，转移的时候需要提供对方账户的邮箱地址。
+
+第四种：交易所交易
+定义：
+这是一种相对少见的模式，等于把你的机器放在商家内部的交易平台上。
+
+操作：卖家设置好机器信息和价格，买家购买。也可以私下商定好价格，通过交易所指定 ID 或时间锁定机器完成交易。
+特点：官方的交易平台，还是有保障的，但是比较坑的是，部分商家可能会收取手续费，且卖出的资金不能立即到账，需要先提现到余额，然后再提现到你的对应支付宝或者微信账户，等待周期长提现时间不可控，还可能收取多笔手续费，很不划算。
+代表商家（仅作知识扩展）
+Akile
+狐蒂云
+注：这里不是打广告，仅为了告诉小白一种比较少的交易形式。
+
+总结与建议
+追求相对安全：首选 官方 PUSH 因为官方提供的PUSH服务是有保障的，不会出现邮箱找回，或者账户被找回，泄露自己账户信息（很多原油交易的账户还绑定了银行卡或者PayPal的自动续费，给自己和他人造成麻烦）。 交易的原油的时候，记得解绑自己的交易信息，防止被无故扣钱。
+有原油要原油：比如搬瓦工这类的商家，能有原油交易肯定是 原邮，因为不容易出现问题，你下次交易也方便，不会留下隐患，下次交易也可以直接给别人邮箱账户，让他自己完成解绑你也方便。
+改邮不是不可用需要看清楚：改邮 通常也是安全的，但是需要分清楚商家，也要注意商家的修改邮箱的规则，比如DMIT不是随时都可以修改，有10天的冷静期，自己在频繁交易的时候注意账户安全和平台限制。
+
+- 狐蒂云的交易所已经取消了
+
+- RN 按台收费，不是按次。客服说每个 $8
+# discuss-paid-vps
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [海外服务器购买，有哪些推荐，以及哪些坑需要注意？ - V2EX _202606](https://v2ex.com/t/1196279)
+- 稳定且性价比高选 Netcup 、便宜大碗选 racknerd
+
+- 如果你要稳定性、又要性价比，因为 KYC 莫名其妙被封号的，排除 Hetzner （ KYC 严格、涨价、贵）、OVH （ KYC 严格，不欢迎中国人、涨价、贵）。
+  - 可以看看 Netcup
+
+- ## [做中转站推荐用哪个机？目前知晓以下4个鸡 - LINUX DO _202605](https://linux.do/t/topic/2238660)
+- 看你用户数量，一般推荐HostDZire，但是有缺点，就是三年付绑定太长了，而且由于是分销商，所以无法更换ip，如果ip出问题了很难换，不过性能肯定是最强的，
+  - 然后是绿云，绿云的问题的硬盘小，核心有30%限制，
+  - 然后是Chicago，这家和ccs是一家，超售大王，可能会遇到容易关机的问题
+  - 但是买HostDZire要考虑周期问题，三年付太长了，而且ip出问题了很难换ip，不过还是最推荐HostDZire，因为中转站并发肯定很多，所以绿云肯定不适合，因为有30%核限制，长时间超过就停机，所以这就是为什么我把绿云在排最后的原因，有核限制，无法程度并发高的任务
+- 推荐HostDZire，个人目前在用HostDZire做开发鸡，rn和ccs的3c4g都持有但是这俩基本都因为有超售存在容易重启，HostDZire目前没有遇到问题
+
+- HostDZire 作为落地还好，套CF，直连都不适合作为中转使用，我目前也是用的HostDZire 只能说凑合用，晚高峰丢包还是挺严重的
+
+- hostdzire性价比不错，建站套CF就行，就是需要三年付要考虑一下，像VPS的G口带宽一般都是共享的吧，商家不可能允许长时间占满带宽
+- 之前我站就是hostdzire，4c6g sfo月付，说实话不好用，cpu性能不好，超售了
+
+- ## [大佬们总结聊聊稳的、值得推荐的VPS运营商 _202605](https://www.nodeseek.com/post-745439-1)
+- 线路机就那么几家吧，亚太龙系和小秘书，大妈好像也可以，美国就瓦工大妈还有小秘书
+  - 建站机除了大厂就nc吧，hd是三哥开的不太敢用，rn和ccs还有cc稳定性还是差了点
+
+- 越来越多人直接用 AWS、Oracle 这些大厂了，虽然不一定便宜，但稳定性和生态确实舒服。
+
+- netcup应该算很稳的建站了，然后就是一些大厂，腾讯云、阿里云、甲骨文、aws、azure、digitalocean，最近看到的DigitalFyre也不错，性价比也极高也很稳定。
+
+- ## [最近一直在看vps相关的，一些小心得体会 - LINUX DO _202606](https://linux.do/t/topic/2313988)
+  - 看站里的测评啊，还有猫猫整理的资料什么的，发现这种像走流量的机子，除去涨价RN（已经变成了20刀了），大多都是10-15刀之间，甚至有的还会8刀（按年算）。这种都是1c1g。（我看的都是便宜的，不看超级优化线路的，那种略过 ）
+  - 然后一些可能配置稍微好点的，低价的，大多都是美东，像CCS 这些。20-25刀应该就能拿下至少2c2g的，稍微贵点的像rn（总觉得涨的有点离谱）36刀也能拿下同配置。
+  - 结果：像我这种一个月都用不了100G流量的，最近部署docker服务什么的都少很多，真的是放在那吃灰，而且像2c2g的说实话也运行不了什么龙虾呀什么的，折腾半天回过头发现自己竟然没那么多需求，基本都是用别人现成的服务。
+
+- 去年在dedirock上 买了一个一年7刀的，感觉对我来说挺够用的了。
+
+- 还是得有自己的稳定机子，甲骨文杀龟太突然了，没办法部署一些需要长时间稳定的
+
+- hostdirze是36刀年付 4c6g（有同配置三年70刀的）
+- CCS洛杉矶3c4g 年付22刀也还行
+
+- ## [想找个年费100以内的大盘鸡 - LINUX DO _202606](https://linux.do/t/topic/2400758)
+- 现在硬盘这么贵大盘鸡1个t的少说也要六七十刀（这还是几年前有活动的价格）
+
+- dedirock客服挺积极的，我在他家买了两台，一台1.5T HDD一台2.5T HDD，有时候会出问题但是发工单回复很及时，他家好像隔段时间就发邮件说维护一次，具体冷备份的话应该无影响就是断线一小会而已，感觉性价比还是很不错 
+
+- 最后买了Interserver的2.4刀月付试试咸淡，是钻石盘，Fio只有我绿云2T的十分之一，不过这个价格确实也没办法，我绿云2T年付要80刀。。。
+
+- ## [🍀平替Racknerd美西！【5月10日售罄】CCS洛杉矶补货了，可能是目前美西最便宜的机器了，CCS低价机，不是优化线路，备用机优选美西 - 测评 - IDC Flare _202604](https://idcflare.com/t/topic/77833)
+- 中国大陆到美国的优化线路或者无优化线路，几乎都是走洛杉矶，物理延迟低，买其他地方的也要经过洛杉矶，例如去美东的纽约，水牛城，美中的亚特兰大，芝加哥，都要经过洛杉矶。 目前确实是最便宜的，量也是最大，服务也稳定。其他品牌的不清楚，但ccs是十几年的牌子，跑路概率不大。
+
+- 狐蒂云难民来了, 便宜一时爽，跑路火葬场
+  - 我推aff也是看商家下菜，看起来不靠谱的都不敢推
+  - 现在ccs算是最便宜的靠谱机器了，无优化，无优化，无优化，会玩的佬友都玩的很溜
+
+- 开了台纽约的4c8g玩。不过这个开机真的好久啊。
+  - 他们老外下班了就不上班的，一般下午或者晚上买开机会快一点
+- 我半夜买的买完就开机了，纽约的2+2。虽然说听松弛，但是我之前中午找他们换IP啥的回复也挺快的
+
+- ## dartnode [RN闪购建站鸡平替 2C4G100G 仅需13.99/y - IDC Flare _202606](https://idcflare.com/t/topic/99797)
+  - 两家最大区别
+  - RN 服务售后好
+  - DN IP原生 解锁好，售后服务响应慢 支持PP支付
+  - 我特意标注了pp，遇事不决上pp，敢上pp还是有点实力的
+
+- 会有跑路风险吗
+  - 我用了两年，就是售后慢，其他与这个价格匹配，跑路应该不至于，let上他们认过
+
+- ## [HostDzire他没有push通道吗 _202609](https://www.nodeseek.com/post-913404-1)
+- 不能push
+- 还不能修改邮箱
+
+- ## [日经贴, 小白求推荐个建站小鸡 - IDC Flare _202603](https://idcflare.com/t/topic/72945)
+- hostdare 和 hostdzire 不是一家，后者是 leaseweb 的十多年的分销商，而 leaseweb 是始建于 1999 年的老牌厂商
+
+- ## 国内的云服务器快到期了，不打算续了。准备全部搞到海外服务器，但又不想用aws，调研一番，
+- https://x.com/wsygc/status/1856623132087558565
+  - 似乎digital ocean + dokploy是个不错的选择，兼具了便捷与可定制化。 有实战经验的推友分享下吗？
+- 刚实战完，dokploy 非常好用
+- 我看dokploy官方视频演示的就是 Hetzner ，算是官推首选了，有点介意的是“德国”产品，会不会延迟比较高
+
+- 然后你的域名还需要转移出去，否则没法用，因为海外没法备案，然后你把域名从国内转移到国外会发现有多麻烦。 而国外域名往国内转就有想收个验证码的事儿
+
+- ## [有哪些性价比高的高配美国服务器 强调cpu和内存 线路似乎无所谓? - LINUX DO _202603](https://linux.do/t/topic/1792158)
+  - 仔细计算 此帖应该终结了 我决定自己组建一台128gx86 或者直接mac, 这边问题是国内上行宽带升级一下 还有做好代理就好
+- 
+- 还有高配到底是啥高配，CPU单核强的，还是核数多的？还是内存大的，还是硬盘大的，还是带宽大流量足的，还是全都要？
+
+- 直接干独服
+
+- 我觉得最大预算会花在国内上行上
+
+- 套cf只能不挑IP吧，带宽不够，访问速度一样上不来啊
+# discuss-paid-cn
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [亚洲优化线路感觉100%被通信运营商人为控制在高价位 _202606](https://www.nodeseek.com/post-786732-1)
+  - 最近用了几个亚洲落地鸡，国际互联都非常优秀，而且价格都很便宜。由此让我对亚洲优化线路机器的售价远远超过美西优化线路鸡这种现象产生了深深的质疑。抛开最近由于硬件涨价导致亚洲优化线路机器一机难求。以香港举例，国际互联优秀的机器并不贵，但是内地优化线路机器比非优化线路贵很多倍。硬件、空间占用、电力、IP等资源这些两种机器应该是没太大区别，那么溢价就出在香港到内地的优化通信线路。而香港到深圳，不过隔了一条河，可以说建设跨境通信线路远远低于美西海底光缆。成本更低，卖得还更贵？还是说内地人就应该花高价用这么贵的线路？应该感恩？
+- 建一堵墙，然后在墙上开几个洞，守在洞口收钱就可以赚大钱。
+
+- ## 🆚 [一文看懂: 阿里云轻量与ECS服务器区别：价格、使用、网络及限制对比 - 知乎 _202604](https://zhuanlan.zhihu.com/p/2030928067451994982)
+- 轻量服务器
+  - 自动创建VPC网络资源，实例创建完成后默认配置了一个公网IP地址，不支持更换公网IP地址。
+  - 带宽为套餐内指定，不支持自定义调整带宽。
+  - 不支持安装虚拟化软件和二次虚拟化。
+  - 不支持声卡应用。
+  - 内网连通性上存在一定限制。
+  - 仅支持挂载一个数据盘，且数据盘只能在创建轻量应用服务器时挂载。
+  - 不支持部署集、资源编排、弹性伸缩、标签和资源组等ECS支持的高级功能。
+  - 不支持配置IPv6地址。
+  - 灵活变配支持升级为更高配置的套餐；也支持将服务器数据平滑迁移至ECS实例
+  - 简便运维提供基础的运维操作，包括远程登录、服务器监控、简单的防火墙配置、数据备份与迁移、应用管理 、操作日志等。
+
+- ECS
+  - 支持自行规划和维护网络，通过专有网络、交换机等功能自行规划私网。通过安全组、网络ACL等功能自行控制流量。
+  - 仅弹性裸金属服务器和超级计算集群支持二次虚拟化，其他规格族不支持安装虚拟化软件和二次虚拟化。
+  - 不支持声卡应用。
+  - 可以根据不同场景灵活变配。
+  - 提供弹性扩容能力，实例与带宽均可随时升降配，云盘可扩容。
+  - 提供丰富的OpenAPI。
+
+- ECS公网带宽是独享的，购买云服务器ECS选择带宽的话会分配独立公网IP地址，轻量应用服务器公网IP也是独享的。
+  - 目前阿里云轻量应用服务器升级到200Mbps峰值带宽，200M带宽是指该实例在公网出方向和入方向所能达到的瞬时最大带宽上限为200 Mbps，但该带宽值不作为业务承诺指标，啥意思？就是虽然标的是200M，但是实际达不到的意思。
+  - ECS的固定200M带宽有区别，ECS固定带宽就是固定独享的，即便是网络高峰时段也不会出现丢包的现象，ECS的固定带宽是有保障的，轻量不承诺无保障，以实际为准。
+
+- 出于安全考虑，阿里云服务器ECS和轻量应用服务器默认只开放了22和3389端口，其他的如网站所需的80、443端口，数据库3306端口等都需要手动设置开启。云服务器ECS是通过安全组来管理的，而轻量应用服务器是通过防火墙来操作的。
+
+- ## [国内长期服务器求推荐 ](https://linux.do/t/topic/1350199)
+  - 起因是题主2年前买的服务器最近快到期了，续费价格突然从一年400暴涨到2000+，转了一圈下来发现国内大厂都是这个策略，前期低价使用，后期高价续费。
+  - 2年下来想迁移各类服务也蛮烦的，所以想请教下各位佬，有没有国内长期价格稳定的厂商，年付300-500，用途主要是建站+国内中转。续费刺客太吓人了
+  - tips：因为手里还有境外的线路机，所以目前的想法是把一些网络环境需求不高的服务，比如博客，工具站、导航等等一些都放到境外的服务器上。但一些类似FRP和虚拟组网的服务就难办了。 
+
+- 国内全这样，新人首单便宜，续费就是刺客~
+  - 每年一换吧，VPS和域名都要备案，不备案就骚扰你，还有可能真的被封~所以真累了~
+  - 腾讯流量刺客，超出后要付费，而且无法超出后自动实时停止。
+  - 华为云方向很模糊，域名整个部门都不玩了，让人很担心~对了，白嫖华为代金券不错，而且华为这一点很赞，常年有各种活动，可以白嫖代金券
+  - 其他的不是一线梯队大厂，不敢尝试~
+
+- 不仅是VPS，国内域名也有续费刺客。。
+
+- 阿里云99一年，可以续费三年，但是带宽有点子小3MB
+
+- ## 现在阿里云服务器也这么贵了吗··· 4GB内存的低配，一年都要1000多，大家现在在哪买服务器...
+- https://x.com/caiyue5/status/2051159488548450540
+- 国内的服务器没有便宜的 海外的话过 cf 的话买啥都行
+
+- 2核4g的服务器，企业实名认证的情况下，第一台一年只需要199，而且每年续费都是199，促销活动页里，是一个长期活动。
+- 阿里云还是挺优惠的，双核4G ECS 199年，开通自动续费每年都是199。不过只能薅一台。不限地域。
+  - ECS要流浪费吧
+
+- digital ocean 也算小厂了吗
+  - do是流氓厂，网上搞ddos攻击，无时不刻乱扫端口试图碰撞破解的，7成以上都是do的机器
+
+- 搜轻量云服务器就得了，足够用了。你这个 ECS 是做主站分发用的，不适合你
+
+- @Vultr这个可以，我用了六年了，最低2.5$一个月的美国节点，纯净IP
+
+- 之前朋友找了一家香港的云服务，4核8g一年300多点，不定期断网、故障、联系不到人、设备数据丢失。
+
+- 我穷，只买racknerd，配置tailscale，保证安全又节省了梯子
+
+- greencloudvps性价比高，但是你要自己做安全防护。
+
+- 我推荐几个，都是自己在用，比较稳定的服务器厂商，非常适合出海产品/外贸独立站：
+  1. NetCup 这家我给很多做欧美的客户部署系统用的，非常经济实惠，可以买VDS，性能嘎嘎好，真正的独享资源；
+  2. Ovh 超级划算的独服务，挺适合存储需求大的场景；
+  3. Heztner 这个和ovh有点接近，我最近用的少了
+  - Vultr / Digital Ocean 等这种算是云厂商里比较出名的，就是比较贵，对我来说使用没有感觉有什么优势，可能对非技术人员来说操作简单一些。
+
+- nube.sh/invite/897602750V27SC 我最近用这家还可以，1cpu 2gRAM 3usd左右，关键是AMD 服务器zen3 CPU，现在VPS市场5usd以下套餐基本都是用10年前的inter服务器 CPU
 # discuss-vendors
 - resources
 
@@ -1135,6 +1416,414 @@ Claude 账号用了好几年，升级 pro 也 3 个多月了。自己用 Google 
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [Raksmart能够长期用么，黑五会有更性价比的三网优化么，TQ留档 _202609](https://www.nodeseek.com/post-925987-1)
+- 去年黑五接近0元购了1台2C4G，后来放生了
+
+- 现在都已经超售成灰了
+- 超售到影响带宽，还买吗
+
+- 超兽 半程cn2
+
+- 超售之王，一半价格，线路也是只给了一半，去程都是普通线路。
+
+- 目前我的之前能200m，现在只能50m了带宽，这不如4837的啥了快
+  - 我也是，用ai帮我看了下，说是超售的问题，口子是G口没问题
+- 我口子开始可以跑1g，现在对打la的机子只有500，然后代理测速只有50了
+
+- 这家不太稳定，长期用的话还是换一家吧
+
+- 4837那个1.99的可以玩玩
+
+- 到期跑吧，超售到影响性能的商家也是很少见了。尤其4837的机器，cn2还在一直卖也快了
+
+- ## [【NodeSeek福利】SV（硅谷）2核心，4G内存 大陆优化 VIP 秒杀$1.99，限量20台/周，抢完即止！ _202609](https://www.nodeseek.com/post-943813-1)
+  - 经典款（每周一更新库存） SV（硅谷）2核心，4G内存，50G HDD，大陆优化 VIP，带宽5G，1T流量；续费同价，秒杀价：$1.99 
+  - 每周一10点左右开放库存，自己留意一下，不用私信我，为了公平性，我也不会私信给大家具体时间。
+  - 10点我开的库存，抢完了，我真没招了。这个机器价格我不能大量放库存。
+  - 量小，只能等下周一开库存了。
+
+- 别卖4837了.. 最近质量跟屎一样
+  - 我真是没办法弄了，大家都想要这款低价，性价比高的产品，我争取到了一些，结果又不行了。
+
+- ## [【NodeSeek福利】爆款云机，BGP 5G口/3T $1.99超低价限量秒杀，续费同价！！！ _202608](https://www.nodeseek.com/post-878338-1)
+  - SV （圣何塞）1核心，1G内存，50G HDD，国际BGP，带宽5G，3T流量； 秒杀价：$ 1.99 
+  - SV （圣何塞）1核心，1G内存，50G HDD，大陆优化 VIP，带宽5G，1T流量；秒杀价：$ 1.99
+
+- 挺便宜的感觉跟dedirock差不多 这两家客服都挺快 但是这家很难说话
+
+- [RakSmart特惠：新用户送$300代金券，全场65折，2核心，4G内存，大陆优化VIP/BGP 5G带宽，$1.99限量抢购！！！ _202607](https://www.nodeseek.com/post-843914-1)
+  - 2核心 4G 50G HDD 大陆优化VIP 5G，1TB流量， $1.99
+  - 2核心 4G 50G HDD 国际BGP 5G， 10TB流量， $1.99
+  - SV （硅谷）VPS产品套餐：$1.99限量秒杀，每天限量20台，抢完即止
+
+- [【NodeSeek福利】SV 2核心 4G内存，大陆优化/BGP 5G带宽 $1.99限量秒杀，续费同价！！！ _202607](https://www.nodeseek.com/post-831564-1)
+  - SV （硅谷）2核心，4G内存，50G HDD，国际BGP，带宽5G，10T流量；续费同价，秒杀价：1.99
+  - SV（硅谷）2核心，4G内存，50G HDD，大陆优化 VIP，带宽5G，1T流量；续费同价，秒杀价：1.99 
+
+- ## 🚀 [RakSmart：新用户免费试用，全场65折，爆款云机$2.99秒杀！！ _202606](https://www.nodeseek.com/post-789397-1)
+  - 如果机器存在问题，您可以工单反馈，我也可以第一时间解决。
+- 啥新商家啊 这个都多少年了 ， 超兽怪， cpu 负载 长期40-100 ， 自己玩去吧 ssh都上不了
+
+- 2011年的商家了 hostloc以前时不时都能看到 现在才跑来NS推广交商家订阅费 
+
+- 之前开的一台，哪里都是拒绝连接，浪费钱，避雷
+
+- ## 🤔 [【总结】raksmart月付还剩1个多礼拜，总结下问题请坛友自行判别是否续费。 _202609](https://www.nodeseek.com/post-941603-1)
+已解决：
+1. 有些机器开起来会有bug：比如ssh连不上 ，电信全部ping不通，github拉取不了，貌似是ip问题 发工单更换新ip就能解决。
+2. ARP泛洪问题：持续收到大量的入站背景流量（约 60 KB/s），网络数据包密度高达 900 ~ 1000 pps。
+3. 内网计费的问题：现在我的后台内网已经不计费了， 2026.9.29官方已经明确修复了
+4. 官网的用量统计：之前为24小时更新一次。现在并非24小时才更新一次了 ，但是问官方说还在优化中，我也不清楚多久更新一次。
+5. CPU跑分很低，超售问题：当前已恢复正常水平，详情看下面坛友晚高峰NQ。
+6. 有坛友说到的 内网网卡貌似跑不满1G口子 发工单找客服已解决。
+
+正在解决：
+1. 说是之后会优化开完机之后也能开启内网功能。
+
+总结：
+内网计费和用量统计时间的问题：虽然后台已经有所修复，但是客服还不能给出解决问题的答复，只是说还在持续优化中。
+
+最划算的玩法应该是 2.99的4837和3.99的CN2组内网玩法：
+3.99 1T流量的CN2线路和2.99 3T流量的4837内网之间不计费，相当于你将获得2T CN2双向流量+2T 4837双向流量。
+！！！记得购买的时候要勾选内网选项，当前购买之后无法再添加内网网卡。
+
+他家的CN2比瓦工和大妈的延迟高10来ms
+但是晚高峰速度没差 所以我也不在意
+
+- 商家还是有在正面解决问题的，月付足以，现在4837性价比比他高的没几家
+  - 如果只用CN2的确这样更便宜 ，只是1.99只有1T流量 加一美刀就有3T流量 ，所以我选择加一美刀
+
+- 做个线路机还行吧
+- 就当个线路机用，价格还好
+
+- 5g带宽1g流量，我认为这是性价比最高的4837
+- 4837很可以，用来爽看emby
+
+- ip实在太脏了，IP2Location 99，IPQS 95，CF都要跳盾
+  - 我会说我的瓦工和大妈 也这么脏 本身就是线路机 不在乎ip干净程度
+
+- 说实话 我买了好几家4837用不出差距（云悠 matrix raksmart bestvm） 反正没啥差距 所以就留了一台性价比最高的。
+至于论坛一直在炒的白丝， 溢价那么高 有这溢价的钱我不如去买CN2。。。
+而且 299一年的续费价格。。。还是那句话 这么贵的4837我不如去买CN2
+
+- 1.99刀的BGP是3T流量
+  - 那是国际的 ，流量用不到。多余2T纯吃灰。这个多余2T的 4837至少还能跑的起来。
+
+- 最划算的玩法应该是 1.99的BGP或4837和3.99的CN2组内网玩法
+
+- 当前不代表未来，未来翻车的确实挺多例子了。当前溢价，未来打折的例子太多了。
+
+- 2026.9.29工单 官方已经明确修复 内网流量统计问题了
+至于流量统计更新还在优化中 依旧24小时更新
+
+- ## [raksmart的cn2能上吗 _202609](https://www.nodeseek.com/post-942729-1)
+- 月付呗，反正不贵。出问题丢了就是
+
+- 半程CN2，去程是163普通，看你需求吧。然后价格也是双程的一半
+
+- 4837用着咋样啊，移动电信高峰期爽用吗？，我用的cn2，西南延迟太高了200多ms，听说4837直一点
+  - 一般，除了量大便宜
+
+- ## [raksmart 137.175段 送中 _202609](https://www.nodeseek.com/post-951929-1)
+  - 只能打开google.com.hk
+  - 我现在在往回拉看看能不能拉回
+- 我的4837上周刚拉回来，结果这周又被送中了，麻了
+
+- 我的是Gemini送了，google没送，好像每个段的邻居习惯是不一样的
+
+- 我下午买的2.99刀和3.99刀，整好4837转发CN2，一看给我送中了
+
+- [Raksmart CN2 晚高峰再测 _202609](https://www.nodeseek.com/post-943119-1)
+  - 这🐔别说还真可以，就是前段时候送中，这两天才拉回来。
+- 回程速度的确不错，就是去程是163
+
+- ## [【TQ】晚高峰 raksmart 4837 2c4g 1.99刀 _202609](https://www.nodeseek.com/post-955764-1)
+- 浙江电信延迟这么低
+
+- 这广东是真快乐啊。。最近好像看起来还挺稳的
+
+- 月付款1.99，年付没优惠呢？
+  - 年付 $19.9
+
+- ## [【已收】raksmart 4837 2C4G 1.99 _202609](https://www.nodeseek.com/post-954503-1)
+  - 溢价30元收一台，真有大家说的那么好吗，收一台摸一摸
+- 这只是4837线路，你不会是要拿去碰瓷顶级线路吧
+
+- 用来放claude code
+  - 那可以，不过是机械硬盘，而且ip很脏。你最好配个落地
+
+- 直接收2.99还有3T流量
+
+- ## [lightlayer是国人oneman吗，亚太地区稳定性怎么样 _202610](https://www.nodeseek.com/post-968581-1)
+- Megalayer的子品牌吧，稳定性可以的，一直在用他家的hk反代，目前稳定在线300+天
+
+- 他家亚太小水管很好用
+
+- ## [gen2和zouter，十倍的差价，体验差几倍？ _202608](https://www.nodeseek.com/post-863385-1)
+  - zouter一年168，绿云gen2一个月25刀，基本就是十倍的差价了，它们在体验上差多少呢？如果兜里没啥钱，有没有价格和线路介于两者间的机器？
+
+- zouter 一个月 2T
+绿云 500G 除非你再掏钱组他那个丢包丢成傻逼的内网 1T
+
+zouter 已经属于中间档位了，移动和联通都属于是能用。
+
+兜里没钱，就选这些联通快乐鸡、移动快乐鸡，体验不顶尖但是能用。
+兜里有钱，再上这些三网精品吧。
+不存在便宜+高质量的产品，存在的话也会被mjj冲烂
+
+- 这没有任何可比性吧。不可能再有比zouter更有性价比的选择了，如果有那按照mjj定律，只有两种结果，一个是挨打被打，一个是被冲烂。zouter之前不就被打了好长一段时间吗。
+
+- 差3倍，gen2是三网顶尖，zouter是1网都不顶尖
+
+- 非晚高峰差别还好，Zouter JP上游是SkyLine，用的软银+IIJ
+
+- 不是晚高峰用不出来区别
+
+- 其实兜里没钱真可以考虑美西，k系我用下来除了延迟是gen2的一倍其他基本没有什么区别，美国的落地还好找
+
+- skyline最近移动也一般，联通好点
+
+- ## [Raksmart能够长期用么，黑五会有更性价比的三网优化么，TQ留档 _202609](https://www.nodeseek.com/post-925987-1)
+- 现在都已经超售成灰了
+- 不怕超售就考虑一下
+
+- 超兽 半程cn2
+
+- 超售之王，一半价格，线路也是只给了一半，去程都是普通线路。
+
+- 目前我的之前能200m，现在只能50m了带宽，这不如4837的啥了快
+- 我口子开始可以跑1g，现在对打la的机子只有500，然后代理测速只有50了
+
+- 4837那个1.99的可以玩玩
+
+- 到期跑吧，超售到影响性能的商家也是很少见了。尤其4837的机器，cn2还在一直卖也快了
+
+- ## [raksmart这家线路是最近优化过了吗 _202609](https://www.nodeseek.com/post-908857-1)
+  - 他家大陆优化线路（4837）以前那个丢包平峰期都高到不堪入目，刚才看论坛里的晚高峰nq丢包现在能到0
+  - 可能是以前去程有问题，我是一个月前直接挂itdog上测的，现在去程也不怎么丢包了
+- 目前使用情况比我小秘书sjc还要好
+
+- 4837并非优化，直连而已，联通的优化是10099/9929
+
+- 对了，这家疑似和CSTSERVER也有关系，cst和这家的好多服务器测试ip都一样， 卖的线路高度重合
+
+- ## [shandun的LA三网优化差在哪呢？ _202609](https://www.nodeseek.com/post-952256-1)
+  - 感觉shandun价格也只比vmiss高一点点，同样也是三网优化。而且现在随便买，vmiss为什么会有这么高的溢价呢？shandun差在哪里？
+- 我用下来vmiss9929和tri差不多，哈哈哈
+  - 我也是9929 core，这个月流量用光了买了一个shandun的4$机器，感觉都挺好，我用来当线路机的。
+
+- 上游不一样，回程速度也不一样，VMISS虽然写的200M口，但是回程速度能跑到600多Mbps，而shandun无论去程还是回程都超不过200M，而富强往往重要的就是回程速度
+- 我是一台vmiss9929core + shandun 4$机器，看探针数据shandun的机器确实要好很多。
+
+- 差在炒鸡老看不上 
+
+- 不都差不多的，够用了，他家机器性能还可以，跑脚本比很多都要快，不过估计新商家用的人少
+
+- ## [shandun有没有可以媲美vmiss tri的us节点？ _202609](https://www.nodeseek.com/post-918636-1)
+  - shandun有没有可以媲美vmiss tri的us节点？ de感觉还挺稳定
+- 之前美国出大流量套餐还行，一个月4刀，现在貌似还可以用折扣，cogent 伪加宽，之前出过一个
+
+- shandun有个三网优化的，八折，4每月，200mbps，500G
+
+- ## [晚上才上来，看见shandun解散了！ _202608](https://www.nodeseek.com/post-892096-1)
+  - 其实我也用了这家的de 9929，速度确实还可以，也相对便宜。
+  - 但是炸鸡、送中等问题确实存在，实话都不让说了。
+- 格局太小了，我估计很多人10月份四折或者5折不会续费，主要没啥价格优势，别家也做得到
+
+- [Shandun闭群，我来捋一捋 _202608](https://www.nodeseek.com/post-891780-1)
+- 没必要开群聊，有问题有工单系统就行，开群聊的都是闲着没事的商家，还得找人管理
+
+- ## [【ShanDun Network 新商家入驻】德国 AS9929 上线｜40% OFF +40% OFF 首月低至💲1.01｜抽奖送 30 台 VPS _202608](https://www.nodeseek.com/post-863994-1)
+  - ShanDun Network 主要提供云服务器、物理服务器等服务。本次为大家带来德国 AS9929 云服务器，并准备了 30 台 VPS 作为新商家入驻福利，欢迎大家参与体验。
+
+- ## [全面总结cloudcone，不算垃圾也不算好吧，一般而已，上位替很多 _202408](https://www.nodeseek.com/post-143962-1)
+- cloudcone有什么可以争的，cc的技术是有一点，人家自己开发面板的，但机器一般般，除了几个远古款没必要买
+cloudcone的竞品
+rn
+单从性价比来讲，rn完全碾压cloudcone，cpu性能伯仲之间，io吊打
+cloudcone的经典款如879还有稍微比较一下的能力，其他就没必要比了
+
+crunchbits
+天上地下，crunchbits真的能赚钱吗，似乎勉强不亏钱
+
+其他欧洲机
+有很多，netcup等，或者那个忍者，还有些想不出来了反正很多
+
+cloudcone的io水准的数值不会说谎，真要搞个东西，部署个数据库，性能差别一下子就出来了
+为什么有时候hdd的io数值可以
+cloudcone的io是ssd cached，刚开始是往ssd缓存写，之后是往hdd硬盘写。
+这就导致跑分和实际用的性能差别
+
+cloudcone到底买不买
+远古879，9.xx高性价比款，溢价不离谱，可买
+老款hdd普通款，纯冤种，谁买谁sb，不如rn，不如crunchbits/layer
+新款13刀ssd，io性能差，建议观望，或者买隔壁rn妥妥的
+花30刀买个垃圾io机器的，看乐子
+
+- rn的ip好像很烂，谷歌一直跳验证
+
+- rn和clonecone的ip上游是一个，没差
+这种机房ip跳验证正常，套warp或者登录谷歌账号可以缓解
+
+- rn洛杉矶以外的上游是colocrossing这里的ip更烂
+洛杉矶74开头的还可以
+
+- crunchbits 独服托管应该还是在赚的 只是VPS不咋赚
+- 独服托管一般都是赚的，vps可能是为了增加名气
+
+- 13刀，内存才1g，硬盘才20G，明显瘸腿，而且cpu很差，等超售多了更差，单核跑分200多我都见过
+
+主要是affman在硬推，管理员又不理
+
+- 买的人多了，cpu分就降了，超售大王
+
+- ## 👀 [还在用 CloudCone 的 随时做好准备吧 _202605](https://www.nodeseek.com/post-752561-1)
+- 这篇文章主要报道了洛杉矶知名数据中心和基础设施提供商 Multacom 因为拖欠房租而被起诉的新闻，并分析了该事件对下游主机厂商和用户可能带来的潜在影响。
+由于 Multacom 主要是作为“上游批发商”，很多大家熟知的便宜 VPS 商家都是租用它的机房。这次事件牵扯到了几家热门厂商：
+
+RackNerd（闪购王）：
+时间线非常微妙。RackNerd 最近刚刚完成了大动作，把大量设备从 Multacom 洛杉矶机房（DC-02）整体迁移到了新的 West 7 Center 机房（DC-03）。其 CEO 曾含糊地表示“由于一些无法控制的建筑/大楼因素，继续留在原地已经不是长久之计”。现在看来，RackNerd 可能是提前听到了风声，为了避免重蹈 QuadraNet 的覆辙，提前帮客户避了雷。
+
+CloudCone：
+CloudCone 在 2024 年被 Edge Centres 收购，而 Edge Centres 在 2023 年也收购了 Multacom，这意味着 CloudCone 和 Multacom 目前属于同一家母公司。近期 CloudCone 正在通知客户进行大规模的 IPv4 改号（Renumbering）。虽然不一定意味着他们要搬走，但在母公司深陷官司的背景下，IP 变动加上近期有用户抱怨其联盟营销（Affiliate）佣金提现延迟，让部分网友猜测其资金链是否存在压力。
+
+HostNamaste（来自评论区商家补充）：
+该商家表示，他们在今年 3 月就收到 Multacom 的通知，称其计划将基础设施从 Aon Center（707 威尔希尔）重组搬迁到附近的另一个机房（600 W. 7th Street）。HostNamaste 已经主动完成了迁移，目前没有生产环境留在那栋涉及纠纷的大楼里。
+
+文章最后提醒广大垃圾机（LowEndBox）爱好者：虽然不能证明 Multacom 会马上倒闭，但这笔 40 多万美元的欠款绝非小数目。如果你有海外 VPS 或服务器在 Multacom 的洛杉矶机房（或者不确定上游是谁），现在是检查并做好数据备份（Backup）的最佳时机。
+
+- ## [cloudnium可以直接改成按年续费码 _202608](https://www.nodeseek.com/post-871470-1)
+  - 按月怕忘记续费
+
+- 工单改年付客服涨价
+- 我也有一台改成年付客服居然说要9.9刀，我直接月付算了，应该可以提前手动出账单付款吧
+
+- 可以，改成年付就要9.9$
+
+- 直接充值余额，让系统自动扣就完了
+
+- 以前可以5.88年付 现在貌似不给改了
+
+- 可以提前支付订单，我一次付三个月的，应该也能一次付一年
+
+- 可以直接手动点击续费，付款12次不就一年了
+  - 进服务器详情有个 Manual Service Renew
+
+- ## [【已破解满0.5刀才能支付宝】cloudnium这家支付宝不能支付了？ _202607](https://www.nodeseek.com/post-832542-1)
+  - 续费点支付宝没反应，我是一个人吗？
+
+- 0.49的吗 得大于0.5才能支付宝
+- 0.5以上才能支付，0.49充值余额要10刀，收的话收0.54月付比较方便
+
+- ## [感觉cloudnium这波账算不过来啊 _202607](https://www.nodeseek.com/post-808589-1)
+  - cloudnium这波给独立ipv4，只要0.54，据说用信用卡支付可以0.49。即使完全不考虑机器和人工的费用，一个ip费用一个月我看也要0.5刀的成本吧。他卖这么便宜怎么办到的，账算不过来啊
+  - 好吧，看了大家的回复我自己也查了下，现在ipv4成本价格降了，大概就0.2-0.3刀一个月左右，那账还是算的过来的
+- 这家23年就有了
+
+- 0.49是一开始的价格，因为第三方通道最低0.5起，所以就改成了0.54，并不是使用信用卡才是0.49
+  - 这家开了蛮久了，会不会跑路不好说，反正月付吧
+
+- 自有数据中心，与其吃灰，不如发挥一下价值。
+- 机器成本我觉得超兽下可以完全不考虑了，但是ip成本是实打实的，每台机器都要有的，还能这么便宜就很神奇
+
+- 海创还0.39呢
+  - 海创配置可比这个低, 而且还涨价了, 现在也得0.5
+
+- 人家都拿的B段吧 0.2-0.3刀 有的赚
+
+- ## [CLAW限速越来越变态了 _202505](https://www.nodeseek.com/post-331171-1)
+  - 我自己同步数据已经把速度控制到50M了，这也是偶尔一次跑大流量。还没跑一小时给我限速到2M.......
+
+- 8刀4刀4.2刀，几刀的机器都限速。赶紧弃坑保平安。
+
+- 限10M才得行
+
+- 一小时还算好，我啥也没干。。。。晚上直接限速本以为是qos没想到机里就1m 
+
+- 你一说claw限速，就有人进来冷嘲热讽，不得不说阿里母公司公关这一块儿还是到位啊。
+
+- 你在NS LOC说都没有用的~
+它们只怕在老外那边被人喷！建议大家都去lowendtalk围剿无良IDC
+
+- ## [netcup老1o的价值在哪？有啥优点吗？我看好多人溢价收 _202603](https://www.nodeseek.com/post-652710-1)
+- 便宜稳定，可开25端口
+- 大厂稳定可靠
+
+- 1欧一个月带ipv4
+
+- 其实就是便宜 一年10欧 + 无限流量
+
+- 大厂，稳定，可以开邮局，无限流量，以后要涨价了
+
+- ## [netcup老1o鸡怎么样 _202608](https://www.nodeseek.com/post-884221-1)
+- 流量？老1欧我记得没流量限制来着，不少人拿来刷pt
+
+- 流量无限，但是会限速，24小时平均每小时超过100Mbps，会限速到100Mbps
+
+- ## [收到了一台netcup 老1o 无比开心 _202609](https://www.nodeseek.com/post-915795-1)
+- 大厂里的便宜鸡，而且开放了 25 端口出
+- 探针鸡
+
+- 快乐就好，这鸡太鸡肋了，不然溢价也不会这么点
+
+- ## [netcup新老1o的区别是什么 _202609](https://www.nodeseek.com/post-916765-1)
+- 新1o比老1o贵
+老的1o原价就带v4 新的默认只有v6 要v4得加0.5o
+
+- 新1o不带v4是1.04o，带v4是1.54o；老1o带v4是0.99o
+
+- 新1o好像是1.2o老的价格就不清楚了，好像是0.84o？
+
+- [nc的新1o/2o和老款什么区别 _202608](https://www.nodeseek.com/post-861558-1)
+- 怎么可能不涨价，合约到期都涨的
+- 之前是0.84，五月涨到0.99，后面还会不会涨不知道
+
+- ## [这下应该很多人对netlab有清楚的认识了吧 _202602](https://www.nodeseek.com/post-622748-1)
+  - geelinx新商家
+价格确实便宜，比之前家人云同样的价格便宜了一半，流量还多。
+但是着线路我看是真不如软银，就在刚刚软银联通刚刚轻松破300mbs，netlab也就不到200。虽然老板说是线路没调好
+电信晚上会比发疯的软银强一点。
+昨天晚上给我看傻了，我本就是准备买台搭个面板，那么多人抢。1g的搭flux总报错，开swap都不行。
+不是说这家不好，我也买了台，但是这么疯狂还上脚本真是太夸张了。
+
+- 感觉也还好吧，一个月十块钱出头，电信比claw好，联通比claw差
+主要是突然意识到亚太要上就干脆极致一点，半吊子的亚太不如上美西，所以才出掉了
+
+- 不拉不睬，我这边晚上确实比软银好，晚上9.25的结果
+
+- 只用过netlab美西4837，拉中之拉。不过亚洲利好联通移动用户
+
+- ## [netlab就是垃圾 _202610](https://www.nodeseek.com/post-962824-1)
+  - 偶尔小炸一次，然后每个月准时憋个大的 
+- 远离netlab，上游是netlab的都不买，太垃圾了
+
+- 圣何塞已经稳了2个多月了，没人打肯定不炸
+
+- ## [xtom有大陆优化的套餐卖吗？ _202603](https://www.nodeseek.com/post-661470-1)
+- v.ps即可 xtom不直接面向散客
+
+- ## [有人科普 v.ps 和 xTom 老板郭秀峰的瓜吗? 好奇 竟然能引起千人众怒 我记得老板也在 v2 就是 smms ipsb 的作者 - V2EX _202305](https://www.v2ex.com/t/939029)
+看评论区总结了下
+
+主要歧视中国人
+1. 移民澳洲 不承认是中国人 并且不允许别人叫他中文名字 因现在有了英文名字
+2. 黑五清退了所有中国用户, 发现中国 IP 注册就封号
+3. Paypal 过 6 个月争议期再要求 KYC 实名认证水电单, 不提供则封号
+4. 不能说 v.ps 不好, 否则拉黑封号
+5. 言而无信, 多人证据实锤
+
+- 简单总结下主线剧情：V. PS TG 群里一个管理做事不按章法，想起啥就做啥，平时语气有点得罪人，群里精神股东也比较多，败路人缘。前两天又封了几个典型虚假信息的账号（按他家 AUP 规定），此为导火索。争议点在于不是一开始注册的时候就封，而是过了几个月了想起这回事就顺手封掉，导致了一波节奏，昨晚开始补救但为时已晚，节奏已经起来了，开始翻旧账挖黑料，愈演愈烈，现在矛头逐渐指向老板兽兽进行攻击，所以能看到如此“盛况”。
+
+至于图中的内容有事实，也有张口就来的。现在隔壁有几个人在一直发帖带大节奏，有些路人看到后感觉自己正义感爆发，强行把自己代入进去跟着喷，他们只是想爽一下。现在的形势是只要不跟着喷就会被打成舔狗，一般人也懒得吭声，毕竟现在 Hostloc 没人管理，想干啥都行。
 
 - ## [【Dmit PK 搬瓦工特价机】-chatgpt _202604](https://www.nodeseek.com/post-687304-1)
 机型	官方价	溢价	实际成本
@@ -1471,6 +2160,38 @@ dedirock配置1c2.5g 15gb 6.45$/year
 
 - 偶尔给你失联两三天，目前是吃灰
 - 平均每月断网一天。
+# discuss-vendor-hostdzire
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [近期最差服务商体验：HostDZire 两次沦陷、甩锅用户与毫无底线的私自停机 _202609](https://www.nodeseek.com/post-937638-1)
+  - 此前我在评测他们自营印度机房的 AMD 7K62 机器时，就曾明确提醒过大家：*「此次的印度属于 HostDZire 自运营的，和 Leaseweb 无关，稳定性存疑……此外机器的虚拟化是VMware。
+  - 从 8 月初宿主机集群全量被勒索导致数据彻底灭失，到 9 月 8 日自营 VPS 再次大面积失守被黑客植入 Xboard 节点与 root 后门并全盘甩锅客户，再到 9 月 19 日无视通知内容、无预警私自拔线停机，甚至暴露出了 **「疑似私下使用控制台明文密码试探登录用户虚拟机」** 的行业大忌问题。
+  - 我从来不认为价格和免责条款是商家无底线的理由
+  - [近期最差服务商体验（续）：HostDZire 官方自认草台运维、TG群甩锅与光速踢人封口 _202609](https://www.nodeseek.com/post-938769-1)
+
+- 盲猜到商家最后又会拿出销量说：只要价格低，总会有人买单
+
+- 8月印度机房重建之后，我的机器一直被组播风暴灌流量进去，一个月能跑1000多G，反馈了一个多月到现在还没修复
+
+- ## [HostDZire这是被黑了啊 _202608](https://www.nodeseek.com/post-858093-1)
+  - 很抱歉通知您，我们的基础设施遭受了勒索软件攻击，影响了多个虚拟化节点。因此，一些VPS和独立服务器服务目前无法使用。
+
+- 三哥租的上游leaseweb很稳，除了超售没有其他的缺点。三哥自营的咖喱鸡最近这几个月掉线频率相对较高。
+- 阿三在美国没有自营业务，都是租的leaseweb。
+
+- 卧槽。三哥这个国家不行。老是被黑进去。还能安全点吗。
+
+- 小鸡访问不了了，得亏我昨天部署了一个tolaria 做了一套总结同步
 # discuss-vendor-racknerd
 - resources
   - [RackNerd | VPS Specials](https://www.racknerd.com/specials/)
@@ -1635,13 +2356,330 @@ Gemini、Reddit 被拉黑；
 
 - ## 
 
-- ## 
+- ## [怀疑 DartNode 服务商侧初始密码泄露——我的两台 VPS 被挖矿了 _20260930](https://www.nodeseek.com/post-955971-1)
+  - 我在 DartNode 两台美国的小鸡，一台 2 核 4G 拿来跑点服务，一台 1 核 1G 当落地出口，都是 Debian 12。前天开始，那台 1G 的面板 CPU 一直顶在 100%。
+  - 登上去一看，有个进程占了 85% 的 CPU，命令行伪装成系统自带的登录服务（systemd-logind），但那文件有 8.2MB——正常才 281KB。不用想了，被换成门罗币挖矿程序（XMRig）了。挖矿配置藏在类似 .cache 的目录里伪装成缓存，矿池是 supportxmr。为了让程序反复复活，它还在 systemd 目录下面塞了个假的设备管理服务，开机自启、杀掉自动重拉。
+  - 除了挖矿，这哥们还装了 Docker，跑了三个卖带宽的挂机容器（bitping、traffmonetizer、peer2profit），容器名全起了系统进程的名字。操作历史也被清掉了。
+  - 两台机用的都是 16 位随机密码，字母数字混的，爆破不可能。但我把 SSH 日志翻了一遍，压根没有任何 Failed 记录——攻击者第一次连上来，密码直接就对了。更离谱的是两台是"连着"被登的：某天 14:23 进了 B 机，25 秒后（14:24）又从同一个 IP 进了 A 机。
+  - 所以基本能断定，问题不在我这：DartNode 那边把账户下的机器清单和对应的 root 初始密码泄了（平台被拖库、面板被撞、或者收开通信的邮箱被入手，都有可能）。两台机的密码都是它开通时下发的。
+- 入侵来源 IP：
+  - 185.121.108.3（乌克兰，AS43815 Nash Prostir LLC）
+  - 103.29.127.12（孟加拉，AS38067 Radiant Communications）
+  - 108.165.12.55（与受害机同机房的内网段）
+  - 104.28.205.19 / 104.28.237.19（Cloudflare WARP 共享出口，仅作参考）
+
+- 离谱，挖矿还偷偷挂机，系统直接重装得了
+
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
 
 - ## [My Disappointing Experience with DartNode VPS: A Cautionary Tale — LowEndTalk _202510](https://lowendtalk.com/discussion/210302/my-disappointing-experience-with-dartnode-vps-a-cautionary-tale)
   - When I attempted to restore from backup, I discovered that none of my backups were functioning properly. Despite having three different backup points available, not a single one would boot successfully after restoration. The restore process would complete, but whatever was being restored simply wouldn't start.
   - The restoration process was painfully slow, and ultimately unsuccessful.
   - The fact that multiple backups failed to restore properly raises serious questions about their backup system's reliability. What good are backups if they don't work when you need them?
 
+# discuss-vendor-zgo
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [🔥ZgoCloud 上新洛杉矶三网精品线路机（CN2GIA CMIN2 9929）AMD EPYC 7002+ 美国原生 IP + NVMe SSD 测评 _202604](https://www.nodeseek.com/post-671000-1)
+- zgo没有udp，买个便宜的落地还行
+
+- 这家对CPU的限制相当严厉，我在群里见过一个老哥说，装个宝塔会触发限制自动关机。
+
+- 不如vmiss，一样的小口子少流量，但至少vmiss上游好一点
+
+- 我去，是netlab，我们完蛋了
+
+- ## [ZgoCloud LA三网优化机器测评：IP质量不错，但性价较低，网络质量堪忧 _202602](https://www.nodeseek.com/post-618765-1)
+  - AMD VPS-Specials-Starter 产品，定位为中国优化线路+性能机器，实测下来表现比较糟糕，断流较为严重。先说说网络方面，电信9929，联通则是按照地区不同走9929/CMIN2/4837不等，移动走CMIN2，因为注意到上游为kurun机房，所以特地分了闲时和晚高峰进行测试，晚高峰会比闲时普遍增加30ms左右的延时，且去程丢包比较严重，电信部分地区丢包到无法使用的程度，联通部分地区轻微丢包，移动地区大部分地区轻微丢包
+- 它家的hy2跑不动的，不用想了，限制udp
+
+- zgo比较少看到溢价的
+
+- 我之前还挺想买，但感觉二手市场都不太行
+  - 你还挺精的，凡是二手市场都不认可的鸡肯定有些地方不尽人意。目前还持有这家的鸡，等哪天不用了再评价，其实多翻翻老帖都说过
+
+- 这家很垃圾，Kurun系列的，都很垃圾
+
+- 后悔没早看到，垃圾的很
+# discuss-vendor-vmrack
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [vmrack 的L3机子和大妈 搬瓦工的vps对比如何? _202604](https://www.nodeseek.com/post-696808-1)
+  - 先说结论，VMRack机器的IP质量和解锁都挺好，线路的话只建议买L3级别产品，落地的话只建议L2、L1（其中L1只能拿来做落地用，直连有点费劲）
+
+- IP和硬件比搬瓦工好，其他不如瓦工。VMRack是500Mbps的口子，瓦工DC99是1Gbps，DC1/6/9是2.5Gbps的口子。DC99是CN2GIA+CMIN2，VMRack是三网各自优化，而且瓦工大妈现在买不到，短期内补货希望也不大，只有VMRack能每周都能买到。
+
+- 没法比，差不多同等价格瓦工和大妈的流量都是vmrack的2倍以上。品牌的口碑也没法比。有这俩的特价款没其它厂商的事。
+
+- 一品牌口碑
+二稳定情况
+三长期持有
+三方面来对比 VMRack还得考察
+
+- ## [【测评/避雷？】Vmrack L2. VPS.1C1G. Base 三网优化 _202603](https://www.nodeseek.com/post-635859-1)
+  - 今天看见Vmrack，刚好缺个流量稍大的有点线路的机子做反代，看见有个所谓三网回程10099的三网优化款，但是在论坛里找不到一个完全一点的测试，因为毕竟已经是低信誉商家了。想了想还是购入了，因为以前用过他家三网精品，感觉质量还可以，但是这次确实是踩雷了，就发个稍微完全点的测试说明下避雷。原先预想可能稍微差点，20~30Mbps晚高峰我也能接受，结果……
+  - 本帖仅说明避雷Vmrack三网优化系列 即所谓去程163/10099/CMI 三网回程10099款，小包10099，大包隐藏，实际不知
+  - 实测晚高峰期间三网TCP可用率极低，且有断流现象发生，说实话感觉不如国际T1，而且性能表现也一般不惊艳
+  - 后记：甚至感觉不如RN和CC，感觉相差也不大了。想你了，家人云，为什么在我买后20分钟出了20刀Netlab，想上灵车了
+  - 看他们退款政策，好像只支持退款到余额，还要扣除支付网关费用那些的...
+
+- 我和楼主一模一样，精品4刀持有中，200M可跑满
+想买个优化来反代
+结果上海联通晚上单线程50Mbps
+RN都能200Mbps单线程
+
+- 楼主你这款好像不是三网回程精品款，像是他们家的三网回程优化款，全走4837
+  - 对的对的，我标了是L2，三网优化款。美国版的软银，白天猛晚上拉
+
+- 国际线路10099，过关进国内4837，不是9929，那丢包率不敢想，还不如家人云frm效果。
+
+- 他家刚出的时候，我买了L2，当时晚高峰酷酷的能轻松跑满200Mbps，而且基本三网平。后来半个月不到，就“维护”了一次，三网不直了，且偶有断联，但速度也轻松能上100Mbps。
+
+现在L2看起来是彻底的拉了。
+
+另外冷知识，bwg的dc9好像晚上比白天更好一些，justmysocks的hk cmi套餐也是晚上更好用。
+
+- ## [📍都在说VMRack好，我来看看怎么个事 | 测评 L1 L2 L3三条线路机器，果然L3机器确实很赞，没什么库存，购买靠抢（文末有抢机器的方法） _202604](https://www.nodeseek.com/post-695952-1)
+- 今年高企的硬件价格，让搬瓦工/DMIT都不再投入资源，守着现金；再加上国内环境变化，海外IDC厂家各个都惜售手里的产品，小厂家也借机推出自己的产品，个个都卖爆了
+- 先说结论，VMRack机器的IP质量和解锁都挺好，线路的话只建议买L3级别产品，落地的话只建议L2、L1（其中L1只能拿来做落地用，直连有点费劲）
+- 3个级别分别是L3三网精品 L2三网优化 L1美国原生
+  - L3三网精品是优化线路机器，三网各自优化，IPv4-电信CN2GIA 联通9929 移动CMIN2 无IPv6
+  - L2三网优化是没有优化完全的机器，IPv4-电信163 联通10099 移动CMI 无IPv6
+  - L1美国原生，无优化线路，IPv4-普通线路 无IPv6
+- 最后说一下，值得买的是L3，特价款最值得买了，但经常缺货
+引用论坛某位资深大佬的话是，vmrack每周一早上9点-10点会小批量放货，放货之前登录账号，点击购买，多点几次支付就能抢到
+另外，根据祖训，大家抢特价机之前，一定要注册好账号，务必做到一号一机！ 
+可千万不要一号多机，玩够了难以出手。一号一机非常容易出手。按现在的硬件趋势，未来这个特价机还会溢价，买到L3低配特价机就是赚到
+
+- 更正一下，不是每周一，是最后一个周一了，这个月底活动结束
+
+- 线路再好也不上低信誉商家
+# discuss-vendor-白丝云/咸鱼云/akko/moe
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [4837的鸡只有白丝云和其他？ _202610](https://www.nodeseek.com/post-967235-1)
+  - 4837的鸡只有白丝云和其他，我咋就这么不信呢，曾经用过一个月，停机三次，延迟确实比我瓦工的4837低10ms，但是丢包比瓦工要高，难道是利于炒鸡才这样讲的？
+- 再强他也就只是个4837啊
+- 4837终究是4837 只是比其他的4837好那么一些
+
+- 没用过，想体验也难体验。看到去程是精品线，这确实在大流量里很独一份，做直播可能适合，或者上传数据多。
+
+- 河南电信 日用 感受不到和vmiss tri的区别 下载东西的时候比tri快 晚高峰更快
+
+- 没用过白丝4837。但我感觉他不管怎么优化，物理线路的限制摆在那啊。。
+4837可能闲时大口子和瞬时峰值都比9929等更高，但丢包抖动、qos等依然是9929更稳。
+
+- ## [呜呜, 仔细看了下白丝对比我的咸鱼 _202606](https://www.nodeseek.com/post-756572-1)
+  - 好爽啊 白丝的160一年 性价比拉满了啊
+  - 9929的也才240 呜呜呜呜呜
+  - 好想买一台 本来都准备上床了的 给我整应激了
+- 白丝160不是9929，240才是，主要是很难买到，而且闲鱼流量大口子大啊，翻倍了
+
+- 不是这样比的啊 你也要看配置和流量多少啊
+
+- k系不扩容，卖完了就是卖完了
+
+- 这两款我都有，160的是三网各自精品去程，三网4837回程，但这个4837很顶
+高峰期只有延迟明显增加，丢包基本与精品类似，比某vm的L2强的离谱
+
+- akko他家最近带宽升级了1gbps。不过综合来看还是咸鱼云更好，工单更快
+
+- 主要闲鱼的美西86刀真有点富贵了，这个价格都赶上咱们刘总的jp了（虽然小刘拉了）
+
+- vmiss说实话只有tri值得买，9929感觉现在有点超兽，之前买了一台还算稳，不过有大小包问题
+- vmiss口子小，挨打容易断流。不过他家段比较多，不一定都会顾及所有段。他家的tri还是不错的。
+
+- ## [akko和咸鱼云的德国优化线路是不是同一上游的？ _202604](https://www.nodeseek.com/post-677547-1)
+- akko那方面不行？
+机器跑分
+稳定性
+售后服务
+都不如咸鱼
+
+- 咸鱼比其它的都贵 但是确实非常牛
+
+- ## [akko 与 moe 是不是同一商家，产品安排策略很诡异 _202610](https://www.nodeseek.com/post-967614-1)
+akko 500g 299；
+moe 500g 349r；
+akko 800g 449r；
+moe 1000g 509r。
+akko 1200g 699r；
+
+- 不一定是同一家 但母鸡可能是同一台 
+
+- 几乎可能就是一个老板，都是oneman，工单都慢的要死
+
+- ## [akko官网恢复了 _202608](https://www.nodeseek.com/post-875653-1)
+- 官网掉线是被ddos了吧，群组禁烟是因为被ddos群里就会有些不和谐的声音
+
+- 群没解散，只是清空历史消息+禁言
+官网每次被打都会炸
+
+- 经历过面包云的各种操作，国人oneman idc的各种操作我都习惯了 
+
+- ## [Akko是真的好用啊家人们 _202412](https://www.nodeseek.com/post-223938-1)
+  - 咸鱼云的流量虽然多但是带宽略微小了点，买来用有点浪费了，又用不上那么多流量，发现Akko家流量减少了些，但是对我来说刚好够用，季付也特别省钱划算，据说商家也是老二刺猿了，这下不得不买了。
+
+- 这家服务是kirino三家里最拉跨的了
+- kirino三家你就认准咸鱼吧 贵点贵点 售后及时
+  - 其实咸鱼反而是最便宜的 因为有活动款 白丝和akko都没有那种活动款
+
+- 咸鱼服务好一点
+白丝和akko都感觉很佛系
+
+- 白丝和akko貌似是一个人开的两个站 (网关都用的同一个) 从去年基本都不怎么管了，回工单都是随机看心情回，有时候几个小时，有时候得几天。估计就是业余看一下的状态，平时的注意力不在做这个上面。 咸鱼老板是真的好，做什么事态度都很正式很负责，我有个机器好几年了，一直用的很舒心
+
+- akko是国人oneman吗
+  - 是的吧，国外也没这么垃圾的了
+- 老板比较佛系哈哈，我用过，机子还算稳，服务一般
+
+- 这同线路的就咸鱼云服务好
+- 是的，咸鱼云白丝云akko三个德鸡好像是同一个上游，但是白丝云和akko都很多人说工单慢
+
+- 記得前年買過，那時都是自動開通的，老闆日常在 TG 群潛水（玩游戲），佛性處理工單
+
+- 论松弛感，还得是欧洲，我之前葡萄牙小鸡的工单居然一年后才回复
+
+- 
+- 
+- 
+
+- ## [akko口碑到底怎么样 _202609](https://www.nodeseek.com/post-908959-1)
+  - 年付+不予退款，如果是当自用鸡鸡怎么样
+  - 主要是用购前工单咨询过客服，问个换ip的事情拖了4h才回，有没有自用的mjj说一下
+- 只说机器本身的话，它家德国 Mini (299) 挺好，推荐～
+工单这个就不好说了，那是跟不上 GreenCloud、VMISS、DMIT 这些。
+
+- 工单比较慢 其他k系四个都差不多
+
+- 想起来akko好像是以前 昱格云 的员工，昱格云 因为合伙纠纷倒闭了，akko离开后另立门户。
+19年 20年的事情了吧。当时我在 昱格云 还有好几个小鸡。
+
+- 他家没什么太大问题，反正中规中矩吧。但记得跟 ACCK区分。
+
+- kirino几个下游线路表现都差不多的，要炸一起炸，补偿一起补偿
+
+- K系四兄弟
+咸鱼
+AKKO
+MOE
+白丝
+
+个人体感是 咸鱼>AKKO>白丝>MOE
+
+目前持有AKKO SJC和白丝4837 都算好鸡
+不挨打 线路不抽风的时候 体验都算美西第一梯队 非常好
+
+- 老商家+kirino的线路，目前看着没什么问题，是个不错的选择
+
+- 他家的SJC目前是我认为最厉害的线路之一。起步速度100Mbits
+
+- ## [绿云，白丝云，咸鱼云，zouter， 这几家有哪些强项优化线路？ _202604](https://www.nodeseek.com/post-677230-1)
+- 白丝，咸鱼任意款都是同级强项
+
+- 绿云的日本gen2强
+咸鱼和白丝感觉是美西和欧洲方向
+zouter是移动快乐机吧 
+
+- 白丝和咸鱼的线路都很好，晚高峰杠杠的 
+
+- ## [白丝云cloudsilk家的美西圣何塞是9929好用还是用4837？ _202403](https://www.nodeseek.com/post-79476-1)
+  - 白丝云的美西9929是不是比4837更屌更好用？
+
+- 那肯定是9929，本身9929就是联通vip线路，4837只算优化
+
+- 都是在收 9929 的，4837 收的人少
+
+- 经常大宽带下载选斯巴达的西雅图4837，稳定，带宽足，其它商家的4837多少有点毛病。9929 都差不多，带宽不够大，超兽的多。
+
+- ## [白丝云 cloudsilk很顶吗，4837的 _202608](https://www.nodeseek.com/post-888121-1)
+- 这也是没想到的，居然现在美西4837都有人抢 放以前都没人要吧
+  - 不一定，阿里的hk也是163 4837，但是顶尖
+- 美西和hk不能这样比吧
+
+- 去程精品，回程4837
+
+- 4837其实不差。主要是看商家是不是给超售太多了。一般这个线路就比CN2延迟高30-50ms，普通用户基本感觉不出来
+
+- 年付299款普遍溢价50r左右，159款溢价基本80+
+
+- 年付127.99的现在多少钱啊：美国-大陆优化BGP-套餐A，美国圣何塞-大陆优化BGP（4837）流量800G
+  - 128款溢价都到天上去了，159款的还稍微好收一点，159的年付和128的套餐是一样的，然后159款的溢价是大概100r左右。128r的不好收不知道多少钱了，可能两三百起步
+
+- ## [口子小的三网优化可能真不如白丝云4837 _202610](https://www.nodeseek.com/post-960405-1)
+  - 年付128 月800g流量 性价比不比vmiss差啊
+  - 我是河南电信 晚高峰也有200多
+  - 我的8折vmiss tri basic感觉可以卖了
+- 晚上再试，现在不拥挤
+
+- 能跑，晚上延迟比其他两家飘得高而已，但依然不丢包
+
+- 4837 永远不可能和9929或者三网优化坐一桌
+
+- 丢包率和延迟比我之前的大妈还低, 18天内平均丢包率不到0.1%, 延迟几乎没波动, 晚高峰也一样.
+
+- ## [白丝云这个能冲？回程4837 _202609](https://www.nodeseek.com/post-955392-1)
+  - 回程三网4837，去程三网各自精品
+- 去程精品没卵用，实际体验还是回程决定
+- 关键看回程 你在国内下载吃的是回程 4837晚高峰基本都掉速 标的2560M别当真
+去程精品只管上传和ping好看 所以买之前找他要测试ip 晚上8-11点用你自己宽带跑个单线程下载+mtr看回程丢包
+899一年买的主要是8T流量 流量用不到这么多的话不如找回程也是9929/cmin2的
+
+- 单ip配极大流量，跑不了多少流量就被嫱了，无论什么协议
+
+- 上海选择性比较多，内地距离远，线路拥堵，体验还是有很大差距
+
+- ## [详测及评价白丝云美西 SJC圣何塞（4837） _202606](https://www.nodeseek.com/post-761655-1)
+  - 不错的备用机。去程各自精品，回程三网4837，在机荒年代算是不错的备用的选择吧。但指望晚高峰比各自优化强 纯有点扯了
+  - 我这台IP纯净度及解锁尚佳但抽奖，目前我已有机器分185.148 和38.59段，后者会漂亮一些。这款机型老板原话是不打算在扩容了且挣不到啥钱。还是那句话，花多少钱就只能买到多少体验，商家tg群也以重新开放了，有问题可以直接找老板，
+
+- ## [CloudSilk白丝云 美国圣何塞9929产品测评：三网表现都很不错 _202605](https://www.nodeseek.com/post-735685-1)
+  - 美国圣何塞9929， 本次测评白丝云的精品大陆优化BGP产品，定位是三网优化线路机。
+  - IP质量较差，广播IP，部分常规流媒体(Disney+/Netflix/Reddit)掉了，属于是典型的线路机IP质量，有相关IP需求可以套个落地
+
+- ## [白丝云和咸鱼云4837一个上游吗 _202403](https://www.nodeseek.com/post-76406-1)
+- 一个上游，咸鱼多回程一跳，这两天对比，白丝电信丢包高点0.3%，移动0.1%, 咸鱼联通0.1%，其他0。白丝最近偶尔会断流，高峰期延迟波动大些，电信移动飙到230，咸鱼好些飙200，平时180-190左右
+
+- ## [白丝云和咸鱼云的上游是不是一家的 _202604](https://www.nodeseek.com/post-677808-1)
+- 是吧，好像还有akko和moe
+
+- 咸鱼云的de顶级
+
+- 那欧洲咸鱼云与小秘书相比哪个更好呢，看着价钱都差不多
+  - 咸鱼云
+- 移动的话 v.ps 吧，便宜点。联通咸鱼好
+
+- 开年费的话，好像咸鱼云9929好像更便宜一点
 # discuss-vendor-vmiss
 - ## 
 
@@ -1650,6 +2688,115 @@ Gemini、Reddit 被拉黑；
 - ## 
 
 - ## 
+
+- ## [vmiss US LA TRI和TRI DC2有什么区别 _202610](https://www.nodeseek.com/post-964992-1)
+- tri上游是zont，tri dc2上游是netlab，不过老板说后续dc2可能也会搬去zont
+- DC2 是kurun，流量比DC1少100G，老板自己调的，目前感觉在使用上木有什么差别
+
+- 上游不同 流量dc2少100G
+
+- netlab 最近老挨打
+
+- dc2 电信容易跳163
+
+- ## [VMISS LA. TRI. Basic 是不是也属于传家宝了 _202608](https://www.nodeseek.com/post-892670-1)
+  - 一年45cad折合人民币218元, 溢价150左右
+  - 500g双向 200兆带宽，个人不追求极致，应该也可以归属于传家宝档位了吧
+
+- 总有人喜欢拿限速200Mbps说事。对于绝大多数人来说了，这个带宽日常使用够用且能保证非常好的体验了。
+
+其实，实际体验上，很多省份运营商们美西的单线程带宽上限给到的也就是200Mbps。而且这家IPv6也是优化线路。
+
+然后，不到30刀一年。
+
+我不知道还有哪家可以在同样的价格下提供接近的体验。
+
+除了早期6折和8折的机器。机器的存量还是很大的，以后估计也是常有货。
+
+这机器的存在不是为了当传家宝，但会让某些所谓的传家宝显得有点没那么传家宝了。
+
+当然了，你要说给收藏家提供情绪价值，那某些传家宝还是有的。这点比不了。
+
+- 算起来并不便宜，500G双向一年两百多，还限速200。
+
+- 它得以后都不再放这样的货才能当传家宝，不过按照这个趋势也是有可能的，老板涨价后就再也没有4.5的价格了是真的。
+- 才放货没几天的东西传什么家
+
+- 这个鸡，我看探针下来，比dmit还要稳定。
+
+- 去年前年 那时候 活动🐔多 价格也划算 眼下这个节骨眼 没办法 确实找不到 比vmiss更有性价比的🐔了
+
+- 给200Mbps目的之一就是防止机场、测速党和拼车党进来搞坏个人用户的体验的。用心良苦。
+
+- ## [vmiss的tri和cn2有什么区别？ _202610](https://www.nodeseek.com/post-961951-1)
+  - 我看tri三网优化反而便宜了呢？cn2贵了的同时流量还少了？
+
+- 三网各自和三网cn2
+- cn2电信优化 tri三网优化
+
+三网cn2gia
+三网优化cn2gia 9929 cmin2
+
+gia线路贵所以三网Cn2的机器比三网优化贵
+
+- 三网更优，cn2 路由应该没差异
+
+- 三网cn2gia绝对比三网各自优化贵，但实际体验三网cn2跨网拉得一逼，移动几乎不能用，电信的坑非要去踩哪只能说你小白活该被坑，就跟大妈的pro一样，移动联通还得用v6，流量也少了一半，仅仅多出一个cn2就得去为电信买单，毫无性价比，cn2线路太贵了，又被mjj吹得太神了，说三网cn2吊打三网各自优化的傻逼真的不在少数，移动联通走电信cn2专线你又没交过路费能上你好过吗？想想都不可能，三网除了4837兼容性较好，9929和cn2三网都是垃圾，说白了vmiss的三网cn2体验，还不如白丝的三网4837，vmiss只有电信顶尖，而白丝的三网综合体验会更好
+
+- ## [VMISS的US. LA. TRI系列，洛杉矶两款三网优化的简易对比评测 _202512](https://www.nodeseek.com/post-532141-1)
+  - 首先，我们把不带DC标记的称为DC1，以便于与DC2进行区分。
+  - 我个人推荐是选择DC1，因为流量更多，更看好国际互联的GSL（当然也可能会更炸，压力都给到GSL了）。
+
+- dc2的问题是上海（江苏）联通走的是4837，我也是这个原因换成了9929那款
+
+- ## [话说 VMISS LAX TRI 两个机房的线路似乎差别还挺大 _202605](https://www.nodeseek.com/post-750257-1)
+  - 感觉DC02的电信线路似乎要稳的多啊
+
+- 应该是好点。要不然，不至于流量打了八折，价格和DC01一样。
+
+- 上游不一样，tri是zont，dc2是kurun
+- dc2是kurun
+这个机房的兄弟有福了
+跟netlab一桌的烂货
+
+不过好像vmiss自己额外调试了
+
+- dc1是zont，电信容量接近满载了，大概从一周前开始丢包持续在6%以上
+dc2是kurun，老板自己调的，流量少100g
+
+老板的tri-dc1扩容在等电信落地，扩容前估计电信都不好用
+
+- 他们家dc2自己调的，应该比别的断流王好很多。不是所有netlab和kurun都断流，很多是商家超兽太多了
+
+- > 著名超售上游，Zgo口碑差有一大半的原因出在kurun这，ip质量会出现几条家宽，三网延迟看着也不错，小白被坑二选一的经典产品
+netlab和kurun 再怎么优化，上限摆在那里，谈不上优选, 
+其实直接对照晚高峰的波动就明白了 dmit bwg稳如防御塔, 
+其他的跳disco, 
+这才是体现线路实力的真实表现
+
+- 并不完全是真实情况其实。
+这事取决于多方面:
+商家实际找上游买了多少带宽, 
+Kurun那边跑不起来其实不是带宽不足导致的，而是默认防火墙策略误杀严重，商家没有去找上游特调。
+.....
+有一说一很多事并不能完全怪上游，你可以在很多帖子里看到客户评价，我们家的netlab和kurun的网络基本是没有什么问题的。平心而论，在钱给够的情况下，kurun我先不好评价，但是netlab在我眼里算是服务和质量都很好的上游了的。
+
+DC1的电信 上游那确实是带宽不足了，所以每天有时候带宽被占满的时候会出现问题，但不算太久。 上游一直在和电信进行扩容处理中，但是中国电信那边推进缓慢，一直在处理。 这事群里基本都知道，您可以加入我们的组群，关注下最新动态。 移动和联通没啥问题。
+所以我们的DC1一直都没有再放货很久了，避免更多的客户对此造成误解。等中国电信扩容后才会放货。
+
+- ## [VMISS 美国LAX-TRI产品 复测：性能+IP质量+三网优化 = 个人轻量单品 - LINUX DO _202607](https://linux.do/t/topic/2665086)
+  - LAX TRI 产品，定位是三网优化线路机器
+  - IPV4 三网双程各自顶级优化 (CN2GIA、9929、CMIN2)，IPV6 电信 [[163]] 联通 9929 移动 CMIN2 优化，比较可惜的是电信 IPV6 没有走 9929，优化并不算完整 (电信 IPV6 是没有事实上的 CN2GIA 的，所以一般走 9929 就是最好的选择了)，建议电信用户使用 IPV4 连接，联通移动用户可以选择 IPV4/IPV6 使用，优先使用 IPV4 连接。这里提一嘴教育网的情况，教育网不是很直，延时多在 230ms 左右，不过不丢包，对于教育网用户而言就是能用但不极致，推荐教育网用户去玩 HKIX。
+- 为什么大多数人愿意溢价买 bwg 和 dmit 都不愿意便宜买 vmiss
+  - 因为一直没货，就这么简单， 现在 basic 已经溢价 3 倍了
+- vmiss 两年前一直在用，就是因为不稳，才弃了
+- 去年买了一个，前几天放货想再买一台，结果限制单账号同类型只能一台
+
+- vmiss 的美西确实可以，但是香港只能说是能用。不过人家也就那个价，没啥好说的。一直苦于找不到高性价比的香港优化
+
+- 往年 DMIT 年黑五年付 50 刀，是比这个更高一些（性价比），但是今年机荒，不一定有什么好的优惠，也不一定能不能抢得到
+
+- 东京美西都是好鸡，结果都完全买不到
 
 - ## [有一说一vmiss晚高峰的时候比vmrack稳太多了 _202605](https://www.nodeseek.com/post-744220-1)
   - 同样是三网优化鸡
@@ -1776,6 +2923,77 @@ vmiss我用过 jp的tr，晚高峰速度拉不起来，比不上大妈的pro和e
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## [DMIT套落地鸡请教 _202610](https://www.nodeseek.com/post-967191-1)
+  - 请问DMIT套什么落地鸡性价比高啊？以及多个鸡可以套一个落地鸡吗？
+  - 主要就是网站老跳验证有点烦
+
+- 你要看你自己什么需求，是要解锁流媒体，还是稳定用ai减少风控可能性
+
+- 先想清楚套落地是为了啥。dmit美西本身就是原生ip 看网页刷油管跑gpt直接用就行 没必要再套 套了反而多一跳延迟。
+  - 需要落地一般是两种：要家宽ip跑claude这类风控严的 或者要特定国家的ip解锁流媒体。
+  - 多台入口共用一个落地完全可以 落地开一个入站 每台入口建一个出站指过去就行 或者入口上直接用realm转发到落地端口。只有落地自己的带宽和流量要够大家一起用。
+
+- 看你落地干嘛吧 流媒体解锁本身很够用了 ip本身也不算脏 质量要求再高点就家宽落地咯
+
+- ## [DMIT现在的IP段里，哪个段最干净？ _202610](https://www.nodeseek.com/post-967172-1)
+179.255
+179.253
+69.63
+64.186
+154
+131
+
+- 接个落地最干净
+
+- 线路鸡没哪个段干净
+- 线路鸡，都是千人骑的，没啥干净的。
+
+- 154的还行 179的还在其他区域
+
+- ## [[结案]DMIT不支持seek.li邮箱 _202607](https://www.nodeseek.com/post-808594-1)
+  - 我看坛内dmit热门机都（炒到）1000+了。想拥有一台属于自己的美西，但是中介费5%有点不舍得。不走中介又怕被骗，贪小便宜吃大亏。尤其是0级1级号出机的......
+  - 我想到这个方案（表达不一定流畅，方法可能有争议，轻点喷）：卖家创立新seekli，用seekli邮箱在dmit改邮, 买家用seekli账号登陆dmit，确认机器
+
+- 想法很好 但是DMIT不支持seek.li邮箱
+- .org 和 .li都不支持
+
+- ## [🎄DMIT大妈修改邮箱（过户）保姆级教程 _202512](https://www.nodeseek.com/post-557276-1)
+  - DMIT大妈的账户是可以很方便的过户的，只需要更改账户邮箱即可，简单快捷。
+  - 但这也提出更高的要求，必须是一个账号，一台机器 （MJJ祖训：一号一机）
+  - 一号双鸡或者多机不仅没有溢价，反而会折价
+  - 新的邮箱（接收方邮箱）需要未注册过DMIT；
+  - 距离上次修改邮箱大于10天。
+
+- ## [求科普：收大妈必须是没有注册过DMIT账号的邮箱吗？ _202608](https://www.nodeseek.com/post-897381-1)
+  - 是不是如果注册过DMIT账号对方就无法push过来？
+- 不要理解成push，大妈是改邮箱账号
+
+- 是的，DMIT是改游注册，不是push服务
+
+- 新邮箱改邮。注册过，就被占用了啊
+
+- [买 dmit， 注册过的邮箱还能作为改邮邮箱吗？ _202608](https://www.nodeseek.com/post-897269-1)
+  - 要改绑的邮箱不能有绑定的 dmit 账号，不然怎么改绑
+
+- ## [请问DMIT改邮出掉产品后，原邮箱还能重新注册吗？ _202610](https://www.nodeseek.com/post-957269-1)
+  - 我这个邮箱改邮出掉产品了，未来从别人手里收的时候是否可以让对方改到这个曾经注册过的邮箱
+
+- 可以重新注册，改邮前注意是否绑定信用卡那些的，避免一起转移到新邮箱
+
+- ## [请教，DMIT更换为付费ip有什么优点吗？ _202610](https://www.nodeseek.com/post-960957-1)
+  - 目前是179.255可以升级为付费ip，是更换到154吗？付费升级了有什么优点？求问
+
+- 污染程度更低
+154段是大妈租用的，现在上游涨价了每月多一刀，理论上表现更好，解锁更全面
+
+- 154就是原来的段，没啥特别的，就是cognet涨价了
+
+- 得不到的永远在骚动, 其实没啥用. 我换到免费 ip 有1个月了, 各种服务访问下来没有区别
 
 - ## [大妈的CORONA究竟哪点不如megabox pro，真有必要溢价那么高吗 _202601](https://www.nodeseek.com/post-565213-1)
 - 瓦工是三网各自优化，dmit pro和eb一个电信一个移动联通
@@ -1956,7 +3174,18 @@ T1系列是普通线路机器，双栈无优化，IPv4&IPv6-三网4837 163 CMI
 
 - ## 
 
-- ## 
+- ## [为什么瓦工的溢价会普遍比dmit高呢 _202610](https://www.nodeseek.com/post-966444-1)
+  - 只讨论特价年付机，biggerbox meagbox pro和 eb.wee pro.wee corna malibu等
+  - 瓦工的原油基本都是1000以上，像mega基本都1800-2000了，但是malibu才1300，差距好大呀
+- 瓦工放货比较少吧
+- 瓦工不补货了，绝版当然贵
+- 大妈去年年底补过一波了，所以便宜些
+
+- 三网各自优化好呀，而且瓦工持有量应该比大妈少点
+
+- 大妈要分流V6才是三网，比较麻烦
+
+- 我当初本来是想买瓦工的，因为名气大，逛了坛子果断大妈，性价比太高了还不输瓦工，现在瓦工移动瘸腿了，正在庆幸还好当初是选的大妈，业务鸡，差一网都不行
 
 - ## [为啥大家都盯着瓦工狂炒价格？ _202601](https://www.nodeseek.com/post-586645-1)
   - Megabox上天了，现在又开始炒荷兰， 大妈为啥没有这个待遇？
@@ -2142,7 +3371,15 @@ DMIT AMD 配置
 
 - ## 
 
-- ## 
+- ## 💡 [来论坛1234天! 写点防骗指南!! _202610](https://www.nodeseek.com/post-963269-1)
+- 鉴于最近骗子很多, 打算写点经验, 当然最稳的还是走中介, 但是有些小伙伴还是想省点钱。
+- 在这里就涉及到怎么看交易对象, 这些纯粹是个人的看法和理解。我自己交易数据目前也有好几万了, 最大交易有几笔是3000-4000元的, 整体来说先货的在8-9成, 感谢信任我的朋友, 当然这么久从来没有骗过人也没有被骗过
+- 防骗指南(综合因素不针对任何人):
+  - 不要看到好价的东西觉得捡到便宜了直接甩钱到别人脸上, 觉得自己低级看到对方是3-5级的脑子热了就给钱了
+  - 建议在注册时间在600天以下的交易对象都重点注意, 因为印象中在2年前还没有什么骗子, 基本上都是最近1年左右特别的多
+  - 骗子套路最近又多起来了, 声称可以走中介, 但是最后因为各种理由忽悠你又不走中介了
+  - 注册时间比较长, 但是主题, 回复内容很少很少的, 反之有些人可能拿注册时间很长的白号出售(然后近期大量用AI创建主题和回复制造假象, 然后回头就有人发帖说注册时间长, 主题回复也很多的也不靠谱了!)所以一定要注意主题和回复的内容是不是无意义的或者有多少交易内容的, 以及他是不是真的有交易, 这种对象都要特别特别注意除非他走中介
+  - 交易的时候确定论坛ID和飞机对应上
 
 - ## [nodeseek 有公开的 API 吗？ _202609](https://www.nodeseek.com/post-928160-1)
 - 没有，自己解析 html

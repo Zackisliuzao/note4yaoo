@@ -1481,6 +1481,10 @@ modified: 2026-06-20T15:49:57.019Z
   - 刚刚发现暂时只可用oai协议
   - 可用模型：minimax-2.5（其他模型陆续上线）
 # paid-api 💰
+- 模型
+  - 综合能力: 高级/top > 甜品/flash > 快速/lite/mini
+  - 使用频率: 甜品 > 快速 > 高级
+
 - models
   - cost-auto
     - 2609: luna, mimo, deepseek-v4.1-flash, gemini-3.8-flash, grok-4.6, composer-2.5, devin-swe2
@@ -2484,10 +2488,13 @@ modified: 2026-06-20T15:49:57.019Z
   - [LingShu AI ](https://api.strategyhub.cc/keys)
     - cursor-claude--0.4x
     - ccmax--0.7, 混池 并发不大
-  - https://tkapi.cc.cd/keys
-    - ccmax--0.6x
   - [joeapi ](https://api.joealot.com/keys)
     - cc带审查--0.5x
+    - 反代自 claude-code cli
+  - [君の星辰 ](https://ai.centos.hk/pricing)
+    - CCMAX特惠--0.6x, 限制在Claude code 中使用
+  - https://tkapi.cc.cd/keys
+    - ccmax--0.6x
   - [智元API ](https://pool.chaozhiyuanai.com/keys)
     - ccmax--0.8x
   - [JinnyAPI ](https://jinnyapi.com/keys)
@@ -2915,6 +2922,9 @@ modified: 2026-06-20T15:49:57.019Z
   - 并发才给5, 不然给人刷吗
   - gpt, kiro
 
+- [野菜API ](https://yeschoy.com/)
+  - 一个客户端，完成应用接入、模型选择与价格查看。
+
 - [PackyAPI](https://www.packyapi.com/pricing)
   - [Packy - 模型健康面板](https://check.linux.do/group/Packy)
   - [PackyAPI 使用文档](https://docs.packyapi.com/)
@@ -3178,6 +3188,24 @@ modified: 2026-06-20T15:49:57.019Z
 - [Smz - 数字商品自动发卡平台 ](https://shop.smz6.com/)
   - pp-¥1.6
 
+## esim
+
+- [Jetpac App – Your All-in-One eSIM for Global Travel ](https://www.jetpacglobal.com/eterna)
+  - [分享一个全球终身免费旅行eSIM _202610](https://www.nodeseek.com/post-968222-1)
+  - 这个平台宣传的是全球首款终身免费旅行eSIM
+  - 每年最多可获得4次每次100MB的免费流量
+  - 国家记得选美国才行
+  - 测了IP是新加坡的（这种旅行卡怎么都是新加坡IP）
+  - 有需要的可以当个备用
+  - 🐛 需要先用美区号码接码，然后才能领esim
+
+- 
+- 
+- 
+- 
+- 
+- 
+
 ## email 📧
 
 - email-providers
@@ -3249,6 +3277,10 @@ modified: 2026-06-20T15:49:57.019Z
 
 - [极速的小店 - 链动小铺 ](https://pay.ldxp.cn/shop/jishu)
   - Gmail母号 邮箱，正规账号，单账号独立注册。 可用opus4.6  4.7
+
+- [edu邮箱 - 16688 ](https://www.16688.com.cn/shop/S975721)
+  - 蒙特克莱尔州立大学校友邮箱
+  - 达尔豪斯大学邮箱 后缀@dal.ca 
 
 ### outlook-manager
 
@@ -3349,6 +3381,7 @@ modified: 2026-06-20T15:49:57.019Z
   - 300GB/月 - 100LDC
 # video/movie
 - [OmniBox - 在线观影](https://omnibox.wangchao.uno/)
+  - [ℤ𝕊𝔽𝕒𝕟的影视站 ](https://zsfan888.cc.cd/)
   - [MoonTVPlus](https://moontv.wangchao.uno/)
   - [MoonTVPlus](https://moontv.662778.xyz/)
   - [𝔔𝔦𝔫𝔤 𝔖𝔥𝔢𝔫𝔤 -公益MoonTVPlus - LINUX DO _202605](https://linux.do/t/topic/2126755)
