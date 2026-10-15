@@ -648,6 +648,71 @@ https://dlercloud.com/user/shop
 
 - ## 
 
+- ## [LayerOne：佛州 1C1G20G，$14.4/年，WOW 商宽 IP _202608](https://www.nodeseek.com/post-871673-1)
+  - https://layeronecloud.com/let-promo/
+  - 这家也算是老商家了，之前叫 ReviveHost、Pulsar67，最近又改了名，从 2020 年成立到现在。但是一直不温不火，
+  - 我之前也短期买过一个月，稳定性还不错，还支持 alipay 对国人挺友好的。
+  - 这台机器最大的优势是 IP。不过并不是所有数据库都一致认可的“纯家宽”：IP2Location 仍将其识别为机房 IP，部分数据库也存在滥用标记。因此，更准确的说法是 WOW 商宽 IP，但多数数据库识别为家宽，如果对 IP 质量要求极高建议还是加钱去买真家宽，如果你不太在意延迟且预算有限那这机器还是不错的。
+  - 佛罗里达州距离美西较远，美西访问延迟约 70ms
+  - 对延迟不敏感的话，比较适合用作美国落地、流媒体解锁或轻量代理
+
+
+- ## [性价比最高的🇺🇸家宽和伪家宽推荐一下 _202609](https://www.nodeseek.com/post-923003-1)
+  - 最好稍微带点优化，实在没有也可以
+
+- 看你怎么定义伪家宽了，这个概念就很魔幻，双ISP非家宽？
+
+- 家宽正常情况下都没有优化的，也不推荐直连。
+  - 性价比最高的现在就是诺联家的cox了吧，要求必须是AT&T的话就是aaitr了。
+
+- aaitr: 149/月
+
+- 伪家宽一般都是回程9929优化，反正我觉得只能当个干净的解锁落地机。
+
+另外建议最好也了解一下自己有没有需求，真家宽价格都不便宜。
+
+- 买个代理IP使用链式代理就行了
+
+- 云悠的GTT伪家宽
+
+- Cloudleadinno 伪家宽 3刀一个月 挺好的
+
+- 其实只要不影响流媒体 TK AI 社媒这些使用就行了
+
+- 如果不介意延迟可以看看这家，机器在佛州，现在 let 有活动 15 刀一年 https://layeronecloud.com
+
+- ## [有什么性价比高的us伪家宽 _202609](https://www.nodeseek.com/post-937775-1)
+  - 1个月20以内的，真家宽用不起，买个us伪家宽凑活用用
+- 诺联 云悠 zoro
+- NovixLink的cg20一个月挺绿的
+- 我也推荐NovixLink，我自己买的就是这个，20一个月 
+- NovixLink（诺联） - LAX-BGP Lite 轻量版
+• 1 vCPU 核心
+• 768 MB DDR4 内存
+• 10 GB RAID10 SSD 硬盘
+• 500 Mbps 峰值上行带宽
+• 500 Mbps 峰值下行带宽
+• 1000 GB 每月双向流量
+• 1x 独享美国双ISP原生住宅IPv4
+• 测试IP：38.58.108.2
+• ☁️ 全球 Tier-1 骨干网络
+• ⚠️ 无中国大陆连接优化
+
+ℹ️ 美国 Cogent 双 ISP 住宅 IP 国际带宽 VPS（伪家宽落地）
+
+💰 价格：$4.99 CAD 每月
+
+- 25以内一个月的ntt家宽 怎么样？
+LAX ISP Nano
+CPU 1核 ｜ 内存 1024 M
+硬盘 10 GB ｜ 带宽 1000M
+2048G/月 ｜ 超出限速共享 1 Mbps
+重置流量 $4.99
+IPv4 1个 ｜ IPv6 0个
+$71.88/年
+USISP-NANO-60 6折优惠码 3.6刀一个月 有测试ip啥的。
+下单链接：https://panstar.ai/servers
+
 - ## [ai要不要买家宽的真实体验 _202609](https://www.nodeseek.com/post-921568-1)
 个人经历，只供参考
 chatgpt claude grok gemini 等主流ai都使用，codex claude 是高频 半年使用机房原生ip vmiss demit 没有任何影响
@@ -802,7 +867,25 @@ webshare/ip2world 等系列
 
 - ## 
 
-- ## 
+- ## [佬们。我研究了一晚上也没想明白为什么有人用reality偷自己 _202610](https://www.nodeseek.com/post-981759-1)
+既然自己已经有域名有证书，直接tls+fallback不就行了，这样起到的作用是一致的呀。
+
+另外，reality的最佳实践是偷邻居大厂对吗，但这样如果对方用了cdn，为了防止被作为跳板，要用nginx做sni分流，但这样分流回落一下似乎又会增加特征。（这里解法似乎就是尽量找没用cdn的，或者直接target他源站，但这种站似乎不好找）。
+
+所以我的问题就是：
+1，reality的作用除了假装访问大厂、省的自己配证书和域名等以外，还有别的妙处吗？
+2，为什么有人会用reality偷自己的证书，带来了什么好处。
+
+- 就是为了不想用自己证书才去偷啊 
+- 大家都在偷的时候，你不偷特征是不是太明显了。偷自己的也是偷
+- REALITY的最佳实践是用大厂云藏木于林，而不是用大妈瓦工去偷什么亚麻、CF，还有AMD、苹果、微软这种用全球甚至包含国内节点CDN的
+
+- 方便，而且域名掌握在自己手里
+- reality 可以 vision，tls 的好像就没有了。vision 后不用再次二次加密，CPU 占用低很多，测速也能拉很高
+
+- 查你的时候，各项指标完全对的上。
+偷大厂有小概率被薅
+偷邻居要防邻居突然跑路
 
 - ## i am running https://github.com/MetaCubeX/ClashX.Meta on my macbook, in settting there is a alpha meta core, should i turn it on to use it?
 - unnecessary
@@ -1666,6 +1749,35 @@ ChatGPT 解锁
 - 网上搜一下动态IP代理池应该都是吧，一般用隧道代理比较多，安全
 
 - 免费的很早之前都没了，现在国内代理都得实名才行
+# discuss-vpn-checking
+- https://github.com/xykt/IPQuality
+  - bash <(curl -Ls https://IP.Check.Place)
+    - 直接检测默认项目
+  - bash <(curl -Ls https://Check.Place) -I
+    - 交互式检测， 先选择项目， 再检测
+  - 支持OS/Platform：Ubuntu | Debian | Linux Mint | Fedora | Red Hat Enterprise Linux (RHEL) | CentOS | Arch Linux | Manjaro | Alpine Linux | AlmaLinux | Rocky Linux | macOS | Anolis OS | Alibaba Cloud Linux | SUSE Linux | openSUSE | Void Linux | Windows (via Docker)
+
+- https://github.com/lmc999/RegionRestrictionCheck
+  - bash <(curl -L -s check.unlock.media)
+  - 纯 bash shell 实现的流媒体检测功能，可免 ROOT 执行，支持多个平台。可用于批量测试多个地区的流媒体网站解锁情况。
+  - 带有 bash 环境的任意 Unix 或类 Unix 操作系统。 例如：Ubuntu 16+, Debian 10+, RHEL 7+, Arch Linux, Alpine Linux, FreeBSD, MacOS 10.13+, Android (Termux), iOS (iSH), Windows (MinGW/Cygwin), OpenWRT 23+ 等等。
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [youtube和google被送中有哪些问题和解决办法 _202502](https://www.nodeseek.com/post-272343-1)
+- 鉴别IP是否被送中方法：
+（1）直接打开www.youtobe.com/red，若提示 有图比 Premium在您所在的国家/地区尚未推出, 则IP被送中。
+（2）在vps上使用流媒体检测脚本:bash <(curl -L -s check.unlock.media) 选择 跨国媒体检测 如检测结果为：有图比 Premium: No(Region: CN)则IP被送中。
+
+- 
+- 
+
 # discuss-vpn-ip
 - ## 
 
@@ -1803,6 +1915,23 @@ ChatGPT 解锁
 - Since then, the original ClashX quit and ClashX Meta restarted (its logs show restarts at 03:55–03:57); it's now listening on 7890/9090 as root (my earlier lsof checks missed it because non-root lsof can't see root-owned sockets), and system proxy is back to 7890.
   - Quit and ideally remove the old original ClashX app (and consider cleaning up the leftover ClashX Pro / Clash Verge Rev services too — I saw a verge service daemon still registered with ports 7897-7899/9097). Running several proxy apps means whichever launches last rewrites the system proxy port, and anything hardcoded to another port (like git was) breaks silently.
 
+# discuss-cdn-cn
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [好像 EdgeOne 的国际链接也很差，回源 DediRock 洛杉矶的 IP 网页都打不开 _202610](https://www.nodeseek.com/post-975539-1)
+  - 好像 EdgeOne 的国际链接也很差，回源 DediRock 洛杉矶的 IP 网页都打不开, 网页访问速度甚至不如 Cloudflare
+- EdgeOne走Tier-1的，CF有国内运营商私有Peering，比不了
+DediRock到EdgeOne回程也是Tier-1
+
+- 只能亚太用用
+
+- 国际 CDN 只认准 Cloudflare
 # discuss
 - ## 
 

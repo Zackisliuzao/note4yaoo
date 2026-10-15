@@ -114,8 +114,9 @@ serve -p 9000 --cors
 HOST=0.0.0.0 PORT=8080 react-scripts start
 next dev -H 0.0.0.0 -p 3000
 
-npm i -g npm yarn pnpm corepack serve @dotenvx/dotenvx opencode-ai @openai/codex @kimuson/claude-code-viewer   @deepseek-ai/dsh @github/copilot
+npm i -g npm yarn pnpm corepack serve @dotenvx/dotenvx opencode-ai @kimuson/claude-code-viewer  @github/copilot
 @ooxml-dev/cli
+@openai/codex @deepseek-ai/dsh
 npm up -g skills @getpaseo/cli @earendil-works/pi-coding-agent  
 ```
 
@@ -345,6 +346,136 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - ?
 - dev-log
   - ?
+
+## 1014
+
+- [Document AI pricing | Google Cloud  ](https://cloud.google.com/products/document-ai/pricing)
+  - Enterprise Document OCR Processor: First 1,000 pages per month are $0.00
+  - All Other Processors (Form, Layout, Custom, Pretrained): 0 free pages per month; standard pay-as-you-go rates
+
+- it seems that  https://ladocs.aichorage.de (from worker_5 node) supports to login  with https://auther.aichorage.de (from worker_1 node). but i can not find how to register new user at https://auther.aichorage.de . so what is the normal workflow to register and use https://ladocs.aichorage.de?
+  - source code for ladocs(lasuite-docs) has been cloned at folder `~/Documents/repos/saas/lasuite-docs` for reference if you want.
+  - source code for auther(authelia) has been cloned at folder `~/Documents/repos/saas/authelia` for reference if you want.
+  - Analyze related code/config, then explain to me step by step how to register and use ladocs
+- Authelia is designed as a secure identity provider and reverse-proxy authentication server. Authelia deliberately does not provide a public self-registration/sign-up form. User accounts must be provisioned administratively via its authentication backend.
+  - Auther is configured to use Authelia's file authentication backend
+  - In apps/auther/entrypoint.sh, Auther automatically provisions the bootstrap admin and collaborator accounts into `/config/users_database.yml`
+  - To create a new user, Append the new user to  auther/users_database.yml
+- Ladocs uses Just-In-Time (JIT) provisioning. Once an account exists in Auther, logging in through OIDC automatically creates and synchronizes the user profile in Ladocs' database (impress_user). If no matching record exists in the impress_user table, it automatically instantiates a new user with their OIDC sub, email, and full_name.
+  - Users never have to register in Ladocs directly.
+
+- i want to use verge3/verge5/verge-relay with clashx meta on my mac. the clashx config file is at `~/.config/clash.meta/verge2609.yaml`. verge3/verge5 works well, but verge-relay does not seem to work.
+
+## 1013
+
+- 🤔 i see port 68(udp), 3389(tcp), -1(icmp), 1(tcp and udp) are in current security group, why are they in it? can i remove them?
+  - 3389 (TCP): default port for Windows Remote Desktop Protocol (RDP). Cloud providers bundle it into default security group templates so Windows instances don't get locked out upon creation.
+  - 68 (UDP):  DHCP Client port (DHCP servers send IP address lease information from port 67 to port 68).
+  - -1 (ICMP):  In cloud security groups, -1 represents ALL ICMP types and codes (e.g. ping, traceroute, and error notifications).  Keep it. While it allows ping diagnostics, its most critical job is Path MTU (PMTU) Discovery (ICMP Type 3 "Fragmentation Needed"). If ICMP is blocked, large TCP packets (like downloading files or loading web pages) can get silently dropped along the route (known as an MTU black hole), causing connections to stall.
+  - 1 (TCP and UDP): Port 1 is an obsolete protocol called TCPMUX from the 1980s. In many VPS control panels, this usually appears by accident if someone started entering a port range (like 1-65535) and only saved the 1. Can you remove it? Yes, delete it. Modern systems do not use port 1, and none of your proxy or system services need it.
+
+- 🤔 there are so many oidc auth/account related solutions, like keycloack/authentik... is there any popular open source or self-hostable oidc/auth solutions... please deep research related solutions/projects/ideas, if you found any self hostable products or inspiration projects, provide overview/github-url/website for each.
+- Full-stack IAM platforms (OIDC + SAML + LDAP + MFA, “replace Okta/Auth0” tier)
+  - Keycloak
+  - Authentik
+  - Zitadel
+  - Ory stack (Kratos + Hydra + Keto + Oathkeeper)
+  - Casdoor
+  - Logto
+- Lighter, more focused self-hosted OIDC providers (great for homelabs / small infra)
+  - Authelia
+  - Pocket ID
+  - Kanidm
+  - SuperTokens
+
+- 
+- 
+
+- 🚧 worker_5 node and ladocs service
+i have deployed this repo to my 5 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys librechat/aichorouter/cpapi/cpamp/cursorapi/aichor1/relaichor1, worker_2 node deploys librechat/wapdf/aichor/relaichor/searx/verge2, worker_3 deploys flowy/verge3, worker_4 deploys wabase/verge.
+  - all services are running well on my 5 vps.
+  - Most requests should go to leader node first, then proxying to follower/worker nodes.
+  - the current architecture of Foundation apps/services and Consumer apps/services is good.
+
+- I just get a new vps(with ip 137.175.62.131) as worker_5 node, the current goal is to deploy and connect it to the exisiting services like beszel/woodpecker/observer, then deploy verge5(hysteria2) orphan service on it, then deploy gost service on it and make it work work well with verge3 service, then deploy ladocs consumer service on it.
+
+- task A: analyze exisiting services/config, deploy and connect it to beszel/woodpecker/observer foundational services.
+
+- task B: please design a solution to deploy a orphan hysteria service called `verge5` to any follower node user specified. deploy it to worker_5 node by default. in cloudflare i have configured verge5.aichorage.de to worker_5 node ip . 
+  - verge5 and verge/verge2 have the same features and use the same docker image, but they are unrelated services as orphan service without high availability.
+  - source code for verge/verge2/verge5(hysteria) has been cloned at folder `~/Documents/repos/devops/all-vpn-proxy/hysteria` for reference if you want.
+
+- task C: please design a solution to deploy a gost service to worker_5 node and make it work well with verge3 service. you might refactor/improve verge3 to make it work as a standalone hysteria2 service, please also design a verge-relay service on worker_5 node that make requests go to worker_5 node first then forwarded with gost to verge3(hysteria2). verge3 does not have to be like verge/verge2/verge5, you might refactor/improve verge3. `~/Documents/repos/devops/verges` provides a good example for this forwarding architectre, for example, indigenous node can serve hysteria2 alone, and it could also serve it with being forwarded from primary node. for current task, worker_5 node is like primary node, verge3(worker_3 node) is like indigenous node.
+  - source code for gost has been cloned at folder `../all-vpn-proxy/gost` for reference if you want.
+  - in cloudflare i have configured verge-relay.aichorage.de to worker_5 node ip .
+
+- task D: please design a solution to deploy a lasuite-docs service called `ladocs` to any follower node user specified, also design sensible configurations to make it work well on a single vps. please deploy it to worker_5 node by default, just like aichorouter/flowy/wabase. in cloudflare, i have configured ladocs.aichorage.de to leader ip and worker5-ladocs-origin.aichorage.de to worker_5 ip .
+  - source code for ladocs(lasuite-docs) has been cloned at folder `~/Documents/repos/saas/lasuite-docs` for reference if you want.
+  - `~/Documents/repos/saas/lasuite-docs/documentation/installation/compose.md` and `~/Documents/repos/saas/lasuite-docs/documentation/examples/compose` are the core doc and examples for docker deployment, you might use self-hosted redis/postgresql/minio for ladocs on worker_5 node. for OIDC, please self host authelia docker service with name `auther` on worker_1 node and make it work well with `ladocs`.  in cloudflare, i have configured auther.aichorage.de to leader ip and worker1-auther-origin.aichorage.de to worker_1 ip . configure auther/authelia to make it extensible/flexisible so that it can be used with other services in the future. source code for auther(authelia) has been cloned at folder `~/Documents/repos/saas/authelia` for reference if you want.
+  - ladocs is a little complicated, please design sensible configurations and make it take low system resources to fit most of the docker services on a single budget vps with 3GB ram.
+
+- at the end of the plan,  please push to github to trigger auto deployment with woodpecker ci, then inspect ci status by `woodpecker-cli`, fix issue if it exists.
+
+- all the services on worker_5 node bootstraps successfully, but it does not mean they are working well. please analyze related code/config and run some tests to check if core services really works,, please also check if ladocs works well with auther service, you might test user-registration/login/doc-creation/... to recheck if core features work. you might refactor/improve worker_5 node services to make it correct/robust in the long term.
+- this repo is still beta software. legacy/unused code might be refactored or removed. compatibility layer is not required. just using the latest code/logic is ok.
+
+- 🐛 verge3 direct works perfectly. The relay connects and even got HTTP 200 in the verbose test, but responses are intermittent — QUIC-over-UDP-relay is fragile. The tcpdump reveals the problem: docker-proxy only sends 24-byte packets back to the client, while gost logs show 2560+ bytes going back. Docker's UDP proxy isn't forwarding gost's responses properly. Let me confirm by testing gost with network_mode: host (bypassing docker-proxy entirely). Host-network gost also connects but can't transfer data — so the issue is gost's udp:// handler itself, not docker-proxy. Let me test raw iptables DNAT to confirm UDP relaying works at the kernel level without gost.
+  - Direct worker-5 → worker-3 connection works perfectly . The issue is specifically gost's udp:// handler — it creates short-lived sessions (19-33ms) that break QUIC's connection continuity. 
+  - The fix: add kernel-level iptables DNAT that bypasses gost entirely, forwarding UDP 2053 + hop range directly to verge3. The gost container stays as a health-check placeholder. 
+- 🤔 为什么 verges vps 能通过 gost 正确转发， 而verge3的gost转发存在大量丢包? 
+
+- The problem is clear: iptables-nft (the nf_tables backend on this kernel) does NOT resolve hostnames — it only accepts raw IP addresses. I need to resolve the hostname to an IP before passing it to iptables. Let me fix configure-firewall.sh.
+
+- The auther container runs as the image's default user (empty = root), so it can read mode-600 files. The ladocs-frontend runs as user 101 (nginx-unprivileged), which can't read mode-600 files. The platformctl umask 077 causes all deployed files to be mode 600/700.
+  - The fix: don't bind-mount the nginx template from the host filesystem. Instead, use a Docker volume or a config-based approach. But the simplest robust fix that matches the platform's existing pattern: use volumes_from or mount with a tmpfs — actually, the simplest fix is to copy the template into an init container that sets proper permissions. But that's over-engineering.
+  - The cleanest fix: change the frontend service to run as root (like auther does), or use user: "0:0" and let nginx drop privileges itself.
+  - The nginx-unprivileged image can run as root; it just defaults to non-root for security.
+- Platform umask 077 makes deployed files mode 600; frontend ran as user 101 and couldn't read the bind-mounted nginx template
+
+- can the nginx-unprivileged docker image run as root?
+  - Yes — technically it can. The USER nginx (or similar) directive baked into the nginx-unprivileged image is just a default, not an enforced restriction. Docker and Kubernetes both let you override it
+  - The risk is entirely about why you’d be undoing the point of the image. nginx-unprivileged exists specifically so nginx can run without root privileges — e.g., in Kubernetes clusters enforcing the “restricted” Pod Security Standard, in hardened multi-tenant environments, or just to minimize blast radius.
+  - The vanilla nginx image already works fine for root use cases (it drops privileges for worker processes internally anyway). If you’re running nginx-unprivileged as root, you’re carrying its quirks (port 8080 default, non-standard paths) with none of the security benefit.
+
+- 
+- 
+
+## 1012
+
+- mineru provides free document parsing/ocr api at https://mineru.net/apiManage/docs. is there any other similar services that provides free document parsing/ocr service? does docling/marker provide free service? 
+  - please deep research related solutions/projects/ideas, if you found any smilar and free srevices, provide overview/url/website/free-quota for each.
+
+## 1010
+
+- Setting aichorouter.aichorage.de to Deny under Stay → Edit Websites… didn't stop the block because Stay actually installs 7 separate extensions in Safari:
+  - The rule blocking /api/log?... lives inside 2. Privacy, which is not controlled by Stay's "Edit Websites…" button.
+  - Open Safari → Settings… → Websites 
+  - click Content Blockers, Find aichorouter.aichorage.de and switch it to Off, then reload the page.
+
+## 1009
+
+- [Telegram gateway: DNS resolution failure for api.telegram.org not recovered cleanly; reconnect leaves gateway replying with transient-agent-failure canned responses · Issue · NousResearch/hermes-agent _202607](https://github.com/NousResearch/hermes-agent/issues/75416)
+  - The Telegram platform adapter fails to reach api.telegram.org with DNS resolution errors ([Errno 8] nodename nor servname provided, or not known) and only recovers via fallback IPs (149.154.166.110) after multiple 5-40s backoff attempts. During the degraded window the gateway stays "alive" but cannot poll, and when the agent model calls also fail, users only get canned "transient agent failure" responses with no indication the channel is degraded.
+
+- 🤔 this repo IP-Sentinel is deployed on my 2 vps. it was running well yesterday, i could get the overall report of agent node in telegram bot. but now i cannot get the report of agent node, no valid response in telegram bot, it just responded "司令部指令下达：正在召唤所有哨兵回传简报...", but no valid data.
+  - Agent 节点无法向 Telegram API 推送战报（核心断点）
+  - 上游 DNS 严重丢包/超时：Agent 节点系统原配置上游 DNS 为 8.8.8.8。在该机房网络环境下，到 8.8.8.8 的 UDP 53 报文存在严重丢包乃至超时（5000ms 超时），导致 tg_report.sh 内调用 curl 请求 api.telegram.org 时频繁因域名解析超时而失败，日志中留下大量 ❌ 战报发送失败！API 响应:。
+  - IPv6 路由缺失导致 Happy Eyeballs 悬挂：Agent 节点的公网网卡仅分配了本地链路 fe80:: 地址，并无公网 IPv6 路由。当 curl 尝试连接解析到的 Telegram IPv6 地址（2001:67c:4e8:f004::9）时发生静默挂起，耗尽了连接超时时间。
+  - Agent 端的 Python Webhook 服务采用默认的 TCP 连接队列（request_queue_size = 5），公网端口受到背景扫描时连接队列易打满，导致偶发性连接丢弃（内核计数器 TcpExtListenDrops 增长）。
+- Agent 节点网络与解析加固
+  - 在 Agent 节点的 /etc/hosts 中固化了 149.154.166.110 api.telegram.org 映射，彻底免疫 DNS 丢包与解析延迟。
+  - 优化 /etc/systemd/resolved.conf 与 Netplan 配置，改用高可靠的 Cloudflare DoT（DNS-over-TLS 853 端口）及 1.0.0.1。
+  - 优化 core/agent_daemon.sh：将 Webhook 的 Socket 监听队列扩展至 request_queue_size = 128，消除高频背景流量造成的握手排队丢弃。
+- is there any risk to use the fixed the dns with "149.154.166.110 api.telegram.org" ?
+  - Telegram 在全球拥有多个数据中心（DC1 迈阿密、DC4 阿姆斯特丹、DC5 新加坡等）并发布了多个 BGP Anycast IP 段（如 149.154.160.0/20、91.108.4.0/22 等）。
+  - 如果 Telegram 对 149.154.166.110 对应的节点进行割接、机房维护或路由变更，或者该特定 IP 遭遇国际网络链路中断，Agent 无法自动故障转移（Failover） 到其他健康的 IP（例如 149.154.167.220）。
+  - 更优雅、稳健的方案应当从系统解析协议与应用通信逻辑两层切入，保留动态 DNS 的同时彻底杜绝丢包与超时
+  - 系统底层：启用 DNS-over-TLS (DoT) + 本地缓存（彻底替代传统明文 UDP 53）
+  - 问题根源：该 VPS 机房（PEG TECH INC）对公网 8.8.8.8:53（UDP）有高丢包/丢弃现象。
+  - 在 Agent 的 systemd-resolved 中配置 DNS-over-TLS（通过 TCP 853 端口连接 Cloudflare 1.1.1.1 和 1.0.0.1）： TCP 853 隧道全程加密，零丢包、防阻断、抗污染。 systemd-resolved 开启本地缓存后，动态解析耗时仅 1.2 ms，且能随着 Telegram 官方的 DNS 变更自动平滑更新。
+  - 在脚本的推送请求中增加 -4（或 --ipv4），直接跳过无路由的 IPv6 握手阶段，实现毫秒级建立连接。
+- 已在 Agent 节点上彻底移除了 /etc/hosts 的硬编码记录
+  - resolvectl query -4 api.telegram.org
 
 ## 1008
 

@@ -16,6 +16,102 @@ modified: 2026-09-08T04:45:17.635Z
 - Browser connection succeeds using host aichor.aichorage.de, port 443, SSL enabled.
 # dev-xp
 - 初版 autumn-studio 采用custom build的方式embed pi
+# autumn-studio
+- ## 
+
+- ## 
+
+- ## 
+
+- ## Can an agent profile be selected automatically right now?
+- In the main chat box (per-prompt or mid-session): No. Currently, agent profiles are applied manually by the user in the composer/chat box.
+- In multi-agent / orchestration mode: Partially yes! Paseo already ships with a dedicated MCP tool called list_profiles. When an orchestrating parent agent is running, it can call list_profiles to inspect all configured profiles and read their notes (e.g. "Use for UI work", "Use for deep planning"). The orchestrator can then use those exact values to call create_agent and spin up specialized subagents.
+  - AgentProfile already includes a notes field designed specifically for LLM context. You can write instructions in the profile notes 
+
+- Route via Subagents rather than Mid-Thread Model Swapping
+
+- Approach A: The "Auto-Routing Launcher" (Server Lifecycle Hook)
+  - Whenever a new agent is started, the plugin intercepts the creation request before the session starts, analyzes the prompt, and automatically applies the matching profile.
+- Approach B: Client Slash Command (`/auto <task>`) or Composer Pill
+  - The plugin evaluates `<prompt>`, queries the daemon for agentProfiles, picks the best profile, and launches the task with that configuration.
+
+- 
+- 
+- 
+- 
+
+- ## current git repo(paseo-file-explorer) is paseo plugin that supports to show file tree just like native nested file system and provide some file viewers/editors. core features of "File Explorer" should be built with react component with react-dom, designed for web/desktop only, not for mobile. the final goal is to implement file editors for all popular files, but current focus is .md/.pdf/.xlsx. 
+- the current goal is to design a "AI Text Mode" feature for files like .pdf/.docx: "AI Text Mode" is a button that show on the toolbar of paseo-file-explorer viewer/editors, you might put the button next to existing "Viewer"/"Editor", when user clicks it for the first time, document parser/ocr tools and agent/model will be used to get the text of the .pdf/.docx/html, the text files are put in a folder named `.autumn/` in workspace root. in settings page for paseo-file-explorer, please add a "AI Text Mode" sidebar menu, it should support to configure toggle on/off for this feature, if it is off, the button will not show in toolbar. when doc parsing finishes, open the text file as a split view of the original file on the right, so that original file show on the left, text file content show on the right. if splits view is showing , the "AI Text Mode" button should change to "AI text again" so that user can reparse and get multiple text files for a orignal file, please make it easy to switch the text file in the right split view for the orignal file. you might design a good architecture for storing multiple text files for a single original file. also store some metadata about how the text file is get.
+- it should support to configure the default agent for "AI Text Mode", using pi by default, supports to use other agents that user has configured/auto-detected . agent will use vlm-models or ocr-services for getting text of documents. please design a section for text parsing options, that uses free mineru by default, other api like LlamaParse/Azure Document Intelligence/Datalab might be added and supported later. free mineru provides api(https://mineru.net/apiManage/docs) and cli(https://mineru.net/ecosystem?tab=cli), you might choose which fits better for this plugin.
+- focus on pdf first, more file formats will be supported later, please design a extensible architecture for "AI Text Mode".
+- How do you like my idea? If it is okay, you might improve it.
+- Analyze this feature and related code/config, make a comprehensive plan for "AI Text Mode" feature
+
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
+- ## for paseo-file-explorer, if i set File open mode to be "new-tab", it seems that all file tabs are opened as sub-tabs under a "File Viewer" parent tab. why is it designed this way? since paseo provides native tabs, why is paseo-file-explorer tabs not using it? Is it a good idea to refactor paseo-file-explorer tabs to use paseo tabs instead of using sub-tabs under a paseo parent tab?
+- paseo-file-explorer uses sub-tabs inside a single "File Viewer" workspace tab because Paseo's Plugin SDK models workspace panels as static, parameterless singleton targets per (pluginId, panelId, workspaceId), and does not expose Paseo's internal useWorkspaceLayoutStore or parameterized tab targets to plugins.
+  - Given the constraint that the paseo host repository must not be modified, keeping the sub-tab architecture inside the File Viewer panel is the right design. 
+  - Plugin workspace panels have no per-instance parameters or dynamic titles
+  - Attempting to simulate per-file native Paseo tabs via dynamic addWorkspacePanel() calls would pollute Paseo's + New Tab launcher menu, break across reloads, and leak zombie registrations when tabs are closed.
+
+- Paseo's built-in `kind: "file"` tab is hardwired to Paseo's internal `<FilePane />`.
+  - Paseo does have a native { kind: "file", path } workspace tab target, which is what Paseo's built-in Files tree opens.
+  - but Plugins cannot open { kind: "file", path } tabs 
+  - Even if a plugin could open { kind: "file", path }, that tab renders Paseo's built-in `<FilePane />`, not paseo-file-explorer's PDF viewer/editor 
+
+- Is It a Good Idea to Refactor to Native Paseo Tabs?
+  - The only way a plugin can create multiple distinct native tabs without modifying Paseo is to call client.addWorkspacePanel({ id: "file-...", title: fileName, ... }) dynamically at runtime for every opened file. 
+  - Pollutes Paseo's + New Tab launcher menu across all workspaces
+  - No close lifecycle callback from Paseo tabs, dynamically registered panel would remain in plugin.workspacePanels (and in the + menu) until plugin teardown.
+  - Breaks tab persistence on app reload: Paseo persists open workspace tabs in AsyncStorage (WorkspaceLayoutPersistedStateSchema) and restores them immediately on app startup 
+
+- Advantages of the current File Viewer sub-tab container:
+  - Allows FileViewerContent to manage shared per-workspace blob URL caches, hover preloading across file tabs, and a "Close all tabs" action without cluttering Paseo's top-level Agent/Terminal tab bar.
+  - Keeps all opened files grouped cleanly under one Paseo workspace tab (which you can still dock in a right split pane alongside an Agent or Terminal tab using Paseo's native split layout).
+
+- ## The current file editing system seems to have a lot of issues, especially for file content syncing. please design/improve for a extensible file editing system that supports to edit .md/.pdf/.xlsx first, more file formats later. when user edits in paseo-file-explorer, edits can be saved to filesystem. when a file is edited in filesystem, opening the file in paseo-file-explorer can show the latest content. 
+  - analyze related code, improve the architecture for paseo-file-explorer, make it correct, robust, extensible.
+
+- ## the pdf viewer works now. please continue to improve the file-explorer features.
+  - analyze related features/code, please extend the file open feature to support open .pdf/.xlsx with a default viewer (the current pdf viewer is ok), so excel viewer should be supported next, more file formats will be supported later. in `File Explorer` settings page, for the "Excel" settings section, please support to configure the default zoom level for excel by default, you might design more settings if you want. For every file format setting section in `File Explorer` settings page, please also design a extensible architecture to support to configure the default open behavior for each file format with a viewer or editor by default, editing related features are not implemented yet, please support basic editing features for .pdf/.xlsx, full-featured editing is not required. so all file formats supports to open with default viewer by default, if user configures the deafult open behavior for a file format like pdf as editor, the file format will be opened in pdf editor ux by default, please design a extensible behavior to support to add more viewers/editors later, even for a single file format, multiple viewers/editors might exist like pdfjs-viewer/embedpdf-viewer, please design a extensible architecture, implementing only one view/editor is ok for now. file editing should be saved to file system by default, the final goal is to support editing most common file formats, just .pdf/.xlsx for now, please make the architecture extensible for file editing.
+  - i do not want you to build file viewers/editors from scratch, but might use extend-ui(based on shadcn/base-ui, at folder `~/Documents/repos/ai-ml-llm/all-docai/extend-ui` ) by referring to the code/example like  ~/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/pdf-viewer.tsx, ~/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/xlsx-viewer.tsx, ~/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/xlsx-editor.tsx..., you might refer to more file viewers/editors from ~/Documents/repos/ai-ml-llm/all-docai/extend-ui. 
+  - core features of "File Explorer" feature should be designed for web/desktop only, not for mobile.
+  - Please review existing file explorer features/code, then make a comprehensive plan to improve paseo-file-explorer.
+
+- source code for @extend-ai/react-xlsx is cloned at `~/Documents/repos/ai-ml-llm/all-docai/extend-react-xlsx` for reference if you want. 
+
+- ## there are some heavy js dependencies for major features in paseo-file-explorer plugin like file viewers/editors, is it a good idea to use dynamic import to improve the ux and performance?
+
+- Paseo compiles plugins with esbuild (bundle: true, format: "cjs").
+When esbuild encounters a dynamic import("./heavy-module.js"), it wraps that module and its exclusive dependency tree inside a lazy __esm({ ... }) initializer closure.
+
+- ## git repo `../paseo-plugins/paseo-file-explorer` is paseo plugin that supports to show file tree just like native nested file system. core file tree of "File Explorer" feature should be built with react component with react-dom, designed for web/desktop only, not for mobile. the final goal is to implement file editor for all popular files, but current focus is file viewer(no editor) and pdf file. please support to view .pdf first, other file viewer/editor might be planned but implemented later.
+  - "File Explorer" should be built with react components and tailwindcss. `react-dom` might be bundled in this plugin so that react might be used for any ui in the file tree or viewer if you want. a "build" step in paseo-plugin.json might be added to extract/compile tailwindcss before plugin execution. 
+  - i do not want you to build file tree and file viewer from scratch, but might use extend-ui(based on shadcn/base-ui, at folder `~/Documents/repos/ai-ml-llm/all-docai/extend-ui` ) by referring to the code/example like ~/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/file-system.tsx , ~/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/pdf-viewer.tsx . 
+  - you have implemented part of the goal in paseo-file-explorer plugin repo, please continue to improve it. 
+  - please design a `File Explorer` sidebar menu item below existing sidebar menu items like "History"/"Search"/"Schedules". when it's clicked, a settings page for paseo-file-explorer should show. there are several setting sections in the settings page. for the "General" settings section, there should exist a toggle setting to enable/disable this feature, please also design a file open mode for controlling how file is opened for this plugin, current behavior is opening in a popup dialog, the default behavior should be open a file viewer in place of file tree ui with a go back icon to go back to file tree, a third option for file open model should be open file in a new tab. Three File Open Modes (in-place, dialog, new-tab): when a file is clicked from paseo-file-explorer file tree ui, the default is to open file in-place, and in the top-right menu icon of more actions, please add "open file in dialog" and "open file in new tab" so that user can still choose other mode to open the file manually. for the "PDF" settings section, please support to configure whether to show the side panel of thumbnails for pdf by default, you might design more settings if you want. please design a extensible architecture to support to add more settings sections for other file formats/viewer/editor later.
+  - latest paseo plugin architecture has changed a little, please improve this plugin with the latest paseo plugin architecture. 
+  - Please review existing file explorer features/code, then make a comprehensive plan to improve paseo-file-explorer.
+
+- paseo-file-explorer is still beta software. legacy/unused code might be refactored or removed. compatibility layer is not required. just using the latest code/logic is ok.
+
+- ## paseo-file-explorer is paseo plugin that supports to show file tree just like native nested file system. core file tree of "File Explorer" feature should be built with react component with react-dom, designed for web/desktop only, not for mobile. the final goal is to implement file editor for all popular files, but current focus is file viewer(no editor) and pdf file. please support to view .pdf first, other file viewer/editor might be planned but implemented later.
+  - "File Explorer" should be built with react components and tailwindcss. `react-dom` might be bundled in this plugin so that react might be used for any ui in the file tree or viewer if you want. a "build" step in paseo-plugin.json might be added to extract/compile tailwindcss before plugin execution. 
+  - i do not want you to build file tree and file viewer from scratch, but might use extend-ui(based on shadcn/base-ui, at folder `~/Documents/repos/ai-ml-llm/all-docai/extend-ui` ) by referring to the code/example like ~/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/file-system.tsx , ~/Documents/repos/ai-ml-llm/all-docai/extend-ui/apps/v4/components/extend/pdf-viewer.tsx . 
+  - you have implemented part of the goal in this plugin repo, please continue to improve it. 
+  - please design a `File Explorer` sidebar menu item below existing sidebar menu items like "History"/"Search"/"Schedules". when it's clicked, a settings page for paseo-file-explorer should show. there are several setting sections in the settings page. for the "General" settings section, there should exist a toggle setting to enable/disable this feature, please also design a file open mode for controlling how file is opened for this plugin, current behavior is opening in a popup dialog, the default behavior should be open a file viewer in place of file tree ui with a go back icon to go back to file tree, a third option for file open model should be open file in a new tab. for the "PDF" settings section, please support to configure whether to show the side panel of thumbnails for pdf by default, you might design more settings if you want. please design a extensible architecture to support to add more settings sections for other file formats/viewer/editor later.
+  - latest paseo plugin architecture has changed a little, please improve this plugin with the latest paseo plugin architecture. source code for paseo has been cloned at folder `~/Documents/repos/ai-ml-llm/all-agi-harness/paseo` for reference if you want.
+  - Please review existing file explorer features/code, then make a comprehensive plan to improve it.
+
 # discuss-stars
 - ## 
 
@@ -35,9 +131,20 @@ modified: 2026-09-08T04:45:17.635Z
 
 - ## 
 
-- ## 
+- ## when i reload paseo-file-explorer plugin in paseo mac app, the app gets hanged/stuck. paseo daemon seems not be not working well when i tried to run paseo restart
+- When the Paseo daemon loads or reloads a plugin, createRuntimeBoundaryPlugin runs checkSourceImports recursively across every imported source module and every resolved .js, .d.ts, and .d.mts file in node_modules. For each import edge, the stock compiler performs synchronous TypeScript AST parsing (ts.createSourceFile), module resolution (ts.resolveModuleName), realpathSync.native, and two IPC roundtrips to esbuild (buildContext.resolve).
+  - With @base-ui/react, lucide-react, @embedpdf/ *, pdf-lib, @extend-ai/react-xlsx (and its d3-* dependency tree), and @pierre/trees resolved directly from raw node_modules subtrees, a single reload of paseo-file-explorer walked 3, 700+ files and blocked the daemon's main event loop for 68.3 seconds, freezing the Paseo Mac app and causing paseo restart health probes to time out.
+- Architecture Implemented in paseo-file-explorer
+  - Pre-bundles client third-party libraries into 4 ESM domain bundles under node_modules/.paseo-vendor/ while keeping Paseo host externals (react, react/jsx-runtime, react-native, @tanstack/react-query, zod, @getpaseo/plugin/*) external
+  - Wired into npm run build:vendor, npm run build, and postinstall in package.json
+- Removed Legacy Subpath Workarounds & Multi-Line WASM Chunks:
+  - Replaced all lucide-react/dist/esm/icons/*.js and pdf-lib/dist/pdf-lib.esm.min.js subpath workarounds across client/ with standard "lucide-react" and "pdf-lib" imports and removed client/vendor/lucide-icons.d.ts.
 
-- ## 
+- ## in main chat box, i choose model A from pi agent to start a task. After the model A responded, then can I choose model B to continue the chat?
+- Within Pi, yes: You can freely switch between any models available under your Pi configuration 
+  - After Model A finishes responding (or even while the session is idle between turns), you can select Model B from the model picker in the chat box toolbar and continue the conversation with Model B.
+- Across providers, no: You cannot change the agent provider itself (e.g. from pi to claude-code) inside the same session, because the process runtime and history format are provider-specific.
+- Session resume is preserved: If the session is paused or resumed later, the Pi CLI is launched with `--session <file> --model <ModelB>` , keeping your model selection across restarts.
 
 - ## for thinking effort , there is only off/low/medium/high, is there any way to add a xhigh thinking effort? 
 - the picker's option list is not defined in the app at all — the daemon ships a per-model thinkingOptions list, and the app just renders it. Whether you can get xhigh depends entirely on which agent/model that picker belongs to, and for Claude it's mostly already implemented.

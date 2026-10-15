@@ -609,6 +609,25 @@ Since then I always assume a server is being scanned immediately after it gets a
 - 新手小白建议使用 Ubuntu 系统，默认配置比较完全，软件包更新也还算及时，只要你的 VPS 配置不至于比 1C1G（1 个虚拟核心，1GB 内存）还低，如果再低就换 Debian 吧，如果 Debian 还卡那就得用 Alpine 了，不过这个大多数人不太用得来，它太精简了
 
 - fail2ban 不太推荐用默认的 ufw 来屏蔽恶意扫描，IP 太多了影响 ufw 自己，推荐用 iptables+ipset 的方式（nftables 我就不清楚了，不会用）
+# discuss-vps-use-traffic
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [有哪些无限流量服务器推荐？超量限速 100Mbps+ 的 _202603](https://www.nodeseek.com/post-663849-1)
+NetCup 他家好像都是超量限速，1o 感觉性价比最高
+DMIT T1 系列，不同区域和等级限速不同，HK、JP 50Mbps+，LAX 100Mbps+
+WAP US (目前暂时超量限速10Mbps了，希望后期能调整回 100Mbps)
+
+- BuyVM 10Gbps不限，UpCloud 超fair use限100Mbps
+
+- c-server限速200M 
+
+- 不介意SLA差一点的话可以收个CCS 330T的
 # discuss-vps-usecase 🌰
 - ## 
 
@@ -1633,7 +1652,22 @@ Claude 账号用了好几年，升级 pro 也 3 个多月了。自己用 Google 
 
 - ## 
 
-- ## 
+- ## [为什么很多人交易采用支付宝口令红包？ _202503](https://www.nodeseek.com/post-297209-1)
+  - 这种的是更安全吗还是，有时候我说微信支付也不允许
+
+- 方便 不用加好友
+
+- 方便，直接领就行，收款码还要传图床麻烦
+
+- 我习惯用收款码。口令红包有概率出现不能领取的情况
+
+- 快捷方便
+这问题都快成月经贴了
+
+- 方便，相对匿名，不过查账单能查到
+- 不匿名，收款方能看到付款方的姓名
+
+- 和收款码差不多，点开领取人也能看到对方是谁；就是方便，发个数字，不用找图床上传
 
 - ## [VPS交易避坑指南：原油、改邮、PUSH与交易所模式深度解析 (含搬瓦工/DMIT/NetCup实战) _202601](https://www.nodeseek.com/post-577764-1)
 本文将为您详细拆解这四种模式（原邮、改邮、官方 PUSH、交易所），并结合 搬瓦工、DMIT、NetCup、RackNerd 等代表性商家进行分析。
@@ -2523,6 +2557,42 @@ dedirock配置1c2.5g 15gb 6.45$/year
 
 - ## 
 
+- ## 
+
+- ## [面包云和aethercloud LA对比怎么样 _202609](https://www.nodeseek.com/post-911555-1)
+  - 最近一直在找高性价落地机，测试了很多个都有这个那个的问题，昨天收了一个aethercloud测试下来感觉还可以，就是国际线路有点问题，不知道是不是上游cogent这两天故障导致的，表现就是TG DC4荷兰服务器连接大量丢包，手机客户端几乎刷新不出来。
+  - 然后我又了解到了面包云，感觉这2家很类似，都是提供ATT的V6，但是aethercloud现在只有芝加哥了。
+  - 现在我就是想知道除了V6延迟可能面包云会稍微好点，其他还有什么区别吗？在考虑要不要收一个再测试一下。
+
+- 差不多，我2家la都有，现在都买不到。
+
+- 价格不同，面包云年付12刀，aethercloud好像年付 19刀多
+
+- ae刚换老板，面板爱折腾，两家都不算稳，都要观望，但IP质量都不错
+
+- ### [AetherCloud vs BreadCloud LAX ATT V6 家宽落地机全方位对比 _202609](https://www.nodeseek.com/post-917066-1)
+- 两台的定位几乎一样：洛杉矶落地，同时提供原生 IPv4 + 原生 IPv6 + AT&T IPv6 三条出口，主要卖点就是那个 AT&T 家宽 v6。价格也在同一档，所以很值得直接对打。
+- 丢包：两台 × 三出口 × 5 目标 × 10 包 = 30 组测试，全部 0.0% 丢包。基础连通性都没问题，差异全在延迟、抖动和带宽上。
+- AetherCloud = 大水管 + 真的能跑流量的 AT&T 出口。代价：AT&T 绕芝加哥出网（延迟 100+ ms）、贵 20–38%。
+  - 点播是缓冲式播放，延迟高不影响体感（AetherCloud 那 119 ms RTT 在这里无所谓），看的纯粹是下行带宽。
+  - 直播推流
+- BreadCloud = 低延迟 + 干净路由 + 强 CPU + 更便宜。代价：AT&T 出口被限速到 10 Mbps、端口只有一半、原生 v6 只给单个 /128。
+- 实现方式：一家是真上游，一家是隧道
+  - AetherCloud: 真实 AT&T 上游接入, 注: AetherCloud默认V6出口为原生V6非ATT
+  - BreadCloud: 隧道 / 内网转发交付
+- BreadCloud的ATT V6 IP 被Google标记，网页打开Gemini会提示流量异常, 暂不清楚是单独我这个机器的地址被标记，还是整个段，也就是这个AI分流要把Gemini再单独去除, 又大大减分，同时听说BreadCloud老板马上就要把ATT V6下掉
+
+- aether现在已经有美西的AT＆Tv6家宽了
+
+- ## [快讯 BreadCloud面包云涨价（传家宝涨幅超50%，包含续费） _202606](https://www.nodeseek.com/post-798590-1)
+Crumb系列
+US从0.6刀/月涨价到1刀/月
+JP从0.8刀每月涨价到1.1刀/月
+流量翻倍
+毁了，历史订单 续费 全部涨价
+
+- 流量翻倍算个安慰奖吧，但老用户续费也涨确实有点伤人。
+
 - ## [【已出】breadcloud 面包云 jp, 12刀/年, 满血GSL, 移动快乐鸡 _202605](https://www.nodeseek.com/post-724910-1)
 - 移动晚高峰也快乐吗
   - 我HY2用的没有感觉，蛮快乐
@@ -2548,17 +2618,6 @@ dedirock配置1c2.5g 15gb 6.45$/year
 
 - 重传高就是国际互联丢包严重吧？就是和线路机直连传输丢包严重的意思吧？
 
-- ## [面包云疑似彻底陨落了 _202609](https://www.nodeseek.com/post-924696-1)
-  - 继减配，涨价，升级母鸡把数据搞丢后，面包云老板再把原本的attv6给砍了，现在出了个抽象的attv6套餐，感觉是马上要跑路了
-- nat小鸡从不靠谱，本来就是偷偷搞的，一查就封
-- nat默认灵车吧
-
-- push还要2刀，就是故意不让人活的，就当花钱买教训，他这样就算v4再干净我也不敢用来落地ai了
-  - 貌似要先冲$10才能有资格$2去push
-
-- 还有个aether不知道什么时候也这样
-  - 那个我在用。。至少现在看来老板还算靠谱。。。只是清退了完全赔钱的hk。。至少现在看下去是真的想搞下去
-
 - ## [现在的面包云的attv6什么情况了 _202609](https://www.nodeseek.com/post-931879-1)
   - attv6还能用吗，怎么出了一个att的套餐，之前的不给用了吗，100g的流量？
 - 之前的被砍了
@@ -2576,7 +2635,27 @@ dedirock配置1c2.5g 15gb 6.45$/year
 - ## [面包云做落地机房属性影响大吗 _202606](https://www.nodeseek.com/post-780864-1)
 - 还有比Breadcloud JP CPU 内存 硬盘更猛的鸡吗？IP还干净，国际互联跑满5Gbps，这种落地机堪称完美啊。 拿家宽比的，最起码家宽速度比不过，硬件配置差。
 
+- ## 💥 [面包云疑似彻底陨落了 _202609](https://www.nodeseek.com/post-924696-1)
+  - 继减配，涨价，升级母鸡把数据搞丢后，面包云老板再把原本的attv6给砍了，现在出了个抽象的attv6套餐，感觉是马上要跑路了
+- 还好跑的早。
+本来买的是15刀那款，结果那厮后来挂出12刀的价格，15刀都能卖完，那厮挂12刀，一定有问题，那时就知道那厮的骚操作又要开始了，就赶紧出了。
+现在上车的那些12刀，估计是跑不不了了。
+
+- nat小鸡从不靠谱，本来就是偷偷搞的，一查就封
+
+- 貌似要先冲$10才能有资格$2去push
+
+- 走不远的，还有个aether不知道什么时候也这样
+  - 那个我在用。。至少现在看来老板还算靠谱。。。只是清退了完全赔钱的hk。。至少现在看下去是真的想搞下去
+
+- 说实话他们的线路还是可以的，但是
+这家老板是个傻逼
+我在TG群里说他们ATT V6限速10Mbps太低了，直接给我举报了
+
 # discuss-vendor-raksmart
+- resources
+  - https://cn.raksmart.com/cps/9063  /大陆优化
+  - 线路资源：中国联通 CU4837、中国电信 CT、中国移动 CMI、Telia、TATA、PCCW、Cloudflare、IX等多家 Tier 1 网络资源。
 - ## 
 
 - ## 
@@ -2876,6 +2955,39 @@ yysy，4837口子真的大，轻松跑满本地
 - 卧槽。三哥这个国家不行。老是被黑进去。还能安全点吗。
 
 - 小鸡访问不了了，得亏我昨天部署了一个tolaria 做了一套总结同步
+# discuss-vendor-ccs/colocrossing
+- resources
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [ccs 独服流量用完是限速还是停机啊 _202508](https://www.nodeseek.com/post-425502-1)
+- 用完继续可以用。然后下个月扣你钱
+
+- 不限，可以继续用，超出后 1 刀 1t 好像
+
+- 是直接扣钱 而不通知你
+
+- ## [问：CCS小鸡有cpu限制不 _202609](https://www.nodeseek.com/post-941103-1)
+  - 非杜甫
+- 连金牌U你到手就是单核300还不算限吗
+
+- 主要是流量多，并不是性能机
+
+- [Colocrossing有CPU等资源限制(购买需谨慎) _202503](https://www.nodeseek.com/post-282744-1)
+  - Customer’s Service cannot burst to 95-100% usage for more than fifteen (15) minutes and cannot average higher than 50% usage within any two (2) hour period. 330000 is your monthly bandwidth limit, and it resets every month. This is a very high limit and is nearly impossible to exhaust under normal usage.
+  - 另外需要提醒的是: Colocrossing撤销机器并不会自动退款，需提交工单，并且流程繁琐，还不一定能100%收到退款，或者即使收到退款也只能退到账户余额，而不是原路退回。
 # discuss-vendor-racknerd
 - resources
   - [RackNerd | VPS Specials](https://www.racknerd.com/specials/)
@@ -3053,9 +3165,31 @@ Gemini、Reddit 被拉黑；
 
 - ## 
 
-- ## 
+- ## [牛马云 dedirock这种机能干啥用？ _202610](https://www.nodeseek.com/post-981162-1)
+  - 有个dedirock，ip质量有点垃圾，距离也远，不能落地也不能线路，可以做什么用啊？
+- v6联通0丢包 翻墙用晚高峰油管18万轻轻松松
+- IPv6直连不要太爽好吧
+- 套CF加IPv6，垃圾IP也能榨出点剩余价值
 
-- ## 
+- 不管什么线路，套CF众生平等
+- 套个 cf 部署 emby jellyfin 无压力
+
+- 为啥我出口套了cf之后, ip质量更垃圾了呢? 套cf的目的是什么呢?
+  - cdn加速，cdn缓存，双栈访问，当然cf的cdn对于国内网络可能是减速器，建议优选，或者用亚太cdn，或者直接国内域名备案用国内cdn最佳。
+
+- 我也两台爹地肉
+一台7刀一年的2c2g套cdn当主力来部署docker应用
+一台17刀一年的1t还是1.5t的大盘鸡，目前还没想好做啥，闲置两个月了
+其实他们家的鸡算性价比机吧，我没崩过，就是ip太差，时不时移动连不上
+
+- 牛马云的国际互联还可以，我从 牛马云的 LA NY往巴黎的ORACLE , 传视频文件，速度能到10-19MB /S 不是太快，就这个价格来说，还可以了，倒个文件啥的，做个小备份，还是非常不错的。
+
+- 不知道这商家什么操作，超售不是不能接受，动不动重启那是真没辙了，发了两次工单每次都说以后不会了
+  - 超的太多母鸡顶不住了
+- 一直是8168，跑分单核从700 - 200 - 400 一直变
+
+- ## [Dedirock改ip如何收费 _202610](https://www.nodeseek.com/post-963286-1)
+- 不收费，问题是越换越烂，并且只能在你目前255.255.255.0的段里换，换别的段就是给你迁移了，一般情况越换越烂，除非你被墙了
 
 - ## [cloudnium的小鸡，CPU不同机房的怎么不一样啊？ _202607](https://www.nodeseek.com/post-831791-1)
 Intel(R) Xeon(R) Platinum 8168 CPU @ 2.70GHz
@@ -3211,15 +3345,9 @@ ip有没有被gemini送中
 
 - 离谱，挖矿还偷偷挂机，系统直接重装得了
 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
+- ### [建议立即检查dartnode的小鸡是否被植入挖矿程序 _202610](https://www.nodeseek.com/post-966530-1)
+  - 我两个dartnode的小鸡都被植入了挖矿程序，其他都正常
+  - codex 帮我查出来的
 
 - ## [My Disappointing Experience with DartNode VPS: A Cautionary Tale — LowEndTalk _202510](https://lowendtalk.com/discussion/210302/my-disappointing-experience-with-dartnode-vps-a-cautionary-tale)
   - When I attempted to restore from backup, I discovered that none of my backups were functioning properly. Despite having three different backup points available, not a single one would boot successfully after restoration. The restore process would complete, but whatever was being restored simply wouldn't start.
