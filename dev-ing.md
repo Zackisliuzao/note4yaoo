@@ -347,10 +347,116 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 1017
+
+- running ops/tests/run-all.sh full is very very slow. analyze related code, find the reason, then design a good solution to improve running full test and fast test, make it correct/robust/performant in the long term.
+
+- 🤔 What is the best practice to self-host onlyoffice? 
+  - DocumentServer is the source code (build tooling, sdkjs, web-apps, etc.). You’d only use it to compile your own build, not to deploy.
+  - Docker-DocumentServer is the one you want. It packages the free Community edition as a container image. Starting from version 6.0 the product is called ONLYOFFICE Docs, and this image installs the free Community version. 
+  - CommunityServer is the older all-in-one portal (documents, CRM, projects, mail). You don’t need it. OpenCloud takes its place, and you only need the editors (Document Server). It duplicates what OpenCloud already does and requires 8 GB to 16 GB of RAM on its own.
+
+- ONLYOFFICE Document Server is designed purely as a headless editing engine (comparable to Collabora CODE or Microsoft Office Online Server). It provides the canvas/editor UI and collaboration protocols (WOPI, JavaScript API, conversion services), expecting a separate host application to handle user accounts, folder hierarchies, and file storage.
+
+- 🤔 can self-hostable https://hub.docker.com/r/collabora/code/ , https://github.com/CollaboraOnline/online.mirror be used as a standalone web app? or is it requiired to be used with external services like nextcloud/opencloud/seafile?
+  - No, the collabora/code Docker container cannot be used as a standalone end-user web application on its own
+  - It is designed strictly as an editing engine and backend service, not a full document management system
+  - Collabora Online (CODE) is an editing engine, not a standalone web app. It has no file storage, no user accounts, no file browser, and no login. 
+  - If you open its root URL in a browser, you’ll just get a plain “OK” message. The only UI it ships is the admin console at /browser/dist/admin/admin.html.
+  - It works by acting as a WOPI client. Some other application (the WOPI host) stores the files, authenticates users, and embeds Collabora in an iframe. The host exposes the WOPI endpoints (CheckFileInfo, GetFile, PutFile) and hands Collabora an access token for each document. Collabora then pulls the file, renders the editing UI, and saves changes back.
+  - It doesn’t have to be Nextcloud, OpenCloud, or Seafile, though. Any WOPI host works, and those three are just the most common.
+  - Collabora Online needs its own backend server running in the background, and the Nextcloud side only needs a connector pointed at it. The same pattern applies to the others.
+
+- gpt [现在dot的虚拟机还会一两天就重置一次吗？ - LINUX DO _202610](https://linux.do/t/topic/3035415/4)
+  - 不是重置额度，是更换实例，dot 每个一段时间会更换一次
+  - 我现在基本上每天都会清空一次，感觉你只要用量高了就会给你请空。 这两天我发现 github cli 还登录不了了，非常麻烦
+  - 用下来，发现 dot 的虚拟机的网络访问限制非常严重，浏览器能打开一些网页，虚拟机的命令行几乎不能访问网络，聊天有另外一套命令行工具，有动态代理，能访问一部分网页。 总之就是，openai 限制的很死，搞得很难用。 网络权限限制的很死，要想不通过它虚拟机的浏览器访问一些网络资源，基本只能自己建 mcp，很难用。。。如果不放开网络访问，dot 就是个垃圾产品
+
+## 1016
+
+- https://github.com/ONLYOFFICE/CommunityServer vs https://github.com/ONLYOFFICE/DocumentServer
+  - CommunityServer (now called ONLYOFFICE Groups) is a team collaboration portal. It covers document management, project management with Gantt charts and time tracking, a CRM with invoicing, plus blogs, forums, a wiki. It handles files and permissions but doesn’t include the document editors. Instead, its README lists ONLYOFFICE Docs (the DocumentServer repo) as an optional component you add for online document, spreadsheet, presentation and PDF editing. Its license is also different: Apache 2.0, versus AGPL for Document Server. 
+  - DocumentServer (now called ONLYOFFICE Docs) is the editing engine. It’s a collaborative online office suite with viewers and editors for text documents, spreadsheets, presentations, forms and PDFs. It has no user management, project tracking or similar features of its own. It’s meant to be plugged into something else, such as ONLYOFFICE DocSpace, Workspace, or third-party odoo/owncloud/seafile.
+- If you already have a file platform (Nextcloud, ownCloud, Seafile, your own app) and just want in-browser Office-compatible editing, you want DocumentServer alone.
+  - If you want a self-hosted all-in-one portal with projects, CRM and mail, you want CommunityServer, and you’ll almost certainly pair it with DocumentServer so people can edit files in the browser.
+  - Document Server became Docs at v6), so you’ll see the old and new names mixed in docs and forum posts.
+
+- 🆚 i have a kvm vps .
+when i install ubuntu 26.04, the ram shows as
+```
+
+root@xxx:~# free -h
+
+               total        used        free      shared  buff/cache   available
+
+Mem:           3.3Gi       660Mi       2.0Gi       3.4Mi       908Mi       2.7Gi
+Swap:          2.7Gi        68Ki       2.7Gi
+
+```
+when i install debian 13, the ram shows as 
+```
+
+root@xx:~# free -h
+
+               total        used        free      shared  buff/cache   available
+
+Mem:           3.8Gi       297Mi       3.6Gi       2.1Mi       120Mi       3.5Gi
+Swap:             0B          0B          0B
+
+```
+so weird. why does it happen? you can give me some commands to run on vps to help you debug/analyze if you want
+
+- The 0.5 GiB (512 MiB) difference in total RAM between Ubuntu 26.04 and Debian 13 on the same 4 GB KVM VPS is almost always caused by Ubuntu reserving memory at boot time for kdump (crashkernel).
+- The total column in free -h does not show your raw physical hardware RAM. Instead, it displays `MemTotal` from `/proc/meminfo`, which is Total Physical RAM minus memory permanently locked away by the firmware and the Linux kernel during boot
+  - Ubuntu server installs often include `kdump-tools/linux-crashdump`, which reserves a few hundred MB at boot for a crash-dump kernel. Debian doesn’t do this by default. That reserved memory isn’t counted in `MemTotal`, so free doesn’t show it.
+  - Debian 13 (3.8Gi total): Out of 4.0 GiB (4,096 MiB) of virtualized physical RAM, roughly 150–200 MiB is reserved for the BIOS/UEFI memory map, PCIe MMIO space, and the kernel binary itself, leaving 3.8 GiB available to the OS. Debian does not enable kernel crash dump reservations by default.
+  - Ubuntu 26.04 (3.3Gi total): Ubuntu Server and Cloud images enable kdump-tools by default. Ubuntu's default GRUB configuration passes the kernel parameter crashkernel=2G-4G:320M,4G-32G:512M,.... Because your VPS has 4 GiB of RAM, it hits the 4G-32G:512M bracket and locks away 512 MiB (0.5 GiB) of isolated RAM so a secondary capture kernel can save diagnostic logs if a kernel panic occurs (3.8 GiB - 0.5 GiB = 3.3 GiB).
+
+- Notice your Swap size (2.7Gi): Ubuntu 26.04 also looks at your usable memory at install/boot time (or via swap.img sizing rules) to size the swap file, whereas Debian's cloud image leaves swap disabled by default.
+
+- cat /proc/cmdline
+  - cat /sys/kernel/kexec_crash_size
+  - Look for `crashkernel=...` in the output string. If present, the kernel is actively reserving memory at boot.
+- sudo dmesg | grep -iE "Memory:|crashkernel|balloon"
+  - You should see a line reading crashkernel reserved: ... (512 MB) alongside a Memory: summary line showing usable kilobytes versus total physical kilobytes (for example, 3460000K/4193000K available, where the difference includes the kernel code, data, initrd, and reserved crashkernel space).
+- grep -E "MemTotal|DirectMap|Balloon|CmaTotal|Unaccepted" /proc/meminfo
+  - Add up the DirectMap4k, DirectMap2M, and DirectMap1G values—their sum reflects the actual physical address space mapped by the hypervisor (around 4,194,304 kB). If Balloon shows a large number, the KVM host's virtio_balloon driver is reclaiming RAM; if CmaTotal is large, the Contiguous Memory Allocator reserved a buffer.
+
+- How to Reclaim the 512 MiB on Ubuntu 26.04
+  - /etc/default/grub.d/kdump-tools.cfg
+  - edit it to comment out the `GRUB_CMDLINE_LINUX_DEFAULT` line or run `sudo apt purge -y kdump-tools`.
+
+```sh
+sudo apt purge -y kdump-tools linux-crashdump kexec-tools makedumpfile
+
+# Regenerate the GRUB configuration and reboot:
+update-grub
+reboot
+
+```
+
+- To get the memory back, you can remove kdump (you only need it for kernel crash dumps, which you almost certainly don’t):
+  - apt purge kdump-tools linux-crashdump kexec-tools makedumpfile
+
+## 1015
+
+- vps cpu:
+Intel Core Processor (Broadwell, IBRS）步进2（6代）32/64-bit
+vs
+ntel Xeon Processor (Skylake, IBRS) 步进4 (6代) 32/64-bit
+
+- 在 VPS 环境中，Intel Xeon Processor (Skylake, IBRS) 整体优于 Intel Core Processor (Broadwell, IBRS)。这两串字符并不是物理 CPU 的真实出厂型号，而是 KVM/QEMU 虚拟化层向虚拟机暴露的“虚拟 CPU 模板”（Virtual CPU Model），用来屏蔽底层硬件差异并方便宿主机热迁移。
+- 为什么一个叫 Core、一个叫 Xeon？
+  - 这只是 QEMU 源码对不同代际模板的默认命名习惯。在 QEMU 中，Broadwell 的通用虚拟模板统一被命名为 Intel Core Processor (Broadwell...)，即便宿主机实际使用的是服务器级的 Xeon E5-2680 v4，开出来的 VPS 也会显示为 Intel Core Processor。
+  - 而到了 Skylake 时代，QEMU 将桌面端（Skylake-Client）与服务器端（Skylake-Server）模板拆分开来，后者专门命名为 Intel Xeon Processor。
+  - 这里的“6代”不是指第六代酷睿，而是面板或检测脚本将 CPUID 中的 Family 6（第 6 家族） 直接翻译成了“6代”。自 1995 年的 Pentium Pro 以来，Intel 绝大多数主流 x86 处理器（从老旧的酷睿 2 到如今的至强铂金）的 Family 编号全部是 6。
+
+- Skylake, IBRS 支持 AVX-512 指令集（包含 avx512f、avx512dq、avx512bw、avx512vl 等）。在运行高强度加密解密、音视频转码（FFmpeg）、科学计算或本地轻量级 AI 推理（如 llama.cpp 纯 CPU 推理）时，Skylake 的吞吐量明显快于仅支持 AVX2 的 Broadwell。
+
 ## 1014
 
 - [Document AI pricing | Google Cloud  ](https://cloud.google.com/products/document-ai/pricing)
-  - Enterprise Document OCR Processor: First 1,000 pages per month are $0.00
+  - Enterprise Document OCR Processor: First 1, 000 pages per month are $0.00
   - All Other Processors (Form, Layout, Custom, Pretrained): 0 free pages per month; standard pay-as-you-go rates
 
 - it seems that  https://ladocs.aichorage.de (from worker_5 node) supports to login  with https://auther.aichorage.de (from worker_1 node). but i can not find how to register new user at https://auther.aichorage.de . so what is the normal workflow to register and use https://ladocs.aichorage.de?
@@ -414,9 +520,9 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
   - `~/Documents/repos/saas/lasuite-docs/documentation/installation/compose.md` and `~/Documents/repos/saas/lasuite-docs/documentation/examples/compose` are the core doc and examples for docker deployment, you might use self-hosted redis/postgresql/minio for ladocs on worker_5 node. for OIDC, please self host authelia docker service with name `auther` on worker_1 node and make it work well with `ladocs`.  in cloudflare, i have configured auther.aichorage.de to leader ip and worker1-auther-origin.aichorage.de to worker_1 ip . configure auther/authelia to make it extensible/flexisible so that it can be used with other services in the future. source code for auther(authelia) has been cloned at folder `~/Documents/repos/saas/authelia` for reference if you want.
   - ladocs is a little complicated, please design sensible configurations and make it take low system resources to fit most of the docker services on a single budget vps with 3GB ram.
 
-- at the end of the plan,  please push to github to trigger auto deployment with woodpecker ci, then inspect ci status by `woodpecker-cli`, fix issue if it exists.
+- at the end of the plan, please push to github to trigger auto deployment with woodpecker ci, then inspect ci status by `woodpecker-cli`, fix issue if it exists.
 
-- all the services on worker_5 node bootstraps successfully, but it does not mean they are working well. please analyze related code/config and run some tests to check if core services really works,, please also check if ladocs works well with auther service, you might test user-registration/login/doc-creation/... to recheck if core features work. you might refactor/improve worker_5 node services to make it correct/robust in the long term.
+- all the services on worker_5 node bootstraps successfully, but it does not mean they are working well. please analyze related code/config and run some tests to check if core services really works, , please also check if ladocs works well with auther service, you might test user-registration/login/doc-creation/... to recheck if core features work. you might refactor/improve worker_5 node services to make it correct/robust in the long term.
 - this repo is still beta software. legacy/unused code might be refactored or removed. compatibility layer is not required. just using the latest code/logic is ok.
 
 - 🐛 verge3 direct works perfectly. The relay connects and even got HTTP 200 in the verbose test, but responses are intermittent — QUIC-over-UDP-relay is fragile. The tcpdump reveals the problem: docker-proxy only sends 24-byte packets back to the client, while gost logs show 2560+ bytes going back. Docker's UDP proxy isn't forwarding gost's responses properly. Let me confirm by testing gost with network_mode: host (bypassing docker-proxy entirely). Host-network gost also connects but can't transfer data — so the issue is gost's udp:// handler itself, not docker-proxy. Let me test raw iptables DNAT to confirm UDP relaying works at the kernel level without gost.
@@ -534,7 +640,7 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
 - purge the poison in Safari: 
   - Safari → Settings → Privacy → Manage Website Data…
   - Search for aichorage, select it, click Remove (alternatively: Develop menu → Empty Caches, or quit and reopen Safari after the removal)
-- stay-userscript-manager's Privacy filter list (30,198 rules) contains this content-blocker rule:
+- stay-userscript-manager's Privacy filter list (30, 198 rules) contains this content-blocker rule:
   - {"trigger": {"url-filter": "^[^:]+:(//)?([^:/]+)+/api/log\\?"}, "action": {"type": "block"}}
   - That regex blocks any URL whose path is exactly /api/log?... — a generic anti-tracking rule (aimed at analytics endpoints) that perfectly, accidentally collides with new-api's log-list API.
   - Failed in Private windows	Content blockers apply in Private too
@@ -570,13 +676,13 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
 
 ## 1003
 
-- [求助，antigravity 登录报错是为什么？There was an unexpected issue setting up your account.An error occurred. - LINUX DO _202606](https://linux.do/t/topic/2285357/2)
+- [求助，antigravity 登录报错是为什么？There was an unexpected issue setting up your account. An error occurred. - LINUX DO _202606](https://linux.do/t/topic/2285357/2)
   - 👷: ip问题， 换到自建节点就能正常使用了
 
 - 🤔 i want to Build as a Custom Plugin to create a rich text markdown editor ux. 
   - analyze related code, explain to me more details about how to build a custom plugin with prosemirror-view, prosemirror-state, prosemirror-model ... using dom without react.
-  - the ux might be like,  when user chats with paseo agent in main chatbox and mentions a markdown file, user can right click the file path and show a context menu with menu items to open the markdown editor in sidebar panel or new tab, or any better ux ...
-  - How do you like my idea? If it is okay, you might improve it,  then exmplain to me step by step how to implement it
+  - the ux might be like, when user chats with paseo agent in main chatbox and mentions a markdown file, user can right click the file path and show a context menu with menu items to open the markdown editor in sidebar panel or new tab, or any better ux ...
+  - How do you like my idea? If it is okay, you might improve it, then exmplain to me step by step how to implement it
 - "Sidebar panel or new tab" maps perfectly to the existing API — openPanel("editor", { location: "explorer" }) for the sidebar, { location: "workspace" } for a workspace tab (panels use one persisted plugin workspace-tab target, so it survives reload).
 - Dynamic import, never static. The bundle is one file evaluated on every platform
   - Gated await import() compiles to a lazy require — the module body only runs when the web branch executes.
@@ -585,7 +691,7 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
 - Route 1 — Don't use react-dom; bundle DOM libs that don't need React
 - Route 2 — Bundle react-dom as a self-contained "island"
   - I compiled react-dom + react-dom/client with the plugin compiler's settings. Result: it compiles cleanly 
-  - Ship a process shim, imported first. react-dom/index.js is a runtime branch on process.env.NODE_ENV
+  - Ship a process shim, imported first. react-dom/index.js is a runtime branch on process.env. NODE_ENV
   - Dynamic-import it behind the web gate. Otherwise every phone evaluates 1.4 MiB at plugin load 
   - Mount your own root into a container div you own — never render into, or take ownership of, a node the host React tree renders.
   - React context does not cross roots. Context objects come from the shared react, but the provider stack is per-root, so the island sees only defaults. 
@@ -641,7 +747,7 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
 - 🤔 clash.meta/verge.yaml works for a while, but now all connection to ip/doamin is timeout. why does it happen?
   - 6 OK / 9 FAIL on consecutive delay tests — the tunnel works in bursts, then dies in stretches. Classic lossy-path behavior.
   - Your current line is 广东广电 (124.240.xx.xx), and it's now 20:25 Beijing time — international prime-time congestion(阻塞; 拥挤) window.
-  - Let me measure the actual path quality with direct pings between the Mac and both VPSes, and large-packet pings from the server back to your IP. 10–15% packet loss with big jitter on direct pings to both VPSes from your 广电 line — and my SSH just timed out because it's routed through the very tunnel we restored (MATCH,Verge). One final decisive test: capture packets on worker-4 while firing delay tests, to see which direction drops. Firstly set Verge→DIRECT again so that SSH can work.
+  - Let me measure the actual path quality with direct pings between the Mac and both VPSes, and large-packet pings from the server back to your IP. 10–15% packet loss with big jitter on direct pings to both VPSes from your 广电 line — and my SSH just timed out because it's routed through the very tunnel we restored (MATCH, Verge). One final decisive test: capture packets on worker-4 while firing delay tests, to see which direction drops. Firstly set Verge→DIRECT again so that SSH can work.
 - Nothing is wrong with your config, your servers, or DNS. The problem is the network path between your ISP (广东广电， CGNAT) and the two US VPSes: UDP packets to them get dropped in multi-minute bursts, especially during evening peak hours. Hysteria2 runs entirely over QUIC/UDP, so when the burst hits, every handshake fails → all connections to IP and domain variants time out at once. TCP (SSH) and ICMP mostly survive the same windows, which is why everything else on your Mac still works and it "worked for a while" before.
   - The path is lossy right now: direct pings from your Mac to the three VPSes show 5–15% packet loss with 100ms jitter — at 20:25–20:46 Beijing time, prime-time congestion on the 广电 → US West transit (RackNerd / ColoCrossing budget routes are notoriously congested at peak).
   - UDP specifically dies, TCP lives: during failing windows, QUIC delay tests all time out while SSH (TCP) to all three VPSes works — you confirmed this yourself.
@@ -653,7 +759,7 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
   - Brutal congestion control via bandwidth pinning — the decisive change. Verified in the hysteria source you cloned (core/server/server.go): when the client declares its download bandwidth, the server switches from BBR to brutal CC at that rate for the downlink — it holds the flow steady under heavy loss instead of stalling.
 - TCP:22 connects to all three VPSes and ICMP works — yet SSH fails and the tunnel is dead. That's the signature of a size-based drop: small packets (TCP handshake, ICMP) pass, but larger packets die. SSH dies when it sends its ~1–2KB key-exchange packet; QUIC dies because every packet is 1280 bytes. Domestic traffic is unaffected (different route). 
 
-- verge and verge2 are 2 unrelated and standalone proxy service,  verge/worker_4 is in LA, verge2/worker_2 is in Texas, why do they fail at the same time?
+- verge and verge2 are 2 unrelated and standalone proxy service, verge/worker_4 is in LA, verge2/worker_2 is in Texas, why do they fail at the same time?
   - The shared segment is on the China side, and it comes first. Your traffic to both servers takes this path:
   - windows/mac → 广电 access/CGNAT (124.240.x, 203.132.x exits) → provincial core → international gateway (China-side) → [routes diverge here] → LA vs Texas
   - Both tunnels funnel through the same access network, same CGNAT egress pool, and the same international gateway — and evening-peak congestion/policing happens there, before the path ever splits toward LA or Texas.
@@ -665,7 +771,6 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
   - So when you browse Google through 宝可梦， your traffic typically rides 广电 → AWS Singapore/Tokyo → AWS backbone → exit — a short, well-peered China→Asia segment that your 广电 line handles fine even at peak, then premium AWS transit onward. 
   - Your verge servers instead ride the direct China→US public path — the segment that congests and polices UDP every evening.
   - 2. Transport class differs on the relayed nodes. Those entry nodes are Vless/Trojan = TCP+TLS — indistinguishable from ordinary HTTPS to a congested gateway. Your verge tunnel is raw UDP/QUIC, the traffic class that gets policed first when the direct path congests.
-
 # dev-09
 
 ## 0925-🧊
@@ -768,7 +873,7 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
 
 - https://github.com/NVIDIA/OpenShell
   - policy-governed sandboxes over Docker/Podman/microVM; 
-  - Windows support is "WSL 2 (experimental)," not native.
+  - Windows support is "WSL 2 (experimental), " not native.
 
 - OS-level primitives (no container, no VM)
 - macOS Seatbelt / sandbox-exec

@@ -55,6 +55,8 @@ modified: 2023-03-09T13:47:07.317Z
       - 示例依赖server api，本地无法运行
     - https://github.com/ONLYOFFICE/document-editor-react
       - 示例依赖server api，本地无法运行
+  - https://github.com/linuxserver/docker-onlyoffice
+    - Web accessible ONLYOFFICE running on top of Debian
   - https://github.com/phpk/godoos
     - 一款高效的内网办公操作系统，内含word/excel/ppt/pdf/聊天/白板/思维导图等多个办公系统工具
     - 支持配置onlyOffice地址，onlyOffice编辑word/ppt/excel文件
@@ -131,15 +133,32 @@ modified: 2023-03-09T13:47:07.317Z
   - https://github.com/xwiki-labs/netflux-spec2
 
 - CollaboraOnline /1kStar/MPLv2/202401/cpp/js/ts/LibreOffice
+  - https://github.com/CollaboraOnline/online.mirror
+    - A read-only mirror
+    - Collabora Online and Collabora Office are developed on our Gerrit instance at https://gerrit.collaboraoffice.com
+  - https://gerrit.collaboraoffice.com/plugins/gitiles/online  /gitweb
+  - https://gerrit.collaboraoffice.com/admin/repos/online  /all-repos
   - https://github.com/CollaboraOnline/online
-  - https://www.collaboraoffice.com/
+  - https://www.collaboraonline.com/code
+  - https://sdk.collaboraonline.com/docs/architecture.html
   - https://www.collaboraonline.com/
+  - https://www.collaboraoffice.com/
   - Collabora Online is a collaborative online office suite based on LibreOffice
   - This is also the source for the Collabora Office apps for iOS and Android.
   - Collaborative editing features
   - [Collabora Office: The enterprise-ready edition of LibreOffice](https://news.ycombinator.com/item?id=26614654)
   - [Based on LibreOffice - Collabora Online and Collabora Office](https://www.collaboraonline.com/based-on-libreoffice/)
     - Our flagship products, Collabora Online and Collabora Office, are 100% Open Source
+  - API
+    - Conversion API
+    - Extract/Transform Document Structure API
+    - Linking API: extract list of objects inside document you can link to
+
+- https://github.com/CasualOffice/docs /apache2/202609/ts
+  - http://docs.casualoffice.org/
+  - Open-source self-hosted web .docx editor with real-time co-editing — an alternative to Google Docs
+  - https://github.com/CasualOffice/sheets
+    - self-hosted web spreadsheet with .xlsx round-trip and real-time co-editing — an alternative to Google Sheets
 
 - https://github.com/LibreOffice/core /3.5kStar/MPLv2/202512/cpp/java
   - [LibreOffice Online](https://www.libreoffice.org/download/libreoffice-online/)

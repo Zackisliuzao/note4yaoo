@@ -351,6 +351,8 @@ modified: 2026-06-20T15:49:57.019Z
     - [LD士多 - LDC积分商城](https://ldst0re.qzz.io/)
 
 - token-news
+  - [华为云免费7个月羊毛 - LINUX DO _202610](https://linux.do/t/topic/3034545)
+  - [OpenCSG (开放传神) | Hybrid Huggingface+ ｜大模型开源社区与企业AI平台 | AgenticOps 大模型平台 ](https://opencsg.com/models)
   - https://chatapi.weixin.qq.com/
     - 微信开发大赛, 免费使用Deepseek和GLM
     - 白嫖微信的v4flash 1Btoken 约合35块钱
@@ -1503,6 +1505,7 @@ modified: 2026-06-20T15:49:57.019Z
   - kiro - claude  -- ¥50: 会降智, 低缓存
     - kiro 的 claude 是没思考的模型, 能思考其实是 kiro 的 agent 能力
   - swe - 反代devin可能会有低倍率, 如jinny
+  - glm: 可以在闲鱼买周末免费的1亿token， 大概5元
   - token choices: gpt, kiro-claude, gemini, grok, composer, devin-swe, deepseek
   - 厂商类: gpt, claude, gemini, grok, glm
   - ide类: cursor, devin/windsurf, kiro, antigravity
@@ -2544,33 +2547,37 @@ modified: 2026-06-20T15:49:57.019Z
     - 价格与官方标价一致输入2输出10缓存0.1
     - 目前在官方价格优惠期，如果恢复正常标价会通知
     - gemini-4-argon还不太稳定，暂时随缘用吧
-  - https://nikoapi.xyz/pricing  /0.23x
-    - gcp分组--0.1x
-    - 不稳定
-  - [LingShu AI ](https://api.strategyhub.cc/monitor)  /0.3x
-    - ultra 号池
   - https://us.xcmapi.com/price  /0.25x
     - gemini4--0.25x, 单独gemini分组
     - gemini的缓存一直都很低 别人都是跑酒馆的 我是直接反代映射的 自己的ui号
     - ultra一个号一个月就200刀额度，拉满跑不了1-2个小时  跑完就自动切号，首字波动会正常因为会切号  会慢慢加号优化  
     - 提供的模型包含 -high/-low 后缀
+    - Gemini4能用不 一直连不上 > 号池少 pro支持了才能稳定 外面现在倍率0.5x  0.7x了, UI号 保本0.5x
+  - [LingShu AI ](https://api.strategyhub.cc/monitor)  /0.3x
+    - ultra 号池
   - https://kedaya.ai  /0.32x
     - ultra分组
   - https://aiwble.com/pricing  /0.25x
     - gemini4可用性极低
     - 也提供按次，太贵
-  - [创想AI ](https://vapi.chuangxiangai.asia/model-plaza)  /0.35x
-    - 在Gemini-ultra分组里，价格跟的是官方的
-    - 不稳定
-  - [吱吱鼠AI ](https://zzshu.cc/pricing)
+  - [吱吱鼠AI ](https://zzshu.cc/pricing)  /0.33x
     - 新开【Gemini-ultra】分组  倍率0.33x
     - 提供的模型包含 -high/-low 后缀
+  - https://jinnyapi.com/keys  0.35x
+    - 0.35x
   - https://tntapi.com/model-plaza  /0.35x
     - 2 10
-  - [顺达API ](https://www.apiloop.top/pricing)  /0.15x
+  - https://nikoapi.xyz/pricing  /1x
+    - gcp分组--1x
+    - gemini--0.23x
+    - 不稳定
+  - [顺达API ](https://www.apiloop.top/pricing)  /0.35x/只做gemini
     - 企业分组--0.15x
     - gemini4在按次分组， 有点贵
     - 来源是反重力pro
+  - [创想AI ](https://vapi.chuangxiangai.asia/model-plaza)  /0.35x
+    - 在Gemini-ultra分组里，价格跟的是官方的
+    - 不稳定
 
 - [睿动AI · 私有模型 · 公有模型 · 一套规则管到底 ](https://iruidong.com/)
   - [x 动 ai 的 glm 套餐5 小时应该是 1 亿 token - LINUX DO _202609](https://linux.do/t/topic/2914411)
@@ -2678,6 +2685,7 @@ modified: 2026-06-20T15:49:57.019Z
   - 企鹅群 1044626898
   - 群内签到每日领额度（随机 0.01~1 元）
   - gemini--0.15x
+  - gemini4--0.35x
 
 - [joeapi ](https://api.joealot.com/keys), 作者来自台湾, 长期运营
   - https://api.joealot.com/model-plaza  /不是最新模型
@@ -2766,6 +2774,8 @@ modified: 2026-06-20T15:49:57.019Z
   - gemini反重力--0.11x
   - ccmax--0.8x, cctest满分，可蒸
 
+- [空寂AI ](https://api.kongji.org/home)
+
 - [LargeChestnut ](https://largechestnut.com/model-plaza), kiro
   - 高缓存90（cctest测试大概3x） kp（无写入稳90缓存）以及kiro低写入（90缓存左右）0.08 
   - kiro分组 （cctest测试大概2x）正常缓存 正常写入 60缓存左右0.08 
@@ -2836,6 +2846,12 @@ modified: 2026-06-20T15:49:57.019Z
 
 - [Conpera ](https://code.conpera.ai/), 已充值
   - 仅支持google登录
+
+- [AIAPI ](https://cn.aiapi.bot/dashboard/model-prices)
+  - [关于我开了1个月不到的商业中转站，但是亏损了接近3-4万？ - LINUX DO _202610](https://linux.do/t/topic/3035608)
+  - 新用户注册领 10 元体验金，这个是常驻活动
+  - gpt--0.3x
+  - claude--1.5x
 
 - [DataCodex ](https://api.datacodex.net/keys), 已充值
   - 中等价格
