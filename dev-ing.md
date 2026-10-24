@@ -114,10 +114,10 @@ serve -p 9000 --cors
 HOST=0.0.0.0 PORT=8080 react-scripts start
 next dev -H 0.0.0.0 -p 3000
 
-npm i -g npm yarn pnpm corepack serve @dotenvx/dotenvx opencode-ai @kimuson/claude-code-viewer  @github/copilot
+npm i -g npm yarn pnpm corepack serve @dotenvx/dotenvx  @kimuson/claude-code-viewer  @github/copilot
 @ooxml-dev/cli
-@openai/codex @deepseek-ai/dsh
-npm up -g skills @getpaseo/cli @earendil-works/pi-coding-agent  
+@openai/codex @opencode/cli command-code
+npm up -g skills @getpaseo/cli @earendil-works/pi-coding-agent @deepseek-ai/dsh 
 ```
 
 - dev-goals 不能在产品中检验的技术不玩，注意产品化
@@ -346,6 +346,142 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - ?
 - dev-log
   - ?
+
+## 1022
+
+- Stop automated scanning at the edge in cloudflare
+  - Cloudflare has NO firewall rules at all ✗ — no IP rules, no UA rules, no lockdowns ✓. So the edge is doing nothing ✗ — everything passes to the origin ✓ where Caddy 400s the malicious paths ✓.
+  - no edge filtering ✗: the scan hits the origin ~2,300×/day ✓, consuming bandwidth, conntrack, and Caddy CPU ✓ — and it's pure noise
+  - they're actively probing for secrets (.env, .aws/credentials, .git) ✓ — the 400s are Caddy refusing (path traversal / bad method) ✓ but the defence is incidental ✓ not deliberate 
+  - fix: User-agent block — block TLM-Audit-Scanner, CensysInspect, InternetMeasurement, zgrab, ivre-masscan, and metabase-cve-* with a contains match 
+- Caddy has no rate-limiting handler — caddy list-modules shows no http.handlers.rate_limit. Origin-level per-host throttling is impossible without a custom image build.
+
+- [Photo --> SVG comparison: DeepSeek v4.1 Flash vs GLM 5.3 Flash : r/opencode _202610](https://www.reddit.com/r/opencode/comments/1xcj4km/photo_svg_comparison_deepseek_v41_flash_vs_glm_53/)
+  - 任务: 根据实景照片生成svg复刻版
+  - The only interesting thing I noticed in the results concerns DeepSeek 4.1 Max Thinking. While it's true that it gives an overall feel closest to the original photo, it also starts making up certain details (like the buildings in the background).
+- Appreciate the test but LLM is not the appropriate tool for this task 
+
+## 1021
+
+- 🤔 for colocrossing vps s1, i have set mail related dns records in cloudflare, and i have update ptr/rdns with 192.3.x.x to mail.aichorage.de.
+i just get a new vps s2 with new ip 137.175.x.x from netcup.
+can i update the ptr/rdns in netcup and keep the old ptr/rdns in colocrossing unchanged? because i donnot want to open a support ticket in colocrossing to remove the old ptr/rdns.
+- Yes, you can leave the old PTR on ColoCrossing alone. A PTR record belongs to the IP it describes, and whoever owns that IP controls it. ColoCrossing controls the reverse entry for 192.3.x.x and netcup controls it for 137.175.x.x, so the two can’t conflict. Two different IPs can both point to mail.aichorage.de without any problem.
+  - Once mail.aichorage.de resolves only to the netcup IP, the old IP’s PTR will no longer match the forward record. That only matters if S1 still sends mail, so make sure Stalwart on S1 stays stopped.
+  - DNS has no "reverse-of-a-reverse" lookup: PTR records live inside provider-specific reverse zones (x.x.3.192.in-addr.arpa at ColoCrossing and x.x.175.137.in-addr.arpa at Netcup). There is no global DNS query that asks "Which IP addresses across the internet have a PTR record pointing to mail.aichorage.de?"
+  - Receiving mail servers only inspect the active connecting IP: When your new Netcup VPS (137.175.x.x) sends an email to Gmail, Outlook, or any other provider, the receiving server performs Forward-Confirmed Reverse DNS (FCrDNS) strictly on the IP address that opened the connection
+  - Reverse check (PTR): It queries the PTR record of the connecting IP (137.175.x.x) and gets mail.aichorage.de from Netcup's nameservers.
+  - Forward check (A): It queries the A record of mail.aichorage.de from Cloudflare and gets 137.175.x.x.
+  - Because 137.175.x.x → mail.aichorage.de → 137.175.x.x matches in both directions, validation succeeds completely. The receiving server never sees or queries 192.3.x.x.
+  - Once you point your Cloudflare A record to 137.175.x.x and remove ip4:192.3.x.x from your Cloudflare SPF record, the old PTR record on 192.3.x.x becomes an unconfirmed ("orphaned") pointer. Even if someone else later gets 192.3.x.x after your ColoCrossing VPS expires, any mail sent from 192.3.x.x claiming to be from aichorage.de will fail FCrDNS, SPF, and DKIM checks.
+
+- 🤔 there are so many forum/community related solutions, like discourse/forem/nodebb... is there any popular open source or self-hostable forum/community solutions... please deep research related solutions/projects/ideas, if you found any self hostable products or inspiration projects, provide overview/github-url/website for each.
+  - general forum, link aggregators like hn/reddit, comments, chat
+
+## 1020
+
+- why do i feel it lower when i visit sites? previously, the web page loads fast .  but now , i feel it becomes much slower before page content shows
+  - Root cause: Caddy runs with mem_limit: 64m, and it was pinned against that ceiling
+  - When a cgroup is full, the kernel reclaims synchronously inside the allocating thread — so Caddy's request and TLS-handshake threads were being stalled by the kernel on every allocation. 
+  - the pressure spiked when access logging began, because each request now allocates a log entry and JSON buffer. So: a pre-existing mis-sizing that my change turned into a visible stall. 
+- fixes Applied on all 7 nodes (limit raised live, runtime env key written so it survives container recreation), and committed so future nodes get it 
+  - CADDY_MEMORY_LIMIT=192m 
+- Correct: a cgroup limit is a cap, not a reservation. 
+  - Incorrect: it does not "allow larger traffic." The fleet refutes that directly
+  - Caddy's footprint tracks its route table and log volume, not traffic — so the limit is not a throughput dial. It is a stall-avoidance threshold: below the working set the kernel reclaims synchronously inside the allocating threads (today's bug); above it, nothing about capacity changes.
+- The health probe mattered more than its size suggests: a stalled probe fails the all-containers-healthy gate and can block a deployment.
+
+- Close the origin bypass on the Leader: today every public hostname can be reached without Cloudflare's WAF, rate limiting, or bot protection.
+  - After this change the Leader's Caddy accepts HTTPS/HTTP3 only from Cloudflare's published ranges plus a reviewed direct-client allowlist, while Woodpecker gRPC, Observer ingest, ACME, and SSH keep working.
+- Two-layer allowlist
+  - Layer 1 — committed, CI-deployed: Cloudflare ranges. The 22 reviewed Cloudflare CIDRs go into config/cluster/policy.env as EDGE_INGRESS_CLOUDFLARE_RANGES
+  - Layer 2 — runtime-only, never committed: direct clients. The node and operator addresses live in /etc/llm-hub-lite/edge-ingress-sources.env (root-only, mode 600, gitignored), following the repo's existing pattern for node.env, shared-secrets.env, restic-r2.env, and beszel-enrollment.env. EDGE_INGRESS_DIRECT_SOURCES
+  - Always added by the script, independent of the file: LEADER_PUBLIC_IP (the Leader's own agent and collector connect to its public address) and 172.16.0.0/12 (container-originated traffic to the Leader's own public address — the Woodpecker deployer and health probes; RFC1918 is not reachable from the internet).
+- If edge-ingress-sources.env is missing or empty, the script keeps the current unrestricted policy and logs a warning naming the file. 
+- Add edge-ingress-sources.env under the "Root-only runtime configuration" block so the discipline is documented in-repo.
+
+- coolwsd offers no host allowlist (proven: allowed_hosts does not exist), so the control moves to the kernel, where it also covers the document-data-source path.
+  - Enforcement — a dedicated chain in ops/configure-firewall.sh, reconciled role-independently (before the Leader early-return, exactly like reconcile_app_fail2ban), built for every app that is enabled, placed on this node, and declares a profile
+- The egress profile is a new platform capability, not a Collabora special case. 
+  - llm-client is the first profile; gitea, openclouds, fider-style content-handling apps can adopt it later by adding one policy line.
+
+- [Introducing cf: the agentic CLI for the entire Cloudflare API | Cloudflare Blog _202609](https://blog.cloudflare.com/cloudflare-cf-cli-launch)
+  - [Get started · Cloudflare CLI docs ](https://developers.cloudflare.com/cf/get-started/)
+  - Agents love CLIs. But Wrangler only provides commands for around 280 operations, and Cloudflare offers thousands.
+  - Earlier in the year we teased how we were planning to solve this and today, we’re enabling agents to use every Cloudflare product by introducing a new CLI: cf.
+  - Wrangler was hand-built with each product team contributing and taking their own approach to their command developer experience.
+  - We had inconsistent terminology across d1 info, hyperdrive get, workflows describe as each team came up with their own practices at different times.
+  - Forge — Cloudflare’s new unified API generation pipeline — enabled us to do this, building on the idea of generating our CLI commands directly from the API schema that powers our API documentation and SDK generation. Everything we provide has an OpenAPI schema, and if we annotate this with just a little more information, we can use it as the source for Forge to make a CLI.
+  - This enables us to expand cf from the ~280 functions that Wrangler had built up over time, to cover the entirety of the Cloudflare API surface of over 3,000 operations.
+  - Agents need to filter JSON, not look at tables
+  - With 3,000 possible routes through a CLI, how can your agent find the right operation it needs quickly without bloating your context? For this reason we have also added `cf cli search`.
+  - cf does not support the Global API Key.
+
+- [Introducing Forge: the open source pipeline for generating SDKs, CLIs, docs, and more | Cloudflare Blog _202609](https://blog.cloudflare.com/forge-open-source-generation-pipeline)
+  - Forge, a fresh approach to generating SDKs, CLIs, docs, and libraries.
+  - We built Forge because we needed it ourselves in order to treat agents as our customers. Now, we’re open sourcing it because we think everyone should be able to generate all the surfaces that agents need.
+  - https://github.com/cloudflare/forge
+
+## 1019
+
+- Packet-sizing probes revealed that the international path between China Unicom (203.132.60.184) and Colocrossing Los Angeles (198.46.xx.xx) enforces an exact maximum UDP payload ceiling of 1204 bytes (1232-byte IP packet with 20-byte IP + 8-byte UDP headers).
+  - ≥1205 bytes was 100% silently discarded without ICMP Packet Too Big generation.
+  - Hysteria 2's default dynamic PMTU discovery (DPLPMTUD) ramped QUIC frame sizes up to standard 1280–1472 bytes, entering an unrecoverable black hole.
+  - Fix: Configured `disablePathMTUDiscovery: true` in hysteria2.yaml, pinning QUIC payload frames to a safe 1200-byte boundary.
+  - `disablePathMTUDiscovery: true`: Tells QUIC to never probe or exceed the base 1200-byte payload (1200 bytes payload + 8 UDP + 20 IP = 1228-byte IP packet). Since 1204 payload / 1232 IP packet exceeds 1228, packets never get dropped.
+- why do other services like verge2/verge3/verge4/verge5 not use  disablePathMTUDiscovery and have no problem ? why is only Edge-Direct-Hy2 required to use it? 是否和vless协议有关， 其他正常的proxy都用的是hysteria2
+  - Verge5 peers directly with China Unicom (219.158.33.77) in Los Angeles at Hop 5. Because this is direct native BGP cross-connect, there are no intermediate transit tunnels, MPLS labels, or GRE encapsulations. The path maintains a clean, native 1500-byte MTU end-to-end.
+  - for Edge-Direct (198.46.xx.xx, ColoCrossing, Los Angeles): Traffic does not enter China Unicom directly; it traverses Cogent (AS174) domestic transit. Budget inter-carrier transit links frequently use MPLS/GRE tunneling or cross-connect VLAN encapsulation. This reduces the effective maximum UDP payload to 1204 bytes. Any UDP packet larger than 1204 bytes is silently dropped with no ICMP Packet Too Big notification.
+  - On Verge5 (and Verge2/3/4): Because the path supports native 1500 MTU, the 1280-byte and 1472-byte probe packets reach the client and receive ACKs. The connection raises its frame size to 1472 bytes.
+  - On Edge-Direct: Because the transit path hard-caps UDP at 1204 bytes, all 1280+ byte probe packets are silently dropped. When probe drops coincide with data packets or cross-border packet loss, the MTU search state machine causes transmission stalls, congestion window collapse, and timeout: no recent network activity fatal disconnects.
+- `tx-udp-segmentation`: UDP Segmentation Offload (USO / GSO). Allows the application (quic-go) to pass multi-kilobyte UDP super-frames (e.g. 3948 bytes) via sendmsg / UDP_SEGMENT, delegating packet slicing to the network interface.
+  - Problem: On KVM virtual machines with buggy virtio_net drivers (specifically ColoCrossing Los Angeles), the hypervisor drops or corrupts these super-frames.
+  - Impact of turning off: Eliminates VirtIO driver packet corruption and timeout: no recent network activity stream aborts. Software packetization incurs negligible CPU cost (<1% on 100Mbps VPS traffic).
+  - Safe and recommended for all nodes. Nodes on RackNerd/Multacom already have it off [fixed] by the hypervisor; adding ethtool -K "$PUBLIC_INTERFACE" tx-udp-segmentation off to configure-firewall.sh ensures any node with a togglable or buggy driver is permanently protected.
+- `QUIC_GO_DISABLE_GSO` (Hysteria 2 / quic-go Runtime Flag)
+  - An environment variable read by quic-go. When true, quic-go disables batch segmentation via UDP_SEGMENT and writes individual UDP packets using standard socket calls.
+  - Impact: Provides container-level defense-in-depth against GSO corruption even if container networking or host ethtool offloads are altered.
+  - Safe and recommended for all Hysteria 2 containers (verge2, verge3, verge4, verge5, verge6, and verges). Nodes not running Hysteria (leader, worker-1) do not need it.
+- `disablePathMTUDiscovery`
+  - false (default): DPLPMTUD (RFC 8899) dynamically probes packet sizes up to 1472 bytes (standard 1500 Ethernet MTU).
+  - true: Disables discovery and permanently clamps all QUIC frames to 1200 bytes (1228-byte IP packet).
+  - Is it a good idea to enforce disablePathMTUDiscovery: true for all? NO. Enforcing it globally is counter-productive
+  - Throughput & CPU penalty: Clamping frames to 1200 bytes requires ~23% more packets, kernel syscalls, and network interrupts to move the same volume of data compared to 1472 bytes, capping top-end throughput on fast connections (e.g. 4K streaming or bulk transfers).
+  - DPLPMTUD is safe by design: RFC 8899 probes are non-destructive. If a probe is lost, QUIC simply stays at 1200 bytes.
+  - Fleet Applicability: Targeted ONLY to indigenous_node. All other nodes (verge2–verge6 and verges) should keep disablePathMTUDiscovery omitted (false) to leverage the full 1472-byte frame capacity.
+
+- 
+- 
+- 
+- 
+
+## 1018
+
+- how to to make hysteria2/vless faster?
+  - What it improves drastically (Throughput & Bandwidth): It prevents bandwidth from stalling or collapsing when downloading, streaming 4K video, or browsing on high-latency transpacific / cross-border links.
+  - What it improves moderately (Connection Setup): Saves 1 Round-Trip Time (~150–250 ms) on new connections via TCP Fast Open.
+  - What it cannot change (Physical Ping): It cannot alter the speed of light in fiber optics (a 180 ms physical route will remain ~180 ms).
+- net.ipv4.tcp_congestion_control = bbr & net.core.default_qdisc = fq
+  - Impact on VLESS: Massive.
+  - Traditional Linux congestion control (CUBIC) assumes that any packet loss means the network is congested and cuts your transfer speed in half (by 50%). On cross-border international routes, random packet loss of 2%–5% is normal. Under CUBIC, a 500 Mbps connection often degrades to less than 10 Mbps.
+  - BBR measures bottleneck bandwidth and round-trip time independently of packet drops. It maintains high transmission rates (100–300+ Mbps) even on lossy international paths.
+  - default_qdisc = fq (Fair Queueing) is required by BBR for hardware/driver-level packet pacing. Without fq, BBR drops back to coarse software timers, causing microbursts and packet drops.
+- Hysteria's tunnel runs over UDP with its own userland BBR/Brutal controller. However, when Hysteria's server retrieves data from origin websites (YouTube, GitHub, etc.), it opens outbound TCP sockets using the VPS kernel. BBR ensures the server pulls origin content at full speed.
+
+- net.core.rmem_max = 67108864 & wmem_max = 67108864 (64 MB Buffers)
+  - Impact on Hysteria 2 (UDP/QUIC): Critical.
+  - The Linux default UDP receive buffer (net.core.rmem_max) is often only 212 KB.
+  - Under heavy UDP traffic (e.g., 100–500 Mbps download), if userland quic-go cannot read incoming UDP datagrams within a few milliseconds, the kernel socket buffer overflows and drops UDP packets instantly.
+  - Hysteria explicitly requests larger UDP socket buffers from the kernel. Setting rmem_max = 64 MB allows Hysteria to hold incoming packet bursts without kernel drops.
+- Impact on VLESS (TCP): Directly unlocks the Bandwidth-Delay Product (BDP).
+  - Setting max buffers to 64 MB eliminates the artificial single-stream throughput ceiling.
+
+- from your Live ClashX Meta Stability Verification, why is Verge5-Hy2(198) always faster than Verges-Hy2(137)?   Verges-Hy2 node and worker_5 node is almost the same, only ip differs, why is the test latency so different?
+  - 都在美国加州圣何塞的同一个机房（AS54600 PEG TECH INC），且两台机器之间的局域网内网延迟仅为 0.36 ms
+  - 跨太平洋跨国光缆登陆与骨干网分流路径完全不同（主要原因，贡献 ~25–28 ms）
+  - verge5-198: 联通圣何塞出口, 联通骨干跨太平洋登陆网关(122ms) - 上海直达海缆, 移动接入网(158ms)。 该 IP 网段分配到了直连我国上海海底光缆 landing station 的低跳数高速直达信道，到达中国联通骨干上海登陆点的耗时仅 122 ms，最终到达客户端总 RTT 为 ~167–170 ms。
+  - verges-137: 联通圣何塞出口, 联通跨洋海缆经停网关(177ms), 跨洋海缆节点, 移动接入网(192ms)。该 IP 经由上游 PEG TECH 的不同 BGP Peer/光纤通道分流，被送往了另一条经停中继的跨洋海缆节点（跨洋跳段在到达国内核心机房时就已经达到 177 ms，比 198 段多了整整 55 ms 的跨洋波导延迟）。
+  - 底层物理定律：跨太平洋海底光缆一旦由上游运营商 BGP Anycast/出口策略分派到不同线路（例如 NCP/FASTER 直达 vs 早期 TPE 绕行线路），物理光波传输与中继站延迟差异就是 25–30 ms。这是光缆物理路径决定的下限。
 
 ## 1017
 

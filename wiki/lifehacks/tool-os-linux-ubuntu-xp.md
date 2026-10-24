@@ -52,7 +52,7 @@ ssh root@ip
 
 sudo apt update -y && sudo apt upgrade -y
 apt update && apt upgrade -y && apt dist-upgrade -y && apt full-upgrade -y 
-sudo apt install -y vim ufw fail2ban git btop htop 
+sudo apt install -y vim ufw fail2ban git btop htop telnet 
 
 sudo apt autoremove -y
 
@@ -92,6 +92,7 @@ sudo ufw default allow outgoing
 sudo ufw allow http
 sudo ufw allow https
 
+# 先 allow 22 再 enable ufw，不然启用瞬间 SSH 就断了
 sudo ufw allow ssh
 # sudo ufw delete allow ssh
 # sudo ufw delete allow 22/tcp

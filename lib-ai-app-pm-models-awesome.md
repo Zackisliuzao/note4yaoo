@@ -1517,6 +1517,8 @@ modified: 2026-06-20T15:49:57.019Z
     - deepseek有峰谷的，他家有 token 计算器，佬友可以根据用量自己算一下，5 小时额度是 14 刀
   - charm-hyper-crush
   - evot
+  - token-related-plan
+    - opendesign
 
 - tips
   - 不要执着于免费/超低价模型, 可用模型/rpm/tpd/pricing/speed 不可能满足多项
@@ -2458,6 +2460,8 @@ modified: 2026-06-20T15:49:57.019Z
 
 - deepseek/国模-注意缓存价格
   - https://us.xcmapi.com/model-plaza  /0.08x
+    - 0.8-1.6元/1亿token  高峰期用量大 会有缓存浮动
+    - 新增分组：【官转版本】Deepseek模型-官转高缓存版-官key兜底-缓存95%以上, 0.12x
   - https://api.x5m5x.com/monitor  /0.15x
   - https://ai.max66.xyz/keys, 只做自部署的deepseek  /0.125x
   - https://tntapi.com/keys  /0.1x/用户多
@@ -2742,6 +2746,9 @@ modified: 2026-06-20T15:49:57.019Z
   - 可找客服沟通赠金$5
   - 没有在线充值, 需要qq联系后手动充值
 
+- [极光中转站 | Boreara ](https://api.boreara.com/pricing), 主做deepseek, 用户少
+  - [【极光中转站 | Boreara】上架 deepseek-v4.1-flash-1017 模型！新增福利分组 x0.04 倍率！ _202610](https://www.nodeseek.com/post-993878-1#4)
+
 - [muling /New API ](https://vip.muling.store/pricing), 无用户群
   - 反重力claude--0.33x
   - ccmax--0.95x
@@ -3013,8 +3020,13 @@ modified: 2026-06-20T15:49:57.019Z
   - 并发才给5, 不然给人刷吗
   - gpt, kiro
 
-- [野菜API ](https://yeschoy.com/)
+- [野菜API ](https://yeschoy.com/pricing)
+  - https://www.goofish.com/personal?spm=a21ybx.item.itemHeader.1.70ea3da6B1PGIa&userId=2223072180598
+    - 站长在闲鱼卖cline
   - 一个客户端，完成应用接入、模型选择与价格查看。
+
+- [万川智能 ](https://chuanapi.com/pricing)
+  - [【富可敌国】万川API｜注册/回帖/进群共送10刀｜GPT 0.08起、Grok 0.085、国模 0.2、Gemini 0.3、Claude 0.25｜GPT-ultrafast、独立蒸馏分组｜1元=1刀，可开票可对公 - LINUX DO _202610](https://linux.do/t/topic/3040232)
 
 - [PackyAPI](https://www.packyapi.com/pricing)
   - [Packy - 模型健康面板](https://check.linux.do/group/Packy)
@@ -3123,6 +3135,14 @@ modified: 2026-06-20T15:49:57.019Z
     - utral 是反重力
     - 只有几种渠道 1、官转 2、aws 3、kiro/cursor/antigravity
 
+- [KKSJ AI模型中转API ](https://api.kksj.org/pricing)
+  - claude--0.9x
+  - [从 23 年末做起的中转，稳定性见首页监控， ccmax 风控下，依旧坚挺 - V2EX _202603](https://www.v2ex.com/t/1200030)
+
+- [RouterApi ](https://routerapi.net/pricing), 不活跃, 作者的v站帖子都是引流广告
+  - ccmax--0.7x
+  - [新增了一批自建的 ccmax 池中转站， 专注于 claude 满血 ccmax 倍率 0.59 倍！ 缓存命中 95%+ 留 ID 送$5 约 claude 官方$8 的额度 - V2EX _202607](https://www.v2ex.com/t/1227905)
+
 - [Tiger API](https://tiger.bookapi.cc/pricing)
   - opus, in-¥1/M, out-¥5/M
   - [【低倍率&耐用王Tiger】春节炸场福利！Claude 4.6 Opus ，Codex 5.3首发 ](https://linux.do/t/topic/1572928)
@@ -3177,6 +3197,14 @@ modified: 2026-06-20T15:49:57.019Z
 - [Token Harbor ](https://tokenharbor.ai/pricing), 美刀
   - https://tokenharbor.ai/models?category=free
   - Free allowance on a rolling 7-day period
+
+### 中转自部署
+
+- [Yeta Platform ](https://platform.yeta.ai/)  /美元计价
+  - [【富可敌国】7折破甲Deepseek 4.1 Flash！！新店开业注册送$30 - LINUX DO _202610](https://linux.do/t/topic/3061347)
+  - 基于国产卡算力（910C + M890P），大客户可以开通国内专属私有端点。
+  - 纯自营破甲 Deepseek 4.1 flash, 缓存价格高 0.01, 流量太大有一定概率会回退到第三方供应商
+  - 模型不多 ds, glm-5.3-flash
 
 ### 中转的中转
 
@@ -3307,6 +3335,7 @@ modified: 2026-06-20T15:49:57.019Z
 
 - email-providers
   - nodeseek/seek.li: 方便转移邮箱，为mjj设计, 类似还有 smailr.com
+  - 自建域名邮箱经常会被国外主流邮箱服务商如gmail/outlook屏蔽, 有的服务商支持申请解封
 
 - gmail-tools
   - antigravity需要google账号支持gcp: 美区邮箱 + gcp/agy + 12个月套餐

@@ -1032,6 +1032,10 @@ modified: 2025-02-21T17:17:42.225Z
 - https://github.com/thetahealth/mirobody /apache2/202609/python
   - https://mirobody.ai/
   - The AI-native health data engine — collect, translate, and reason with AI Agents over labs results, wearables & genomics.
+# mobile-agent
+- https://github.com/Mangi-11/Eta /2.2kStar/NC/202610/kotlin
+  - Android 系统级 AI Agent——越过沙盒，让模型访问底层API、屏幕、终端与你的数据
+  - [Eta 手机 Agent，2k Stars 了，感谢大家的认可和喜欢  - LINUX DO _202610](https://linux.do/t/topic/3047148)
 # devops
 - https://github.com/liangdabiao/GEO-Content-Optimizer-Skill /MIT/202605/python
   - GEO（Generative Engine Optimization）是面向 AI 搜索引擎的内容优化方法论。就像 SEO 优化 Google 排名，GEO 优化你的内容在 ChatGPT、Perplexity、Gemini、Google AI Overview 等 AI 引擎中的引用率。 本项目提供两个 Claude Code Skill，覆盖 GEO 全流程
@@ -1121,6 +1125,13 @@ modified: 2025-02-21T17:17:42.225Z
     - 支持20多套顶尖视频风格模板，分页编辑，mp4 导出，支持包括Claude Code、Codex、hermes、cursor等主流 Agent接入即用
     - html-video 项目基于 hyperframes 框架构建, 由 Open Design 团队原班人马打造
     - html-video 支持分页预览、分页编辑和帧文字编辑，修改视频更快更方便，不用每改一次就要导出一次看效果
+
+- https://github.com/alchaincyf/huashu-art-motion /4.6kStar/MIT/202610/python/js
+  - 艺术动画skill：35种艺术风格、9种解说语法，用代码让画动起来。
+  - Open Design（nexu-io 出品的开源 AI 设计工作区）的 motion-design skill 把 huashu-art-motion 列为设计来源之一，并在 skills/huashu-art-motion 收录了一份适配版，保留了 MIT 许可和上游出处。很高兴这套艺术动画的做法被另一个开源项目用起来
+  - https://github.com/alchaincyf/huashu-design /25.5kStar/MIT/202610/js
+    - 在你的 agent 里打一句话，拿回一份能交付的设计。
+    - 3 到 30 分钟，你能 ship 一段产品发布动画、一个能点击的 App 原型、一套能编辑的 PPT、一份印刷级的信息图。
 
 - https://github.com/xiejunjie524/handdraw-story-video /MIT/202607/python
   - 把 7–9 幅手绘故事母图制作成 35–45 秒竖屏短视频：先从左到右显现黑白线稿，再沿相同方向逐步填入低饱和色彩。

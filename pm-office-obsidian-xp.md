@@ -74,6 +74,7 @@ modified: 2026-06-30T17:32:43.131Z
   - collab with agent
   - 支持只作为ui使用， 支持自定义server
   - file-in, text-out
+  - 🤔 逐步支持更多格式， 不支持的可先通过外部编辑器来操作
 
 - goals
   - publish/site: github for obsidian bases
@@ -183,11 +184,14 @@ modified: 2026-06-30T17:32:43.131Z
 
 - pm
   - 弱化chat/群聊相关功能, 不要花费过多精力在随处都有的chat上
+  - bring your own agent, like paseo
 
 - features
   - doc skills hub with versioning/usecases
   - apple foundation model
   - cpu friendly
+    - cpu友好的模型
+    - 基于cpu的计算更低价、更快, 省token就是省钱了
   - later
     - bases-kanban for ai
     - [AI正在让办公室里全是垃圾：微软自己人都受不了了 ](https://www.bilibili.com/video/BV1PUYk6jEZX )

@@ -256,6 +256,44 @@ modified: 2026-01-21T04:22:29.956Z
 
 - [AI_APICallError: `max_tokens` must be less than or equal to `16384` · Issue · anomalyco/opencode](https://github.com/anomalyco/opencode/issues/1000)
   - It looks like groq currently only supports a max of 16384 output tokens. I can't seem to go higher in their playground. 
+# discuss-new-api-xp
+- ## 
+
+- ## 
+
+- ## 
+
+- ## i am using self hosted new-api project to manage multiple coding-plan/llm-api-providers so that i can use all models with a single api. 
+i have a channel provider pA that has rpm limit to 3, it provides deepseek-v4.1-flash, deepseek-v4-flash.
+i have a channel provider pB that has rpm limit to 20, it provides deepseek-v4.1-flash.
+pA and pB both have deepseek v4.1 flash model, i want to use pA as many as possible because the pA provider is cheaper, when pA reaches rpm limit, then use pB, then when pA rpm limit is gone, use pA again. the general goal is to use pA first.
+Is it possible to achieve it?  do i need to disable request Affinity for provider channel?
+Analyze related code/config, then explain to me the possibility and then tell me step-by-step step how to do it in the webapp of new-api.
+
+- new-api natively supports this behavior through its Priority-based Routing combined with its Automatic 429 Retry mechanism.
+
+- When pA reaches its 3 RPM limit, upstream responds with HTTP 429 Too Many Requests.
+  - If RetryTimes >= 1, new-api catches the 429, increments the retry counter (retry = 1), and queries the next priority tier (sortedUniquePriorities[1]), which is pB. The request is seamlessly handled by pB without returning an error to your client.
+  - Every new request received from a client starts with retry = 0.
+  - The next request will attempt pA first. If pA’s 1-minute window has reset, pA succeeds. If pA is still returning 429, it retries to pB again.
+
+- Do You Need to Disable Request Affinity?
+  - yes
+  - when session/channel affinity is active, any successful upstream response records the channel ID into cache for that session.
+  - If Request Affinity is enabled and matches your requests: when pA fails with 429 and falls back to pB (which succeeds), RecordChannelAffinity saves pB as the preferred channel for that session.
+  - Subsequent requests will check GetPreferredChannelByAffinity at retry = 0 and lock directly to pB, bypassing pA completely until the cache TTL (default 1 hour) expires.
+
+- Disable Auto-Ban on pA
+  - By default, channels have Auto Ban enabled. If upstream returns an error body containing keywords like "quota" or if 429 is treated as fatal, pA could be automatically disabled
+  - turn OFF "Auto Ban" for channel pA, ensuring it stays permanently active to handle requests as soon as its RPM window reopens.
+
+- 
+- 
+- 
+- 
+- 
+- 
+
 # discuss-new-api-issues
 - ## 
 
@@ -356,12 +394,53 @@ RAG 检索
 - /v1/models 通常用于列出可用模型或查询模型详情。
 
 - 流式输出也不是统一格式
+# discuss-chat-mirror
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [请问最近还有什么在维护的 ChatGPT 网页端共享/镜像方案么？ - V2EX _202607](https://v2ex.com/t/1227501)
+  - 家里四五个人的多台设备都会用 ChatGPT ，多设备登录担心封号。
+  - 想要隔离不同人的对话记录。
+- 初步调研了几个方案：
+01. 开源方案 chatgpt-web-share PandoraNext chatgpt-next-share 都是多年未更新
+02. PandoraHelper 的 wiki 页面注明 “目前 ChatGPT 相关功能不可用”
+03. 闭源方案 xyhelper/chatgpt-share-server-deploy 和 jurieo/chatgpt-share-web 镜像在更新，但都需要付费使用
+04. xyhelper 推荐“流量小或者小团队自用的，可使用蟑螂 v1”，但 cockroachai/cockroachai docker 镜像部署中的 xyhelper/cockroachai 镜像也已经两年未更新
+05. chat2api 之类的 web2api 多处看到反馈说容易封号/降智
+
 # discuss-2api-devops
 - ## 
 
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## [【警告】不要随便分享你的 cline 官key - LINUX DO _202610](https://linux.do/t/topic/3045794)
+  - 昨天想起 cline pass 订阅很难跑完就分享了一下 key，昨晚看的时候还是正常的，今天上 cline 一看积分超额了。
+  - 新弄了一个 key，让 DeepSeek 查了一下有坏人跑非 cline pass 模型
+  - 注意了，直接分享你的 cline 可以基本可以控制你的账号，以下是排查出来的能力
+  - 我已经删号了。积分超额还能删号，能接受。
+
+- 群众里面有坏人啊，看来要分享还得是套一层 newapi 或 sub2api
+
+- 是的，所以 OpenRouter 好像近期才把 API Key 的限权限设置管理起来
+
+- 不是有 hub 站么…
 
 - ## [[已失效]基于X-Codex-Turn-State绕过429与降智(CPA插件) - LINUX DO _202609](https://linux.do/t/topic/2919611)
 
@@ -450,12 +529,12 @@ v6封不完
 据笔者的使用体验来看，不会，但是会限速。如果您的CODEX被降智，那更多可能是普遍的bug问题而不是您的账户风险。就像Android端，桌面端，CODEX都是分开的风控体系，但也有一定的关联性。CODEX的限速表现在首字token和整体速度下降，但很难完全跟本地网络质量和服务器高载的影响因素脱离，本身这种情况也并不多见。
 
 - 逐点剖析————行为特征
-01.             单次复杂度过高：
+01.               单次复杂度过高：
 Pro Extend Thinking的复杂对话中，具体是5.4超过2小时，5.5超过1小时的高负载任务。其实具体分为两个部分：一个是思考时长[反映的是思考token耗费]，一个是输入输出内容。为什么5.5是1小时，5.4是2小时呢？其实business的限制可以放更长一些。因为Pro订阅的模型token速度更快，business速度要慢，以及5.5的算力平台较新，token速度脱离套餐本身就更快。
-01.             新注册账号：
+01.               新注册账号：
 新注册账号是典型的高风险场景。新注册帐号建议至少7天后再开付费套餐或您的背景特征较优秀，也是完全没问题，但对背景特征(如IP)的要求就较高。
 
-01.             支付方式与地区：
+01.               支付方式与地区：
 低价区也是风控的高峰，但这里，OPENAI对于支付地区的权重远比支付方式要高得多。Anthropic对于支付方式和支付地区抓的都严[如果想要听后续可以出Anthropic版本]。OPENAI对于低价区的风控水平明显高于其他地区，比如土区、菲区，误杀也会显著增加。
 
 - 逐点剖析————背景特征
@@ -1042,7 +1121,17 @@ giffgaff（英国号码） ：最受欢迎，月租低，甚至可以 0 月租�
 
 - ## 
 
-- ## 
+- ## [希望佬能为我推荐一个DS的token足够日用的解决方案 - LINUX DO _202610](https://linux.do/t/topic/3041379)
+- 我的推荐是 workbuddy → opencode/command code → cline / 各种中转站
+
+公益绝大部分的 ds 是旧的，不是 1017 版本，并且有明显的量化痕迹，表现为思考死循环在唱歌，会很容易吃满 maxToken 死掉会话。不建议用所有的公益中转.
+
+- cline 推荐度比较低是有什么原因吗
+  - 计费不算透明
+  - 渠道不算透明
+  - 缓存命中不透明不稳定
+  - 上述的顺序都是按这个逻辑。其中 opencode 要比 command code 缓存命中计费更透明一些，command code 在私人的网关统计里跟它文档的计费并不完全一致.
+  - 以上负面用量越大越明显，不过你用量并不算大，所以可以从低价的试试。或者干脆用腾讯的 workbuddy 周边方案.
 
 - ## [kimi现在老套餐大概是多少额度？新套餐又是多少？ - LINUX DO _202610](https://linux.do/t/topic/2978651)
   - 我感觉老套餐砍了一波额度之后，现在一个五小时 95 缓存大概也就一千六百万 token，一周大概是八千万 token。一个月也就是 3 亿多。新套餐额度是多少？
@@ -1804,7 +1893,20 @@ starryblu
 
 - ## 
 
-- ## 
+- ## [CLINEPASS路由到vmc是什么鬼 - LINUX DO _202610](https://linux.do/t/topic/3059438)
+- 用什么钉的 magpie 吗，我用 magpie 顶不住
+  - CPAM 的 ClinePassBridge 插件
+
+- 我也是路由到 vmc 了，估计是前几天刚出，渠道还没自部署吧，现在有自部署就切过来了。
+或者觉得效果差不多了，可以开始路由平摊成本
+
+- 跟 gpt 一样，最怕的不是模型不行，而是降智。
+叽里咕噜搞 2 小时，中间给你降智就全废了
+
+- 看我最新的帖子，vmc 就是 fireworks 其实还算是不错的上游的
+
+- [Cline 的vmc的上游猜测 - LINUX DO _202610](https://linux.do/t/topic/3049098)
+  - cline 有个兜底的未知上游，我之前一直以为是自部署，今天凌晨发现是 fireworks，我正好有一些 fireworks 的 key 和 cline 账号，从凌晨 2:30 开始 glm5.3 突然开始报错，然后我发现 fireworks 也报错了，然后恢复了之后又是同步恢复的，不过好消息是 fireworks 的各种模型都挺不错的，质量很高，速度也够快
 
 - ## [求cursor、kiro、devin.... 等等额度对比 - LINUX DO _202610](https://linux.do/t/topic/3031325)
 - 从 cursor pro + 转到新订阅的 super，我主要用 grok4.7fast 还有 grok bot，周限额用满大概能用 7 亿。纯用 grok4.7fast 的话估计 8 亿左右，不用 fast 模型应该是再翻倍 16 亿左右。
@@ -2949,13 +3051,13 @@ Cloudflare → 安全性 → WAF → 自定义规则 → 创建规则。
   - 国内直连、高稳定、多模型 AI API 中转，支持 GPT-4o/Claude Opus 满血，企业级技术支持。
 - 另外确定目标用户：
 
-01.                                                                                                                                                                                                                                                                             个人开发者：
+01.                                                                                                                                                                                                                                                                               个人开发者：
 特别厉害的个人开发者其实自己也可以解决我刚刚写的那些东西，所以我就不跟这些人卷了，我去闲鱼上找了很多代写项目，毕业设计，软件开发的开发者，这部分人一般懒得折腾，不懂如何配置号池。
 
-01.                                                                                                                                                                                                                                                                             ai套壳创业者：
+01.                                                                                                                                                                                                                                                                               ai套壳创业者：
 他们需要稳定的api，高并发，子账号，针对这部分用户定制了一些企业级的面板和技术支持，然后去三四线城市的boss直聘/转转找各种ai创作视频，装修，ai做本地服务的小团队小企业，跟他们聊合作。
 
-01.                                                                                                                                                                                                                                                                              中小企业/传统行业/实验室
+01.                                                                                                                                                                                                                                                                                中小企业/传统行业/实验室
 他们需要合规，开发票，私有路由，所以我在国内开了个公司，给他们走合规公司签单。
 
 其次就是做seo，小红书，抖音，比如我这篇文章就是一篇seo，seo的核心就是why what how 通过教别人如何搞中转站，如何使用claude code获取流量，当然你也可以发布在知乎掘金csdn个人博客V2EX、NodeSeek、SegmentFault、Linuxo
@@ -3202,6 +3304,12 @@ https://makerich.club/ chong 这个渠道不是源头，也是流传最久的渠
 - ## 
 
 - ## 
+
+- ## 
+
+- ## [免费token(下)-反代实战篇 - LINUX DO _202610](https://linux.do/t/topic/3041365)
+
+- ## [🦐佬教你用上免费Token 不求人(上) - LINUX DO _202610](https://linux.do/t/topic/3041274)
 
 - ## [三大 AI IDE（Trae / CodeBuddy / Qoder）国内版 vs 国际版：注册方式与免费额度对比 - LINUX DO _202609](https://linux.do/t/topic/2845833)
 先说结论：Trae、CodeBuddy、Qoder 三家都分国内版 / 国际版，账号与计费完全独立，免费额度也各不相同，整理成一张表方便对照。
@@ -3710,13 +3818,13 @@ Hugging Face 🇺🇸 Llama 3.3 70B, Qwen2.5 72B, Mistral 7B +many more. $0.10/m
 - 一个是卖钱的正式版，一个是对话用于训练的免费公测版。测试版不一定弱，但 Ta 是测试版。
 
 - ## 💡 [【长期更新-授人以鱼不如授人以渔】公益站渠道公示（人人都可搭公益？） _202601](https://linux.do/t/topic/1477161)
-  01.                                                                                      q2api(claude)
-  02.                                                                                      英伟达ai平台（大部分开源模型）
-  03.                                                                                      hf抱脸（大部分开源模型）
-  04.                                                                                      groq平台
-  05.                                                                                      硅基流动平台
-  06.                                                                                      富可敌国平台（duck已许可分发付费站anti, 正在申请分发max）
-  07.                                                                                      杂七杂八的短效羊毛平台（国外）
+  01.                                                                                       q2api(claude)
+  02.                                                                                       英伟达ai平台（大部分开源模型）
+  03.                                                                                       hf抱脸（大部分开源模型）
+  04.                                                                                       groq平台
+  05.                                                                                       硅基流动平台
+  06.                                                                                       富可敌国平台（duck已许可分发付费站anti, 正在申请分发max）
+  07.                                                                                       杂七杂八的短效羊毛平台（国外）
 
 - [还有可以白嫖opus的平台嘛  ](https://linux.do/t/topic/1510785)
 

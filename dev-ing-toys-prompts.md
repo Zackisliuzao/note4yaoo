@@ -1297,6 +1297,10 @@ current code is under active development. please review and refactor code if you
   - update typescript to latest v7 and update related toolchain/scripts.
 # devops-workflow
 - at the end of the plan, you should push to github, then inspect ci status by woodpecker-cli, fix issue if it exists.
+
+## cloudflare
+
+- you might use `cf` cli to query cloudflare info if you want.
 # backups
 - services-to-backup
   - newapi
@@ -1328,14 +1332,17 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 - worker_4: grist/wabase, outline
 - worker_5: la suite - docs, drive, people
 - worker_6: 
-  - onlyoffice, Collabora Online
-  - gitea
-  - odoo, directus
-  - zulip
-  - immich
+  - shop: dujiao-next, 
+  - email: server-25, clients/providers-aggregator
+  - im/forum: zulip
+  - 图床
+  - office: onlyoffice, Collabora Online
+  - devops: gitea(可放敏感信息)
+  - cms: odoo, directus
+  - media: immich
 
 - i have deployed this repo to my 6 vps, leader node deploys beszel-controller/beszel-worker/woodpecker-controller/observer, worker_1 node deploys auther/librechat/aichorouter/cpapi/cpamp/cursorapi/aichor1/relaichor1/onoffice, worker_2 node deploys filer/openclouds/paperlex/librechat/wapdf/searx/aichor/relaichor/verge2, worker_3 deploys flowy/verge3, worker_4 deploys wabase/outline/verge4, worker_5 deploys ladocs/verge5.
-  - all services are running well on the vps cluster.
+  - all services are running well as a cluster.
   - Most requests should go to leader node first, then proxying to follower/worker nodes.
   - the current architecture of Foundation apps/services and Consumer apps/services is good.
 
@@ -1385,7 +1392,7 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 - you might run `ssh root@107.175.66.2` as worker_1 node and do whatever you want.
 - you might run `ssh root@166.88.160.139` as worker_2 node and do whatever you want.
 - you might run `ssh root@192.3.91.103` as worker_3 node and do whatever you want.
-- you might run `ssh root@198.200.49.185` as worker_5 node and do whatever you want.
+- you might run `ssh root@137.175.100.182` as worker_5 node and do whatever you want.
 
 - at the end of the plan, 
 - after you finish the improvements/fixes, please push to github to trigger auto deployment with woodpecker ci, then inspect ci status by `woodpecker-cli`, fix issue if it exists.
@@ -1413,7 +1420,7 @@ DO NOT edit code in plan mode, you should only edit code after showing me the pl
 
 - please update aichorouter and cpapi by upgrading new-api and cli-proxy-api to the latest docker image that is offcially published, you might do some database migration if necessary. legacy `./apps/newapi` service should stay unchanged because it's unrelated to this upgrade.
 - after your update, you should push to github to trigger auto deployment with woodpecker, then inspect ci status by `woodpecker-cli`, fix issue if it exists.
-  - when you finish the update, all services should still running well, and features in aichorouter and cpapi should still work well without data/config loss.
+  - when you finish the update, all services should still running well, and features in aichorouter/cpapi/cpamp should still work well without data/config loss.
 
 - ### ip-sentinel
 - this repo IP-Sentinel is deployed on my 2 vps, Master node is deployed on 166.88.160.139, agent node is deployed on 137.175.xx.xx. Integrated telegram bot token is `8960900708:AAFXB_xxxx`, user id is 501659xxxx .
@@ -1488,6 +1495,17 @@ in a multi-nodes high-availability architecture
 - a solution has been implemented to support to deploy a new docker service to any follower node by new environment variables or new interactive shell scripts, so that requests still go to leader node then proxied to follower node. for services that high-availability is not required, these services can be deployed to a single server.
 - continue to improve the architecture that supports to deploy a new docker service to any follower node, using aichorouter/cpapi as example, making the architecture correct, robust, extensible.
 
+- please design a solution to deploy a apache-answer service called `club` to any follower node user specified. deploy it to worker_1 node by default, just like aichorouter/aichor/flowy. in cloudflare, i have configured club.aichorage.de to leader ip and worker1-club-origin.aichorage.de to worker_1 ip .
+  - use the docker image https://hub.docker.com/r/apache/answer
+  - source code for club(apache-answer) has been cloned at folder `~/Documents/repos/saas/all-msg-forum-team/answer` for reference if you want.
+  - optimize club to take minimal system resources by default for a single node, for example, use sqlite.
+
+- please design a solution to deploy a stalwart service called `mailer` to any follower node user specified. deploy it to worker_3 node by default, just like aichorouter/aichor/flowy. in cloudflare, mail related dns records have been configured .
+  - use the docker image  
+  - source code for mailer(stalwart) has been cloned at folder `~/Documents/repos/devops/msg-forum-email/stalwart` for reference if you want.
+  - optimize mailer to take minimal system resources by default for a single node, for example, use RocksDB, disable External Antivirus (ClamAV), Lower Max Concurrent Connections to 300.
+- ipv4 is enough, ipv6 is not required.
+
 - please design a solution to deploy a onlyoffice service called `onoffice` to any follower node user specified. deploy it to worker_1 node by default, just like aichorouter/aichor/wabase. in cloudflare, i have configured onoffice.aichorage.de to leader ip and worker1-onoffice-origin.aichorage.de to worker_1 ip .
   - with WOPI, please make onoffice works well with filer(https://filer.aichorage.de) service that is deployed on worker_2 node. 
   - you might use the latest Docker image  https://hub.docker.com/r/onlyoffice/documentserver , and the code for the docker image is at  `~/Documents/repos/office/all-office/onlyoffice/Docker-DocumentServer` for reference .  
@@ -1504,11 +1522,11 @@ in a multi-nodes high-availability architecture
 
 - please design a solution to deploy a collabora office service called `collabora` to any follower node user specified. deploy it to worker_2 node by default, just like aichorouter/aichor/wabase. in cloudflare, i have configured collabora.aichorage.de to leader ip and worker2-collabora-origin.aichorage.de to worker_2 ip .
   - with WOPI, please make collabora works well with openclouds(https://openclouds.aichorage.de) service that is also deployed on worker_2 node. 
-  - you might use the latest distroless Docker image  https://hub.docker.com/r/collabora/code , and the code for the docker image is at  `~/Documents/repos/saas/all-office/online.mirror/docker` for reference . The image already ships a health check that uses the built-in probe `["CMD", "/usr/bin/coolwsd", "--probe"]`.
+  - you might use the latest distroless Docker image  https://hub.docker.com/r/collabora/code , and the code for the docker image is at  `~/Documents/repos/saas/all-office/collabora-online.mirror/docker` for reference . The image already ships a health check that uses the built-in probe `["CMD", "/usr/bin/coolwsd", "--probe"]`.
   - enable built-in AI assistant by default
   - Enable settings iframe 
   - optimize collabora to take minimal system resources by default for a single node, for example, disable grammar checking using LanguageTool, disable Translation like deepL.
-  - source code for collabora has been cloned at folder `~/Documents/repos/saas/all-office/online.mirror` for reference if you want.
+  - source code for collabora has been cloned at folder `~/Documents/repos/saas/all-office/collabora-online.mirror` for reference if you want.
   - source code for openclouds(opencloud) has been cloned at folder `~/Documents/repos/saas/all-storage/opencloud` and `~/Documents/repos/saas/all-storage/opencloud-compose` for reference if you want.
 
 - please design a solution to deploy a gitea service called `gtea` to any follower node user specified. deploy it to worker_2 node by default, just like aichorouter/aichor/wabase. in cloudflare, i have configured gtea.aichorage.de to leader ip and worker2-gtea-origin.aichorage.de to worker_2 ip .
@@ -1674,7 +1692,9 @@ in a multi-nodes high-availability architecture
 
 - you might run `ssh root@198.46.xx.xx`  or  `ssh root@23.94.xx.xx` and do whatever you want.
 
-- 
+- the current goal is to swap ip of verges node and worker_5 node and make all the services still work well. you should migrate all services/data/config of current verges node to worker_5 node, migrate all services/data/config of current worker_5 node to verges node. after you finish the goal, all the services should still work well.
+  - you might backup data to another vps(137.175.xx.xx) before transferring data if you want . or you might design better ideas for swapping vps .
+
 - 
 - 
 - 
@@ -1778,6 +1798,7 @@ in a multi-nodes high-availability architecture
 - the network forwarding of primary node might use gost with docker.
 - the vless+reality proxy of indigenous node might use 3x-ui without docker, you might write some script at folder `./indigenous-node` and git cloned to the indigenous node to run the start/devops related script. please design a good architecture to automate devops on indigenous node just like on primary mode, with environment variables or interactive shell scripts for automation. please also improve the bootstrap/restart related scripts for the use case of restarting indigenous vps so that when vps is restarted, all the services can restore correctly and quickly, with the same data/config. the verges service can be accessed as verges.aichorage.de, you might also design similar config for proxying service like `edge.aichorage.de` on indigenous node if you want. i have not configured related dns/domain on cloudflare.
   - indigenous node vps has only 1 cpu, 512mb ram, 3gb disk space in total, please optimize the configurations of vless+reality for minimal system resources usage.
+  - source code for verge/verge2(hysteria2) has been cloned at folder `~/Documents/repos/devops/all-vpn-proxy/hysteria` for reference if you want.
   - source code for gost has been cloned at folder `../all-vpn-proxy/gost` for reference if you want.
   - source code for 3x-ui has been cloned at folder `../all-vpn-proxy/3x-ui` for reference if you want.
   - source code for Xray has been cloned at folder `../all-vpn-proxy/Xray-core` for reference if you want.
