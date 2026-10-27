@@ -16,12 +16,84 @@ modified: 2026-09-08T04:45:17.635Z
 - Browser connection succeeds using host aichor.aichorage.de, port 443, SSL enabled.
 # dev-xp
 - 初版 autumn-studio 采用custom build的方式embed pi
+# prompts
+- this repo is still beta software, legacy/unused code might be refactored or removed. compatibility layer is not required. using only the latest code is ok.
+
+- source code for begonia editor is at `~/Documents/repos/ai-ml-llm/all-docai/begonia` for reference if you want. 
+  - when you use begonia editor and find some issues, you might fix the issues directly in begonia source code, i will publish the code later.
+- source code for superdoc is at `~/Documents/repos/ai-ml-llm/all-docai/superdoc` for reference if you want.
+- source code for paseo is at `~/Documents/repos/ai-ml-llm/all-agi-harness/paseo` for reference if you want.
+
+- source code for @extend-ai/react-xlsx is cloned at `~/Documents/repos/ai-ml-llm/all-docai/extend-react-xlsx` for reference if you want. 
+- source code for mineru is cloned at `~/Documents/repos/ai-ml-llm/all-doctools/MinerU` for reference if you want. 
+- source code for docling is cloned at `~/Documents/repos/ai-ml-llm/all-doctools/docling` for reference if you want. 
 # autumn-studio
 - ## 
 
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## for "AI Text Mode" split view, you just implemented "Paginated Text Doc" view , it provides better ux than the left-sided pdf viewer. 
+  - "Paginated Text Doc" is a bad name, please rename it to "Text Pages View".
+  - for "AI Text Mode" split view, there is also a Layout Blocks view that supports to highlight left-sided pdf section when cursor is focused in a layout block.
+  - it would be better if this pdf section highlighting feature can be implemented in "Paginated Text Doc"/"Text Pages View" with begonia editor. the ux is just like when user clicks in "Text Pages View" begonia editor, the corresponding left-sided pdf section . in AI Text Mode settings page "General" tab, "Auto-scroll PDF to follow the AI text view" should work for both layout blocks view and text pages view.
+  - since Layout Blocks view is already implemented, you might refactor related code and share some logic with "Text Pages View" editor.
+  - source code for begonia editor is at `~/Documents/repos/ai-ml-llm/all-docai/begonia` for reference if you want. you might directly edits the begonia source code if it is good architectre, you might extend its api for the impelementation of this pdf highlighting feature, if this feature is too complicated, you might design a sub package for it, then i will publish it to npm.
+  - How do you like my idea? If it is OK, you might improve it.
+  - analyze related code/config, then make a comprehensive plan to implement/improve PDF highlighting feature for "AI Text Mode".
+
+- 
+- 
+
+- ## File is too large to edit
+
+- ## you just implemented docx editor for autumn studio paseo plugin.  please update the `@datalking/begonia-react` package to the latest published version. Improve the docx editor to show paginated editor by default. 
+  - improve the docx editor in paseo native tab by add a three dots more menu at the top-right corner of page (at the right of View/Editor), then add a "Open Editor Settings" menu item in it, when this menu item is clicked, navigate to the settings page of "Docx/Doc" format.
+- paginated begonia editor is so useful that it can make "AI Text Mode" better. please create a new AI Text viewer named "Paginated Text Doc" just like exiting Layout Blocks viewer and Text viewer, users might select the viewer they like in the settings page of "AI Text Mode" "General" tab, or users might switch between Text-Preivew/Blocks/Source in ai text split view with the top header actions buttons.
+  - in ai text split view, Paginated Text Doc shows the pdf text as paginated content just like the left-sided original pdf viewer with pages. one page of content from original pdf viewer should have 1 page of content in Paginated Text Doc viewer with begonia editor, because begonia editor supports pagination.
+
+- ## in paseo right sidebar, the "Files" tab show a file tree of workspace folder. but only .md markdown file is supported to read/edit. Most popular files like .pdf/.docx/.xlsx/... all shows "Binary preview unavailable".  the current "Files" related features are too simple and limited.
+  - this autumn-studio-paseo-plugin provides alternative file viewers/editors that supports .pdf/.xlsx .
+  - the goal is to extend the file viewer/editor features to support .docx.  core feature for .docx should be built with react componnet with react-dom, designed for web/desktop only, not for mobile, just like existing .pdf/.xlsx viewer/editor. the final goal is to implement file editor for all popular files, but currently focus on .docx.
+  - .docx viewer/editor should use `BegoniaBrowserEditor` from `@datalking/begonia-react/v1` , begonia editor package `@datalking/begonia-react` is published to npm. for docx viewer/editor, add a paginated option at the top actions buttons, because begonia editor supports both normal editor and paginated editor. 
+  - source code for begonia editor is at `~/Documents/repos/ai-ml-llm/all-docai/begonia` for reference if you want. when you use begonia editor and find some issues, you might fix the issues directly in begonia source code, i will publish the code later.
+  - source code for paseo is at `~/Documents/repos/ai-ml-llm/all-agi-harness/paseo` for reference if you want.
+  - in settings page of autumn-studio-paseo-plugin, please add a new "Docx/Doc" sidebar menu item above existing "Excel", you might add some common settings for the editor, you might refer to settings for excel/pdf. set to use editor by default, not read only reader.
+How do you like my idea? Analyze related code, if my idea is okay, you might improve it. then make a comprehensive plan to implement it
+
+- ## i just renamed and moved the original paseo-file-explorer plugin to folder `~/Documents/repos/ai-ml-llm/all-agi-harness/autumn-studio-paseo-plugin` .
+- For the first time that paseo-file-explorer-plugin/autumn-studio-paseo-plugin was designed, paseo does not provide extension point like "preview files with these extensions" or "open with", and openPanel doesn't take a file path.
+- just now, paseo plugin supports to claim extensions and render inside the file tab you already opened. `~/Documents/repos/ai-ml-llm/all-agi-harness/paseo/plugin-examples/pdf-panel` is an example.
+- source code for paseo is at `~/Documents/repos/ai-ml-llm/all-agi-harness/paseo` .
+- current autumn-studio-paseo-plugin file panel supports splittable layout blocks view and shows in parent "File Viewer" paseo tab. i want to know whether it is possible to open a native paseo tab and show current splittable layout blocks view in it. splittable layout blocks view should still be react-dom first and support desktop/web only, mobile support is not required. 
+- analyze related code/config, then explain to me whether it is possible to implement file panel of autumn-studio-paseo-plugin as the native paseo file panel, and whether existing features in current autumn-studio-paseo-plugin would be broken.
+
+- Non-goals: no changes to the workspace panel surface's read/save behavior; no persisted tab.state (split layout stays per-mount, same as today); no mobile rendering (RN "desktop/web only" fallback message, existing pattern); no programmatic opening of native tabs from the plugin's tree (Paseo has no API — future upstream ask).
+
+- ## ai text mode - Layout Blocks view
+  - MinerU routing — auto prefers ready local Kit models, then a reachable local API, then token cloud, then free cloud. Explicit modes stay available: local-cli, local-api, cloud-token, cloud-free. 
+  - The MinerU mode default is still cloud-free; choose Auto to prefer an installed local setup. 
+  - Storage — `.autumn/<doc-slug>/<versionId>.layout.json` and `<versionId>.assets/images/….` Asset paths are sanitized, capped at 20 MB per file, 64 MB per layout, 512 MB per extraction, and deleted with the version.
+  - Model repair is reactive (failure → Download models → auto-retry), not a pre-parse blocking dialog.
+  - Existing .autumn versions without layout open Text-only until re-parsed.
+
+- use local-cli with the standard tier. 
+  - local-api produces the same layout output if you already run the daemon, 
+  - and cloud-token works if you do not want local models. 
+  - cloud-free cannot produce Layout Blocks at all.
+- Blocks needs MinerU's middle_json.json, which contains the per-block bounding boxes. Only three paths request that zip and persist layout geometry
+
+- MinerU OCR mode is the OCR control: Auto uses the text layer when present, Force OCR handles scans with a broken or missing text layer.
+  - Formula and table recognition run as part of MinerU’s layout pipeline. There is no separate local switch for them.
 
 - ## Can an agent profile be selected automatically right now?
 - In the main chat box (per-prompt or mid-session): No. Currently, agent profiles are applied manually by the user in the composer/chat box.
@@ -46,16 +118,6 @@ modified: 2026-09-08T04:45:17.635Z
 - focus on pdf first, more file formats will be supported later, please design a extensible architecture for "AI Text Mode".
 - How do you like my idea? If it is okay, you might improve it.
 - Analyze this feature and related code/config, make a comprehensive plan for "AI Text Mode" feature
-
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
 
 - ## for paseo-file-explorer, if i set File open mode to be "new-tab", it seems that all file tabs are opened as sub-tabs under a "File Viewer" parent tab. why is it designed this way? since paseo provides native tabs, why is paseo-file-explorer tabs not using it? Is it a good idea to refactor paseo-file-explorer tabs to use paseo tabs instead of using sub-tabs under a paseo parent tab?
 - paseo-file-explorer uses sub-tabs inside a single "File Viewer" workspace tab because Paseo's Plugin SDK models workspace panels as static, parameterless singleton targets per (pluginId, panelId, workspaceId), and does not expose Paseo's internal useWorkspaceLayoutStore or parameterized tab targets to plugins.

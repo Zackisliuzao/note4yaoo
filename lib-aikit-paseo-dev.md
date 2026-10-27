@@ -96,13 +96,14 @@ modified: 2026-09-05T00:27:42.212Z
   - 更符合主流产品的体验
   - 可与现有的workspace view切换
   - 可参考 zcode 的chat, 可切换 timeline 和 project 视图
+  - ❓ sidebar 是否可被替换
 
 - 与im平台的集成，类似openclaw
   - telegram
   - qq
   - codebuddy/workbuddy
 
-- cowork/workbuddy-like
+- cowork/workbuddy-like - office
   - implement integrations for google-docs/msoffice/lark like github/gitea
 
 - rag
@@ -178,7 +179,7 @@ modified: 2026-09-05T00:27:42.212Z
 
 - agent-providers
   - external: deepseek-harness, cursor-cli, commandcode
-  - zcode-cli
+  - zcode-cli: 需要手动打包发布
   - codebuddy/workbuddy
   - auto router
 
