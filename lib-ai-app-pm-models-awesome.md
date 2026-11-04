@@ -2387,6 +2387,12 @@ modified: 2026-06-20T15:49:57.019Z
   - 双向撸毛号仅 ¥1.2
   - ❓ 买了几个tg号都被双向限制了
 
+- [7788 | TG账号购买平台|电报账号批发|telegram账号购买 ](https://tg7788.com/)
+
+## 拼车/cli
+
+- [Clidex — 原生 Claude & Codex CLI 命令行工具 | 稳定免翻·灵活按量计费 ](https://clidex.dev/)
+
 ## 中转站/router
 
 - tips
@@ -3216,6 +3222,13 @@ modified: 2026-06-20T15:49:57.019Z
 
 - [BeeAPI. AI — The AI API Marketplace · 多模型聚合的 AI API 集市 ](https://beeapi.dev/marketplace)
 
+## deepseek
+
+- [SLongan - LINUX DO ](https://linux.do/u/slongan/activity/topics)
+  - [DSKey Search ](https://delay.up.railway.app/deepseek-key-query)
+  - QQ群: 474500237
+  - [(最后2个)60R=100元deepseek额度, 官方apikey交付; 支持查询用量 _202610](https://linux.do/t/topic/3082197)
+
 ## ai-sharing
 
 - [ccAiHub | 1元起用，最低 ¥99/月畅享 Claude ](https://ccaihub.com/pricing)
@@ -3262,6 +3275,7 @@ modified: 2026-06-20T15:49:57.019Z
 
 - [Overseas SIM Cards | UK, US & Japan Mobile Numbers | SIM Panda ](https://simpanda.cc/)
   - [爱屋及乌的用户空间 ](https://www.nodeseek.com/space/1872#/discussions)
+  - onenz--¥99
 
 - [V2EX › lyzh130 ](https://v2ex.com/member/lyzh130)
   - 长期卖 one nz, skinny
@@ -3324,7 +3338,11 @@ modified: 2026-06-20T15:49:57.019Z
   - 有需要的可以当个备用
   - 🐛 需要先用美区号码接码，然后才能领esim
 
-- 
+- [SetupShop ](https://shop.setup0.de/)
+  - esim为主
+  - [继续摆摊 esim.gg 3.5U（23.42CNY） _202610](https://www.nodeseek.com/post-991965-1)
+    - 🐢哥开放的 api 以及py 到可能目前唯一一个可预存 0.5 欧元的渠道（ 流程，购买卡密➡️官网选号或者或者页面选号➡️转移到自己的 esimgg 账户 不过只支持 u付款
+
 - 
 - 
 - 

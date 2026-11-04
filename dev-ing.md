@@ -347,6 +347,63 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 1103
+
+- I just got 2 new NAT/LXC vps from the same ip: stash1(debian12), stash2(debian12). No public port is exposed by default. I added 4 public ports for each vps: 
+  - for stash1: 23110 -> 22/tcp, 23111 -> 443/tcp, 23112 -> 80/tcp/udp.
+  - for stash2: 23120 -> 22/tcp, 23121 -> 443/tcp, 23122 -> 80/tcp/udp.
+- hysteria2 is support on these nat/lxc vps, but not on previous surge1/surge2/surge3.
+- please extend existing architectre and design a automation code/scripts solution that can be deployed to any vps. The solution should support to install vless+reality+vision by default, a optional gost proxying/forwarding service, and a optional hysteria2 serice. stash1 and stash2 should install hysteria2 by default. i have configured stash1.aichorage.de, stash2.aichorage.de in cloudflare. after your implementation and deployment, i want stash1/stash2 work well with clashx meta on my mac, the config file is at `~/.config/clash.meta/verge2609.yaml`.
+- i have a another proxying service verge4.aichorage.de as worker_4 node at folder `~/Documents/repos/devops/llm-hub-lite` .  you might update code in llm-hub-lite if you want.
+- i want to enable gost forwarding on stash1 node, i have configured stash1-relay.aichorage.de in cloudflare, please make it like this: verge4.aichorage.de can be used directly, stash1-relay.aichorage.de can be used as a proxying to verge4.aichorage.de, because stash1-relay is better for peak hours traffic. just like what you did for verge2.aichorage.de and surge1-relay.
+- every NAT/LXC vps has very limited ram/disk-space, optimize it for minimal resource usage.
+- make the deploy automation scripts flexible to support both debian/ubuntu and alpine, so that the optimized config can be auto select and used for the corresponding linux os.
+- also design a solution to auto restart all services on vps restart, so that all services are usable for restart.
+- source code for hysteria2 has been cloned at folder `~/Documents/repos/devops/all-vpn-proxy/hysteria` for reference if you want.
+- source code for Xray has been cloned at folder `../all-vpn-proxy/Xray-core` for reference if you want.
+- source code for REALITY has been cloned at folder `../all-vpn-proxy/REALITY` for reference if you want.
+- source code for gost has been cloned at folder `~/Documents/repos/devops/all-vpn-proxy/gost` for reference if you want.
+
+- how do you like my idea? If it is okay, you might improve it.
+- analyze related code/config/deployment, make a comprehensive plan to implement a solution to deploy to any vps, so that finally surge1 works well with vless/gost and verge2, surge2 works well with vless, surge3 works well with vless, stash1 works well with vless/hysteria2/gost and verge4, stash2 works well with vless/hysteria2.
+- after your implementation, please git push to github, then git clone/pull on each vps and start the services to test it.
+
+- you might run `ssh surge1` as surge1 node and do whatever you want.
+- you might run `ssh stash1` as stash1 node and do whatever you want.
+- you might run `ssh stash2` as stash2 node and do whatever you want.
+- you might run `ssh root@166.88.160.139` as worker_2 node and do whatever you want.
+
+- review your implementation/config, test core deployments, continue to improve, make it correct, robust, extensible.
+
+- for hysteria2 on stash1 and stash2, please improve it to make it fast and robust, for example, you might enable port hopping with only 4 ports on each, i just exposed them on stash1 and stash2:
+- for stash1: 23116 -> 23116/udp, 23117-23119 -> 23117-23119/udp .
+- for stash2: 23126 -> 23126/udp, 23127-23129 -> 23127-23129/udp .
+
+## 1101
+
+- i want to use port hopping for hysteria2 to make it fast/robust for vpn/proxying. Explain to me what is port hopping. can i just use a few ports like 23115-23119 for it, not a wide range of ports?
+  - Because Hysteria 2 runs over QUIC (which uses UDP), Chinese ISPs (China Telecom, Unicom, Mobile) often detect sustained, high-bandwidth UDP flows on a single port. Even if the ISP cannot decrypt the traffic, their automated QoS equipment frequently throttles throughput or drops packets entirely once a single UDP port transfers data continuously for 30 to 60 seconds.
+  - Single Server Socket, Multiple Entry Ports: Your Debian 13 VPS runs the Hysteria 2 process on a single primary UDP port (for example, 23115), while nftables intercepts incoming UDP packets on the rest of your range (23116-23119) and transparently redirects them (DNAT) to 23115 at the kernel level.
+  - Client: you give it a set of ports instead of one. It picks one at random for the first connection, then periodically switches to another (every 30s by default, minimum 5s).  Every 15 to 30 seconds (hop-interval), ClashX Meta on your Mac randomly picks a new destination port from your list and sends the next UDP packet there.
+  - Server: the server still listens on one real port, and a firewall rule redirects the whole range to it.
+- Can you use just 23115-23119?
+  - Why 5 ports is safe on system resources: A common misconception is that opening 1,000+ ports consumes extra RAM or CPU on your VPS. In reality, Hysteria 2 only binds to one socket, and nftables matches an entire port range (23115-23119 or 20000-50000) using a single kernel rule.
+  - The Collision Risk of 5 Ports: On each hop, the client selects the next port randomly, not in strict sequential order. With only 5 ports (23115-23119), there is a 20% chance on every hop that ClashX Meta selects the exact same port it was just using, or jumps back to a port that the ISP placed in a 3-minute cooldown penalty box.
+  - If your VPS provider restricts the number of ports you can assign, 23115-23119 is still much better than a single static port. However, if you have full root access on a dedicated IPv4 LA VPS, expanding the range to at least 50–500 ports (e.g., 23100-23600) eliminates random repeat collisions at zero extra cost to your server.
+
+- 
+- 
+- 
+# dev-10
+
+## 1027
+
+- 小姐，很抱歉我的工作还没定下来，所以这次还需要找你借1500作为最后一个月的生活费。 
+  - 我是想上班的，但我选择的办公软件编辑器的方向是一个技术难且盈利能力也不强的方向，最近几个月的时间精力都花在面试和做自己的产品上了，边面试边改进，但一直没达到一个我和面试官双方都能满意的程度。
+  - 我也知道不能继续这样下去了，快到月底了，这几天本来想尽快谈成一个，但目前给的反馈大多都是在推进中，让我等安排。接下来我会扩大一些方向，再多试一些面试机会，甚至多找一些外包方面的机会，有合适的我也会接了。
+  - 我保证这是最后一个月，一定解决好我的问题，一天天地看时间过去却没什么进展，我也很痛苦，不想这样下去了。你借我的1500就在我剩下的钱里面扣吧，我也记了的。
+  - 感谢你们的帮助。
+
 ## 1026
 
 - 🤔 if Hysteria2 protocol is so fast for vpn , why do popular vpn vendors like justmysocks not provide vpn nodes that use Hysteria2?

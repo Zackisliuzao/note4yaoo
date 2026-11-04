@@ -72,6 +72,8 @@ project `superdoc` (at folder `../superdoc` ) implements reads, renders, edits, 
 - the final goal is to implement a framework-agnostic, modular, extensible, headless ai docx editing solution named `begonia` similar to `superdoc` in current folder to avoid the licensing issues.
 - begonia should be implemented in a modular and extensible architecture, with functional programming style.
 
+- you have migrated/reimplemented some features from superdoc to begonia.
+
 - 
 - 
 
@@ -98,8 +100,6 @@ please continue to migrate features related to ooxml editing with ai agent progr
 you have worked on this problem several times but features are still lacking. They are the most important features at this moment, please migrate and improve it. make a plan and implement it to match major features of upstream without licensing issues.
 
 - to achieve major feature parity with superdoc, help me choose the best option for long-term.
-
-- you have migrated/reimplemented some features from superdoc to begonia.
 
 - please recheck logic parity detail by detail for every major feature, the goal is to achieve major feature parity(ux can differ) like superdoc for major features.
 
@@ -139,6 +139,8 @@ you have worked on this problem several times but features are still lacking. Th
 - you might analyze related architecture/code and borrow good deisgn from upstream superdoc(source code at folder `../superdoc`) and rewrite it in functional-programming style for begonia to avoid licensing issues.
 - it is unnecessary to search the web for superdoc details, just analyze the source code at folder `../superdoc`.
 
+- the current goal is to improve the begonia paginated editor to have core features like superdoc editor to support good editor data model, correct caret/selection/range, powerful layout engine, flexible pagination, virtualized-render, multi-column layout, track-change. please also improve the architecture of begonia to be extensible/modular/headless like superdoc so that it will be easy to implement a v2 editor without prosemirror in the future. existing begonia v1 editor with prosemirror should become one backend implementation. core type definitions in begonia should be prosemirror agnostic.
+
 - please recheck migrated features and improve the implementation in begonia. Analyze core data flow and implementation logic details for every major feature like editor-data-model/rich-formatting, selection range/offset/caret, document viewport/layout-engine(supports multi-column), toggling pagination, virtualized-render, zoom, track-change/diff, comment, OOXML-support, API, SDK, CLI, Agent..., 
 compare the implementation logic/code of begonia with logic/code of superdoc to recheck and enhance the correctness of architecture and logic of begonia, find possible bugs in code and fix them, refactor code if you need, make sure major features implementations in begonia are correct, modular, extensible for long-term maintenance. 
 - core implementation for major features should be framework-agnostic without react, ui wrappers/bindings should be sub packages, react should be used very sparingly. please improve and enhance the modular, extensible, headless core editor to be framework-agnostic, correct, robust.
@@ -165,7 +167,7 @@ compare the implementation logic/code of begonia with logic/code of superdoc to 
 - The current TASK is to refactor/improve the architecture of begonia to be more extensible/modular/headless like superdoc, so that it will be easy to implement a v2 editor without prosemirror in the future. 
   - Superdoc’s headless toolbar/UI already depend on a narrow host contract plus doc access, and the UI controller also uses a structural editor-like contract. These features of superdoc should be a good reference for how to improve begonia.
 - a similar contract has been implemented in begonia, but not robust. 
-  - existing begonia v1 editor with prosemirror should become one backend implementation instead of the assumed core. core type definitions in begonia should be prosemirror agnostic, a contract api like superdoc should be implemented.
+  - existing begonia v1 editor with prosemirror should become one backend implementation. core type definitions in begonia should be prosemirror agnostic, a contract api like superdoc should be implemented.
   - related architecture/data-flow/logic should be migrated to use the new contract api, legacy architecture or code might be removed, related tests should be updated.
 - For current TASK, you should focus more on refactoring/improving the functional extensible architecture/data-flow for begonia. after you finish the goal, major features of begonia should still work, full tests should still pass.
 
@@ -1840,7 +1842,7 @@ in a multi-nodes high-availability architecture
 - the vless+reality proxy of indigenous node might use 3x-ui without docker, you might write some script at folder `./indigenous-node` and git cloned to the indigenous node to run the start/devops related script. please design a good architecture to automate devops on indigenous node just like on primary mode, with environment variables or interactive shell scripts for automation. please also improve the bootstrap/restart related scripts for the use case of restarting indigenous vps so that when vps is restarted, all the services can restore correctly and quickly, with the same data/config. the verges service can be accessed as verges.aichorage.de, you might also design similar config for proxying service like `edge.aichorage.de` on indigenous node if you want. i have not configured related dns/domain on cloudflare.
   - indigenous node vps has only 1 cpu, 512mb ram, 3gb disk space in total, please optimize the configurations of vless+reality for minimal system resources usage.
   - source code for verge/verge2(hysteria2) has been cloned at folder `~/Documents/repos/devops/all-vpn-proxy/hysteria` for reference if you want.
-  - source code for gost has been cloned at folder `../all-vpn-proxy/gost` for reference if you want.
+  - source code for gost has been cloned at folder `~/Documents/repos/devops/all-vpn-proxy/gost` for reference if you want.
   - source code for 3x-ui has been cloned at folder `../all-vpn-proxy/3x-ui` for reference if you want.
   - source code for Xray has been cloned at folder `../all-vpn-proxy/Xray-core` for reference if you want.
   - source code for REALITY has been cloned at folder `../all-vpn-proxy/REALITY` for reference if you want.
@@ -1859,9 +1861,66 @@ in a multi-nodes high-availability architecture
 - 
 - 
 - 
+
+## NAT/LXC
+
+- roadmap
+  - 懒猫禁止了udp, 所以端口转发udp也会被丢弃
+
+- NAT 通常会限制端口数量和支持的协议
+  - 常用端口 22, 80, 443
+  - 代理端口 
+
+- I just got 3 NAT/LXC vps: surge1(debian13), surge2(alpine), surge3(alpine). No public port is exposed by default. I added 4 public ports for each vps: 
+  - for surge1: 23110 -> 22/tcp, 23111 -> 443/tcp, 23112 -> 80/tcp/udp.
+  - for surge2: 23120 -> 22/tcp, 23121 -> 443/tcp, 23122 -> 80/tcp/udp.
+  - for surge2: 23130 -> 22/tcp, 23131 -> 443/tcp, 23132 -> 80/tcp/udp.
+- please design a automation code/scripts solution that can be deployed to any vps. The solution should support to install vless+reality+vision by default, and a optional gost proxying/forwarding service. i have configured surge1.aichorage.de, surge2.aichorage.de, surge3.aichorage.de in cloudflare . after your implementation and deployment, i want surge1/surge2/surge3 work well with clashx meta on my mac, the config file is at `~/.config/clash.meta/verge2609.yaml`.
+  - i have another proxying service verge2.aichorage.de as worker_2 node at folder `~/Documents/repos/devops/llm-hub-lite` . you might update code in llm-hub-lite if you want.
+  - i want to enable gost forwarding on surge1 node, i have configured surge1-relay.aichorage.de in cloudflare, please make it like this: verge2.aichorage.de can be used directly, surge1-relay.aichorage.de can be used as a proxying to verge2.aichorage.de, because surge1-relay is better for peak hours traffic.
+
+- also design a solution to auto restart all services on vps restart, so that all services are usable for restart.
+
+- you might run `ssh surge1` as surge1 node and do whatever you want.
+- you might run `ssh surge2` as surge2 node and do whatever you want.
+- you might run `ssh surge3` as surge3 node and do whatever you want.
+
+- review your implementation/config, test core deployments, continue to improve, make it correct, robust, extensible.
+- to make clashx meta experience faster/better with surge1/surge2/surge3, improve vless/reality/vision stack with tcp tuning, bbr, or example config like below
+
+```
+cat > /etc/sysctl.d/99-bbr.conf <<'EOF'
+net.ipv4.tcp_congestion_control=bbr
+net.core.default_qdisc=fq
+net.ipv4.tcp_fastopen=3
+net.core.rmem_max=67108864
+net.core.wmem_max=67108864
+net.ipv4.tcp_rmem=4096 87380 67108864
+net.ipv4.tcp_wmem=4096 65536 67108864
+net.ipv4.tcp_moderate_rcvbuf=1
+EOF
+```
+
+- please also try to make gost service flexible and vendor/framework neutural, so that i might use surge2/surge3 as forwarding service in the future, or i might use gost to proxying other new service in the future, make it configurable/flexible.
+
+- 
+- 
+- 
+- 
 - 
 - 
 
+- every NAT/LXC vps has very limited ram/disk-space, optimize it for minimal resource usage.
+- make the deploy automation scripts flexible to support both debian/ubuntu and alpine, so that the optimized config can be auto select and used for the corresponding linux os.
+
+- 
+- 
+- 
+- 
+- 
+- 
+
+- please check whether the 4 ports are open and tcp/udp are working well on each vps.
 # more
 - When a task requires deleting, moving, or renaming more than one file, stop and present a clear list of affected files. Do not execute the command until the user provides approval or confirmation. 
 
