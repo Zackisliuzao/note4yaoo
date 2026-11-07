@@ -347,6 +347,100 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 1106
+
+- 🤔 i have a very cheap vps that has big ram(8gb) and big disk(100gb), but it has weak cpu and poor disk IO speed. What is the best used cases for this budget VPS? Is there any popular SaaS application that does not require good CPU and disk IO?  please give me some suggestions for using this vps
+  - a very common "storage/memory promo" profile.
+  - most modern self-hosted SaaS applications are RAM-gated, not CPU-gated. Many popular stacks (Node.js, Python, Elixir, Java, or multi-container Docker apps) sit at 1%–3% CPU usage 95% of the time, yet they crash on cheap 1 GB or 2 GB VPSs because of Out-Of-Memory (OOM) kills.
+  - on Linux, unused RAM automatically becomes disk cache (Page Cache).
+- Look for applications that have a high baseline memory footprint (which your 8 GB RAM easily absorbs) or need large storage capacity (100 GB), but primarily wait on network I/O (webhooks, HTTP APIs) or perform client-side processing.
+- n8n / Activepieces / Node-RED: Workflow automation platforms run on Node.js and love eating 500 MB–1.5 GB of RAM to keep workers and execution states in memory. However, their actual work is mostly waiting on external HTTP APIs and webhooks (network-bound, not CPU-bound).
+- LLM API Gateways (New API / One API / LiteLLM): Acting as a unified router/proxy for external AI APIs requires almost zero CPU and negligible disk I/O. Keeping token states and rate-limiting counters in an in-memory Redis instance makes the gateway blazingly fast regardless of how slow the underlying disk is.
+- Authentik is notorious in the self-hosting community for needing 2 GB+ of RAM just to idle (Python workers + PostgreSQL + Redis), making it unusable on small VPSs.  
+- Vaultwarden: Bitwarden clients perform all heavy encryption/decryption (PBKDF2/Argon2) client-side on your phone or laptop. The server just stores small encrypted blobs and serves them from RAM cache.
+- Modern collaborative wikis like Outline require Redis, Postgres, and a Node.js backend—hungry on RAM, very light on CPU and disk for small teams.
+- Linkwarden / Karakeep (formerly Hoarder) / Wallabag: Great use of your 100 GB disk to archive web pages, PDFs, and articles forever, while the 8 GB RAM absorbs the heavy Next.js/Node.js runtime memory requirements. (Tip: Disable headless Chrome full-page screenshot rendering or limit concurrency to 1 worker so you don't spike the weak CPU).
+- Unlike Nextcloud (which runs heavy PHP scripts on every request and thrashes disk I/O), Seafile (C/Python) and OpenCloud (Go) are exceptionally light on CPU. Slow disk I/O will only cap your maximum upload speed during huge bulk transfers; day-to-day incremental file syncing will be completely unaffected.
+- Garage or MinIO (Self-Hosted S3 Object Storage): Turn that 100 GB into a private S3-compatible bucket for Obsidian/Joplin notes sync, database backups, or static assets. Garage (written in Rust) uses almost no CPU and handles slow disks gracefully.
+- Uptime Kuma / Gatus / Beszel: Why it fits: Monitoring external endpoints is purely network-wait time. Keeping the recent metrics buffered in RAM prevents constant disk thrashing.
+
+- Non-SaaS Infrastructure Use Cases
+  - Caddy / Nginx / Traefik as a reverse proxy in front of everything
+  - In-Memory Cache / Message Broker (Redis / Valkey / DragonflyDB)
+  - Redis / Valkey / Dragonfly / Memcached: this is the best use of your RAM. Turn off persistence or use infrequent snapshots.
+  - Encrypted Offsite Backup Target (BorgBackup / Restic / Kopia)
+  - Private Network Coordinator (Headscale / Tailscale DERP / WireGuard)
+
+- What You Should Avoid on This VPS
+  - Media Transcoding (Jellyfin / Plex / Immich ML): Video transcoding and AI facial recognition/CLIP indexing in Immich will peg a weak CPU at 100% and cause thermal/host throttling. (If you run Immich, offload the Machine Learning container to a desktop PC or another server).
+  - CI builders, compilers, seedboxes: CPU and disk IO bound
+  - CI/CD Builders (GitLab Runner / Compiling Rust, Go, or C++): Compiling code and building multi-stage Docker images require both heavy CPU and high random disk IOPS. Build images via GitHub Actions and only docker pull the finished image to this VPS.
+  - High-Concurrency BitTorrent: Torrenting dozens of files simultaneously creates massive random read/write IOPS ( putting the CPU into high iowait) and heavy SHA-1/SHA-256 hashing on the CPU.
+  - Paperless-ngx: OCR is CPU-heavy, though tolerable if you don’t import often
+  - Elasticsearch, ClickHouse (Plausible), Matrix Synapse: heavy random disk IO
+  - Game servers (Minecraft, etc.): need strong single-core performance
+
+- Tricks to make weak hardware feel better
+Use RAM against slow disk. Raise DB buffer sizes (e.g. PostgreSQL shared_buffers), leave free RAM for the Linux page cache, and mount /tmp and cache dirs as tmpfs.
+Prefer SQLite-based apps with WAL mode over ones that need Postgres or MySQL when possible.
+Cut writes. Mount with noatime, set Docker log rotation limits, use volatile journald logs, and relax DB flush settings where data loss is acceptable (e.g. innodb_flush_log_at_trx_commit=2).
+Use zram instead of disk swap. Swap on a slow disk is painful.
+Put a CDN or cache in front of anything public to spare the CPU.
+Run everything in Docker Compose with memory limits so one app can’t starve the others.
+Benchmark first. Run fio and sysbench so you know your real numbers before choosing workloads.
+
+- 
+
+- Migrated TCP Relay from Gost to Native Xray dokodemo-door:
+  - Completely stopped, disabled, and removed gost on both nodes.
+  - Configured native Xray dokodemo-door on port 80 forwarding directly to the upstream nodes (verge2 for surge1, verge4 for stash1) using Linux kernel splice(2) zero-copy stream forwarding.
+  - Process count on stash1 dropped from 3 to 2, and RAM usage dropped to 34.4 MiB total (21.4 MiB Xray + 13.0 MiB Hysteria).
+- 
+- 
+
+## 1105
+
+- i just bought a lxc/nat vps with lxc debian12 template.
+  - when i run `reboot` as root, the error is
+```
+
+Failed to set wall message, ignoring: Unit dbus-org.freedesktop.login1.service failed to load properly, please adjust/correct and reload service manager: File exists
+Call to Reboot failed: Unit dbus-org.freedesktop.login1.service failed to load properly, please adjust/correct and reload service manager: File exists
+
+```
+- how to reboot the lxc vps?
+
+- 💡
+```sh
+# alias for reboot --force
+reboot -f
+
+```
+
+- /usr/bin/fail2ban-server -xf start
+  - Failed during configuration: Have not found any log file for sshd jail
+  - Cause: /var/log/auth.log doesn’t exist, and your jail.local forces fail2ban to look for it.
+  - Debian 12 doesn’t install rsyslog by default, and LXC templates are especially minimal. sshd logs only go to the systemd journal, so there is no /var/log/auth.log.
+  - ebian’s fail2ban package is meant to handle this. It ships /etc/fail2ban/jail.d/defaults-debian.conf, which sets backend = systemd and enables the sshd jail. But jail.local is read after jail.d/*.conf, and your copy has this in [DEFAULT]: backend = auto
+- 解决方案: 手动设置 backend  = systemd
+
+- I just got 1 new NAT/LXC vps from ip 154.23.xx.xx: surge(debian12).  all ports seem to be exposed by default.
+- please design a automation code/scripts solution that can be deployed to any vps. The solution should support to install vless+reality+vision by default, a optional gost proxying/forwarding service, and a optional hysteria2 serice. surge should install hysteria2 by default. i have configured surge.aichorage.de in cloudflare to 154.23.xx.xx. after your implementation and deployment, i want surge work well with clashx meta on my mac, the config file is at `~/.config/clash.meta/verge2609.yaml`.
+- every NAT/LXC vps has very limited ram/disk-space, optimize it for minimal resource usage.
+- make the deploy automation scripts flexible to support both debian/ubuntu and alpine, so that the optimized config can be auto select and used for the corresponding linux os.
+- also design a solution to auto restart all services on vps restart, so that all services are usable for restart.
+- source code for hysteria2 has been cloned at folder `~/Documents/repos/devops/all-vpn-proxy/hysteria` for reference if you want.
+- source code for Xray has been cloned at folder `../all-vpn-proxy/Xray-core` for reference if you want.
+- source code for REALITY has been cloned at folder `../all-vpn-proxy/REALITY` for reference if you want.
+
+- how do you like my idea? If it is okay, you might improve it.
+- analyze related code/config/deployment, make a comprehensive plan to implement a solution to deploy to any vps, so that finally surge works well with vless/hysteria2, surge1 works well with vless/gost and verge2, surge2 works well with vless, surge3 works well with vless, stash1 works well with vless/hysteria2/gost and verge4, stash2 works well with vless/hysteria2. 
+- after your implementation, please git push to github, then git clone/pull on each vps and restart the services to test it.
+
+- you might run `ssh root@154.23.xx.xx` as surge node and do whatever you want.
+- you might run `ssh surge1` as surge1 node and do whatever you want.
+- you might run `ssh stash1` as stash1 node and do whatever you want.
+
 ## 1104
 
 - TcpQuality
@@ -395,13 +489,14 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
   - Client: you give it a set of ports instead of one. It picks one at random for the first connection, then periodically switches to another (every 30s by default, minimum 5s).  Every 15 to 30 seconds (hop-interval), ClashX Meta on your Mac randomly picks a new destination port from your list and sends the next UDP packet there.
   - Server: the server still listens on one real port, and a firewall rule redirects the whole range to it.
 - Can you use just 23115-23119?
-  - Why 5 ports is safe on system resources: A common misconception is that opening 1,000+ ports consumes extra RAM or CPU on your VPS. In reality, Hysteria 2 only binds to one socket, and nftables matches an entire port range (23115-23119 or 20000-50000) using a single kernel rule.
+  - Why 5 ports is safe on system resources: A common misconception is that opening 1, 000+ ports consumes extra RAM or CPU on your VPS. In reality, Hysteria 2 only binds to one socket, and nftables matches an entire port range (23115-23119 or 20000-50000) using a single kernel rule.
   - The Collision Risk of 5 Ports: On each hop, the client selects the next port randomly, not in strict sequential order. With only 5 ports (23115-23119), there is a 20% chance on every hop that ClashX Meta selects the exact same port it was just using, or jumps back to a port that the ISP placed in a 3-minute cooldown penalty box.
   - If your VPS provider restricts the number of ports you can assign, 23115-23119 is still much better than a single static port. However, if you have full root access on a dedicated IPv4 LA VPS, expanding the range to at least 50–500 ports (e.g., 23100-23600) eliminates random repeat collisions at zero extra cost to your server.
 
 - 
 - 
 - 
+
 # dev-10
 
 ## 1027
@@ -475,7 +570,7 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 
 - Stop automated scanning at the edge in cloudflare
   - Cloudflare has NO firewall rules at all ✗ — no IP rules, no UA rules, no lockdowns ✓. So the edge is doing nothing ✗ — everything passes to the origin ✓ where Caddy 400s the malicious paths ✓.
-  - no edge filtering ✗: the scan hits the origin ~2,300×/day ✓, consuming bandwidth, conntrack, and Caddy CPU ✓ — and it's pure noise
+  - no edge filtering ✗: the scan hits the origin ~2, 300×/day ✓, consuming bandwidth, conntrack, and Caddy CPU ✓ — and it's pure noise
   - they're actively probing for secrets (.env, .aws/credentials, .git) ✓ — the 400s are Caddy refusing (path traversal / bad method) ✓ but the defence is incidental ✓ not deliberate 
   - fix: User-agent block — block TLM-Audit-Scanner, CensysInspect, InternetMeasurement, zgrab, ivre-masscan, and metabase-cve-* with a contains match 
 - Caddy has no rate-limiting handler — caddy list-modules shows no http.handlers.rate_limit. Origin-level per-host throttling is impossible without a custom image build.
@@ -536,9 +631,9 @@ can i update the ptr/rdns in netcup and keep the old ptr/rdns in colocrossing un
   - Wrangler was hand-built with each product team contributing and taking their own approach to their command developer experience.
   - We had inconsistent terminology across d1 info, hyperdrive get, workflows describe as each team came up with their own practices at different times.
   - Forge — Cloudflare’s new unified API generation pipeline — enabled us to do this, building on the idea of generating our CLI commands directly from the API schema that powers our API documentation and SDK generation. Everything we provide has an OpenAPI schema, and if we annotate this with just a little more information, we can use it as the source for Forge to make a CLI.
-  - This enables us to expand cf from the ~280 functions that Wrangler had built up over time, to cover the entirety of the Cloudflare API surface of over 3,000 operations.
+  - This enables us to expand cf from the ~280 functions that Wrangler had built up over time, to cover the entirety of the Cloudflare API surface of over 3, 000 operations.
   - Agents need to filter JSON, not look at tables
-  - With 3,000 possible routes through a CLI, how can your agent find the right operation it needs quickly without bloating your context? For this reason we have also added `cf cli search`.
+  - With 3, 000 possible routes through a CLI, how can your agent find the right operation it needs quickly without bloating your context? For this reason we have also added `cf cli search`.
   - cf does not support the Global API Key.
 
 - [Introducing Forge: the open source pipeline for generating SDKs, CLIs, docs, and more | Cloudflare Blog _202609](https://blog.cloudflare.com/forge-open-source-generation-pipeline)
@@ -643,6 +738,7 @@ can i update the ptr/rdns in netcup and keep the old ptr/rdns in colocrossing un
 
 - 🆚 i have a kvm vps .
 when i install ubuntu 26.04, the ram shows as
+
 ```
 
 root@xxx:~# free -h
@@ -653,7 +749,9 @@ Mem:           3.3Gi       660Mi       2.0Gi       3.4Mi       908Mi       2.7Gi
 Swap:          2.7Gi        68Ki       2.7Gi
 
 ```
+
 when i install debian 13, the ram shows as 
+
 ```
 
 root@xx:~# free -h
@@ -664,13 +762,14 @@ Mem:           3.8Gi       297Mi       3.6Gi       2.1Mi       120Mi       3.5Gi
 Swap:             0B          0B          0B
 
 ```
+
 so weird. why does it happen? you can give me some commands to run on vps to help you debug/analyze if you want
 
 - The 0.5 GiB (512 MiB) difference in total RAM between Ubuntu 26.04 and Debian 13 on the same 4 GB KVM VPS is almost always caused by Ubuntu reserving memory at boot time for kdump (crashkernel).
 - The total column in free -h does not show your raw physical hardware RAM. Instead, it displays `MemTotal` from `/proc/meminfo`, which is Total Physical RAM minus memory permanently locked away by the firmware and the Linux kernel during boot
   - Ubuntu server installs often include `kdump-tools/linux-crashdump`, which reserves a few hundred MB at boot for a crash-dump kernel. Debian doesn’t do this by default. That reserved memory isn’t counted in `MemTotal`, so free doesn’t show it.
-  - Debian 13 (3.8Gi total): Out of 4.0 GiB (4,096 MiB) of virtualized physical RAM, roughly 150–200 MiB is reserved for the BIOS/UEFI memory map, PCIe MMIO space, and the kernel binary itself, leaving 3.8 GiB available to the OS. Debian does not enable kernel crash dump reservations by default.
-  - Ubuntu 26.04 (3.3Gi total): Ubuntu Server and Cloud images enable kdump-tools by default. Ubuntu's default GRUB configuration passes the kernel parameter crashkernel=2G-4G:320M,4G-32G:512M,.... Because your VPS has 4 GiB of RAM, it hits the 4G-32G:512M bracket and locks away 512 MiB (0.5 GiB) of isolated RAM so a secondary capture kernel can save diagnostic logs if a kernel panic occurs (3.8 GiB - 0.5 GiB = 3.3 GiB).
+  - Debian 13 (3.8Gi total): Out of 4.0 GiB (4, 096 MiB) of virtualized physical RAM, roughly 150–200 MiB is reserved for the BIOS/UEFI memory map, PCIe MMIO space, and the kernel binary itself, leaving 3.8 GiB available to the OS. Debian does not enable kernel crash dump reservations by default.
+  - Ubuntu 26.04 (3.3Gi total): Ubuntu Server and Cloud images enable kdump-tools by default. Ubuntu's default GRUB configuration passes the kernel parameter crashkernel=2G-4G:320M, 4G-32G:512M, .... Because your VPS has 4 GiB of RAM, it hits the 4G-32G:512M bracket and locks away 512 MiB (0.5 GiB) of isolated RAM so a secondary capture kernel can save diagnostic logs if a kernel panic occurs (3.8 GiB - 0.5 GiB = 3.3 GiB).
 
 - Notice your Swap size (2.7Gi): Ubuntu 26.04 also looks at your usable memory at install/boot time (or via swap.img sizing rules) to size the swap file, whereas Debian's cloud image leaves swap disabled by default.
 
@@ -680,7 +779,7 @@ so weird. why does it happen? you can give me some commands to run on vps to hel
 - sudo dmesg | grep -iE "Memory:|crashkernel|balloon"
   - You should see a line reading crashkernel reserved: ... (512 MB) alongside a Memory: summary line showing usable kilobytes versus total physical kilobytes (for example, 3460000K/4193000K available, where the difference includes the kernel code, data, initrd, and reserved crashkernel space).
 - grep -E "MemTotal|DirectMap|Balloon|CmaTotal|Unaccepted" /proc/meminfo
-  - Add up the DirectMap4k, DirectMap2M, and DirectMap1G values—their sum reflects the actual physical address space mapped by the hypervisor (around 4,194,304 kB). If Balloon shows a large number, the KVM host's virtio_balloon driver is reclaiming RAM; if CmaTotal is large, the Contiguous Memory Allocator reserved a buffer.
+  - Add up the DirectMap4k, DirectMap2M, and DirectMap1G values—their sum reflects the actual physical address space mapped by the hypervisor (around 4, 194, 304 kB). If Balloon shows a large number, the KVM host's virtio_balloon driver is reclaiming RAM; if CmaTotal is large, the Contiguous Memory Allocator reserved a buffer.
 
 - How to Reclaim the 512 MiB on Ubuntu 26.04
   - /etc/default/grub.d/kdump-tools.cfg

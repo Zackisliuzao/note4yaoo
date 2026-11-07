@@ -782,6 +782,9 @@ Cursor：暂不支持
 - 哈萨克斯坦
   - 无需地址证明
 
+- [Bybit Card 三张卡怎么选？｜台湾卡、格鲁吉亚卡、哈萨克斯坦卡｜申请门槛、费率损耗与功能对比｜无限芝士 - YouTube _202610](https://www.youtube.com/watch?v=tG-S_ma2nLs&t=11s)
+  - 申请流程
+  - 出入金
 - 
 - 
 
@@ -1572,6 +1575,9 @@ infini不是6.9刀开卡吗? 之前infini和社群有活动，存款10u发证明
 - 有没有可能赵长鹏就是因为这个才进去的？要下载自己注册其他地区 P. S. 币安这种1011装死的到底是谁还在用，哦原来是其他家更烂啊那没事了。
 
 - 并不互通。你需要再注册一个港区或者别的非美区非国区的Apple ID，然后再下载国际版币安。
+
+## [【全网最全】币安(Binance)保姆级教程：大陆身份如何注册认证、人民币买币及现货、合约、理财实操2026｜Not financial advice - YouTube _202601](https://www.youtube.com/watch?v=EtBp9bewXSU)
+
 # discuss-coin/crypto
 
 ## 
