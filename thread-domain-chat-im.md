@@ -585,7 +585,7 @@ sms fee出现的另一个原因是号段
 
 - 
 
-# discuss-accounts-us
+# discuss-accounts-us/payment
 - ## 
 
 - ## 
@@ -593,6 +593,34 @@ sms fee出现的另一个原因是号段
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 💰 [关于Gemini Pro 会员一年 Pixel 的优惠的购买 小坑 希望各位注意 - LINUX DO _202607](https://linux.do/t/topic/2605544?tl=en)
+最近 用学生认证的几个账号 Gemini pro 会员都掉了，
+然后闲鱼 20 元购买了 2 个 分别找的 2 个商家，Gemini pro 会员 整个认证都比较顺利 先去掉支付，然后开启验证器.
+但有个小坑就是商家用的支付信用卡是 PaysafeCard 英国的，把我的 2 个美区账号都变成了英国支付信息了，也导致了无法加其他的美区账号到家庭组，本来还想自己在加几个号到家庭组进来，结果全都不行！
+算是一点注意事项，分享出来。不知道哪有美区信用卡的商家 一条龙搞定想在买几个
+
+- 你重新转回美区，或者把美区账号转到英区
+  - 转不了美区了，必须要去掉 Gemini Pro 的订阅才能转，订阅没到期不能转 是按照 Google play 商店地区的
+
+- 你把支付资料删掉，重新加一次就行了。其实不加也行，梯子挂美国节点就可以加了。 家庭组是看 Google play 商店地区的
+  - 支付资料不能删，必须去掉订阅才可以删除 转不了美区了，必须要去掉 Gemini Pro 的订阅才能转，订阅没到期或不取消订阅 不能转
+
+- 非常简单，我教你。直接去支付资料中吧地址随便改为一个美国就行了，然后吧家庭组关闭，然后你就可以更改为美国了，然后打开家庭组 就 OK 了！ 哈哈哈我昨晚也是
+  - 听我的，不需要取消订阅 也不需要美国卡！
+  - 受不了了，给你喂到嘴里。来来。首先去 https://payments.google.com/gp/w/u/0/home/settings 点击 国家 / 地区，填入一个美国地址。然后，去家庭哪里，把所有人踢出去，然后关闭共享，然后去 https://play.google.com/settings 这里就可以把地区改为美国了。然后打开家庭共享 拉人 OK
+
+- 感谢 。
+你第一个链接就是我截图的那个页面 点击 笔杆子后就会出现 Create new profile 链接 然后新添加一个美国地址， 在删除家庭组，然后在切换 Play store 的地区， 然后在创建家庭组，然后还有点击 start share 分享 google pro 套餐功能
+注意 切换地区后原来的英区支付信息会删除，而且再次进入支付信息页面需要接短信验证码验证 如果无法接码的要注意一下！
+
+- 两个号都关闭支付资料不就好了，又不会取消订阅，两个号同地区 ip，哪怕国内归属地的账号都能加 
+
+- 可以转，先申请转区再删家庭组再去 play 上改支付资料到美区（需要一张美区信用卡做认证），然后再建家庭组即可
+
+- 其实可以直接取消订阅然后删掉支付资料的，取消订阅不会取消 pro
 
 - ## [A Comprehensive Guide to Tax-Free Shopping in Portland | Portland _202601](https://webpromo.com/blog/jammybear/3/en)
 - Oregon has no sales tax, so you pay the exact price listed on the tag at checkout.
@@ -648,7 +676,8 @@ The PSU Farmers Market takes place every Saturday morning near Portland State Un
 - 
 
 # discuss-google-accounts
-- ## 
+- tips
+  - 接码和发短信验证会风控同一手机设备的扫码次数和同一手机号的接码次数，最好准备多个设备和多个号码轮流验证, 多次尝试了还是可能失败
 
 - ## 
 
@@ -657,6 +686,114 @@ The PSU Farmers Market takes place every Saturday morning near Portland State Un
 - ## 
 
 - ## 
+
+- ## 
+
+- ## 
+
+- ## 
+
+- ## [佬们求谷歌号注册新方法 - LINUX DO _202608](https://linux.do/t/topic/2835435)
+  - mac，梯子挺好的之前在手机上能注册成功，电脑上想注册个新号一直不可以，要么是让我拿手机扫码，要么是手机验证过不了
+
+- ios 设备注册几乎是随便注册，也不知道谷歌为啥要给苹果开后门（对了，pixel 也能随便注册）
+- iPhone 随便注册 Gmail，只要手机号能过关就行。手机号绑定的账号不能过多，近期没有频繁验证就行。
+- iphone 的邮箱直接创建，手机验证都不要
+- 用 iPhone，烂 IP 一样能过，甚至跳过手机接码
+
+- 用手机 gmail 中注册，注册之后再登录
+- 建议你在谷歌商店里注册，虽然注册后有概率被临时封禁，但是申诉一下就解了，成功率更高。web 端因为各种原因，还需要输入手机号
+- 安卓手机很容易申请呀佬。我在 Gmail 里面申请，每次申请完隔两个星期，断断续续手里快 50 个号了，基本没被封过，不过刚申请下来会立马封禁，但申诉就可以了，申诉很快就过
+
+- iphone 自带的邮件呀，里面添加账号谷歌，注册就行了，手机验证都免了
+
+- ## [苹果手机Gmail登录多个账号方法 - LINUX DO _202605](https://linux.do/t/topic/2214695)
+我前面使用 Gmail 登录 google 账号的时候，登录 10 个就无法继续登录了，提示超过了最大限制，后面偶然一次发现一个方法：
+
+先正常登录，当后面继续登录的时候，提示超过了最大数量的时候
+打开 Safari 浏览器，打开 google.com，点击右上角头像
+可以看到有很多登录状态的账号，基本跟你的 Gmail 邮箱登录的账号一样
+点击退出全部账号【不影响 Gmail 已经登录的账号状态】，然后点击删除账号，将上面登录了的账号都删除掉 【直接去 safari 设置里清除历史记录与网站数据也行，比较快，不介意历史记录的可以操作】
+返回 Gmail App，重新添加 Google 账号，即可继续添加了
+楼主目前登录了 30 几个，我看到有佬友登录 50 多个的
+
+时不时注册一个，但是基本都要手机号，25 年下半年之后，没有手机注册的基本都跳手机验证了，有的手机号，过几个月又可以注册了，然后用了家人的手机
+
+- 直接去 safari 设置里清除历史记录与网站数据也行，比较快
+
+- Google 本来就没禁止多账号啊，只是不让批量注册而已，正常环境登录上百个没事
+
+- ## [多个google账号怎么管理比较好？ _202605](https://www.nodeseek.com/post-750862-1)
+  - 陆续注册了10多个google账号，但是IOS的gmail App不让继续登录新账号了。大家都是怎么管理多账号的？
+  - 另外，google的风控真严格。弄了pixel自助认证，Google发现异地登录，立马退出了账号，再登录就显示被风控了。坑爹的是，解除风控的手机号不记得了，辅助邮箱也没设置
+  - 干净的 ip➕ iOS gmail 客户端，分分钟出来，但不能连着注册
+
+- 有没有安卓备用机 安卓gmail我登录了15个了 还没有提示上限
+  - 有的。看来安卓对数量限制没那么严格，回头试试看
+
+- 我安卓登录30多个没啥事。就是老手机有点卡
+
+- ## [时隔两年，旧事重提下：一部手机最多能登录几个google账号 - LINUX DO _202610](https://linux.do/t/topic/3061131)
+- iPhone 上的 gmail 最多是 8 个号
+
+- 目前登录了 6 个，有个奇葩问题，手机验证用别的号验证，重新登录，手机号还是旧的（大号的）
+- 非常多 我目前登了 13 个号 没事的
+- 22个目前还没出问题，有被封禁的但都是别的原因
+
+- 不知道现在能不能像两年前 EIF 佬的壮举，chrome 多开，一开 10 个号，再加上 edge 浏览器 10 个号，实现一部手机 60 个号
+
+- 每个窗口 4 个号，差不多 200 个号
+
+- 换了设备之后就很容易风控，我之前的好多号都丢了
+
+- 和账号注册有关系的，和登录没关系，手机电脑同时登录 20 多个很久了，一直没事。
+
+- ## [谷歌提示设备验证次数过多怎么解 - LINUX DO _202611](https://linux.do/t/topic/3119610)
+  - 在网上看到其他解决方案，已经用上了：ios 登录 google one 和 YouTube，使用同一个谷歌账号，然后反重力提示扫码用 Google one 扫码，跳转 YouTube 直接认证登录！
+
+- 换设备扫码验证就行，不用发短信，他这个会验证扫码手机的 sim 卡，或者你可以把卡先换一下再扫
+
+- ## [Stuck in Google Anti-Bot QR / MO-SMS Verification Loop on PC ("Device used too many times") when authenticating Google Antigravity / Gemini Code Assist : r/googlecloud _202609](https://www.reddit.com/r/googlecloud/comments/1wr91td/stuck_in_google_antibot_qr_mosms_verification/)
+  - sceenshot the qr code and send the photo to family to scan it .. that worked for me
+- Worked for me too! Thanks 
+
+- ## [Goole 验证二维码【放弃】 _202610](https://www.nodeseek.com/post-985556-1)
+  - The device you used to scan the QR code was used too many times for verification
+  - 设备：苹果 小米
+  - 网络：家宽 搬瓦工
+  - 我tello 成功过一次 后面在验证就不行了 操蛋
+
+- 让你换设备就是IP脏了，换一个节点吧！
+  - 一个sixtynet家宽 一个搬瓦工 
+- 我这里瓦工的IP，一直就是设备不支持提示，连找回密码操作都不可以做。换了个莫名其妙的节点，就好了。
+
+- ## [谷歌账号弹扫码 _202611](https://www.nodeseek.com/post-1023541-1)
+  - 对方号码是 244444， 96831 这些，发不出去
+
+- 用 hk 节点登录，手机扫码的也是同 ip，就会发短信到+852， 国内或者香港手机号都可以发
+
+- ## [现在在国内还有办法注册 Google 账号吗？ - V2EX _202606](https://www.v2ex.com/t/1218362?p=2)
+- 美国节点扫码会让发短信到 96831 ，这时用 giffgaff 发不出去。节点切换到香港节点，会让发短信到 85264522353 ，这时候在号码前面加 00 ，即：0085264522353 ，就可以发出短信了。
+  - 感谢。我这边中国的+86 ，切香港节点后成功了
+
+- 之前用美国节点短信接收方是000590104，96831，244444，这种发送不了
+
+- ## [谷歌账户要验证手机，这步怎么过跟各位求教 - LINUX DO _202610](https://linux.do/t/topic/3026673)
+  - 绑了 2FA，也能输密码过验证，但就是最后登陆之前，它要我做验证。
+  - 国内手机我用了，发短信到 //96831？是什么鬼，我发了，但没效果。求佬友支招  
+  - 点了试试其他方式，仅此一种方式，点了还是这个页面，还是手机扫码。
+
+- 用手机 /ipad 下载 Google app，打开手机设置里的谷歌服务选项，在 Google app 里登录一个
+正常的谷歌账号，用 google app 内部的扫码功能扫码即可
+
+- 这个我前些天刚过了。我的操作是：
+手机开全局的美国加宽梯子；
+下载谷歌（注意，这是谷歌，不是 Chrome）；
+用谷歌这个软件扫就行了，就不会让你发验证码了。
+
+- mobile 端下载 google app (非 chrome) 以及 youtube
+用 google app 扫码
+跳转后然后点击确认登录地址即可
 
 - ## [关于gmail防封以及被封后申诉问题（分享） _202404](https://www.nodeseek.com/post-88578-1)
 近期看到很多mjj因为gmail的封停烦恼，作为一个号商来说，简单分享一点防封技巧和被封后申诉技巧

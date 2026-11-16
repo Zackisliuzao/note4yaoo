@@ -347,6 +347,55 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 1113
+
+- Both BrowserEditorWorkspace.tsx:36 and BrowserPaginatedEditorWorkspace.tsx:62 call the same hook with the same props
+  - Each workspace gets its own controller and its own document 
+  - RichEditorDemo.tsx:139-144 documents why they can't share one LocalRoom yet (two ProseMirror views echoing the same Y.Doc update deadlock the microtask queue — a known collab-layer bug, so the demo keeps documents independent).
+- BrowserEditorWorkspace: native flow editing
+  - ProseMirror's real contenteditable DOM is mounted. Editing is native: the browser handles caret, typing, IME, selection directly in ProseMirror.
+  - There is no pagination rendering at all — one continuous scrolling document
+  - the DOM stays a single flow. In web mode the flow estimator even fakes a 1,000,000px-tall page with zeroed top/bottom margins so layout math treats it as endless web flow
+- BrowserPaginatedEditorWorkspace: off-screen host + painted pages
+  - Hidden host: it can't be display:none: it must stay focusable for keyboard input, IME composition, and clipboard; overflow:hidden confines caret-reveal scrolling.
+  - Editing bridge — createPaginatedEditingSession binds pointer/keyboard listeners to the painted pages, maps positions through line geometry back into document offsets
+- the toolbar's Web/Vertical/Horizontal/Book toggle drives both editors, but for editor 1 it only changes viewport metadata/zoom (it never grows page gaps), while for editor 2 it genuinely re-lays-out pages — that asymmetry is inherent to the two front-ends, not a bug in your run.
+
+- Goal: Make the paginated editor caret behave like the plain editor caret: it blinks while the editor owns focus, disappears when focus genuinely leaves, survives a trip to the toolbar, and never regresses selection/range painting.
+  - Not ported, deliberately: FocusWatchdog periodic auto-refocus
+  - Out of scope: word-select/double-click normalization and pointer-drag range selection; shadow-DOM focus retargeting; window-blur handling
+
+## 1112
+
+- One thing I deliberately did not claim
+Collaborative undo looked broken too: a probe returned true while leaving the text unchanged. But sharedUndo produced no transaction at all in that probe, which may just mean the Yjs undo scope was empty for a directly dispatched edit — so that is not evidence of a product bug. The plan treats collab as a hypothesis to settle with a real test after fix #1, rather than pre-emptively touching yUndoPlugin.
+
+- [[恢复了]ClinePass的Deepseek咋突然用不了了 - LINUX DO _202611](https://linux.do/t/topic/3160660)
+  - failed to generate stream from Vercel: failed to invoke model 'vmc/cw-deepseek-v41-flash-1017-fallbacks' with streaming: request failed with status 400: {"error":{"message":"user message must have content","type":"invalid_request_error","param":"messages.334.content","code":"invalid_request_error"}}
+- 💡 新开对话就可以用了
+
+## 1111
+
+- [腾讯全新搜索产品“元宝搜索”正式上线 - LINUX DO _202611](https://linux.do/t/topic/3156531)
+  - [元宝搜索-腾讯旗下新一代AI搜索 ](https://so.qq.com/)
+  - 需要微信/qq登录后使用
+  - 提供了公众号内容搜索和访问
+
+## 1109
+
+- can i register a PaysafeCard account without being in europe?  can i use it outside europe?
+  - Local Verification: Registration requires a valid residential address, a local mobile number with matching country code for SMS verification, and a government-issued ID from that supported country.
+
+- i was given a used google account with 2fa key like HTICZUIUOJUNKRIIWZ7NXWBIORRMOMEL , i can go to https://2fa.fun and use the 2fa key to get the 2fa code. it works well. recently i changed the google 2fa to use ente 2fa app, but now i need to give this google account with 2fa key to another colleague. how can i get a 2fa key like HTICZUIUOJUNKRIIWZ7NXWBIORRMOMEL?
+- Option 1: Generate a new key from Google (cleanest)
+  - choose Change authenticator app (or Set up authenticator).
+  - On the QR code screen, click Can’t scan it? Google then shows a text key like abcd efgh ijkl mnop ....
+  - Copy the key and remove the spaces. That is the same kind of key as HTICZUIUOJUNKRIIWZ7NXWBIORRMOMEL.
+  - Setting up a new authenticator replaces the old one. 
+  - So if you want to keep your own Ente Auth working, add the same key to Ente as well. Use “enter a setup key” or “manual entry” in Ente before you finish verifying, and both will generate the same codes.
+- Option 2: Get the key back out of Ente Auth
+  - If the Google account is already set up in Ente, the key is stored there. Open the entry in Ente Auth and look for Edit or Show QR code. The edit screen shows the secret, and the QR code contains it as otpauth://...?secret=XXXX. Copy the secret= part. The exact menu names may differ slightly by app version.
+
 ## 1108
 
 - when i run `/agents` in antigravity agy tui, why does global explorer custom subagent ~/.gemini/config/agents/explorer/agent.md does not show?
