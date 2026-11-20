@@ -347,6 +347,74 @@ npx -y @tencent-weixin/openclaw-weixin-cli install
 - dev-log
   - ?
 
+## 1118
+
+- 🤔 for "Feature matrix" table, typing and cursor  has some issues.  when I click in a table cell , the cursor can show at the right character,  then i type a character, sometimes the character shows before the cursor character.  It  seems that typing in cells that are after the empty cell can reproduce this issue.  
+  - the painted offset and the editing offset are computed by two different code paths, and they only agree by construction when the geometry is simple.
+
+- 🤔 I have a budget VPS with a very good AMD 7950 cpu. What services are better to deploy on this amd vps?  I want to deploy a librechat saas , a postgresql db service, a caddy reverse proxy service on multiple vps, which services are best for this AMD vps?
+  - In general, a budget 7950X VPS shines at bursty, single-thread-sensitive, or low-latency compute workloads
+  - Single-threaded web runtimes & API gateways: Node.js, Bun, Deno, Python (FastAPI/Django), Ruby, and PHP apps—especially Next.js/Nuxt SSR apps or LLM API routers/proxies that do heavy JSON/stream processing.
+  - Search & Vector Engines: Meilisearch, Typesense, Qdrant, or PostgreSQL + pgvector (benefits from Zen 4 + AVX-512 + fast NVMe).
+  - File parsing and local embedding generation are CPU-heavy, and Zen 4’s AVX-512 support and core count help here, as long as your plan gives you enough dedicated threads.
+  - Remote Dev & CI/CD Runners: Self-hosted GitHub Actions/Forgejo runners, code-server, Docker builds, or Rust/Go/TypeScript compilation (cuts build times dramatically).
+  - Game Servers: Minecraft, Terraria, Factorio, Palworld, etc. (notoriously bottlenecked by single-thread tick speed).
+  - Lightweight CPU AI / Document Processing: Running small local embedding models, Whisper transcription, or document/OCR parsers (e.g., for your LibreChat RAG pipeline) using AVX-512.
+- The 7950X’s strength is very high single-thread speed (about 5.5 GHz+ boost) with fast DDR5. That helps query latency, index lookups, sorting, and vacuum work. 
+  - Keep the DB in the same datacenter or region as the app servers. Cross-region latency will cancel out any CPU advantage.
+- What to Avoid on a Budget 7950X VPS
+  - CPU Intensive Tasks: Heavy FFmpeg/Jellyfin video transcoding, continuous AI training/large LLM inference, or aggressive scraping. Budget Ryzen hosts almost always enforce strict fair-share CPU policies and will throttle or suspend containers/VMs that peg vCPUs continuously.
+  - Pure Network/Storage Roles: Standalone reverse proxies, pure VPN/proxy relays, or large cold-file storage—you are overpaying for compute you won't use.
+
+- 🤔 Is there any good suffix and prefix that can be added to word "leader" or "worker" to express some meaning?
+  - co-
+  - ex-
+  - sub-
+  - non-
+  - pro- / anti-
+  - -like
+  - -ly: Showing qualities expected of an effective leader (formal; workerly is rare)
+  - -ism: An ideology centered on a single leader (leaderism) or the working class (workerism)
+  - hood / -dom: Rare/literary terms for the collective identity or realm of workers
+- If a prefix or suffix feels clunky, English usually handles the nuance in one of two ways instead:
+  - Drop -er and modify the root: Words like workaholic, workable, overworked, and misleading attach cleanly to the base verb rather than the noun.
+  - Use a compound modifier: Terms like ringleader (instigator of a scheme), thought leader, fieldworker, caseworker, and gig worker carry sharper, more idiomatic meaning than forced affixes.
+  - solleader, terraleader, lunaleader
+
+## 1117
+
+- improve the begonia editor architectre to be headless, modular, extensible.
+  - current architecutre is already in this direction, but continue to improve to make it easy to implement a v2 editor without prosemirror in the future. existing begonia v1 editor with prosemirror should be one backend implementation. core type definitions in begonia should be prosemirror agnostic.
+  - table should be a separate package in begonia to make it modular, extensible, replaceable, better tree-shaking.
+- continue to improve the table ux: 
+  - when user click the empty position to the right of the last table row, the cursor should show and blink at the last character of the next text line below table, if the next text line is empty, the cursor just show at the start of line, it is also end of line. To enhance this ux, it might be better to auto add a empty line below table if there is no content after table or it is a page break after table.
+  - if cursor is at the last character of last table cell content, pressing arrow-right or arrow-down key should move cursor to the start of next line. You might improve the cursor/arrow-key logic for entering/leaving/moving-inside table.
+
+- begonia-chinese-ime
+  - 在段落中输入时, 输入字符会立刻显示在段落文本中间, 按空格选词后中文候选词会替换输入字符
+  - 在表格中输入时, 输入字符不会立刻显示在表格, 按空格选词后中文候选词才会显示在表格, 这个设计可以减少编辑器重排, 提升性能
+
+- 🤔 On the table UX, where I'd change your design. Your instinct — guarantee there is a line after the table — is exactly what Word and Google Docs do, but they enforce it when the table is created or pasted at the end, as a document-normalisation rule, not when the user clicks. Inserting on click makes the document change without typing, which shows up as a dirty document and an undo step the user did not ask for. With the guard paragraph present, clicking to the right of the last row becomes a pure caret placement — no model mutation, nothing to undo — which is both simpler and closer to the reference behaviour. I'd also widen the hit area to the whole band right of the table and the gap between table bottom and the next block, since that is the space users actually click.
+
+- [Git hook speed comparison](https://x.com/pontusab/status/2122466524493730107)
+🥇 hk (Rust): 1.37s
+🥈 Lefthook (Go): 1.81s
+🥉 prek (Rust): 2.16s
+04. pre-commit (Python): 2.97s
+
+- 原来复制文件夹推荐用 cp -a吗，我一直用的cp -r
+  - https://x.com/FunFurina/status/2122599888739525107
+- -a 保留原有权限和信息，-r 会改成执行命令的用户
+
+- cp -r 只做递归复制，新文件会变成你当前用户的、时间戳是现在的，权限也受 umask 影响，符号链接可能被跟随。
+cp -a 是归档模式（等价于 -dR --preserve=all），会完整保留权限、所有者、时间戳、符号链接、扩展属性等，复制结果更接近原样。
+备份配置、系统文件或需要精确复原时，推荐用 -a。
+- 在意文件元数据的话就用-a，或者直接一部到位用rsync。大部分情况下cp -r就已经够用了。
+
+## 1116
+
+- The thing that would actually speed up mid-document typing is page-prefix incremental pagination — reuse pages before the dirty one, repaginate from there — not projection patching. It is the design ../superdoc effectively uses, and it needs care with footnotes, section balancing and page-number fields. A smaller provable slice first: allow the reuse when the block's line count changes but it is the last placement on its page and the following blocks have slack, so no page break can move. Say the word and I will take that on; it is scoped enough to verify with the same three smokes.
+
 ## 1113
 
 - Both BrowserEditorWorkspace.tsx:36 and BrowserPaginatedEditorWorkspace.tsx:62 call the same hook with the same props
@@ -980,6 +1048,19 @@ i have deployed this repo to my 5 vps, leader node deploys beszel-controller/bes
 
 - mineru provides free document parsing/ocr api at https://mineru.net/apiManage/docs. is there any other similar services that provides free document parsing/ocr service? does docling/marker provide free service? 
   - please deep research related solutions/projects/ideas, if you found any smilar and free srevices, provide overview/url/website/free-quota for each.
+
+| 服务 | 免费额度 | 刷新周期 | 附加限制 |
+|---|---|---|---|
+| **MinerU** | 完整 API ~1, 000–2, 000 页/天；免登录轻量版 10, 000 页/天 | 每日（UTC 0 点） | 单文件 ≤200MB/200 页；轻量版 ≤10MB/20 页 |
+| **LlamaParse** | 1, 000 页/天 | 每日 | 输出优秀但需注册 LlamaCloud |
+| **Azure Document Intelligence** | 500 页/月 | 每月，永久 | 需 Azure 订阅 |
+| **Google Document AI** | 1, 000 页/月 | 每月，永久 | 仅 OCR 处理器；Layout Parser 收费 |
+| **AWS Textract** | 1, 000 页/月 | 仅前 3 个月 | 之后 $1.50/千页起 |
+| **Mistral OCR** | $10 额度/月（≈5, 000 页） | 每月 | Free 计划可能用数据训练 |
+| **Unstructured** | 10, 000 页 | 一次性（注册） | 之后 $0.015/页 |
+| **TextIn** | 1, 000 credits（≈1, 000 页） | 一次性（注册） | 并发 1 |
+| **OCR.space** | 25, 000 次/月 | 每月 | ≤1MB、PDF ≤3 页 |
+| **Datalab（Marker 官方 API）** | $20 用量/月 | 每月 | 工作邮箱注册 |
 
 ## 1010
 
